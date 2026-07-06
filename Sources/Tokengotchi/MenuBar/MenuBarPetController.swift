@@ -109,6 +109,21 @@ final class MenuBarPetController {
                 self.updateStatusIcon(self.petState.mode)
             }
         }
+
+        // Reset simulation state when the popover closes so the pet reflects
+        // real agent state again. SwiftUI's onDisappear is unreliable when an
+        // NSPopover closes, so we use the popover notification as a safety net.
+        NotificationCenter.default
+            .publisher(for: NSPopover.didCloseNotification, object: popover)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                guard self.petState.isSimulating else { return }
+                self.petState.isSimulating = false
+                self.petState.save()
+                self.petState.setMode(.idle)
+            }
+            .store(in: &cancellables)
     }
 
     // MARK: System Events (sleep/wake + screen changes)

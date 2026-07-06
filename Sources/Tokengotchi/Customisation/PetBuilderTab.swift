@@ -136,9 +136,38 @@ struct PetBuilderTab: View {
                 .buttonStyle(.plain)
             }
 
-            let assigned = petState.assignments.clips(for: selectedMode, substate: exampleSubstate(for: selectedMode))
-            ForEach(assigned, id: \.id) { clip in
-                assignedRow(clip, isOnlyClip: assigned.count == 1)
+            let assigned = petState.assignments.clips(for: selectedMode)
+            
+            if selectedMode == .busy {
+                let grouped = Dictionary(grouping: assigned, by: { $0.busySubstate })
+                let sortedSubstates = BusySubstate.allCases.filter { grouped.keys.contains($0) }
+                let generalClips = grouped[nil] ?? []
+                
+                ForEach(sortedSubstates, id: \.self) { substate in
+                    if let clips = grouped[substate], !clips.isEmpty {
+                        Text(substate.displayName)
+                            .font(.system(size: 10, weight: .semibold, design: .rounded))
+                            .foregroundColor(.white.opacity(0.6))
+                            .padding(.top, 4)
+                        ForEach(clips, id: \.id) { clip in
+                            assignedRow(clip, isOnlyClip: assigned.count == 1)
+                        }
+                    }
+                }
+                
+                if !generalClips.isEmpty {
+                    Text("General")
+                        .font(.system(size: 10, weight: .semibold, design: .rounded))
+                        .foregroundColor(.white.opacity(0.6))
+                        .padding(.top, 4)
+                    ForEach(generalClips, id: \.id) { clip in
+                        assignedRow(clip, isOnlyClip: assigned.count == 1)
+                    }
+                }
+            } else {
+                ForEach(assigned, id: \.id) { clip in
+                    assignedRow(clip, isOnlyClip: assigned.count == 1)
+                }
             }
         }
     }
@@ -221,8 +250,35 @@ struct PetBuilderTab: View {
                     .foregroundColor(.white.opacity(0.4))
                     .padding(.vertical, 8)
             } else {
-                ForEach(available, id: \.id) { clip in
-                    libraryRow(clip)
+                if selectedMode == .busy {
+                    let grouped = Dictionary(grouping: available, by: { $0.busySubstate })
+                    let sortedSubstates = BusySubstate.allCases.filter { grouped.keys.contains($0) }
+                    let generalClips = grouped[nil] ?? []
+                    
+                    ForEach(sortedSubstates, id: \.self) { substate in
+                        if let clips = grouped[substate], !clips.isEmpty {
+                            Text(substate.displayName)
+                                .font(.system(size: 10, weight: .semibold, design: .rounded))
+                                .foregroundColor(.white.opacity(0.6))
+                                .padding(.top, 4)
+                            ForEach(clips, id: \.id) { clip in
+                                libraryRow(clip)
+                            }
+                        }
+                    }
+                    if !generalClips.isEmpty {
+                        Text("General")
+                            .font(.system(size: 10, weight: .semibold, design: .rounded))
+                            .foregroundColor(.white.opacity(0.6))
+                            .padding(.top, 4)
+                        ForEach(generalClips, id: \.id) { clip in
+                            libraryRow(clip)
+                        }
+                    }
+                } else {
+                    ForEach(available, id: \.id) { clip in
+                        libraryRow(clip)
+                    }
                 }
             }
         }

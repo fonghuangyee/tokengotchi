@@ -1,0 +1,411 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0041125A5C62ED06889BF2B5 /* PetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF73E452C615D68393A6FFD0 /* PetState.swift */; };
+		0274357B3F3647B880F4DF64 /* TokengotchiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E0F3F1DE271C79E7AD3556 /* TokengotchiApp.swift */; };
+		1049BD594E2DC9A9AB95BA0E /* ProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA116665CA4ADCD1AFD0878 /* ProviderManager.swift */; };
+		10B4B2DF51EE32A4BE1705B0 /* LLMProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E9840B4E862911D3808AA /* LLMProviderProtocol.swift */; };
+		112C63D1EDBA63FF70B40857 /* MenuBarPetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CE5F6BDCAC900FD637EB20 /* MenuBarPetController.swift */; };
+		2844FADF3B091BA06A110AA5 /* PetConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472689CA2F71B339AA17E0C0 /* PetConfig.swift */; };
+		400AE1D6FDA62B1E3FB71DAD /* GamificationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408E1E6D27B6F5A4CEB86F28 /* GamificationCoordinator.swift */; };
+		637288E18AB7CB6440CF9B9B /* PetAnimationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323000747DF32AFBED595976 /* PetAnimationEngine.swift */; };
+		78A17E8C8D2C9B12A004E6BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2682FCDF0E49EC9EC5FB3 /* AppDelegate.swift */; };
+		7D09BF8C15F198676749A072 /* CustomisationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73759F51E0B8347A3DFACE30 /* CustomisationView.swift */; };
+		D64D42AD3E21C1591F6F69D6 /* AntigravityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0DAA552DFDFFE9EEEF705A /* AntigravityProvider.swift */; };
+		E49928675F92291356E7347D /* OtherProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373297A1CEF7556EB5B0FB1B /* OtherProviders.swift */; };
+		EB6217FA402F76A611BD47BF /* PetDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7405767B400326CD58EAB35B /* PetDashboardView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		14CE5F6BDCAC900FD637EB20 /* MenuBarPetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarPetController.swift; sourceTree = "<group>"; };
+		323000747DF32AFBED595976 /* PetAnimationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetAnimationEngine.swift; sourceTree = "<group>"; };
+		373297A1CEF7556EB5B0FB1B /* OtherProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherProviders.swift; sourceTree = "<group>"; };
+		408E1E6D27B6F5A4CEB86F28 /* GamificationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamificationCoordinator.swift; sourceTree = "<group>"; };
+		472689CA2F71B339AA17E0C0 /* PetConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetConfig.swift; sourceTree = "<group>"; };
+		73759F51E0B8347A3DFACE30 /* CustomisationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomisationView.swift; sourceTree = "<group>"; };
+		7405767B400326CD58EAB35B /* PetDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDashboardView.swift; sourceTree = "<group>"; };
+		75E0F3F1DE271C79E7AD3556 /* TokengotchiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokengotchiApp.swift; sourceTree = "<group>"; };
+		928E9840B4E862911D3808AA /* LLMProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMProviderProtocol.swift; sourceTree = "<group>"; };
+		BB0DAA552DFDFFE9EEEF705A /* AntigravityProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntigravityProvider.swift; sourceTree = "<group>"; };
+		D80A6B6E49F4ECBA696A59F1 /* Tokengotchi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tokengotchi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8B2682FCDF0E49EC9EC5FB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FEA116665CA4ADCD1AFD0878 /* ProviderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderManager.swift; sourceTree = "<group>"; };
+		FF73E452C615D68393A6FFD0 /* PetState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetState.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		077C298858048ACEF6464654 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D80A6B6E49F4ECBA696A59F1 /* Tokengotchi.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0D4D4A41792D832DEB896131 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				BB0DAA552DFDFFE9EEEF705A /* AntigravityProvider.swift */,
+				928E9840B4E862911D3808AA /* LLMProviderProtocol.swift */,
+				373297A1CEF7556EB5B0FB1B /* OtherProviders.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		1B608500930AFB5081F70905 /* MenuBar */ = {
+			isa = PBXGroup;
+			children = (
+				14CE5F6BDCAC900FD637EB20 /* MenuBarPetController.swift */,
+			);
+			path = MenuBar;
+			sourceTree = "<group>";
+		};
+		2D49F243ADC02126813C99A0 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F8B2682FCDF0E49EC9EC5FB3 /* AppDelegate.swift */,
+				75E0F3F1DE271C79E7AD3556 /* TokengotchiApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		665B98B2D057BD527F69DAE4 /* Customisation */ = {
+			isa = PBXGroup;
+			children = (
+				73759F51E0B8347A3DFACE30 /* CustomisationView.swift */,
+			);
+			path = Customisation;
+			sourceTree = "<group>";
+		};
+		835AAFFE73658EF2E415179F /* Pet */ = {
+			isa = PBXGroup;
+			children = (
+				323000747DF32AFBED595976 /* PetAnimationEngine.swift */,
+				472689CA2F71B339AA17E0C0 /* PetConfig.swift */,
+				FF73E452C615D68393A6FFD0 /* PetState.swift */,
+			);
+			path = Pet;
+			sourceTree = "<group>";
+		};
+		BD8B805C8CC69863C1296B88 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				FEA116665CA4ADCD1AFD0878 /* ProviderManager.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		E05AF4BD5332327FB34256CB /* Gamification */ = {
+			isa = PBXGroup;
+			children = (
+				408E1E6D27B6F5A4CEB86F28 /* GamificationCoordinator.swift */,
+			);
+			path = Gamification;
+			sourceTree = "<group>";
+		};
+		EC161D8E23139C9E81B36584 = {
+			isa = PBXGroup;
+			children = (
+				F0E925743CE2D48959694A2C /* Tokengotchi */,
+				077C298858048ACEF6464654 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EF2AE4A0B4BA3BE606D18F25 /* Popover */ = {
+			isa = PBXGroup;
+			children = (
+				7405767B400326CD58EAB35B /* PetDashboardView.swift */,
+			);
+			path = Popover;
+			sourceTree = "<group>";
+		};
+		F0E925743CE2D48959694A2C /* Tokengotchi */ = {
+			isa = PBXGroup;
+			children = (
+				2D49F243ADC02126813C99A0 /* App */,
+				665B98B2D057BD527F69DAE4 /* Customisation */,
+				E05AF4BD5332327FB34256CB /* Gamification */,
+				1B608500930AFB5081F70905 /* MenuBar */,
+				835AAFFE73658EF2E415179F /* Pet */,
+				EF2AE4A0B4BA3BE606D18F25 /* Popover */,
+				0D4D4A41792D832DEB896131 /* Providers */,
+				BD8B805C8CC69863C1296B88 /* Settings */,
+			);
+			name = Tokengotchi;
+			path = Sources/Tokengotchi;
+			sourceTree = "<group>";
+		};
+		"TEMP_D0FFD847-8F4D-4E76-9703-A2C58A463C91" /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7FDA9502D8983D3F5B90735E /* Tokengotchi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ECF52E295FF12C1266DB005D /* Build configuration list for PBXNativeTarget "Tokengotchi" */;
+			buildPhases = (
+				7921E3961FF24EEA37CD12F9 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tokengotchi;
+			packageProductDependencies = (
+			);
+			productName = Tokengotchi;
+			productReference = D80A6B6E49F4ECBA696A59F1 /* Tokengotchi.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C095A6DFDD045CDB37E00E85 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					7FDA9502D8983D3F5B90735E = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = EFACC1CEB0DE7966D5912760 /* Build configuration list for PBXProject "Tokengotchi" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = EC161D8E23139C9E81B36584;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 077C298858048ACEF6464654 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7FDA9502D8983D3F5B90735E /* Tokengotchi */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7921E3961FF24EEA37CD12F9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D64D42AD3E21C1591F6F69D6 /* AntigravityProvider.swift in Sources */,
+				78A17E8C8D2C9B12A004E6BA /* AppDelegate.swift in Sources */,
+				7D09BF8C15F198676749A072 /* CustomisationView.swift in Sources */,
+				400AE1D6FDA62B1E3FB71DAD /* GamificationCoordinator.swift in Sources */,
+				10B4B2DF51EE32A4BE1705B0 /* LLMProviderProtocol.swift in Sources */,
+				112C63D1EDBA63FF70B40857 /* MenuBarPetController.swift in Sources */,
+				E49928675F92291356E7347D /* OtherProviders.swift in Sources */,
+				637288E18AB7CB6440CF9B9B /* PetAnimationEngine.swift in Sources */,
+				2844FADF3B091BA06A110AA5 /* PetConfig.swift in Sources */,
+				EB6217FA402F76A611BD47BF /* PetDashboardView.swift in Sources */,
+				0041125A5C62ED06889BF2B5 /* PetState.swift in Sources */,
+				1049BD594E2DC9A9AB95BA0E /* ProviderManager.swift in Sources */,
+				0274357B3F3647B880F4DF64 /* TokengotchiApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		194079E9AFFA521DCE5DF3D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Sources/Tokengotchi/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_NAME = Tokengotchi;
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		41036E6351A95253E4D4A0CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Sources/Tokengotchi/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tokengotchi.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		909DF4253BC6B6827B01529A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Sources/Tokengotchi/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_NAME = Tokengotchi;
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A4D313ABA41EDA1F1145FF61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Sources/Tokengotchi/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tokengotchi.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ECF52E295FF12C1266DB005D /* Build configuration list for PBXNativeTarget "Tokengotchi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				909DF4253BC6B6827B01529A /* Debug */,
+				194079E9AFFA521DCE5DF3D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		EFACC1CEB0DE7966D5912760 /* Build configuration list for PBXProject "Tokengotchi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4D313ABA41EDA1F1145FF61 /* Debug */,
+				41036E6351A95253E4D4A0CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C095A6DFDD045CDB37E00E85 /* Project object */;
+}

@@ -1,0 +1,31 @@
+name: Tokengotchi
+options:
+  bundleIdPrefix: com.tokengotchi
+  deploymentTarget:
+    macOS: "14.0"
+  xcodeVersion: "15"
+
+settings:
+  base:
+    PRODUCT_BUNDLE_IDENTIFIER: com.tokengotchi.app
+    MACOSX_DEPLOYMENT_TARGET: "14.0"
+    SWIFT_VERSION: "5.0"
+    INFOPLIST_FILE: Sources/Tokengotchi/Resources/Info.plist
+    CODE_SIGN_STYLE: Automatic
+    LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/../Frameworks"
+
+targets:
+  Tokengotchi:
+    type: application
+    platform: macOS
+    sources:
+      - path: Sources/Tokengotchi
+        excludes:
+          - "Resources/Info.plist"
+    resources:
+      - Sources/Tokengotchi/Resources/Info.plist
+    settings:
+      base:
+        PRODUCT_NAME: Tokengotchi
+        WRAPPER_EXTENSION: app
+    dependencies: []

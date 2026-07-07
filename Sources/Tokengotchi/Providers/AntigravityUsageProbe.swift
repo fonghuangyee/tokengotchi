@@ -15,7 +15,7 @@ class AntigravityUsageProbe {
     static let shared = AntigravityUsageProbe()
     private let timeout: TimeInterval = 8.0
 
-    func probe() async throws -> UsageSnapshot {
+    func probe(workspaceId: String? = nil) async throws -> UsageSnapshot {
         // 1. Detect process
         let pgrepResult = try runCommand("/usr/bin/pgrep", args: ["-lf", "language_server"])
         let lines = pgrepResult.split(separator: "\n").map(String.init)
@@ -26,6 +26,10 @@ class AntigravityUsageProbe {
         
         for line in lines {
             if line.contains("language_server_macos") || line.contains("language_server") {
+                if let targetWorkspace = workspaceId {
+                    guard line.contains(targetWorkspace) else { continue }
+                }
+                
                 if let p = extractPID(from: line) { pid = p }
                 if let c = extractFlag("--csrf_token", from: line) { csrfToken = c }
                 if let hp = extractFlag("--extension_server_port", from: line).flatMap(Int.init) { httpPort = hp }
@@ -68,24 +72,47 @@ class AntigravityUsageProbe {
         let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
         
         var quotas = [UsageQuota]()
-        
+        var activeModelName: String? = nil
         if let userStatus = json?["userStatus"] as? [String: Any],
-           let cascadeModelConfigData = userStatus["cascadeModelConfigData"] as? [String: Any],
-           let clientModelConfigs = cascadeModelConfigData["clientModelConfigs"] as? [[String: Any]] {
+           let cascadeModelConfigData = userStatus["cascadeModelConfigData"] as? [String: Any] {
            
-            for config in clientModelConfigs {
-                if let label = config["label"] as? String,
-                   let quotaInfo = config["quotaInfo"] as? [String: Any] {
-                   
-                    let remaining = (quotaInfo["remainingFraction"] as? Double) ?? 0.0
-                    let reset = quotaInfo["resetTime"] as? String
-                    
-                    quotas.append(UsageQuota(percentRemaining: remaining * 100.0, label: label, resetTime: reset))
+            let defaultModelId = (cascadeModelConfigData["defaultOverrideModelConfig"] as? [String: Any])?["modelOrAlias"] as? [String: Any]
+            let activeModelId = defaultModelId?["model"] as? String
+            
+            if let clientModelConfigs = cascadeModelConfigData["clientModelConfigs"] as? [[String: Any]] {
+                for config in clientModelConfigs {
+                    if let label = config["label"] as? String {
+                        
+                        // Check if this config matches the active model ID
+                        if let modelOrAlias = config["modelOrAlias"] as? [String: Any],
+                           let modelId = modelOrAlias["model"] as? String,
+                           modelId == activeModelId {
+                            activeModelName = label
+                        }
+                        
+                        if let quotaInfo = config["quotaInfo"] as? [String: Any] {
+                            let remaining = (quotaInfo["remainingFraction"] as? Double) ?? 0.0
+                            let reset = quotaInfo["resetTime"] as? String
+                            quotas.append(UsageQuota(percentRemaining: remaining * 100.0, label: label, resetTime: reset))
+                        }
+                    }
                 }
             }
         }
         
-        return UsageSnapshot(quotas: quotas, activeModelName: nil)
+        let finalModelName = activeModelName ?? "Mystery Model 🕵️‍♂️"
+        return UsageSnapshot(quotas: quotas, activeModelName: finalModelName)
+    }
+
+    private class InsecureDelegate: NSObject, URLSessionDelegate {
+        func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+            if let trust = challenge.protectionSpace.serverTrust {
+                let credential = URLCredential(trust: trust)
+                completionHandler(.useCredential, credential)
+            } else {
+                completionHandler(.performDefaultHandling, nil)
+            }
+        }
     }
 
     private func makeRequest(scheme: String, port: Int, path: String, csrfToken: String) async throws -> Data {

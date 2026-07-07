@@ -9,7 +9,7 @@ public enum AgentEvent {
     case busy(substate: BusySubstate? = nil)  // agent is working
     case completed(taskId: String, totalTokens: Int)
     case failed(taskId: String, error: Error)
-    case contextWarning(remainingTokens: Int) // mood-only, no animation trigger
+    case contextWarning(remainingTokens: Int) // informational only, no animation trigger
     case disconnected
     case idle
     case waiting

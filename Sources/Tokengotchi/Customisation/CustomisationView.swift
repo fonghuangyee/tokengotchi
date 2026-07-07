@@ -24,7 +24,9 @@ struct SettingsTab: View {
                 // --- API Key ---
                 sectionHeader("API Key")
 
-                if let provider = providerManager.available.first(where: { $0.id == providerManager.activeProviderId }) {
+                if let provider = providerManager.available.first(where: {
+                    $0.id == providerManager.activeProviderId
+                }) {
                     if provider.id != "antigravity" && provider.id != "ollama" {
                         SecureField("API Key for \(provider.name)", text: $editingKey)
                             .textFieldStyle(.plain)
@@ -44,11 +46,13 @@ struct SettingsTab: View {
                         .font(.system(size: 12, weight: .medium))
                         .foregroundColor(.purple)
                     } else {
-                        Text(provider.id == "antigravity"
-                             ? "Bridge auto-connects to localhost:7432"
-                             : "Connects to Ollama at localhost:11434")
-                            .font(.system(size: 11))
-                            .foregroundColor(.white.opacity(0.4))
+                        Text(
+                            provider.id == "antigravity"
+                                ? "Bridge auto-connects to localhost:7432"
+                                : "Connects to Ollama at localhost:11434"
+                        )
+                        .font(.system(size: 11))
+                        .foregroundColor(.white.opacity(0.4))
                     }
                 }
 
@@ -109,12 +113,16 @@ struct SettingsTab: View {
                 }
             }
             .padding(12)
-            .background(providerManager.activeProviderId == provider.id
-                        ? Color.purple.opacity(0.15) : Color.white.opacity(0.05))
+            .background(
+                providerManager.activeProviderId == provider.id
+                    ? Color.purple.opacity(0.15) : Color.white.opacity(0.05)
+            )
             .clipShape(RoundedRectangle(cornerRadius: 10))
-            .overlay(RoundedRectangle(cornerRadius: 10)
-                .stroke(providerManager.activeProviderId == provider.id
-                        ? Color.purple.opacity(0.4) : Color.clear, lineWidth: 1))
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(
+                        providerManager.activeProviderId == provider.id
+                            ? Color.purple.opacity(0.4) : Color.clear, lineWidth: 1))
         }
         .buttonStyle(.plain)
     }

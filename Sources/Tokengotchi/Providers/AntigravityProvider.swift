@@ -1,5 +1,5 @@
-import Foundation
 import Combine
+import Foundation
 
 // MARK: - Antigravity Provider
 // Zero-config state tracking: reads the agent's own transcript.jsonl directly.
@@ -13,11 +13,11 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
     @Published private(set) var isInstalledLocally: Bool = false
 
     // Transcript-derived state — read by the UI
-    @Published private(set) var currentTool: String? = nil   // e.g. "grep_search", "replace_file_content"
-    @Published private(set) var stepCount: Int = 0           // total steps seen in current conversation
+    @Published private(set) var currentTool: String? = nil  // e.g. "grep_search", "replace_file_content"
+    @Published private(set) var stepCount: Int = 0  // total steps seen in current conversation
 
     // Quota-derived state (Stamina)
-    @Published private(set) var currentStamina: Double? = nil // 0.0 to 1.0
+    @Published private(set) var currentStamina: Double? = nil  // 0.0 to 1.0
     @Published private(set) var dailyStamina: Double? = nil
     @Published private(set) var weeklyStamina: Double? = nil
     @Published private(set) var activeModelName: String? = nil
@@ -39,7 +39,8 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
     private var lastParsedPhase: TranscriptPhase = .idle
 
     // Queue for replaying intermediate steps
-    private var pendingPhaseQueue: [(phase: TranscriptPhase, tool: String?, stepIndex: Int, stepType: String)] = []
+    private var pendingPhaseQueue:
+        [(phase: TranscriptPhase, tool: String?, stepIndex: Int, stepType: String)] = []
     private var drainTimer: Timer?
 
     // CSV status-duration logging
@@ -57,7 +58,8 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
         case planning
         case building
         case running
-        case waitingForUser   // ask_question / ask_permission
+        case generic  // unrecognized tool — falls back to focused busy
+        case waitingForUser  // ask_question / ask_permission
         case completed
         case error
         case idle
@@ -76,7 +78,7 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
             "/Applications/Antigravity.app",
             "\(homeDir)/.gemini/antigravity-ide",
             "\(homeDir)/.gemini/antigravity",
-            "\(homeDir)/.gemini/config"
+            "\(homeDir)/.gemini/config",
         ]
         isInstalledLocally = pathsToCheck.contains { fileManager.fileExists(atPath: $0) }
     }
@@ -105,9 +107,15 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
     @MainActor
     private func startPolling() {
         directoryPollingTimer?.invalidate()
-        directoryPollingTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] _ in
+        directoryPollingTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) {
+            [weak self] _ in
             guard let self else { return }
-            Task { @MainActor in self.pollDirectory() }
+            Task { @MainActor in
+                self.pollDirectory()
+                if self.staminaLastUpdated == nil {
+                    await self.fetchStamina()
+                }
+            }
         }
         pollDirectory()
     }
@@ -136,7 +144,8 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
         self.fileDescriptor = fd
 
         if let attrs = try? FileManager.default.attributesOfItem(atPath: path),
-           let size = attrs[.size] as? UInt64 {
+            let size = attrs[.size] as? UInt64
+        {
             // Initial read of last 8KB to quickly get current state
             let readOffset = size > 8192 ? size - 8192 : 0
             currentFileOffset = readOffset
@@ -146,7 +155,8 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
             }
         }
 
-        fileWatcher = DispatchSource.makeFileSystemObjectSource(fileDescriptor: fd, eventMask: .write, queue: .main)
+        fileWatcher = DispatchSource.makeFileSystemObjectSource(
+            fileDescriptor: fd, eventMask: .write, queue: .main)
 
         fileWatcher?.setEventHandler { [weak self] in
             guard let self = self else { return }
@@ -192,15 +202,25 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
     private func scheduleIdleTimeout() {
         cancelIdleTimeout()
 
-        let isIdleState = (lastKnownPhase == .completed || lastKnownPhase == .waitingForUser || lastKnownPhase == .idle)
+        // waitingForUser is a persistent state — the agent is blocked waiting
+        // for the user to respond. We must NOT auto-transition to idle; the
+        // next USER_INPUT step will move us out of waiting on its own.
+        guard lastKnownPhase != .waitingForUser else { return }
+
+        let isIdleState = (lastKnownPhase == .completed || lastKnownPhase == .idle)
         let timeoutSeconds = isIdleState ? 1.5 : 60.0
 
         let workItem = DispatchWorkItem { [weak self] in
             guard let self = self else { return }
             Task { @MainActor in
-                if self.lastKnownPhase != .idle && self.pendingPhaseQueue.isEmpty {
-                    self.transitionToIdle(reason: "idle_timeout")
-                }
+                // Re-check at fire time: the phase may have transitioned to
+                // .waitingForUser between scheduling and firing (e.g. a busy
+                // timeout was scheduled, then the agent asked a question).
+                guard self.lastKnownPhase != .idle,
+                    self.lastKnownPhase != .waitingForUser,
+                    self.pendingPhaseQueue.isEmpty
+                else { return }
+                self.transitionToIdle(reason: "idle_timeout")
             }
         }
 
@@ -235,7 +255,9 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
 
         let next = pendingPhaseQueue.removeFirst()
         // applyPhase handles logging and publishing
-        applyPhase(phase: next.phase, tool: next.tool, stepIndex: next.stepIndex, lastStepType: next.stepType, reason: "queue_drained")
+        applyPhase(
+            phase: next.phase, tool: next.tool, stepIndex: next.stepIndex,
+            lastStepType: next.stepType, reason: "queue_drained")
     }
 
     // MARK: - Conversation Switch
@@ -274,7 +296,9 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
     }
 
     // MARK: - Apply Phase → Emit Events
-    private func applyPhase(phase: TranscriptPhase, tool: String?, stepIndex: Int, lastStepType: String, reason: String) {
+    private func applyPhase(
+        phase: TranscriptPhase, tool: String?, stepIndex: Int, lastStepType: String, reason: String
+    ) {
         currentTool = tool
 
         guard phase != lastKnownPhase else { return }
@@ -286,7 +310,7 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
             eventType: "END",
             phase: currentStatusPhase,
             tool: currentStatusTool,
-            stepIndex: lastSeenStepIndex, // use the last recorded step index
+            stepIndex: lastSeenStepIndex,  // use the last recorded step index
             conversationId: convId,
             startTime: currentStatusStartTime,
             endTime: now,
@@ -318,10 +342,14 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
 
         switch phase {
         case .reading:
-            if previousPhase == .idle || previousPhase == .completed { subject.send(.started(taskId: UUID().uuidString)) }
+            if previousPhase == .idle || previousPhase == .completed {
+                subject.send(.started(taskId: UUID().uuidString))
+            }
             subject.send(.busy(substate: .reading))
         case .thinking:
-            if previousPhase == .idle || previousPhase == .completed { subject.send(.started(taskId: UUID().uuidString)) }
+            if previousPhase == .idle || previousPhase == .completed {
+                subject.send(.started(taskId: UUID().uuidString))
+            }
             subject.send(.busy(substate: .thinking))
         case .writing, .executing:
             subject.send(.busy(substate: .writing))
@@ -333,12 +361,18 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
             subject.send(.busy(substate: .building))
         case .running:
             subject.send(.busy(substate: .running))
+        case .generic:
+            if previousPhase == .idle || previousPhase == .completed {
+                subject.send(.started(taskId: UUID().uuidString))
+            }
+            subject.send(.busy(substate: nil))
         case .waitingForUser:
             subject.send(.waiting)
         case .completed:
             subject.send(.completed(taskId: UUID().uuidString, totalTokens: 0))
         case .error:
-            subject.send(.failed(taskId: UUID().uuidString, error: AGYError.agentFailed("Transcript error")))
+            subject.send(
+                .failed(taskId: UUID().uuidString, error: AGYError.agentFailed("Transcript error")))
         case .idle:
             break
         }
@@ -386,7 +420,8 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
         let homeDir = FileManager.default.homeDirectoryForCurrentUser.path
         let brainDir = "\(homeDir)/.gemini/antigravity-ide/brain"
 
-        guard let conversationIds = try? FileManager.default.contentsOfDirectory(atPath: brainDir) else {
+        guard let conversationIds = try? FileManager.default.contentsOfDirectory(atPath: brainDir)
+        else {
             return nil
         }
 
@@ -396,33 +431,44 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
 
         // Return most recently modified transcript
         return candidatePaths.max { a, b in
-            let dateA = (try? FileManager.default.attributesOfItem(atPath: a))?[.modificationDate] as? Date ?? .distantPast
-            let dateB = (try? FileManager.default.attributesOfItem(atPath: b))?[.modificationDate] as? Date ?? .distantPast
+            let dateA =
+                (try? FileManager.default.attributesOfItem(atPath: a))?[.modificationDate] as? Date
+                ?? .distantPast
+            let dateB =
+                (try? FileManager.default.attributesOfItem(atPath: b))?[.modificationDate] as? Date
+                ?? .distantPast
             return dateA < dateB
         }
     }
 
     // MARK: - Collect New Steps
-    private func collectNewStepsFromOffset(path: String) -> [(phase: TranscriptPhase, tool: String?, stepIndex: Int, stepType: String)] {
-        guard let fileHandle = try? FileHandle(forReadingFrom: URL(fileURLWithPath: path)) else { return [] }
+    private func collectNewStepsFromOffset(path: String) -> [(
+        phase: TranscriptPhase, tool: String?, stepIndex: Int, stepType: String
+    )] {
+        guard let fileHandle = try? FileHandle(forReadingFrom: URL(fileURLWithPath: path)) else {
+            return []
+        }
         defer { try? fileHandle.close() }
 
         let fileSize = (try? fileHandle.seekToEnd()) ?? 0
-        guard fileSize >= currentFileOffset else { return [] } // File might have been truncated
+        guard fileSize >= currentFileOffset else { return [] }  // File might have been truncated
 
         try? fileHandle.seek(toOffset: currentFileOffset)
         currentFileOffset = UInt64(fileSize)
 
         guard let data = try? fileHandle.readToEnd(),
-              let rawString = String(data: data, encoding: .utf8) else { return [] }
+            let rawString = String(data: data, encoding: .utf8)
+        else { return [] }
 
         let lines = rawString.components(separatedBy: .newlines).filter { !$0.isEmpty }
-        var results: [(phase: TranscriptPhase, tool: String?, stepIndex: Int, stepType: String)] = []
+        var results: [(phase: TranscriptPhase, tool: String?, stepIndex: Int, stepType: String)] =
+            []
 
         for line in lines {
             guard let jsonData = line.data(using: .utf8),
-                  let obj = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
-                  let stepIndex = obj["step_index"] as? Int else { continue }
+                let obj = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
+                let stepIndex = obj["step_index"] as? Int
+            else { continue }
 
             // Only process steps we haven't seen in the queue
             // We use the highest stepIndex collected so far or lastSeenStepIndex
@@ -445,8 +491,9 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
                 switch type_ {
                 case "PLANNER_RESPONSE":
                     if let toolCalls = obj["tool_calls"] as? [[String: Any]],
-                       let firstCall = toolCalls.first,
-                       let toolName = firstCall["name"] as? String {
+                        let firstCall = toolCalls.first,
+                        let toolName = firstCall["name"] as? String
+                    {
                         // Insert a brief planning phase before the actual tool action
                         results.append((.planning, nil, stepIndex, type_))
                         results.append((phase(for: toolName), toolName, stepIndex, type_))
@@ -475,12 +522,12 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
             return .writing
 
         case "grep_search", "list_dir",
-             "read_url_content", "list_permissions",
-             "search_web":
+            "read_url_content", "list_permissions",
+            "search_web":
             return .searching
 
         case "run_command", "manage_task", "schedule",
-             "execute_url":
+            "execute_url":
             return .running
 
         case "ask_question", "ask_permission":
@@ -490,7 +537,7 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
             return .building
 
         default:
-            return .thinking
+            return .generic
         }
     }
 
@@ -509,18 +556,19 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
     /// Human-readable label for a TranscriptPhase.
     private func phaseLabel(_ phase: TranscriptPhase) -> String {
         switch phase {
-        case .reading:       return "reading"
-        case .thinking:      return "thinking"
-        case .writing:       return "writing"
-        case .executing:     return "executing"
-        case .searching:     return "searching"
-        case .planning:      return "planning"
-        case .building:      return "building"
-        case .running:       return "running"
+        case .reading: return "reading"
+        case .thinking: return "thinking"
+        case .writing: return "writing"
+        case .executing: return "executing"
+        case .searching: return "searching"
+        case .planning: return "planning"
+        case .building: return "building"
+        case .running: return "running"
+        case .generic: return "generic"
         case .waitingForUser: return "waiting_for_user"
-        case .completed:     return "completed"
-        case .error:         return "error"
-        case .idle:          return "idle"
+        case .completed: return "completed"
+        case .error: return "error"
+        case .idle: return "idle"
         }
     }
 
@@ -541,13 +589,15 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
         let logURL = URL(fileURLWithPath: "/Users/fong/Documents/FHY/tokengotchi/token_log.csv")
         let iso = ISO8601DateFormatter()
         let start = iso.string(from: startTime)
-        let end   = iso.string(from: endTime)
+        let end = iso.string(from: endTime)
         let duration = String(format: "%.2f", endTime.timeIntervalSince(startTime))
-        let toolStr  = tool ?? ""
-        let stepStr  = stepIndex >= 0 ? "\(stepIndex)" : ""
+        let toolStr = tool ?? ""
+        let stepStr = stepIndex >= 0 ? "\(stepIndex)" : ""
 
-        let header = "timestamp_start,timestamp_end,duration_seconds,pet_status,transcript_phase,current_tool,step_index_at_transition,conversation_id,transition_reason,last_step_type,event_type\n"
-        let row    = "\(start),\(end),\(duration),\(phaseLabel(phase)),\(phaseLabel(phase)),\(toolStr),\(stepStr),\(conversationId),\(reason),\(lastStepType),\(eventType)\n"
+        let header =
+            "timestamp_start,timestamp_end,duration_seconds,pet_status,transcript_phase,current_tool,step_index_at_transition,conversation_id,transition_reason,last_step_type,event_type\n"
+        let row =
+            "\(start),\(end),\(duration),\(phaseLabel(phase)),\(phaseLabel(phase)),\(toolStr),\(stepStr),\(conversationId),\(reason),\(lastStepType),\(eventType)\n"
 
         let fm = FileManager.default
         if !fm.fileExists(atPath: logURL.path) {
@@ -585,7 +635,9 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
     enum AGYError: LocalizedError {
         case agentFailed(String)
         var errorDescription: String? {
-            switch self { case .agentFailed(let msg): return msg }
+            switch self {
+            case .agentFailed(let msg): return msg
+            }
         }
     }
 
@@ -593,19 +645,51 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
     @MainActor
     private func fetchStamina() async {
         do {
-            let snapshot = try await AntigravityUsageProbe.shared.probe()
+            var targetWorkspace: String? = nil
+            if !lastActiveTranscriptPath.isEmpty {
+                if let path = extractWorkspacePath(from: lastActiveTranscriptPath) {
+                    targetWorkspace = "file" + path.replacingOccurrences(of: "/", with: "_")
+                }
+            }
 
-            // Just use the first model found if we can't determine the active one easily
-            guard let firstQuota = snapshot.quotas.first else {
-                print("[\(self.name)] No quotas found in probe")
+            let snapshot = try await AntigravityUsageProbe.shared.probe(
+                workspaceId: targetWorkspace)
+
+            var activeModel = snapshot.activeModelName
+
+            // Fallback: check transcript for user settings override
+            var debugInfo = "Debug Info:\n"
+            debugInfo += "Transcript Path: \(lastActiveTranscriptPath)\n"
+
+            if !lastActiveTranscriptPath.isEmpty {
+                if let transcriptOverride = extractActiveModelName(from: lastActiveTranscriptPath) {
+                    activeModel = transcriptOverride
+                    debugInfo += "Extracted Model: \(transcriptOverride)\n"
+                } else {
+                    debugInfo += "Extracted Model: nil\n"
+                }
+            }
+
+            try? debugInfo.write(
+                toFile:
+                    "/Users/fong/.gemini/antigravity-ide/brain/c1bb66e9-f31d-4e79-835a-2fb527883b7a/scratch/troubleshoot.md",
+                atomically: true, encoding: .utf8)
+
+            guard let finalModel = activeModel else {
+                print("[\(self.name)] No active model found in probe")
                 return
             }
 
-            self.activeModelName = firstQuota.label
+            self.activeModelName = finalModel
 
-            // Antigravity JSON returns multiple quotas for the same model if there are daily/weekly limits.
-            // We'll separate them based on what's available. If there are two, assume one is daily (higher) and one is weekly (lower).
-            let modelQuotas = snapshot.quotas.filter { $0.label == firstQuota.label }
+            // Find the quota matching the active model
+            let modelQuotas = snapshot.quotas.filter { $0.label == finalModel }
+            guard !modelQuotas.isEmpty else {
+                // If the model is Mystery Model, we might not have a quota.
+                self.currentStamina = 1.0
+                self.staminaLastUpdated = Date()
+                return
+            }
 
             var daily: Double? = nil
             var weekly: Double? = nil
@@ -636,9 +720,68 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
             self.currentStamina = min(d, effectiveWeekly)
             self.staminaLastUpdated = Date()
 
-            print("[\(self.name)] Fetched quota: daily \(Int(d * 100))%, weekly \(Int(w * 100))% -> effective stamina: \(Int((self.currentStamina ?? 0) * 100))% for \(self.activeModelName ?? "")")
+            print(
+                "[\(self.name)] Fetched quota: daily \(Int(d * 100))%, weekly \(Int(w * 100))% -> effective stamina: \(Int((self.currentStamina ?? 0) * 100))% for \(self.activeModelName ?? "")"
+            )
         } catch {
             print("[\(self.name)] Failed to fetch stamina: \(error)")
         }
+    }
+
+    private func extractWorkspacePath(from transcriptPath: String) -> String? {
+        guard let data = try? String(contentsOfFile: transcriptPath, encoding: .utf8) else {
+            return nil
+        }
+
+        let regex = try? NSRegularExpression(pattern: "\"Cwd\"\\s*:\\s*\"(?:\\\\\")?(/[^\\\\\"]+)")
+        let range = NSRange(data.startIndex..<data.endIndex, in: data)
+        if let match = regex?.firstMatch(in: data, options: [], range: range) {
+            if let r = Range(match.range(at: 1), in: data) {
+                return String(data[r])
+            }
+        }
+
+        let regex2 = try? NSRegularExpression(
+            pattern: "\"SearchPath\"\\s*:\\s*\"(?:\\\\\")?(/[^\\\\\"]+)")
+        if let match2 = regex2?.firstMatch(in: data, options: [], range: range) {
+            if let r = Range(match2.range(at: 1), in: data) {
+                return String(data[r])
+            }
+        }
+
+        return nil
+    }
+
+    private func extractActiveModelName(from transcriptPath: String) -> String? {
+        guard let data = try? String(contentsOfFile: transcriptPath, encoding: .utf8) else {
+            return nil
+        }
+
+        // Parse JSON strings: the regex can safely use .dotMatchesLineSeparators on the unescaped content
+        let regex = try? NSRegularExpression(
+            pattern:
+                "<USER_SETTINGS_CHANGE>.*?setting `Model Selection` from .*? to (.*?)\\. No need",
+            options: [.dotMatchesLineSeparators])
+
+        var lastModel: String? = nil
+        let lines = data.split(whereSeparator: \.isNewline)
+        for line in lines {
+            guard let jsonData = String(line).data(using: .utf8),
+                let json = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
+                let type = json["type"] as? String,
+                type == "USER_INPUT" || type == "SYSTEM_MESSAGE",
+                let content = json["content"] as? String
+            else {
+                continue
+            }
+
+            let range = NSRange(content.startIndex..<content.endIndex, in: content)
+            if let match = regex?.firstMatch(in: content, options: [], range: range) {
+                if let r = Range(match.range(at: 1), in: content) {
+                    lastModel = String(content[r])
+                }
+            }
+        }
+        return lastModel
     }
 }

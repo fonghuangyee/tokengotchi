@@ -1,6 +1,6 @@
 import AppKit
-import SwiftUI
 import Combine
+import SwiftUI
 
 // MARK: - Menu Bar Pet Controller
 // Manages the NSStatusItem (click target) AND a borderless NSWindow
@@ -52,7 +52,9 @@ final class MenuBarPetController {
         // Find antigravity provider to get stamina and model name
         var stamina: Double? = nil
         var modelName: String? = nil
-        if let agy = providerManager.available.first(where: { $0.id == "antigravity" }) as? AntigravityProvider {
+        if let agy = providerManager.available.first(where: { $0.id == "antigravity" })
+            as? AntigravityProvider
+        {
             stamina = agy.currentStamina
             modelName = agy.activeModelName
         }
@@ -103,7 +105,8 @@ final class MenuBarPetController {
             .store(in: &cancellables)
 
         // Start animation loop
-        animationTimer = Timer.scheduledTimer(withTimeInterval: 1.0 / 15.0, repeats: true) { [weak self] _ in
+        animationTimer = Timer.scheduledTimer(withTimeInterval: 1.0 / 15.0, repeats: true) {
+            [weak self] _ in
             Task { @MainActor in
                 guard let self = self else { return }
                 self.updateStatusIcon(self.petState.mode)
@@ -170,13 +173,11 @@ final class MenuBarPetController {
             }
         case .completed:
             petState.setMode(.completed)
-            petState.adjustMood(by: 10)
         case .failed:
             petState.setMode(.error)
-            petState.adjustMood(by: -10)
         case .contextWarning:
-            // Mood-only: never overwrite the active working clip.
-            petState.adjustMood(by: -5)
+            // No animation trigger; never overwrite the active working clip.
+            break
         case .started:
             // First sign of life for a turn → go busy (no specific substate yet).
             if petState.mode != .busy { petState.setMode(.busy, substate: nil) }

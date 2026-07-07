@@ -75,7 +75,6 @@ The pet will now animate in real-time as your agent works!
 ## Gamification
 
 - **XP & Levels** — earn XP from every completed task (token count × streak multiplier)
-- **Mood Meter** — pet mood rises with completions, falls with errors and inactivity
 - **Token Bank** — earn 1 coin per 100 tokens → spend in the cosmetics shop
 - **Daily Streaks** — 3 days: 1.25×, 7 days: 1.5×, 30 days: 2× XP
 - **Achievements** — 11 badges: First Steps, Centurion, Token Millionaire, Night Owl, and more
@@ -90,9 +89,9 @@ TokengotchiApp (NSApplication)
 │   ├── NSStatusItem — click target + state icon
 │   ├── NSWindow overlay — full-width transparent, pet walks here
 │   └── NSPopover — dashboard on click
-├── PetState (ObservableObject) — mood, XP, level, config
+├── PetState (ObservableObject) — mode, config, animation assignments
 ├── PetAnimationEngine (SKScene) — SpriteKit procedural chibi
-├── GamificationCoordinator — XP, mood, tokens, streaks, achievements
+├── GamificationCoordinator — XP, tokens, streaks, achievements
 ├── ProviderManager — routes between LLM providers
 │   ├── AntigravityProvider — polls localhost:7432
 │   ├── OpenAIProvider (stub)

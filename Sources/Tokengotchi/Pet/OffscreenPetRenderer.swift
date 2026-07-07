@@ -3,7 +3,10 @@ import AppKit
 struct OffscreenPetRenderer {
 
     /// Render a single frame for the given clip ID.
-    static func renderFrame(clipID: String, config: PetConfig, time: TimeInterval, stamina: Double? = nil, modelName: String? = nil) -> NSImage {
+    static func renderFrame(
+        clipID: String, config: PetConfig, time: TimeInterval, stamina: Double? = nil,
+        modelName: String? = nil
+    ) -> NSImage {
         let size = NSSize(width: 22, height: 22)
 
         let image = NSImage(size: size, flipped: false) { rect in
@@ -19,10 +22,10 @@ struct OffscreenPetRenderer {
             var tilt: CGFloat = 0
 
             let blobColor = NSColor.black
-            let eyeColor = NSColor.black // drawn with .clear
+            let eyeColor = NSColor.black  // drawn with .clear
 
             var eyeBlink = false
-            var eyeStyle = "normal" // normal, happy, dead, wide, droopy
+            var eyeStyle = "normal"  // normal, happy, dead, wide, droopy
 
             var showSweat = false
             var showDots = false
@@ -77,9 +80,9 @@ struct OffscreenPetRenderer {
                 eyeBlink = sin(time * 1.5) > 0.95
 
             case "idle_yawn":
-                squish = -abs(sin(time * 1.5)) * 4.0 // stretches up tall
+                squish = -abs(sin(time * 1.5)) * 4.0  // stretches up tall
                 bounce = abs(sin(time * 1.5)) * 0.5
-                eyeBlink = sin(time * 1.0) > 0.6     // drowsy blinks
+                eyeBlink = sin(time * 1.0) > 0.6  // drowsy blinks
                 eyeStyle = "droopy"
 
             case "idle_nap":
@@ -90,7 +93,7 @@ struct OffscreenPetRenderer {
 
             case "idle_wave":
                 // Was "wake" — sunrise stretch + wave
-                squish = -abs(sin(time * 4.0)) * 4.0 // stretches up tall
+                squish = -abs(sin(time * 4.0)) * 4.0  // stretches up tall
                 eyeStyle = "wide"
                 // little wave offset on the right side
                 xOffset = sin(time * 6.0) * 0.5
@@ -104,6 +107,20 @@ struct OffscreenPetRenderer {
                 squish = -abs(sin(time * 2.0)) * 3.5
                 bounce = abs(sin(time * 2.0)) * 0.5
                 eyeStyle = "wide"
+
+            // ──────────── Busy: focused (general — no substate known) ────────────
+            case "busy_focused_grind":
+                bounce = abs(sin(time * 3.0)) * 1.2
+                squish = sin(time * 3.0) * 0.4
+                tilt = sin(time * 2.0) * 5.0
+                eyeStyle = "droopy"
+                showSweatband = true
+
+            case "busy_focused_flow":
+                bounce = abs(sin(time * 2.0)) * 1.0
+                squish = sin(time * 2.0) * 0.3
+                eyeStyle = "wide"
+                pupilMotion = .slowScan
 
             // ──────────── Busy: thinking ────────────
             case "busy_think_pace":
@@ -265,23 +282,24 @@ struct OffscreenPetRenderer {
 
             // Apply tilt (rotate around center of blob)
             let transform = NSAffineTransform()
-            transform.translateX(by: cx + xOffset, yBy: y + h/2)
+            transform.translateX(by: cx + xOffset, yBy: y + h / 2)
             transform.rotate(byDegrees: tilt)
-            transform.translateX(by: -(cx + xOffset), yBy: -(y + h/2))
+            transform.translateX(by: -(cx + xOffset), yBy: -(y + h / 2))
             transform.concat()
 
             // Body
-            let bodyRect = NSRect(x: cx + xOffset - w/2.0, y: y, width: w, height: h)
+            let bodyRect = NSRect(x: cx + xOffset - w / 2.0, y: y, width: w, height: h)
 
             if glitchMode {
                 blobColor.set()
-                let r1 = NSRect(x: bodyRect.minX - 1, y: bodyRect.minY, width: w + 2, height: h/2)
-                let r2 = NSRect(x: bodyRect.minX + 2, y: bodyRect.minY + h/2, width: w - 1, height: h/2)
+                let r1 = NSRect(x: bodyRect.minX - 1, y: bodyRect.minY, width: w + 2, height: h / 2)
+                let r2 = NSRect(
+                    x: bodyRect.minX + 2, y: bodyRect.minY + h / 2, width: w - 1, height: h / 2)
                 NSBezierPath(rect: r1).fill()
                 NSBezierPath(rect: r2).fill()
             } else {
                 blobColor.set()
-                let path = NSBezierPath(roundedRect: bodyRect, xRadius: w/3.0, yRadius: h/3.0)
+                let path = NSBezierPath(roundedRect: bodyRect, xRadius: w / 3.0, yRadius: h / 3.0)
                 path.fill()
             }
 
@@ -318,19 +336,23 @@ struct OffscreenPetRenderer {
 
             if showExclamation {
                 let pulse = sin(time * 5.0) > 0 ? 1.0 : 0.5
-                let attrs: [NSAttributedString.Key: Any] = [.font: NSFont.systemFont(ofSize: 12, weight: .bold), .foregroundColor: NSColor.systemYellow.withAlphaComponent(pulse)]
+                let attrs: [NSAttributedString.Key: Any] = [
+                    .font: NSFont.systemFont(ofSize: 12, weight: .bold),
+                    .foregroundColor: NSColor.systemYellow.withAlphaComponent(pulse),
+                ]
                 "!".draw(at: NSPoint(x: cx + 4, y: y + h + 2), withAttributes: attrs)
             }
 
             if showSweatband {
                 NSColor(calibratedRed: 0.9, green: 0.3, blue: 0.3, alpha: 1).set()
                 let bandY = y + h - 3.5
-                let bandRect = NSRect(x: cx + xOffset - w/2 - 0.5, y: bandY, width: w + 1, height: 2)
+                let bandRect = NSRect(
+                    x: cx + xOffset - w / 2 - 0.5, y: bandY, width: w + 1, height: 2)
                 NSBezierPath(rect: bandRect).fill()
                 let tailPath = NSBezierPath()
-                tailPath.move(to: NSPoint(x: cx + xOffset + w/2, y: bandY + 1))
-                tailPath.line(to: NSPoint(x: cx + xOffset + w/2 + 2, y: bandY - 1))
-                tailPath.line(to: NSPoint(x: cx + xOffset + w/2 + 3, y: bandY + 2))
+                tailPath.move(to: NSPoint(x: cx + xOffset + w / 2, y: bandY + 1))
+                tailPath.line(to: NSPoint(x: cx + xOffset + w / 2 + 2, y: bandY - 1))
+                tailPath.line(to: NSPoint(x: cx + xOffset + w / 2 + 3, y: bandY + 2))
                 tailPath.lineWidth = 0.8
                 tailPath.stroke()
             }
@@ -341,10 +363,12 @@ struct OffscreenPetRenderer {
                 let phase2 = CGFloat(Int(time * 25.0 + 1) % 5) / 5.0
                 let phase3 = CGFloat(Int(time * 35.0 + 2) % 5) / 5.0
 
-                let lineX = cx + xOffset - w/2.0 - 2.0
+                let lineX = cx + xOffset - w / 2.0 - 2.0
                 let line1 = NSRect(x: lineX - 6.0 * phase1 - 4, y: y + 3.0, width: 4.0, height: 1.0)
-                let line2 = NSRect(x: lineX - 8.0 * phase2 - 6, y: y + h/2.0, width: 6.0, height: 1.0)
-                let line3 = NSRect(x: lineX - 5.0 * phase3 - 2, y: y + h - 3.0, width: 3.0, height: 1.0)
+                let line2 = NSRect(
+                    x: lineX - 8.0 * phase2 - 6, y: y + h / 2.0, width: 6.0, height: 1.0)
+                let line3 = NSRect(
+                    x: lineX - 5.0 * phase3 - 2, y: y + h - 3.0, width: 3.0, height: 1.0)
 
                 NSBezierPath(rect: line1).fill()
                 NSBezierPath(rect: line2).fill()
@@ -355,7 +379,7 @@ struct OffscreenPetRenderer {
                 blobColor.set()
                 let footW: CGFloat = 3
                 let footH: CGFloat = 1.5
-                let footX = cx + xOffset + w/2 - 4
+                let footX = cx + xOffset + w / 2 - 4
                 let tapPhase = sin(time * 20.0)
                 let footY = y + (tapPhase > 0 ? tapPhase * 1.5 : 0) - 1.0
                 let footRect = NSRect(x: footX, y: footY, width: footW, height: footH)
@@ -374,15 +398,21 @@ struct OffscreenPetRenderer {
                 NSBezierPath(rect: leftEye).fill()
                 NSBezierPath(rect: rightEye).fill()
             } else if eyeStyle == "happy" {
-                let attrs: [NSAttributedString.Key: Any] = [.font: NSFont.systemFont(ofSize: 8, weight: .bold), .foregroundColor: eyeColor]
+                let attrs: [NSAttributedString.Key: Any] = [
+                    .font: NSFont.systemFont(ofSize: 8, weight: .bold), .foregroundColor: eyeColor,
+                ]
                 "^".draw(at: NSPoint(x: cx + xOffset - 5, y: eyeY - 2), withAttributes: attrs)
                 "^".draw(at: NSPoint(x: cx + xOffset + 1, y: eyeY - 2), withAttributes: attrs)
             } else if eyeStyle == "dead" {
-                let attrs: [NSAttributedString.Key: Any] = [.font: NSFont.systemFont(ofSize: 6, weight: .bold), .foregroundColor: eyeColor]
+                let attrs: [NSAttributedString.Key: Any] = [
+                    .font: NSFont.systemFont(ofSize: 6, weight: .bold), .foregroundColor: eyeColor,
+                ]
                 "x".draw(at: NSPoint(x: cx + xOffset - 5, y: eyeY - 1), withAttributes: attrs)
                 "x".draw(at: NSPoint(x: cx + xOffset + 1, y: eyeY - 1), withAttributes: attrs)
             } else if eyeStyle == "wide" {
-                let attrs: [NSAttributedString.Key: Any] = [.font: NSFont.systemFont(ofSize: 6, weight: .bold), .foregroundColor: eyeColor]
+                let attrs: [NSAttributedString.Key: Any] = [
+                    .font: NSFont.systemFont(ofSize: 6, weight: .bold), .foregroundColor: eyeColor,
+                ]
                 "o".draw(at: NSPoint(x: cx + xOffset - 5, y: eyeY - 1), withAttributes: attrs)
                 "o".draw(at: NSPoint(x: cx + xOffset + 1, y: eyeY - 1), withAttributes: attrs)
             } else {
@@ -404,8 +434,10 @@ struct OffscreenPetRenderer {
                     eyeH = 1.5
                 }
 
-                let leftEye = NSRect(x: cx + xOffset - 4 + pupilDir, y: eyeY, width: eyeW, height: eyeH)
-                let rightEye = NSRect(x: cx + xOffset + 1 + pupilDir, y: eyeY, width: eyeW, height: eyeH)
+                let leftEye = NSRect(
+                    x: cx + xOffset - 4 + pupilDir, y: eyeY, width: eyeW, height: eyeH)
+                let rightEye = NSRect(
+                    x: cx + xOffset + 1 + pupilDir, y: eyeY, width: eyeW, height: eyeH)
                 NSBezierPath(rect: leftEye).fill()
                 NSBezierPath(rect: rightEye).fill()
             }
@@ -427,7 +459,10 @@ struct OffscreenPetRenderer {
                 NSColor.white.set()
                 let dotCount = Int(time * 3.0) % 4
                 let dots = String(repeating: ".", count: dotCount)
-                let attrs: [NSAttributedString.Key: Any] = [.font: NSFont.systemFont(ofSize: 10, weight: .bold), .foregroundColor: NSColor.white]
+                let attrs: [NSAttributedString.Key: Any] = [
+                    .font: NSFont.systemFont(ofSize: 10, weight: .bold),
+                    .foregroundColor: NSColor.white,
+                ]
                 dots.draw(at: NSPoint(x: cx - 6, y: y + h - 2), withAttributes: attrs)
             }
 
@@ -436,11 +471,21 @@ struct OffscreenPetRenderer {
                 let zPhase1 = (time * 2.0).truncatingRemainder(dividingBy: 3.0)
                 let zPhase2 = (time * 2.0 + 1.0).truncatingRemainder(dividingBy: 3.0)
 
-                let attrs1: [NSAttributedString.Key: Any] = [.font: NSFont.systemFont(ofSize: 6, weight: .bold), .foregroundColor: NSColor.white.withAlphaComponent(1.0 - zPhase1/3.0)]
-                let attrs2: [NSAttributedString.Key: Any] = [.font: NSFont.systemFont(ofSize: 4, weight: .bold), .foregroundColor: NSColor.white.withAlphaComponent(1.0 - zPhase2/3.0)]
+                let attrs1: [NSAttributedString.Key: Any] = [
+                    .font: NSFont.systemFont(ofSize: 6, weight: .bold),
+                    .foregroundColor: NSColor.white.withAlphaComponent(1.0 - zPhase1 / 3.0),
+                ]
+                let attrs2: [NSAttributedString.Key: Any] = [
+                    .font: NSFont.systemFont(ofSize: 4, weight: .bold),
+                    .foregroundColor: NSColor.white.withAlphaComponent(1.0 - zPhase2 / 3.0),
+                ]
 
-                "Z".draw(at: NSPoint(x: cx + 2 + zPhase1 * 2, y: y + h + 2 + zPhase1 * 4), withAttributes: attrs1)
-                "z".draw(at: NSPoint(x: cx + 5 + zPhase2 * 2, y: y + h + zPhase2 * 4), withAttributes: attrs2)
+                "Z".draw(
+                    at: NSPoint(x: cx + 2 + zPhase1 * 2, y: y + h + 2 + zPhase1 * 4),
+                    withAttributes: attrs1)
+                "z".draw(
+                    at: NSPoint(x: cx + 5 + zPhase2 * 2, y: y + h + zPhase2 * 4),
+                    withAttributes: attrs2)
             }
 
             if showGlasses {

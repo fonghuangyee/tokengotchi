@@ -1,5 +1,5 @@
-import SwiftUI
 import AppKit
+import SwiftUI
 
 // MARK: - Pet Builder Tab
 // Lets the user choose which animation clips play for each PetMode, with
@@ -64,26 +64,31 @@ struct PetBuilderTab: View {
                         VStack(spacing: 4) {
                             Image(systemName: mode.sfSymbol)
                                 .font(.system(size: 14))
-                                .foregroundColor(selectedMode == mode
-                                    ? Color(NSColor(hex: mode.accentColorHex) ?? .purple)
-                                    : .white.opacity(0.5))
+                                .foregroundColor(
+                                    selectedMode == mode
+                                        ? Color(NSColor(hex: mode.accentColorHex) ?? .purple)
+                                        : .white.opacity(0.5))
                             Text(mode.displayName)
                                 .font(.system(size: 9, weight: .semibold))
-                                .foregroundColor(selectedMode == mode ? .white : .white.opacity(0.5))
+                                .foregroundColor(
+                                    selectedMode == mode ? .white : .white.opacity(0.5))
                         }
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 8)
                         .background(
                             RoundedRectangle(cornerRadius: 8)
-                                .fill(selectedMode == mode
-                                      ? Color.white.opacity(0.12)
-                                      : Color.white.opacity(0.04))
+                                .fill(
+                                    selectedMode == mode
+                                        ? Color.white.opacity(0.12)
+                                        : Color.white.opacity(0.04))
                         )
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
-                                .stroke(selectedMode == mode
-                                        ? Color(NSColor(hex: mode.accentColorHex) ?? .purple
-                                              ).opacity(0.5)
+                                .stroke(
+                                    selectedMode == mode
+                                        ? Color(
+                                            NSColor(hex: mode.accentColorHex) ?? .purple
+                                        ).opacity(0.5)
                                         : Color.clear, lineWidth: 1)
                         )
                     }
@@ -136,13 +141,23 @@ struct PetBuilderTab: View {
                 .buttonStyle(.plain)
             }
 
-            let assigned = petState.assignments.clips(for: selectedMode)
-            
+            let assigned = petState.assignments.allAssignedClips(for: selectedMode)
+
             if selectedMode == .busy {
                 let grouped = Dictionary(grouping: assigned, by: { $0.busySubstate })
                 let sortedSubstates = BusySubstate.allCases.filter { grouped.keys.contains($0) }
                 let generalClips = grouped[nil] ?? []
-                
+
+                if !generalClips.isEmpty {
+                    Text("Focused")
+                        .font(.system(size: 10, weight: .semibold, design: .rounded))
+                        .foregroundColor(.white.opacity(0.6))
+                        .padding(.top, 4)
+                    ForEach(generalClips, id: \.id) { clip in
+                        assignedRow(clip, isOnlyClip: assigned.count == 1)
+                    }
+                }
+
                 ForEach(sortedSubstates, id: \.self) { substate in
                     if let clips = grouped[substate], !clips.isEmpty {
                         Text(substate.displayName)
@@ -152,16 +167,6 @@ struct PetBuilderTab: View {
                         ForEach(clips, id: \.id) { clip in
                             assignedRow(clip, isOnlyClip: assigned.count == 1)
                         }
-                    }
-                }
-                
-                if !generalClips.isEmpty {
-                    Text("General")
-                        .font(.system(size: 10, weight: .semibold, design: .rounded))
-                        .foregroundColor(.white.opacity(0.6))
-                        .padding(.top, 4)
-                    ForEach(generalClips, id: \.id) { clip in
-                        assignedRow(clip, isOnlyClip: assigned.count == 1)
                     }
                 }
             } else {
@@ -242,7 +247,9 @@ struct PetBuilderTab: View {
                 .foregroundColor(.white.opacity(0.8))
 
             let assignedIDs = Set(petState.assignments.ids(for: selectedMode))
-            let available = AnimationLibrary.clips(for: selectedMode).filter { !assignedIDs.contains($0.id) }
+            let available = AnimationLibrary.clips(for: selectedMode).filter {
+                !assignedIDs.contains($0.id)
+            }
 
             if available.isEmpty {
                 Text("All animations for this state are already added. 🎉")
@@ -254,7 +261,17 @@ struct PetBuilderTab: View {
                     let grouped = Dictionary(grouping: available, by: { $0.busySubstate })
                     let sortedSubstates = BusySubstate.allCases.filter { grouped.keys.contains($0) }
                     let generalClips = grouped[nil] ?? []
-                    
+
+                    if !generalClips.isEmpty {
+                        Text("Focused")
+                            .font(.system(size: 10, weight: .semibold, design: .rounded))
+                            .foregroundColor(.white.opacity(0.6))
+                            .padding(.top, 4)
+                        ForEach(generalClips, id: \.id) { clip in
+                            libraryRow(clip)
+                        }
+                    }
+
                     ForEach(sortedSubstates, id: \.self) { substate in
                         if let clips = grouped[substate], !clips.isEmpty {
                             Text(substate.displayName)
@@ -264,15 +281,6 @@ struct PetBuilderTab: View {
                             ForEach(clips, id: \.id) { clip in
                                 libraryRow(clip)
                             }
-                        }
-                    }
-                    if !generalClips.isEmpty {
-                        Text("General")
-                            .font(.system(size: 10, weight: .semibold, design: .rounded))
-                            .foregroundColor(.white.opacity(0.6))
-                            .padding(.top, 4)
-                        ForEach(generalClips, id: \.id) { clip in
-                            libraryRow(clip)
                         }
                     }
                 } else {

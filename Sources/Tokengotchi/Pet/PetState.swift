@@ -31,30 +31,8 @@ final class PetState: ObservableObject {
     @Published var isNearEdge: Bool = false
     @Published var showConfetti: Bool = false
 
-    // Vitals
-    @Published var mood: Double = 75           // 0–100
-
     // Backwards-compatible alias used by existing UI (read-only computed)
     var currentAnimation: PetMode { mode }
-
-    // Derived
-    var moodLabel: String {
-        switch mood {
-        case 80...100: return "😄 Ecstatic"
-        case 60..<80:  return "😊 Happy"
-        case 40..<60:  return "😐 Neutral"
-        case 20..<40:  return "😟 Sad"
-        default:       return "😢 Miserable"
-        }
-    }
-
-    var moodColor: Color {
-        switch mood {
-        case 70...100: return Color(hue: 0.35, saturation: 0.8, brightness: 0.85)
-        case 40..<70:  return Color(hue: 0.14, saturation: 0.8, brightness: 0.9)
-        default:       return Color(hue: 0.6, saturation: 0.5, brightness: 0.7)
-        }
-    }
 
     // The currently resolved clip (read by renderer + UI previews).
     var currentClip: AnimationClip {
@@ -185,11 +163,6 @@ final class PetState: ObservableObject {
         }
     }
 
-    // MARK: - Mood
-    func adjustMood(by delta: Double) {
-        mood = max(0, min(100, mood + delta))
-    }
-
     // MARK: - Persistence
     func save() {
         let encoder = JSONEncoder()
@@ -210,14 +183,12 @@ final class PetState: ObservableObject {
 // MARK: - Save State (Codable snapshot)
 private struct PetSaveState: Codable {
     var configData: Data
-    var mood: Double
     var assignments: AnimationAssignments
     var randomize: Bool
 
     @MainActor
     init(from state: PetState) {
         configData = (try? JSONEncoder().encode(state.config)) ?? Data()
-        mood = state.mood
         assignments = state.assignments
         randomize = state.randomize
     }
@@ -227,7 +198,6 @@ private struct PetSaveState: Codable {
         if let cfg = try? JSONDecoder().decode(PetConfig.self, from: configData) {
             state.config = cfg
         }
-        state.mood = mood
         state.assignments = assignments
         state.randomize = randomize
         // Make sure the current clip reflects the loaded assignments.

@@ -1,0 +1,1045 @@
+{
+  "name": "Ember",
+  "palette": {
+    "base": "#E17055",
+    "secondary": "#FDCB6E",
+    "accent": "#D63031",
+    "eye": "#FFEAA7",
+    "dark": "#2D3436"
+  },
+  "dock": {
+    "svgs": [
+      {
+        "id": "base_svg",
+        "svg": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>\n  <g id='tail'>\n    <path fill='var(--accent)' d='M60 75 Q 80 85, 90 70 Q 80 80, 60 70 Z'/>\n  </g>\n  <g id='left_wing'>\n    <path fill='var(--secondary)' d='M40 50 Q 10 20, 5 45 Q 15 50, 10 65 Q 30 60, 40 50 Z'/>\n  </g>\n  <g id='right_wing'>\n    <path fill='var(--secondary)' d='M60 50 Q 90 20, 95 45 Q 85 50, 90 65 Q 70 60, 60 50 Z'/>\n  </g>\n  <g id='body'>\n    <ellipse cx='50' cy='70' rx='25' ry='20' fill='var(--base)'/>\n    <ellipse cx='50' cy='75' rx='15' ry='12' fill='var(--eye)'/>\n  </g>\n  <g id='head'>\n    <path fill='var(--secondary)' d='M35 30 Q 25 10, 20 15 Q 30 25, 40 30 Z'/>\n    <path fill='var(--secondary)' d='M65 30 Q 75 10, 80 15 Q 70 25, 60 30 Z'/>\n    <rect x='30' y='25' width='40' height='35' rx='15' fill='var(--base)'/>\n    <g id='eyes'>\n      <circle cx='40' cy='40' r='4' fill='var(--dark)'/>\n      <circle cx='60' cy='40' r='4' fill='var(--dark)'/>\n      <circle cx='39' cy='39' r='1.5' fill='white'/>\n      <circle cx='59' cy='39' r='1.5' fill='white'/>\n    </g>\n    <ellipse cx='50' cy='50' rx='10' ry='6' fill='var(--eye)'/>\n    <circle cx='47' cy='49' r='1' fill='var(--accent)'/>\n    <circle cx='53' cy='49' r='1' fill='var(--accent)'/>\n  </g>\n</svg>"
+      },
+      {
+        "id": "idle_dragon_sleep_override",
+        "svg": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>\n  <g id='tail'>\n    <path fill='var(--accent)' d='M60 75 Q 80 85, 90 70 Q 80 80, 60 70 Z'/>\n  </g>\n  <g id='left_wing'>\n    <path fill='var(--secondary)' d='M40 50 Q 10 20, 5 45 Q 15 50, 10 65 Q 30 60, 40 50 Z'/>\n  </g>\n  <g id='right_wing'>\n    <path fill='var(--secondary)' d='M60 50 Q 90 20, 95 45 Q 85 50, 90 65 Q 70 60, 60 50 Z'/>\n  </g>\n  <g id='body'>\n    <ellipse cx='50' cy='70' rx='25' ry='20' fill='var(--base)'/>\n    <ellipse cx='50' cy='75' rx='15' ry='12' fill='var(--eye)'/>\n  </g>\n  <g id='head'>\n    <path fill='var(--secondary)' d='M35 30 Q 25 10, 20 15 Q 30 25, 40 30 Z'/>\n    <path fill='var(--secondary)' d='M65 30 Q 75 10, 80 15 Q 70 25, 60 30 Z'/>\n    <rect x='30' y='25' width='40' height='35' rx='15' fill='var(--base)'/>\n    <g id='eyes'>\n      <path d='M35 40 Q 40 45, 45 40' stroke='var(--dark)' stroke-width='2' fill='none'/>\n      <path d='M55 40 Q 60 45, 65 40' stroke='var(--dark)' stroke-width='2' fill='none'/>\n      \n      \n    </g>\n    <ellipse cx='50' cy='50' rx='10' ry='6' fill='var(--eye)'/>\n    <circle cx='47' cy='49' r='1' fill='var(--accent)'/>\n    <circle cx='53' cy='49' r='1' fill='var(--accent)'/>\n  </g>\n</svg>"
+      },
+      {
+        "id": "busy_dragon_fire_override",
+        "svg": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>\n  <g id='tail'>\n    <path fill='var(--accent)' d='M60 75 Q 80 85, 90 70 Q 80 80, 60 70 Z'/>\n  </g>\n  <g id='left_wing'>\n    <path fill='var(--secondary)' d='M40 50 Q 10 20, 5 45 Q 15 50, 10 65 Q 30 60, 40 50 Z'/>\n  </g>\n  <g id='right_wing'>\n    <path fill='var(--secondary)' d='M60 50 Q 90 20, 95 45 Q 85 50, 90 65 Q 70 60, 60 50 Z'/>\n  </g>\n  <g id='body'>\n    <ellipse cx='50' cy='70' rx='25' ry='20' fill='var(--base)'/>\n    <ellipse cx='50' cy='75' rx='15' ry='12' fill='var(--eye)'/>\n  </g>\n  <g id='head'>\n    <path fill='var(--secondary)' d='M35 30 Q 25 10, 20 15 Q 30 25, 40 30 Z'/>\n    <path fill='var(--secondary)' d='M65 30 Q 75 10, 80 15 Q 70 25, 60 30 Z'/>\n    <rect x='30' y='25' width='40' height='35' rx='15' fill='var(--base)'/>\n    <g id='eyes'>\n      <circle cx='40' cy='40' r='4' fill='var(--dark)'/>\n      <circle cx='60' cy='40' r='4' fill='var(--dark)'/>\n      <circle cx='39' cy='39' r='1.5' fill='white'/>\n      <circle cx='59' cy='39' r='1.5' fill='white'/>\n    </g>\n    <ellipse cx='50' cy='50' rx='10' ry='6' fill='var(--eye)'/>\n    <circle cx='47' cy='49' r='1' fill='var(--accent)'/>\n    <circle cx='53' cy='49' r='1' fill='var(--accent)'/>\n  <path fill='var(--secondary)' d='M50 50 L40 70 L50 90 L60 70 Z'/></g></svg>"
+      },
+      {
+        "id": "waiting_dragon_bored_override",
+        "svg": "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>\n  <g id='tail'>\n    <path fill='var(--accent)' d='M60 75 Q 80 85, 90 70 Q 80 80, 60 70 Z'/>\n  </g>\n  <g id='left_wing'>\n    <path fill='var(--secondary)' d='M40 50 Q 10 20, 5 45 Q 15 50, 10 65 Q 30 60, 40 50 Z'/>\n  </g>\n  <g id='right_wing'>\n    <path fill='var(--secondary)' d='M60 50 Q 90 20, 95 45 Q 85 50, 90 65 Q 70 60, 60 50 Z'/>\n  </g>\n  <g id='body'>\n    <ellipse cx='50' cy='70' rx='25' ry='20' fill='var(--base)'/>\n    <ellipse cx='50' cy='75' rx='15' ry='12' fill='var(--eye)'/>\n  </g>\n  <g id='head'>\n    <path fill='var(--secondary)' d='M35 30 Q 25 10, 20 15 Q 30 25, 40 30 Z'/>\n    <path fill='var(--secondary)' d='M65 30 Q 75 10, 80 15 Q 70 25, 60 30 Z'/>\n    <rect x='30' y='25' width='40' height='35' rx='15' fill='var(--base)'/>\n    <g id='eyes'>\n      <path d='M35 40 Q 40 45, 45 40' stroke='var(--dark)' stroke-width='2' fill='none'/>\n      <path d='M55 40 Q 60 45, 65 40' stroke='var(--dark)' stroke-width='2' fill='none'/>\n      \n      \n    </g>\n    <ellipse cx='50' cy='50' rx='10' ry='6' fill='var(--eye)'/>\n    <circle cx='47' cy='49' r='1' fill='var(--accent)'/>\n    <circle cx='53' cy='49' r='1' fill='var(--accent)'/>\n  </g>\n</svg>"
+      }
+    ],
+    "states": [
+      {
+        "id": "idle",
+        "animations": [
+          {
+            "id": "idle_dragon_prowl",
+            "name": "Dragon Idle",
+            "description": "Slow breathing and gentle wing flaps",
+            "duration": 2.0,
+            "tracks": [
+              {
+                "targetId": "head",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 2,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 2.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "body",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 1,
+                    "sx": 1.05,
+                    "sy": 0.95
+                  },
+                  {
+                    "time": 2.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "left_wing",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.0,
+                    "rotate": -15,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 2.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "right_wing",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.0,
+                    "rotate": 15,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 2.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "idle_dragon_sleep",
+            "name": "Dragon Sleep",
+            "description": "Sleeping peacefully",
+            "duration": 3.0,
+            "svg": {
+              "id": "idle_dragon_sleep_override"
+            },
+            "tracks": [
+              {
+                "targetId": "head",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 5,
+                    "tx": 0,
+                    "ty": 5,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.5,
+                    "rotate": 5,
+                    "tx": 0,
+                    "ty": 6,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 3.0,
+                    "rotate": 5,
+                    "tx": 0,
+                    "ty": 5,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "body",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.5,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1.08,
+                    "sy": 0.92
+                  },
+                  {
+                    "time": 3.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "left_wing",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": -40,
+                    "tx": 5,
+                    "ty": 10,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.5,
+                    "rotate": -35,
+                    "tx": 5,
+                    "ty": 10,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 3.0,
+                    "rotate": -40,
+                    "tx": 5,
+                    "ty": 10,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "right_wing",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 40,
+                    "tx": -5,
+                    "ty": 10,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.5,
+                    "rotate": 35,
+                    "tx": -5,
+                    "ty": 10,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 3.0,
+                    "rotate": 40,
+                    "tx": -5,
+                    "ty": 10,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "busy",
+        "animations": [
+          {
+            "id": "busy_dragon_hover",
+            "name": "Dragon Hover",
+            "description": "Furious flapping and hovering",
+            "duration": 0.4,
+            "tracks": [
+              {
+                "targetId": "head",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -5,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.2,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -7,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.4,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -5,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "body",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -5,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.2,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -7,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.4,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -5,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "left_wing",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 20,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.2,
+                    "rotate": -50,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.4,
+                    "rotate": 20,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "right_wing",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": -20,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.2,
+                    "rotate": 50,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.4,
+                    "rotate": -20,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "busy_dragon_fire",
+            "name": "Dragon Fire",
+            "description": "Hovering and breathing tiny fire",
+            "duration": 0.4,
+            "svg": {
+              "id": "busy_dragon_fire_override"
+            },
+            "tracks": [
+              {
+                "targetId": "head",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": -5,
+                    "tx": 0,
+                    "ty": -5,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.2,
+                    "rotate": -5,
+                    "tx": 0,
+                    "ty": -7,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.4,
+                    "rotate": -5,
+                    "tx": 0,
+                    "ty": -5,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "body",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -5,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.2,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -7,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.4,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -5,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "left_wing",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 20,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.2,
+                    "rotate": -50,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.4,
+                    "rotate": 20,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "right_wing",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": -20,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.2,
+                    "rotate": 50,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.4,
+                    "rotate": -20,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "waiting",
+        "animations": [
+          {
+            "id": "waiting_dragon_sway",
+            "name": "Dragon Sway",
+            "description": "Swaying back and forth waiting",
+            "duration": 2.0,
+            "tracks": [
+              {
+                "targetId": "head",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": -10,
+                    "tx": -5,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.0,
+                    "rotate": 10,
+                    "tx": 5,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 2.0,
+                    "rotate": -10,
+                    "tx": -5,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "body",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": -5,
+                    "tx": -2,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.0,
+                    "rotate": 5,
+                    "tx": 2,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 2.0,
+                    "rotate": -5,
+                    "tx": -2,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "waiting_dragon_bored",
+            "name": "Dragon Bored",
+            "description": "Looking down bored",
+            "duration": 2.0,
+            "svg": {
+              "id": "waiting_dragon_bored_override"
+            },
+            "tracks": [
+              {
+                "targetId": "head",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 5,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 7,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 2.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 5,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "body",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 2,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 2.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "completed",
+        "animations": [
+          {
+            "id": "completed_dragon_jump",
+            "name": "Dragon Jump",
+            "description": "Happy jump",
+            "duration": 1.0,
+            "tracks": [
+              {
+                "targetId": "head",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.2,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 5,
+                    "sx": 1,
+                    "sy": 0.9
+                  },
+                  {
+                    "time": 0.5,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -15,
+                    "sx": 1,
+                    "sy": 1.1
+                  },
+                  {
+                    "time": 0.8,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "body",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.2,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 5,
+                    "sx": 1.1,
+                    "sy": 0.9
+                  },
+                  {
+                    "time": 0.5,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -10,
+                    "sx": 0.9,
+                    "sy": 1.1
+                  },
+                  {
+                    "time": 0.8,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "left_wing",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.2,
+                    "rotate": 20,
+                    "tx": 0,
+                    "ty": 5,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.5,
+                    "rotate": -40,
+                    "tx": 0,
+                    "ty": -10,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.8,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "right_wing",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.2,
+                    "rotate": -20,
+                    "tx": 0,
+                    "ty": 5,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.5,
+                    "rotate": 40,
+                    "tx": 0,
+                    "ty": -10,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.8,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "completed_dragon_flip",
+            "name": "Dragon Flip",
+            "description": "Happy flip",
+            "duration": 1.0,
+            "tracks": [
+              {
+                "targetId": "head",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.5,
+                    "rotate": 180,
+                    "tx": 0,
+                    "ty": -20,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.0,
+                    "rotate": 360,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "body",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.5,
+                    "rotate": 180,
+                    "tx": 0,
+                    "ty": -20,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.0,
+                    "rotate": 360,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "tail",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.5,
+                    "rotate": 180,
+                    "tx": 0,
+                    "ty": -20,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.0,
+                    "rotate": 360,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "left_wing",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.5,
+                    "rotate": 180,
+                    "tx": 0,
+                    "ty": -20,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.0,
+                    "rotate": 360,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "right_wing",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.5,
+                    "rotate": 180,
+                    "tx": 0,
+                    "ty": -20,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.0,
+                    "rotate": 360,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "error",
+        "animations": [
+          {
+            "id": "error_dragon_explode",
+            "name": "Explosion",
+            "description": "Dragon explodes into ashes",
+            "duration": 0.8,
+            "frames": [
+              "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='10' fill='#E17055'/></svg>",
+              "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='30' fill='#FDCB6E'/><circle cx='50' cy='50' r='15' fill='#E17055'/></svg>",
+              "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='50' fill='#FFEAA7'/><circle cx='50' cy='50' r='30' fill='#FDCB6E'/><circle cx='50' cy='50' r='15' fill='#E17055'/></svg>",
+              "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='60' fill='none' stroke='#FDCB6E' stroke-width='4'/><path d='M30 30 L20 20 M70 30 L80 20 M30 70 L20 80 M70 70 L80 80' stroke='#FFEAA7' stroke-width='3'/></svg>",
+              "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path d='M30 30 L10 10 M70 30 L90 10 M30 70 L10 90 M70 70 L90 90' stroke='#FDCB6E' stroke-width='2' opacity='0.5'/></svg>"
+            ]
+          },
+          {
+            "id": "error_dragon_explode_alt",
+            "name": "Explosion Alt",
+            "description": "Dragon explodes into ashes",
+            "duration": 0.8,
+            "frames": [
+              "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='10' fill='#E17055'/></svg>",
+              "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='30' fill='#FDCB6E'/><circle cx='50' cy='50' r='15' fill='#E17055'/></svg>",
+              "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='50' fill='#FFEAA7'/><circle cx='50' cy='50' r='30' fill='#FDCB6E'/><circle cx='50' cy='50' r='15' fill='#E17055'/></svg>",
+              "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='60' fill='none' stroke='#FDCB6E' stroke-width='4'/><path d='M30 30 L20 20 M70 30 L80 20 M30 70 L20 80 M70 70 L80 80' stroke='#FFEAA7' stroke-width='3'/></svg>",
+              "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path d='M30 30 L10 10 M70 30 L90 10 M30 70 L10 90 M70 70 L90 90' stroke='#FDCB6E' stroke-width='2' opacity='0.5'/></svg>"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

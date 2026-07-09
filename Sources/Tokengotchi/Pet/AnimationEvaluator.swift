@@ -1,0 +1,80 @@
+import CoreGraphics
+import Foundation
+
+struct AnimationEvaluator {
+    /// Evaluate all transforms for the given tracks at the specified time.
+    /// Returns a dictionary of [layerId: LayerTransform].
+    static func evaluate(tracks: [KeyframeTrack], duration: TimeInterval, time: TimeInterval) -> [String: LayerTransform] {
+        guard duration > 0 else { return [:] }
+        let loopTime = time.truncatingRemainder(dividingBy: duration)
+        
+        var transforms: [String: LayerTransform] = [:]
+        
+        for track in tracks {
+            transforms[track.targetId] = evaluateTrack(track, time: loopTime, duration: duration)
+        }
+        
+        return transforms
+    }
+    
+    private static func evaluateTrack(_ track: KeyframeTrack, time: TimeInterval, duration: TimeInterval) -> LayerTransform {
+        // Sort keyframes by time just to be safe
+        let keyframes = track.keyframes.sorted { $0.time < $1.time }
+        guard !keyframes.isEmpty else { return .identity }
+        if keyframes.count == 1 {
+            return transform(from: keyframes[0])
+        }
+        
+        var kf1 = keyframes.last!
+        var kf2 = keyframes.first!
+        
+        for i in 0..<(keyframes.count - 1) {
+            if time >= keyframes[i].time && time < keyframes[i+1].time {
+                kf1 = keyframes[i]
+                kf2 = keyframes[i+1]
+                break
+            }
+        }
+        
+        if time < keyframes.first!.time {
+            kf1 = keyframes.last!
+            kf2 = keyframes.first!
+            let dt = kf2.time - (kf1.time - duration)
+            if dt <= 0 { return transform(from: kf2) }
+            let progress = (time - (kf1.time - duration)) / dt
+            return interpolate(from: kf1, to: kf2, progress: progress)
+        }
+        
+        if time >= keyframes.last!.time {
+            kf1 = keyframes.last!
+            kf2 = keyframes.first!
+            let dt = (kf2.time + duration) - kf1.time
+            if dt <= 0 { return transform(from: kf1) }
+            let progress = (time - kf1.time) / dt
+            return interpolate(from: kf1, to: kf2, progress: progress)
+        }
+        
+        let dt = kf2.time - kf1.time
+        if dt <= 0 { return transform(from: kf1) }
+        let progress = (time - kf1.time) / dt
+        return interpolate(from: kf1, to: kf2, progress: progress)
+    }
+    
+    private static func transform(from kf: Keyframe) -> LayerTransform {
+        return LayerTransform(rotate: kf.rotate, tx: kf.tx, ty: kf.ty, sx: kf.sx, sy: kf.sy)
+    }
+    
+    private static func interpolate(from kf1: Keyframe, to kf2: Keyframe, progress: Double) -> LayerTransform {
+        let p = max(0, min(1, progress))
+        // Smoothstep easing for a nicer animation
+        let easeP = p * p * (3.0 - 2.0 * p)
+        
+        return LayerTransform(
+            rotate: kf1.rotate + (kf2.rotate - kf1.rotate) * easeP,
+            tx: kf1.tx + (kf2.tx - kf1.tx) * easeP,
+            ty: kf1.ty + (kf2.ty - kf1.ty) * easeP,
+            sx: kf1.sx + (kf2.sx - kf1.sx) * easeP,
+            sy: kf1.sy + (kf2.sy - kf1.sy) * easeP
+        )
+    }
+}

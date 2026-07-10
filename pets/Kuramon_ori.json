@@ -358,7 +358,7 @@
       },
       {
         "id": "dock_pulse_beam_override",
-        "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><g id=\"kuramon_all\"><g id=\"tentacle_bl\"><path d=\"M 30 75 C 20 85 10 95 25 90 C 35 85 40 78 40 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"tentacle_br\"><path d=\"M 70 75 C 80 85 90 95 75 90 C 65 85 60 78 60 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"horn_tl\"><path d=\"M 35 25 C 25 15 15 5 20 20 C 25 35 30 35 30 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"horn_tr\"><path d=\"M 65 25 C 75 15 85 5 80 20 C 75 35 70 35 70 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"body_main\"><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"eye_group\"><path id=\"eye_black\" d=\"M 23 55 C 23 38 38 28 55 28 C 72 28 77 43 77 55 C 77 72 62 77 45 77 C 28 77 23 67 23 55 Z\" fill=\"var(--eyeliner)\"/><ellipse id=\"sclera\" cx=\"52\" cy=\"53\" rx=\"19\" ry=\"17\" fill=\"var(--eye-sclera)\"/><circle id=\"iris\" cx=\"52\" cy=\"53\" r=\"13\" fill=\"var(--eye-iris)\"/><circle id=\"pupil\" cx=\"52\" cy=\"53\" r=\"6\" fill=\"var(--eye-pupil)\"/><ellipse id=\"highlight\" cx=\"48\" cy=\"47\" rx=\"5\" ry=\"4\" fill=\"#FFFFFF\"/></g><g id=\"front_laser_fx\"><g id=\"front_glow\"><circle cx=\"52\" cy=\"53\" r=\"28\" fill=\"var(--eye-iris)\" opacity=\"0.15\"/><circle cx=\"52\" cy=\"53\" r=\"20\" fill=\"var(--eye-iris)\" opacity=\"0.25\"/></g><g id=\"front_core\"><circle cx=\"52\" cy=\"53\" r=\"8\" fill=\"#FFFFFF\" opacity=\"0.95\"/><circle cx=\"52\" cy=\"53\" r=\"13\" fill=\"var(--eye-iris)\" opacity=\"0.45\"/></g><g id=\"front_ring_outer\"><circle cx=\"52\" cy=\"53\" r=\"15\" fill=\"none\" stroke=\"var(--eye-iris)\" stroke-width=\"5\" opacity=\"0.9\"/></g><g id=\"front_ring_inner\"><circle cx=\"52\" cy=\"53\" r=\"8\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"3\" opacity=\"0.95\"/></g></g></g></svg>"
+        "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><g id=\"kuramon_all\"><g id=\"tentacle_bl\"><path d=\"M 30 75 C 20 85 10 95 25 90 C 35 85 40 78 40 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"tentacle_br\"><path d=\"M 70 75 C 80 85 90 95 75 90 C 65 85 60 78 60 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"horn_tl\"><path d=\"M 35 25 C 25 15 15 5 20 20 C 25 35 30 35 30 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"horn_tr\"><path d=\"M 65 25 C 75 15 85 5 80 20 C 75 35 70 35 70 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"body_main\"><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"eye_group\"><path id=\"eye_black\" d=\"M 23 55 C 23 38 38 28 55 28 C 72 28 77 43 77 55 C 77 72 62 77 45 77 C 28 77 23 67 23 55 Z\" fill=\"var(--eyeliner)\"/><ellipse id=\"sclera\" cx=\"52\" cy=\"53\" rx=\"19\" ry=\"17\" fill=\"var(--eye-sclera)\"/><circle id=\"iris\" cx=\"52\" cy=\"53\" r=\"13\" fill=\"var(--eye-iris)\"/><circle id=\"pupil\" cx=\"52\" cy=\"53\" r=\"6\" fill=\"var(--eye-pupil)\"/><ellipse id=\"highlight\" cx=\"48\" cy=\"47\" rx=\"5\" ry=\"4\" fill=\"#FFFFFF\"/></g><g id=\"front_laser_fx\"><g id=\"front_core\"><circle cx=\"52\" cy=\"53\" r=\"8\" fill=\"#FFFFFF\" opacity=\"0.95\"/><circle cx=\"52\" cy=\"53\" r=\"13\" fill=\"var(--eye-iris)\" opacity=\"0.45\"/></g><g id=\"front_ring_outer\"><circle cx=\"52\" cy=\"53\" r=\"15\" fill=\"none\" stroke=\"var(--eye-iris)\" stroke-width=\"5\" opacity=\"0.9\"/></g><g id=\"front_ring_inner\"><circle cx=\"52\" cy=\"53\" r=\"8\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"3\" opacity=\"0.95\"/></g></g></g></svg>"
       },
       {
         "id": "dock_cannon_flash_override",
@@ -580,7 +580,7 @@
             "id": "busy_pulse_beam",
             "name": "Pulse Beam",
             "description": "Stays large and centered while the eye swells, then fires a purple front-facing pulse from the pupil as expanding rings flash over the eye and the horns and tentacles brace.",
-            "duration": 3.5,
+            "duration": 2.4,
             "svg": {
               "id": "dock_pulse_beam_override"
             },
@@ -621,23 +621,15 @@
                     "sy": 0.98
                   },
                   {
-                    "time": 1.5,
+                    "time": 1.35,
                     "rotate": 0,
                     "tx": 0,
-                    "ty": -1,
-                    "sx": 0.99,
-                    "sy": 1.02
+                    "ty": 1,
+                    "sx": 1.02,
+                    "sy": 0.99
                   },
                   {
-                    "time": 2.1,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 2,
-                    "sx": 1.03,
-                    "sy": 0.98
-                  },
-                  {
-                    "time": 2.7,
+                    "time": 1.8,
                     "rotate": 0,
                     "tx": 0,
                     "ty": -2,
@@ -645,7 +637,7 @@
                     "sy": 1.04
                   },
                   {
-                    "time": 3.5,
+                    "time": 2.4,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -690,31 +682,15 @@
                     "sy": 0.92
                   },
                   {
-                    "time": 1.4,
+                    "time": 1.2,
                     "rotate": 0,
                     "tx": 0,
                     "ty": -1,
-                    "sx": 1.22,
-                    "sy": 1.22
+                    "sx": 1.18,
+                    "sy": 1.18
                   },
                   {
-                    "time": 1.9,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 1,
-                    "sx": 0.95,
-                    "sy": 0.95
-                  },
-                  {
-                    "time": 2.4,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": -1,
-                    "sx": 1.2,
-                    "sy": 1.2
-                  },
-                  {
-                    "time": 2.8,
+                    "time": 1.65,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 1,
@@ -722,7 +698,7 @@
                     "sy": 0.96
                   },
                   {
-                    "time": 3.5,
+                    "time": 2.4,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -759,7 +735,7 @@
                     "sy": 1.4
                   },
                   {
-                    "time": 1,
+                    "time": 0.92,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -767,31 +743,15 @@
                     "sy": 0.8
                   },
                   {
-                    "time": 1.4,
+                    "time": 1.2,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
-                    "sx": 1.3,
-                    "sy": 1.3
+                    "sx": 1.15,
+                    "sy": 1.15
                   },
                   {
-                    "time": 1.9,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0.85,
-                    "sy": 0.85
-                  },
-                  {
-                    "time": 2.4,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.45,
-                    "sy": 1.45
-                  },
-                  {
-                    "time": 2.8,
+                    "time": 1.58,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -799,7 +759,7 @@
                     "sy": 0.25
                   },
                   {
-                    "time": 3.5,
+                    "time": 2.4,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -836,7 +796,7 @@
                     "sy": 1.75
                   },
                   {
-                    "time": 1.1,
+                    "time": 1.08,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -844,31 +804,15 @@
                     "sy": 0.2
                   },
                   {
-                    "time": 1.5,
+                    "time": 1.32,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
-                    "sx": 1.6,
-                    "sy": 1.6
+                    "sx": 1.55,
+                    "sy": 1.55
                   },
                   {
-                    "time": 1.8,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0.2,
-                    "sy": 0.2
-                  },
-                  {
-                    "time": 2.4,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.8,
-                    "sy": 1.8
-                  },
-                  {
-                    "time": 2.7,
+                    "time": 1.62,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -876,7 +820,7 @@
                     "sy": 0
                   },
                   {
-                    "time": 3.5,
+                    "time": 2.4,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -913,7 +857,7 @@
                     "sy": 1.15
                   },
                   {
-                    "time": 1.05,
+                    "time": 1,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -921,7 +865,7 @@
                     "sy": 0.25
                   },
                   {
-                    "time": 1.4,
+                    "time": 1.24,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -929,23 +873,7 @@
                     "sy": 1.25
                   },
                   {
-                    "time": 1.75,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0.2,
-                    "sy": 0.2
-                  },
-                  {
-                    "time": 2.3,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.35,
-                    "sy": 1.35
-                  },
-                  {
-                    "time": 2.6,
+                    "time": 1.55,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -953,7 +881,7 @@
                     "sy": 0
                   },
                   {
-                    "time": 3.5,
+                    "time": 2.4,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -990,31 +918,15 @@
                     "sy": 1
                   },
                   {
-                    "time": 1.4,
-                    "rotate": -10,
-                    "tx": -1,
-                    "ty": 2,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 2,
-                    "rotate": 14,
-                    "tx": 2,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 2.5,
-                    "rotate": -15,
+                    "time": 1.28,
+                    "rotate": -14,
                     "tx": -2,
                     "ty": 3,
                     "sx": 1,
                     "sy": 1
                   },
                   {
-                    "time": 3.5,
+                    "time": 2.4,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -1051,31 +963,15 @@
                     "sy": 1
                   },
                   {
-                    "time": 1.4,
-                    "rotate": 10,
-                    "tx": 1,
-                    "ty": 2,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 2,
-                    "rotate": -14,
-                    "tx": -2,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 2.5,
-                    "rotate": 15,
+                    "time": 1.28,
+                    "rotate": 14,
                     "tx": 2,
                     "ty": 3,
                     "sx": 1,
                     "sy": 1
                   },
                   {
-                    "time": 3.5,
+                    "time": 2.4,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -1171,83 +1067,6 @@
                     "ty": 0,
                     "sx": 1,
                     "sy": 1
-                  }
-                ]
-              },
-              {
-                "targetId": "front_glow",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0,
-                    "sy": 0
-                  },
-                  {
-                    "time": 0.5,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0.35,
-                    "sy": 0.35
-                  },
-                  {
-                    "time": 0.72,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.4,
-                    "sy": 1.4
-                  },
-                  {
-                    "time": 1,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0.8,
-                    "sy": 0.8
-                  },
-                  {
-                    "time": 1.4,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.3,
-                    "sy": 1.3
-                  },
-                  {
-                    "time": 1.9,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0.85,
-                    "sy": 0.85
-                  },
-                  {
-                    "time": 2.4,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.45,
-                    "sy": 1.45
-                  },
-                  {
-                    "time": 2.8,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0.25,
-                    "sy": 0.25
-                  },
-                  {
-                    "time": 3.5,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0,
-                    "sy": 0
                   }
                 ]
               }

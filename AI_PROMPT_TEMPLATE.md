@@ -60,7 +60,7 @@ The menuBar icon is a macOS Template Image at 22x22. Here the correct choice IS 
 
 1. At least 1 distinct animation variant for each state: `idle`, `busy`, `waiting`, `completed`, `error`.
 2. `subStates` are optional — use them for specific busy-phase animations (reading, thinking, writing, searching, planning, building, running) only if you want dedicated motion for those phases.
-3. Use `frames` for complex shape-morphing animation, `tracks` for transform-based (rotate/translate/scale) animation. They are mutually exclusive per animation.
+3. Use `frames` for complex shape-morphing animation, `tracks` for transform-based (rotate/translate/scale) and color (fill/stroke) animation. They are mutually exclusive per animation.
 4. If using `frames`, design them to play at **24 FPS** for high-quality, fluid motion. You must calculate the animation's `duration` based on this framerate (e.g., 24 frames = 1.0s, 48 frames = 2.0s). Do not skimp on frames; aim for smooth and expressive animations (e.g., 24-60 frames per animation cycle) to ensure premium quality.
 5. If using `tracks`, the last keyframe's `time` in every track MUST exactly equal the animation's `duration`, so loops are seamless.
 6. Give every meaningful SVG part its own `id` on the `<g>` tag so it can be targeted by a track.
@@ -204,7 +204,7 @@ Only output the final JSON once every box is checked. **CRITICAL:** The generate
         },
         "tracks": {
           "type": "array",
-          "description": "AI: Keyframe tracks for animating SVG parts via CSS transforms. Mutually exclusive with 'frames'. Provide either tracks OR frames.",
+          "description": "AI: Keyframe tracks for animating SVG parts via CSS transforms (rotate, translate, scale) and colors (fill, stroke). Mutually exclusive with 'frames'. Provide either tracks OR frames.",
           "items": { "$ref": "#/definitions/KeyframeTrack" }
         },
         "frames": {
@@ -260,6 +260,14 @@ Only output the final JSON once every box is checked. **CRITICAL:** The generate
         "sy": {
           "type": "number",
           "description": "AI: Y-axis scale multiplier (1.0 is default)."
+        },
+        "fill": {
+          "type": "string",
+          "description": "AI: Optional. Override the fill color (hex or var(--key))."
+        },
+        "stroke": {
+          "type": "string",
+          "description": "AI: Optional. Override the stroke color (hex or var(--key))."
         }
       },
       "additionalProperties": false

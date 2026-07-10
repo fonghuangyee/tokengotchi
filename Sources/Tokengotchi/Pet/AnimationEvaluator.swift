@@ -61,7 +61,15 @@ struct AnimationEvaluator {
     }
     
     private static func transform(from kf: Keyframe) -> LayerTransform {
-        return LayerTransform(rotate: kf.rotate, tx: kf.tx, ty: kf.ty, sx: kf.sx, sy: kf.sy)
+        return LayerTransform(
+            rotate: kf.rotate, 
+            tx: kf.tx, 
+            ty: kf.ty, 
+            sx: kf.sx, 
+            sy: kf.sy,
+            fill: kf.fill.map { .solid($0) },
+            stroke: kf.stroke.map { .solid($0) }
+        )
     }
     
     private static func interpolate(from kf1: Keyframe, to kf2: Keyframe, progress: Double) -> LayerTransform {
@@ -69,12 +77,28 @@ struct AnimationEvaluator {
         // Smoothstep easing for a nicer animation
         let easeP = p * p * (3.0 - 2.0 * p)
         
+        let fill: LayerColor?
+        if let f1 = kf1.fill, let f2 = kf2.fill {
+            fill = .interpolated(c1: f1, c2: f2, progress: easeP)
+        } else {
+            fill = kf1.fill.map { .solid($0) } ?? kf2.fill.map { .solid($0) }
+        }
+        
+        let stroke: LayerColor?
+        if let s1 = kf1.stroke, let s2 = kf2.stroke {
+            stroke = .interpolated(c1: s1, c2: s2, progress: easeP)
+        } else {
+            stroke = kf1.stroke.map { .solid($0) } ?? kf2.stroke.map { .solid($0) }
+        }
+        
         return LayerTransform(
             rotate: kf1.rotate + (kf2.rotate - kf1.rotate) * easeP,
             tx: kf1.tx + (kf2.tx - kf1.tx) * easeP,
             ty: kf1.ty + (kf2.ty - kf1.ty) * easeP,
             sx: kf1.sx + (kf2.sx - kf1.sx) * easeP,
-            sy: kf1.sy + (kf2.sy - kf1.sy) * easeP
+            sy: kf1.sy + (kf2.sy - kf1.sy) * easeP,
+            fill: fill,
+            stroke: stroke
         )
     }
 }

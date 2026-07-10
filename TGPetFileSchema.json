@@ -117,7 +117,7 @@
         },
         "tracks": {
           "type": "array",
-          "description": "AI: Keyframe tracks for animating SVG parts via CSS transforms. Mutually exclusive with 'frames'. Provide either tracks OR frames.",
+          "description": "AI: Keyframe tracks for animating SVG parts via CSS transforms (rotate, translate, scale) and colors (fill, stroke). Mutually exclusive with 'frames'. Provide either tracks OR frames.",
           "items": { "$ref": "#/definitions/KeyframeTrack" }
         },
         "frames": {
@@ -173,6 +173,14 @@
         "sy": {
           "type": "number",
           "description": "AI: Y-axis scale multiplier (1.0 is default)."
+        },
+        "fill": {
+          "type": "string",
+          "description": "AI: Optional. Override the fill color (hex or var(--key))."
+        },
+        "stroke": {
+          "type": "string",
+          "description": "AI: Optional. Override the stroke color (hex or var(--key))."
         }
       },
       "additionalProperties": false

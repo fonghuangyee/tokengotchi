@@ -107,7 +107,9 @@ struct VectorPetRenderer {
                                   transforms: [String: LayerTransform],
                                   pet: TGPetFile,
                                   scale: CGFloat,
-                                  defs: SVGDefinitions) {
+                                  defs: SVGDefinitions,
+                                  fillOverride: LayerColor? = nil,
+                                  strokeOverride: LayerColor? = nil) {
         let t = transforms[layer.id] ?? .identity
 
         NSGraphicsContext.current?.saveGraphicsState()
@@ -128,14 +130,17 @@ struct VectorPetRenderer {
             ctx.setAlpha(layer.opacity)
         }
 
+        let currentFillOverride = t.fill ?? fillOverride
+        let currentStrokeOverride = t.stroke ?? strokeOverride
+
         // Draw elements
         for element in layer.elements {
-            drawElement(element, pet: pet, defs: defs)
+            drawElement(element, pet: pet, defs: defs, fillOverride: currentFillOverride, strokeOverride: currentStrokeOverride)
         }
 
         // Recurse into child layers
         for child in layer.children {
-            drawLayer(child, transforms: transforms, pet: pet, scale: scale, defs: defs)
+            drawLayer(child, transforms: transforms, pet: pet, scale: scale, defs: defs, fillOverride: currentFillOverride, strokeOverride: currentStrokeOverride)
         }
 
         NSGraphicsContext.current?.restoreGraphicsState()
@@ -145,7 +150,9 @@ struct VectorPetRenderer {
 
     private static func drawElement(_ element: SVGElement,
                                     pet: TGPetFile,
-                                    defs: SVGDefinitions) {
+                                    defs: SVGDefinitions,
+                                    fillOverride: LayerColor? = nil,
+                                    strokeOverride: LayerColor? = nil) {
         NSGraphicsContext.current?.saveGraphicsState()
         NSGraphicsContext.current?.compositingOperation = .sourceOver
 
@@ -182,17 +189,26 @@ struct VectorPetRenderer {
         }
 
         // MARK: Fill
-        switch element.fill {
-        case .color(let colorStr):
-            if colorStr != "none" {
-                let resolved = resolveColorString(colorStr, palette: pet.palette)
-                let alpha    = element.fillOpacity  // element.opacity already applied to ctx
-                if let color = NSColor(svgString: resolved)?.withAlphaComponent(
-                    (NSColor(svgString: resolved)?.alphaComponent ?? 1) * alpha) {
-                    color.setFill()
-                    bezier.fill()
-                }
+        if let overrideColor = resolveLayerColor(fillOverride, palette: pet.palette) {
+            let alpha = element.fillOpacity
+            if overrideColor != .clear {
+                let finalColor = overrideColor.withAlphaComponent(overrideColor.alphaComponent * alpha)
+                finalColor.setFill()
+                bezier.fill()
             }
+        } else {
+            switch element.fill {
+            case .color(let colorStr):
+                if colorStr != "none" {
+                    let resolved = resolveColorString(colorStr, palette: pet.palette)
+                    let alpha    = element.fillOpacity  // element.opacity already applied to ctx
+                    if let color = NSColor(svgString: resolved)?.withAlphaComponent(
+                        (NSColor(svgString: resolved)?.alphaComponent ?? 1) * alpha) {
+                        color.setFill()
+                        bezier.fill()
+                    }
+                }
+
 
         case .gradient(let gradId):
             if let gradDef = defs.gradients[gradId],
@@ -201,20 +217,30 @@ struct VectorPetRenderer {
                              fillOpacity: element.fillOpacity,
                              palette: pet.palette, ctx: ctx)
             }
+            }
         }
 
         // MARK: Stroke
-        switch element.stroke {
-        case .color(let colorStr):
-            if colorStr != "none" {
-                let resolved = resolveColorString(colorStr, palette: pet.palette)
-                let alpha    = element.strokeOpacity
-                if let color = NSColor(svgString: resolved)?.withAlphaComponent(
-                    (NSColor(svgString: resolved)?.alphaComponent ?? 1) * alpha) {
-                    color.setStroke()
-                    bezier.stroke()
-                }
+        if let overrideColor = resolveLayerColor(strokeOverride, palette: pet.palette) {
+            let alpha = element.strokeOpacity
+            if overrideColor != .clear {
+                let finalColor = overrideColor.withAlphaComponent(overrideColor.alphaComponent * alpha)
+                finalColor.setStroke()
+                bezier.stroke()
             }
+        } else {
+            switch element.stroke {
+            case .color(let colorStr):
+                if colorStr != "none" {
+                    let resolved = resolveColorString(colorStr, palette: pet.palette)
+                    let alpha    = element.strokeOpacity
+                    if let color = NSColor(svgString: resolved)?.withAlphaComponent(
+                        (NSColor(svgString: resolved)?.alphaComponent ?? 1) * alpha) {
+                        color.setStroke()
+                        bezier.stroke()
+                    }
+                }
+
 
         case .gradient(let gradId):
             // Stroke gradients: stroke-to-fill trick (clip to stroke path then fill gradient)
@@ -231,6 +257,7 @@ struct VectorPetRenderer {
                              fillOpacity: element.strokeOpacity,
                              palette: pet.palette, ctx: ctx)
                 ctx.restoreGState()
+            }
             }
         }
 
@@ -320,6 +347,23 @@ struct VectorPetRenderer {
             return palette?[key] ?? string
         }
         return string
+    }
+
+    private static func resolveLayerColor(_ lc: LayerColor?, palette: [String: String]?) -> NSColor? {
+        guard let lc = lc else { return nil }
+        switch lc {
+        case .solid(let cStr):
+            if cStr == "none" { return .clear }
+            let res = resolveColorString(cStr, palette: palette)
+            return NSColor(svgString: res)
+        case .interpolated(let c1, let c2, let progress):
+            if c1 == "none" || c2 == "none" { return nil }
+            let res1 = resolveColorString(c1, palette: palette)
+            let res2 = resolveColorString(c2, palette: palette)
+            guard let nc1 = NSColor(svgString: res1)?.usingColorSpace(.sRGB), 
+                  let nc2 = NSColor(svgString: res2)?.usingColorSpace(.sRGB) else { return nil }
+            return nc1.blended(withFraction: CGFloat(progress), of: nc2)
+        }
     }
 }
 

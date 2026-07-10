@@ -2424,7 +2424,8 @@ struct DefaultPetData {
                     "tx": 0,
                     "ty": 0,
                     "sx": 1,
-                    "sy": 1
+                    "sy": 1,
+                    "fill": "var(--base)"
                   },
                   {
                     "time": 0.14,
@@ -2480,7 +2481,8 @@ struct DefaultPetData {
                     "tx": -2,
                     "ty": 3,
                     "sx": 1.08,
-                    "sy": 0.92
+                    "sy": 0.92,
+                    "fill": "#ff6666"
                   },
                   {
                     "time": 1.86,
@@ -2496,7 +2498,8 @@ struct DefaultPetData {
                     "tx": 0,
                     "ty": 0,
                     "sx": 1,
-                    "sy": 1
+                    "sy": 1,
+                    "fill": "var(--base)"
                   }
                 ]
               },
@@ -2509,7 +2512,8 @@ struct DefaultPetData {
                     "tx": 0,
                     "ty": 0,
                     "sx": 1,
-                    "sy": 1
+                    "sy": 1,
+                    "fill": "var(--base)"
                   },
                   {
                     "time": 0.08,
@@ -2565,7 +2569,8 @@ struct DefaultPetData {
                     "tx": -2,
                     "ty": 5,
                     "sx": 1.14,
-                    "sy": 0.86
+                    "sy": 0.86,
+                    "fill": "#ff6666"
                   },
                   {
                     "time": 1.82,
@@ -2581,7 +2586,8 @@ struct DefaultPetData {
                     "tx": 0,
                     "ty": 0,
                     "sx": 1,
-                    "sy": 1
+                    "sy": 1,
+                    "fill": "var(--base)"
                   }
                 ]
               },
@@ -2594,7 +2600,8 @@ struct DefaultPetData {
                     "tx": 0,
                     "ty": 0,
                     "sx": 1,
-                    "sy": 1
+                    "sy": 1,
+                    "fill": "var(--base)"
                   },
                   {
                     "time": 0.24,
@@ -2626,7 +2633,8 @@ struct DefaultPetData {
                     "tx": 4,
                     "ty": 3,
                     "sx": 1,
-                    "sy": 1
+                    "sy": 1,
+                    "fill": "#ff6666"
                   },
                   {
                     "time": 1.56,
@@ -2650,7 +2658,8 @@ struct DefaultPetData {
                     "tx": 0,
                     "ty": 0,
                     "sx": 1,
-                    "sy": 1
+                    "sy": 1,
+                    "fill": "var(--base)"
                   }
                 ]
               },
@@ -2663,7 +2672,8 @@ struct DefaultPetData {
                     "tx": 0,
                     "ty": 0,
                     "sx": 1,
-                    "sy": 1
+                    "sy": 1,
+                    "fill": "var(--base)"
                   },
                   {
                     "time": 0.2,
@@ -2703,7 +2713,8 @@ struct DefaultPetData {
                     "tx": -3,
                     "ty": -2,
                     "sx": 0.98,
-                    "sy": 1.02
+                    "sy": 1.02,
+                    "fill": "#ff6666"
                   },
                   {
                     "time": 1.96,
@@ -2719,7 +2730,25 @@ struct DefaultPetData {
                     "tx": 0,
                     "ty": 0,
                     "sx": 1,
-                    "sy": 1
+                    "sy": 1,
+                    "fill": "var(--base)"
+                  }
+                ]
+              },
+              {
+                "targetId": "body_main",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "fill": "var(--base)"
+                  },
+                  {
+                    "time": 1.42,
+                    "fill": "#ff6666"
+                  },
+                  {
+                    "time": 2.2,
+                    "fill": "var(--base)"
                   }
                 ]
               }

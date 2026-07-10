@@ -3,6 +3,12 @@ import Foundation
 
 // MARK: - Keyframe Animation Models
 
+/// Represents a color state (either solid or interpolating between two colors)
+enum LayerColor: Equatable {
+    case solid(String)
+    case interpolated(c1: String, c2: String, progress: Double)
+}
+
 /// A sequence of keyframes targeting a specific SVG layer (by ID).
 struct KeyframeTrack: Codable, Equatable {
     let targetId: String
@@ -17,9 +23,11 @@ struct Keyframe: Codable, Equatable {
     var ty: Double = 0
     var sx: Double = 1
     var sy: Double = 1
+    var fill: String? = nil
+    var stroke: String? = nil
     
     enum CodingKeys: String, CodingKey {
-        case time, rotate, tx, ty, sx, sy
+        case time, rotate, tx, ty, sx, sy, fill, stroke
     }
 
     init(from decoder: Decoder) throws {
@@ -30,15 +38,19 @@ struct Keyframe: Codable, Equatable {
         ty = try container.decodeIfPresent(Double.self, forKey: .ty) ?? 0
         sx = try container.decodeIfPresent(Double.self, forKey: .sx) ?? 1
         sy = try container.decodeIfPresent(Double.self, forKey: .sy) ?? 1
+        fill = try container.decodeIfPresent(String.self, forKey: .fill)
+        stroke = try container.decodeIfPresent(String.self, forKey: .stroke)
     }
 
-    init(time: TimeInterval, rotate: Double = 0, tx: Double = 0, ty: Double = 0, sx: Double = 1, sy: Double = 1) {
+    init(time: TimeInterval, rotate: Double = 0, tx: Double = 0, ty: Double = 0, sx: Double = 1, sy: Double = 1, fill: String? = nil, stroke: String? = nil) {
         self.time = time
         self.rotate = rotate
         self.tx = tx
         self.ty = ty
         self.sx = sx
         self.sy = sy
+        self.fill = fill
+        self.stroke = stroke
     }
 }
 
@@ -49,6 +61,8 @@ struct LayerTransform: Equatable {
     var ty: Double = 0
     var sx: Double = 1
     var sy: Double = 1
+    var fill: LayerColor? = nil
+    var stroke: LayerColor? = nil
     
     static let identity = LayerTransform()
 }

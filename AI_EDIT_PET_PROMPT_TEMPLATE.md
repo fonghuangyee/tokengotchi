@@ -72,7 +72,12 @@ Go through this checklist. If any answer is "no," revise before responding:
 - [ ] Is the JSON strictly valid against the schema (no extra properties, all required fields present)?
 - [ ] Did I preserve all existing animations and logic that the user did NOT want to change?
 
-Only output the final JSON once every box is checked. **CRITICAL:** The generated JSON file can be huge and cause severe chat UI lag. DO NOT output or preview the raw JSON text directly in the chat response. Instead, write the JSON directly to a file, generate it as a downloadable artifact, or provide it in a format meant only for downloading/copying without inline rendering. Provide no commentary before or after.
+Only output the final JSON once every box is checked. **CRITICAL:** The generated JSON file can be huge and cause severe chat UI lag.
+
+- **If you have access to local file editing tools** (e.g. you are in an IDE): DO NOT regenerate or output the entire JSON file. Instead, strictly use your tools to apply targeted, precise edits to only the changed parts of the file.
+- **If you are in a web interface without tools**: Output only the specific JSON objects/snippets that changed, with clear instructions on where to replace them. Do NOT spit out the whole file. Provide it in a format meant only for downloading/copying without inline rendering. 
+
+Provide no commentary before or after.
 
 ---
 

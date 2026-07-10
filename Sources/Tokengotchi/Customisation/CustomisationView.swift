@@ -21,6 +21,18 @@ struct SettingsTab: View {
 
                 Divider().background(Color.white.opacity(0.1))
 
+                // --- Display Mode ---
+                sectionHeader("Display Mode")
+                Picker("", selection: $petState.displayMode) {
+                    ForEach(PetDisplayMode.allCases) { mode in
+                        Text(mode.rawValue).tag(mode)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .labelsHidden()
+
+                Divider().background(Color.white.opacity(0.1))
+
                 // --- API Key ---
                 sectionHeader("API Key")
 

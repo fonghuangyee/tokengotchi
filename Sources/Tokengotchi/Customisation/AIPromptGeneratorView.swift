@@ -180,8 +180,8 @@ struct AIPromptGeneratorView: View {
                 return String(sub[..<end.lowerBound])
             }
         }
-        if let start = text.range(of: "{"), let end = text.range(of: "}", options: .backwards) {
-            return String(text[start.lowerBound...end.upperBound])
+        if let start = text.range(of: "{"), let end = text.range(of: "}", options: .backwards), start.lowerBound < end.upperBound {
+            return String(text[start.lowerBound..<end.upperBound])
         }
         return text
     }

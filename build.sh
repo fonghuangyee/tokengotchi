@@ -11,6 +11,17 @@ RESOURCES_DIR="$APP_DIR/Contents/Resources"
 mkdir -p "$MACOS_DIR"
 mkdir -p "$RESOURCES_DIR"
 
+# 1. Generate AppIcon using sips and iconutil
+echo "🎨 Generating App Icon for Tokengotchi..."
+
+# 1.5 Generate DefaultPetData.swift
+echo "⚙️  Generating DefaultPetData.swift..."
+./Scripts/generate_default_pet.swift
+
+# Generate app icon
+python3 build_icon.py Sources/Tokengotchi/Resources
+cp Sources/Tokengotchi/Resources/AppIcon.icns "$RESOURCES_DIR/"
+
 # Generate Info.plist
 cat > "$APP_DIR/Contents/Info.plist" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
@@ -25,6 +36,8 @@ cat > "$APP_DIR/Contents/Info.plist" <<EOF
     <string>$APP_NAME</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
     <key>CFBundleShortVersionString</key>
     <string>1.0</string>
     <key>CFBundleVersion</key>
@@ -61,5 +74,8 @@ swiftc -o "$MACOS_DIR/$APP_NAME" \
     -framework Combine
 
 echo "✅ Build complete → $APP_DIR"
+echo "🛑 Closing existing instance..."
+killall "$APP_NAME" 2>/dev/null || true
+
 echo "🚀 Launching..."
 open "$APP_DIR"

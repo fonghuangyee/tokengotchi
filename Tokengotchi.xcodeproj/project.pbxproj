@@ -20,6 +20,7 @@
 		D64D42AD3E21C1591F6F69D6 /* AntigravityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0DAA552DFDFFE9EEEF705A /* AntigravityProvider.swift */; };
 		E49928675F92291356E7347D /* OtherProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373297A1CEF7556EB5B0FB1B /* OtherProviders.swift */; };
 		EB6217FA402F76A611BD47BF /* PetDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7405767B400326CD58EAB35B /* PetDashboardView.swift */; };
+		A1B2C3D4E5F6A7B8C9D0E1F2 /* StatusPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E1D0C9B8A7F6E5D4C3B2A1 /* StatusPopoverView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		472689CA2F71B339AA17E0C0 /* PetConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetConfig.swift; sourceTree = "<group>"; };
 		73759F51E0B8347A3DFACE30 /* CustomisationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomisationView.swift; sourceTree = "<group>"; };
 		7405767B400326CD58EAB35B /* PetDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDashboardView.swift; sourceTree = "<group>"; };
+		F2E1D0C9B8A7F6E5D4C3B2A1 /* StatusPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPopoverView.swift; sourceTree = "<group>"; };
 		75E0F3F1DE271C79E7AD3556 /* TokengotchiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokengotchiApp.swift; sourceTree = "<group>"; };
 		928E9840B4E862911D3808AA /* LLMProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMProviderProtocol.swift; sourceTree = "<group>"; };
 		BB0DAA552DFDFFE9EEEF705A /* AntigravityProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntigravityProvider.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				7405767B400326CD58EAB35B /* PetDashboardView.swift */,
+				F2E1D0C9B8A7F6E5D4C3B2A1 /* StatusPopoverView.swift */,
 			);
 			path = Popover;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				637288E18AB7CB6440CF9B9B /* PetAnimationEngine.swift in Sources */,
 				2844FADF3B091BA06A110AA5 /* PetConfig.swift in Sources */,
 				EB6217FA402F76A611BD47BF /* PetDashboardView.swift in Sources */,
+				A1B2C3D4E5F6A7B8C9D0E1F2 /* StatusPopoverView.swift in Sources */,
 				0041125A5C62ED06889BF2B5 /* PetState.swift in Sources */,
 				1049BD594E2DC9A9AB95BA0E /* ProviderManager.swift in Sources */,
 				0274357B3F3647B880F4DF64 /* TokengotchiApp.swift in Sources */,

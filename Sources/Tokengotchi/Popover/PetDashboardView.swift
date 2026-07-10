@@ -1,40 +1,57 @@
 import SwiftUI
 
+// MARK: - Navigation Destinations
+enum PetDashboardDestination: Hashable {
+    case preview(String) // pet name
+    case prompt
+    case jsonEditor
+}
+
 // MARK: - Pet Dashboard (Popover)
 struct PetDashboardView: View {
     @ObservedObject var petState: PetState
     @ObservedObject var providerManager: ProviderManager
+    @StateObject private var petManager = PetManager.shared
 
     @State private var selectedTab: DashboardTab = .home
 
     enum DashboardTab: String, CaseIterable {
         case home = "house.fill"
-        case petBuilder = "wand.and.stars.inverse"
         case settings = "gearshape.fill"
     }
 
     var body: some View {
-        ZStack {
-            // Background gradient
-            backgroundGradient
-                .ignoresSafeArea()
+        NavigationStack {
+            ZStack {
+                // Background gradient
+                backgroundGradient
+                    .ignoresSafeArea()
 
-            VStack(spacing: 0) {
-                // Header
-                headerBar
-
-                // Content
-                Group {
-                    switch selectedTab {
-                    case .home:         HomeTab(petState: petState, providerManager: providerManager)
-                    case .petBuilder:   PetBuilderTab(petState: petState)
-                    case .settings:     SettingsTab(providerManager: providerManager, petState: petState)
+                VStack(spacing: 0) {
+                    // Content
+                    Group {
+                        switch selectedTab {
+                        case .home:
+                            HomeTab(petState: petState, providerManager: providerManager, petManager: petManager)
+                        case .settings:
+                            SettingsTab(providerManager: providerManager, petState: petState)
+                        }
                     }
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-                // Tab bar
-                tabBar
+                    // Tab bar
+                    tabBar
+                }
+            }
+            .navigationDestination(for: PetDashboardDestination.self) { dest in
+                switch dest {
+                case .preview(let petName):
+                    PetPreviewView(petState: petState, petManager: petManager, previewPetName: petName)
+                case .prompt:
+                    AIPromptGeneratorView(petState: petState, petManager: petManager)
+                case .jsonEditor:
+                    JSONEditorView(petManager: petManager)
+                }
             }
         }
         .frame(width: 340, height: 520)
@@ -45,62 +62,12 @@ struct PetDashboardView: View {
     var backgroundGradient: some View {
         LinearGradient(
             colors: [
-                Color(hex: petState.config.auraColor)?.opacity(0.25) ?? Color.purple.opacity(0.25),
+                Color.purple.opacity(0.25),
                 Color.black.opacity(0.92),
             ],
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )
-    }
-
-    // MARK: Header Bar
-    var headerBar: some View {
-        HStack(spacing: 12) {
-            // Pet mini preview
-            Circle()
-                .fill(Color(hex: petState.config.baseColor) ?? .purple)
-                .frame(width: 36, height: 36)
-                .overlay(
-                    Text("🐾").font(.system(size: 18))
-                )
-                .overlay(
-                    Circle().stroke(
-                        Color(hex: petState.config.auraColor)?.opacity(0.8) ?? .purple, lineWidth: 2
-                    )
-                )
-
-            VStack(alignment: .leading, spacing: 2) {
-                Text(petState.config.name)
-                    .font(.system(size: 14, weight: .bold, design: .rounded))
-                    .foregroundColor(.white)
-                Text(petState.mode.displayName)
-                    .font(.system(size: 11))
-                    .foregroundColor(.white.opacity(0.6))
-            }
-
-            Spacer()
-
-            // Provider badge
-            HStack(spacing: 4) {
-                Circle()
-                    .fill(
-                        providerManager.available.first(where: {
-                            $0.id == providerManager.activeProviderId
-                        })?.isConnected == true ? .green : .gray
-                    )
-                    .frame(width: 6, height: 6)
-                Text(providerManager.activeProviderName)
-                    .font(.system(size: 10, weight: .medium))
-                    .foregroundColor(.white.opacity(0.6))
-            }
-            .padding(.horizontal, 8)
-            .padding(.vertical, 4)
-            .background(Color.white.opacity(0.08))
-            .clipShape(Capsule())
-        }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 12)
-        .background(Color.white.opacity(0.05))
     }
 
     // MARK: Tab Bar
@@ -115,11 +82,11 @@ struct PetDashboardView: View {
                             .font(.system(size: 16))
                             .foregroundColor(
                                 selectedTab == tab
-                                    ? Color(hex: petState.config.auraColor) ?? .purple
+                                    ? Color.purple
                                     : .white.opacity(0.4))
                         if selectedTab == tab {
                             Circle()
-                                .fill(Color(hex: petState.config.auraColor) ?? .purple)
+                                .fill(Color.purple)
                                 .frame(width: 4, height: 4)
                         } else {
                             Spacer().frame(height: 4)
@@ -139,6 +106,7 @@ struct PetDashboardView: View {
 struct HomeTab: View {
     @ObservedObject var petState: PetState
     @ObservedObject var providerManager: ProviderManager
+    @ObservedObject var petManager: PetManager
 
     private var antigravity: AntigravityProvider? {
         providerManager.available.first(where: { $0.id == "antigravity" }) as? AntigravityProvider
@@ -147,6 +115,9 @@ struct HomeTab: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 14) {
+                // Pet Carousel Header
+                petCarousel
+                
                 // Live activity — mode + tool + steps consolidated into one card
                 liveActivityCard
 
@@ -156,6 +127,81 @@ struct HomeTab: View {
                 }
             }
             .padding(16)
+        }
+    }
+    
+    // MARK: - Pet Carousel
+    private var petCarousel: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Text("Your Pets")
+                    .font(.system(size: 14, weight: .bold, design: .rounded))
+                    .foregroundColor(.white)
+                Spacer()
+                // Provider badge moved here since headerBar is gone
+                HStack(spacing: 4) {
+                    Circle()
+                        .fill(
+                            providerManager.available.first(where: {
+                                $0.id == providerManager.activeProviderId
+                            })?.isConnected == true ? .green : .gray
+                        )
+                        .frame(width: 6, height: 6)
+                    Text(providerManager.activeProviderName)
+                        .font(.system(size: 10, weight: .medium))
+                        .foregroundColor(.white.opacity(0.6))
+                }
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(Color.white.opacity(0.08))
+                .clipShape(Capsule())
+            }
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    // Create New Button
+                    NavigationLink(value: PetDashboardDestination.prompt) {
+                        VStack {
+                            ZStack {
+                                Circle()
+                                    .strokeBorder(Color.white.opacity(0.2), style: StrokeStyle(lineWidth: 1, dash: [4]))
+                                    .frame(width: 50, height: 50)
+                                Image(systemName: "plus")
+                                    .font(.system(size: 20))
+                                    .foregroundColor(.white.opacity(0.6))
+                            }
+                            Text("New Pet")
+                                .font(.system(size: 10, weight: .medium, design: .rounded))
+                                .foregroundColor(.white.opacity(0.6))
+                        }
+                        .frame(width: 60)
+                    }
+                    .buttonStyle(.plain)
+                    
+                    // Available Pets
+                    ForEach(petManager.availablePets, id: \.name) { pet in
+                        let isActive = petManager.activePet.name == pet.name
+                        
+                                                Group {
+                            if isActive {
+                                NavigationLink(value: PetDashboardDestination.preview(pet.name)) {
+                                    petCard(pet: pet, isActive: isActive)
+                                }
+                                .buttonStyle(.plain)
+                            } else {
+                                Button {
+                                    petManager.activePet = pet
+                                } label: {
+                                    petCard(pet: pet, isActive: isActive)
+                                }
+                                .buttonStyle(.plain)
+                            }
+                        }
+
+                    }
+                }
+                .padding(.vertical, 4)
+            }
         }
     }
 
@@ -239,6 +285,46 @@ struct HomeTab: View {
     }
 
     // MARK: - Helpers
+        @ViewBuilder
+    private func petCard(pet: TGPetFile, isActive: Bool) -> some View {
+        VStack {
+            ZStack {
+                Circle()
+                    .fill(Color.purple)
+                    .frame(width: 50, height: 50)
+                if isActive {
+                    Circle()
+                        .strokeBorder(Color.white, lineWidth: 2)
+                        .frame(width: 54, height: 54)
+                }
+                
+                // Mini preview
+                TimelineView(.animation) { context in
+                    Image(
+                        nsImage: OffscreenPetRenderer.renderFrame(
+                            clipID: pet.toAnimationClips(forContext: "dock").first?.id ?? "",
+                            pet: pet,
+                            time: context.date.timeIntervalSince1970,
+                            contextName: "dock",
+                            targetSize: NSSize(width: 64, height: 64)
+                        )
+                    )
+                    .resizable()
+                    .interpolation(.none)
+                    .scaledToFit()
+                    .frame(width: 32, height: 32)
+                }
+            }
+            
+            Text(pet.name)
+                .font(.system(size: 10, weight: .medium, design: .rounded))
+                .foregroundColor(isActive ? .white : .white.opacity(0.6))
+                .lineLimit(1)
+        }
+        .frame(width: 60)
+        .opacity(isActive ? 1.0 : 0.7)
+    }
+
     func statCard<Content: View>(@ViewBuilder _ content: () -> Content) -> some View {
         content()
             .padding(14)

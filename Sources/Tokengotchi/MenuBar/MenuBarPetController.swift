@@ -3,10 +3,10 @@ import Combine
 import SwiftUI
 
 // MARK: - Menu Bar Pet Controller
-// Manages the NSStatusItem (click target) AND a borderless NSWindow
-// that overlays the entire menu bar for the walking pet sprite.
+// Manages the NSStatusItem (click target) in the menu bar.
+// Clicking the status item toggles the popover.
 @MainActor
-final class MenuBarPetController {
+final class MenuBarPetController: NSObject, NSMenuDelegate {
 
     private let petState: PetState
     private let providerManager: ProviderManager
@@ -19,16 +19,21 @@ final class MenuBarPetController {
     private var animationTimer: Timer?
     private var startTime: TimeInterval = Date().timeIntervalSinceReferenceDate
 
-    // Popover for dashboard
-    private var popover: NSPopover!
+    // Pet window controller (shared with DockPetController).
+    private let windowController: PetWindowController
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(petState: PetState, providerManager: ProviderManager) {
+    init(
+        petState: PetState,
+        providerManager: ProviderManager,
+        windowController: PetWindowController
+    ) {
         self.petState = petState
         self.providerManager = providerManager
+        self.windowController = windowController
+        super.init()
         setupStatusItem()
-        setupPopover()
         bindEvents()
         bindSystemEvents()
     }
@@ -36,20 +41,18 @@ final class MenuBarPetController {
     // MARK: Status Item
     private func setupStatusItem() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        guard let button = statusItem.button else { return }
-        button.action = #selector(togglePopover)
-        button.target = self
-        button.sendAction(on: [.leftMouseUp, .rightMouseUp])
-        updateStatusIcon(.idle)
+        
+        let menu = NSMenu()
+        menu.delegate = self
+        statusItem.menu = menu
+        
+        updateStatusIcon()
     }
 
-    private func updateStatusIcon(_ state: PetMode) {
+    private func updateStatusIcon() {
         guard let button = statusItem.button else { return }
+        let elapsed = Date().timeIntervalSinceReferenceDate - startTime
 
-        let now = Date().timeIntervalSinceReferenceDate
-        let elapsed = now - startTime
-
-        // Find antigravity provider to get stamina and model name
         var stamina: Double? = nil
         var modelName: String? = nil
         if let agy = providerManager.available.first(where: { $0.id == "antigravity" })
@@ -59,40 +62,70 @@ final class MenuBarPetController {
             modelName = agy.activeModelName
         }
 
-        // Generate the pixel-art blob natively in CoreGraphics.
-        // We render the currently-selected clip for the active mode.
         let image = OffscreenPetRenderer.renderFrame(
             clipID: petState.currentClipID,
-            config: petState.config,
+            pet: PetManager.shared.activePet,
             time: elapsed,
             stamina: stamina,
-            modelName: modelName
+            modelName: modelName,
+            isTemplate: true
         )
-
         button.image = image
     }
 
-    // MARK: Popover
-    private func setupPopover() {
-        popover = NSPopover()
-        popover.contentSize = CGSize(width: 340, height: 520)
-        popover.behavior = .transient
-        popover.animates = true
-
-        let dashboard = PetDashboardView(
-            petState: petState,
-            providerManager: providerManager
-        )
-        popover.contentViewController = NSHostingController(rootView: dashboard)
+    // MARK: - NSMenuDelegate
+    
+    nonisolated func menuNeedsUpdate(_ menu: NSMenu) {
+        MainActor.assumeIsolated {
+            menu.removeAllItems()
+            
+            let openItem = NSMenuItem(title: "Open Tokengotchi", action: #selector(self.openApp), keyEquivalent: "n")
+            openItem.target = self
+            // let font = NSFont.systemFont(ofSize: 14, weight: .bold)
+            openItem.attributedTitle = NSAttributedString(string: "Open Tokengotchi")
+            menu.addItem(openItem)
+            
+            menu.addItem(NSMenuItem.separator())
+            
+            let modeLabel = self.getModeLabel()
+            let infoView = NSHostingView(rootView: MenuInfoView(
+                modeLabel: modeLabel,
+                providerName: self.providerManager.activeProviderName
+            ))
+            infoView.frame = NSRect(x: 0, y: 0, width: 220, height: 44)
+            
+            let infoItem = NSMenuItem()
+            infoItem.view = infoView
+            menu.addItem(infoItem)
+            
+            menu.addItem(NSMenuItem.separator())
+            
+            let quitItem = NSMenuItem(title: "Quit Tokengotchi", action: #selector(self.quitApp), keyEquivalent: "q")
+            quitItem.target = self
+            menu.addItem(quitItem)
+        }
+    }
+    
+    private func getModeLabel() -> String {
+        switch petState.mode {
+        case .idle: return "Idle"
+        case .busy:
+            if let sub = petState.busySubstate {
+                return "Working - \(sub.displayName)"
+            }
+            return "Working"
+        case .waiting: return "Waiting"
+        case .completed: return "Task Complete"
+        case .error: return "Error"
+        }
     }
 
-    @objc private func togglePopover() {
-        guard let button = statusItem.button else { return }
-        if popover.isShown {
-            popover.performClose(nil)
-        } else {
-            popover.show(relativeTo: button.bounds, of: button, preferredEdge: .maxY)
-        }
+    @objc private func openApp() {
+        windowController.show()
+    }
+
+    @objc private func quitApp() {
+        NSApp.terminate(nil)
     }
 
     // MARK: Bind Agent Events → Pet State
@@ -104,34 +137,18 @@ final class MenuBarPetController {
             }
             .store(in: &cancellables)
 
-        // Start animation loop
-        animationTimer = Timer.scheduledTimer(withTimeInterval: 1.0 / 15.0, repeats: true) {
-            [weak self] _ in
+        // Animation loop
+        animationTimer = Timer.scheduledTimer(
+            withTimeInterval: 1.0 / 24.0, repeats: true
+        ) { [weak self] _ in
             Task { @MainActor in
-                guard let self = self else { return }
-                self.updateStatusIcon(self.petState.mode)
+                self?.updateStatusIcon()
             }
         }
-
-        // Reset simulation state when the popover closes so the pet reflects
-        // real agent state again. SwiftUI's onDisappear is unreliable when an
-        // NSPopover closes, so we use the popover notification as a safety net.
-        NotificationCenter.default
-            .publisher(for: NSPopover.didCloseNotification, object: popover)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                guard let self = self else { return }
-                guard self.petState.isSimulating else { return }
-                self.petState.isSimulating = false
-                self.petState.save()
-                self.petState.setMode(.idle)
-            }
-            .store(in: &cancellables)
     }
 
-    // MARK: System Events (sleep/wake + screen changes)
+    // MARK: System Events (sleep/wake)
     private func bindSystemEvents() {
-        // Wake from sleep → wave
         NSWorkspace.shared.notificationCenter
             .publisher(for: NSWorkspace.didWakeNotification)
             .receive(on: DispatchQueue.main)
@@ -142,9 +159,6 @@ final class MenuBarPetController {
     }
 
     private func handleSystemWake() {
-        // `wake` was absorbed into idle as the "Little Wave" clip. We set idle
-        // and briefly pin the wave clip for a friendly wake-up greeting;
-        // normal idle rotation resumes after ~2s.
         petState.setMode(.idle)
         let previousClip = petState.currentClipID
         petState.currentClipID = "idle_wave"
@@ -160,12 +174,10 @@ final class MenuBarPetController {
     }
 
     private func handleAgentEvent(_ event: AgentEvent) {
-        // If simulating animations, ignore automated real-time provider events
         guard !petState.isSimulating else { return }
 
         switch event {
         case .busy(let substate):
-            // Entering busy (or switching substate within busy).
             if petState.mode == .busy {
                 petState.setBusySubstate(substate)
             } else {
@@ -176,10 +188,8 @@ final class MenuBarPetController {
         case .failed:
             petState.setMode(.error)
         case .contextWarning:
-            // No animation trigger; never overwrite the active working clip.
             break
         case .started:
-            // First sign of life for a turn → go busy (no specific substate yet).
             if petState.mode != .busy { petState.setMode(.busy, substate: nil) }
         case .disconnected:
             petState.setMode(.idle)
@@ -188,5 +198,26 @@ final class MenuBarPetController {
         case .waiting:
             petState.setMode(.waiting)
         }
+    }
+}
+
+// MARK: - Menu Info View
+struct MenuInfoView: View {
+    let modeLabel: String
+    let providerName: String
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Status: \(modeLabel)")
+                .font(.system(size: 13, weight: .regular))
+                .foregroundColor(.primary)
+            
+            Text("Provider: \(providerName)")
+                .font(.system(size: 13, weight: .regular))
+                .foregroundColor(.primary)
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 4)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }

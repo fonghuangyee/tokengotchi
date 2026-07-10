@@ -4,7 +4,7 @@ import Foundation
 // MARK: - Antigravity Provider
 // Zero-config state tracking: reads the agent's own transcript.jsonl directly.
 // No SQLite, no protobuf heuristics, no binary parsing. Just clean JSON.
-final class AntigravityProvider: LLMProviderProtocol, ObservableObject {
+final class AntigravityProvider: LLMProviderProtocol, ObservableObject, @unchecked Sendable {
 
     let id = "antigravity"
     let name = "Antigravity (AGY)"

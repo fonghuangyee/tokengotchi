@@ -104,6 +104,7 @@ struct TGPetFile: Codable {
                     id: anim.id,
                     name: anim.name,
                     description: anim.description,
+                    duration: anim.duration,
                     modes: [mode],
                     busySubstate: nil
                 ))
@@ -118,6 +119,7 @@ struct TGPetFile: Codable {
                             id: anim.id,
                             name: anim.name,
                             description: anim.description,
+                            duration: anim.duration,
                             modes: [mode],
                             busySubstate: substateEnum
                         ))

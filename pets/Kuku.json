@@ -1,0 +1,439 @@
+{
+  "name": "Kuku",
+  "palette": {
+    "base": "#E0E8F5",
+    "accent": "#FF8C00"
+  },
+  "menuBar": {
+    "svgs": [
+      {
+        "id": "mb_base",
+        "svg": "<svg viewBox='0 0 100 100'><g id='mb_kuku'><path id='mb_body' d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill-rule='evenodd' fill='#000'/><circle id='mb_pupil' cx='47' cy='48' r='8' fill='#000'/></g></svg>"
+      }
+    ],
+    "states": [
+      {
+        "id": "idle",
+        "animations": [
+          {
+            "id": "mb_idle_look",
+            "name": "Subtle Look",
+            "description": "The pupil slowly darts left and right within the eye socket.",
+            "duration": 4.0,
+            "tracks": [
+              {
+                "targetId": "mb_pupil",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1.0,
+                    "tx": -5,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1.5,
+                    "tx": -5,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 2.5,
+                    "tx": 5,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 3.0,
+                    "tx": 5,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 4.0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "busy",
+        "animations": [
+          {
+            "id": "mb_busy_bob",
+            "name": "Gentle Bob",
+            "description": "The entire creature softly pulses and bobs up and down.",
+            "duration": 1.0,
+            "tracks": [
+              {
+                "targetId": "mb_kuku",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.25,
+                    "tx": 0,
+                    "ty": 2,
+                    "sx": 1.05,
+                    "sy": 0.95,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.5,
+                    "tx": 0,
+                    "ty": -2,
+                    "sx": 0.95,
+                    "sy": 1.05,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.75,
+                    "tx": 0,
+                    "ty": 1,
+                    "sx": 1.02,
+                    "sy": 0.98,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1.0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "rotate": 0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "waiting",
+        "animations": [
+          {
+            "id": "mb_waiting",
+            "name": "Waiting",
+            "description": "A slow, static pulse indicating a pause.",
+            "duration": 2.0,
+            "tracks": [
+              {
+                "targetId": "mb_kuku",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1.0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0.9,
+                    "sy": 0.9,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 2.0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "rotate": 0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "completed",
+        "animations": [
+          {
+            "id": "mb_completed",
+            "name": "Tiny Hop",
+            "description": "A quick, sharp upward hop to signify completion.",
+            "duration": 0.8,
+            "tracks": [
+              {
+                "targetId": "mb_kuku",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.2,
+                    "tx": 0,
+                    "ty": 2,
+                    "sx": 1.1,
+                    "sy": 0.9,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.4,
+                    "tx": 0,
+                    "ty": -4,
+                    "sx": 0.9,
+                    "sy": 1.1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.6,
+                    "tx": 0,
+                    "ty": 1,
+                    "sx": 1.05,
+                    "sy": 0.95,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.8,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "rotate": 0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "error",
+        "animations": [
+          {
+            "id": "mb_error",
+            "name": "Shake",
+            "description": "A rapid horizontal shake indicating an issue.",
+            "duration": 0.4,
+            "tracks": [
+              {
+                "targetId": "mb_kuku",
+                "keyframes": [
+                  {
+                    "time": 0.0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.1,
+                    "tx": -3,
+                    "ty": 0,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "rotate": -5
+                  },
+                  {
+                    "time": 0.2,
+                    "tx": 3,
+                    "ty": 0,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "rotate": 5
+                  },
+                  {
+                    "time": 0.3,
+                    "tx": -2,
+                    "ty": 0,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "rotate": -2
+                  },
+                  {
+                    "time": 0.4,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "rotate": 0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "dock": {
+    "svgs": [
+      {
+        "id": "dock_base",
+        "svg": "<svg viewBox='0 0 100 100'><g id='kuku'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>"
+      }
+    ],
+    "states": [
+      {
+        "id": "idle",
+        "animations": [
+          {
+            "id": "dock_idle_float",
+            "name": "Squishy Float",
+            "description": "Kuku hovers in the air, squashing and stretching dramatically at the top and bottom of each arc.",
+            "duration": 2.0,
+            "frames": [
+              "<svg viewBox='0 0 100 100'><g><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(0, -5) translate(50,50) scale(0.95, 1.05) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(0, -8) translate(50,50) scale(0.98, 1.02) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(0, 0) translate(50,50) scale(1.02, 0.98) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(0, 5) translate(50,50) scale(1.05, 0.95) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>"
+            ]
+          },
+          {
+            "id": "dock_idle_look",
+            "name": "Darting Glance",
+            "description": "Kuku's giant central eye shifts sharply left and right, culminating in a full-screen blink.",
+            "duration": 2.5,
+            "frames": [
+              "<svg viewBox='0 0 100 100'><g><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='35' cy='48' r='8' fill='#111'/><circle cx='30' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='35' cy='48' r='8' fill='#111'/><circle cx='30' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='55' cy='48' r='8' fill='#111'/><circle cx='50' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='55' cy='48' r='8' fill='#111'/><circle cx='50' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 45 55 70 50' fill='none' stroke='#111' stroke-width='6' stroke-linecap='round'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "busy",
+        "animations": [
+          {
+            "id": "dock_busy_laser",
+            "name": "Laser Blast",
+            "description": "Kuku crouches back in anticipation, then violently lunges forward, blasting a massive glowing laser beam from its eye, recoiling from the force.",
+            "duration": 1.0,
+            "frames": [
+              "<svg viewBox='0 0 100 100'><g><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(5, 10) translate(50,50) scale(0.9, 0.9) rotate(15) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(10, 15) translate(50,50) scale(0.85, 1.05) rotate(25) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(-15, 0) translate(50,50) scale(1.1, 0.9) rotate(-10) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/><polygon points='55,48 110,35 110,61' fill='var(--accent)'/><polygon points='55,48 110,43 110,53' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(-20, 0) translate(50,50) scale(1.05, 0.95) rotate(-12) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/><polygon points='55,48 110,25 110,71' fill='var(--accent)'/><polygon points='55,48 110,38 110,58' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(-5, 0) translate(50,50) scale(0.95, 1.0) rotate(-5) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/><polygon points='55,48 110,40 110,56' fill='var(--accent)'/><polygon points='55,48 110,46 110,50' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(5, 5) translate(50,50) scale(0.9, 1.05) rotate(5) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>"
+            ]
+          },
+          {
+            "id": "dock_busy_charge",
+            "name": "Energy Swell",
+            "description": "Kuku rotates rapidly left and right while swelling in size, its massive eye charging up energy.",
+            "duration": 1.0,
+            "frames": [
+              "<svg viewBox='0 0 100 100'><g><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(50,50) scale(1.1, 1.1) rotate(10) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='#FFC107'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(50,50) scale(1.15, 1.15) rotate(-10) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='#FFC107'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(50,50) scale(1.2, 1.2) rotate(20) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='#FFEB3B'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(50,50) scale(1.25, 1.25) rotate(-20) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='#FFEB3B'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(50,50) scale(1.1, 1.1) rotate(5) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "waiting",
+        "animations": [
+          {
+            "id": "dock_waiting_deflate",
+            "name": "Sad Deflation",
+            "description": "Kuku droops and sags toward the ground, its eye heavily half-closed in boredom, occasionally sighing.",
+            "duration": 2.0,
+            "frames": [
+              "<svg viewBox='0 0 100 100'><g><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(0, 10) translate(50,50) scale(1.1, 0.9) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 50 45 70 50 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 45 47 65 52 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='52' r='8' fill='#111'/><circle cx='42' cy='47' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(0, 15) translate(50,50) scale(1.15, 0.85) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 50 45 70 50 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 45 47 65 52 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='54' r='8' fill='#111'/><circle cx='42' cy='49' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(0, 15) translate(50,50) scale(1.15, 0.85) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 50 45 70 50 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 45 47 65 52 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='54' r='8' fill='#111'/><circle cx='42' cy='49' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(0, 12) translate(50,50) scale(1.1, 0.9) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 50 45 70 50 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 45 47 65 52 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='52' r='8' fill='#111'/><circle cx='42' cy='47' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(0, 15) translate(50,50) scale(1.15, 0.85) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 50 45 70 50 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 45 47 65 52 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='54' r='8' fill='#111'/><circle cx='42' cy='49' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "completed",
+        "animations": [
+          {
+            "id": "dock_completed_flip",
+            "name": "Triumphant Flip",
+            "description": "Kuku crouches low to the ground and launches into a spectacular 360-degree backflip, landing with a heavy squish.",
+            "duration": 1.2,
+            "frames": [
+              "<svg viewBox='0 0 100 100'><g><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(0, 15) translate(50,50) scale(1.2, 0.7) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(0, -20) translate(50,50) scale(0.8, 1.2) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(0, -30) translate(50,50) scale(1.0, 1.0) rotate(180) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(0, -10) translate(50,50) scale(1.0, 1.0) rotate(270) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(0, 20) translate(50,50) scale(1.4, 0.6) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(0, -5) translate(50,50) scale(0.9, 1.1) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "error",
+        "animations": [
+          {
+            "id": "dock_error_pop",
+            "name": "Balloon Pop",
+            "description": "Kuku swells dangerously large, its eye flashing red, until it suddenly pops and collapses into a flat puddle on the ground.",
+            "duration": 1.5,
+            "frames": [
+              "<svg viewBox='0 0 100 100'><g><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(50,50) scale(1.2, 1.2) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='#FF3333'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(-5, 5) translate(50,50) scale(1.4, 1.4) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='#FF3333'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g><path d='M 10 90 Q 30 80 50 85 Q 70 80 90 90 Q 75 95 50 95 Q 25 95 10 90 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 30 85 Q 45 80 60 85 Q 55 92 45 90 Q 35 92 30 85 Z' fill='#111'/><circle cx='45' cy='87' r='3' fill='var(--accent)'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g><path d='M 10 90 Q 30 80 50 85 Q 70 80 90 90 Q 75 95 50 95 Q 25 95 10 90 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 30 85 Q 45 80 60 85 Q 55 92 45 90 Q 35 92 30 85 Z' fill='#111'/><circle cx='45' cy='87' r='3' fill='var(--accent)'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g transform='translate(0, 10) translate(50,50) scale(0.5, 1.5) translate(-50,-50)'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>",
+              "<svg viewBox='0 0 100 100'><g><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

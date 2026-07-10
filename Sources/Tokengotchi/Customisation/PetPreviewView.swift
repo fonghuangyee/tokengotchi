@@ -100,18 +100,19 @@ struct PetPreviewView: View {
                         
                         TimelineView(.animation) { context in
                             let time = context.date.timeIntervalSince1970 - petState.animationStartTime
-                            Image(
-                                nsImage: VectorPetRenderer.renderFrame(
-                                    clipID: previewMenuClipID,
-                                    pet: targetPet,
-                                    time: time,
-                                    context: .menuBar
-                                )
+                            let img = VectorPetRenderer.renderFrame(
+                                clipID: previewMenuClipID,
+                                pet: targetPet,
+                                time: time,
+                                context: .menuBar
                             )
-                            .resizable()
-                            .interpolation(.none)
-                            .scaledToFit()
-                            .frame(width: 64, height: 64)
+                            Image(nsImage: img)
+                                .resizable()
+                                .renderingMode(.template)
+                                .interpolation(.none)
+                                .scaledToFit()
+                                .frame(width: 64, height: 64)
+                                .foregroundColor(.white)
                         }
                         .frame(height: 100)
                         .frame(maxWidth: .infinity)
@@ -135,7 +136,7 @@ struct PetPreviewView: View {
             
             // Actions
             VStack(spacing: 12) {
-                NavigationLink(value: PetDashboardDestination.prompt) {
+                NavigationLink(value: PetDashboardDestination.prompt(targetPet.name)) {
                     actionButton(title: "Modify with AI", icon: "wand.and.stars", color: .purple)
                 }
                 .buttonStyle(.plain)
@@ -244,18 +245,27 @@ struct AnimationCarouselView: View {
                                 } label: {
                                     TimelineView(.animation) { timelineContext in
                                         let time = timelineContext.date.timeIntervalSince1970 - petState.animationStartTime
-                                        Image(
-                                            nsImage: VectorPetRenderer.renderFrame(
-                                                clipID: anim.id,
-                                                pet: activePet,
-                                                time: time,
-                                                context: context
-                                            )
+                                        let img = VectorPetRenderer.renderFrame(
+                                            clipID: anim.id,
+                                            pet: activePet,
+                                            time: time,
+                                            context: context
                                         )
-                                        .resizable()
-                                        .interpolation(.none)
-                                        .scaledToFit()
-                                        .frame(width: 40, height: 40)
+                                        if context == .menuBar {
+                                            Image(nsImage: img)
+                                                .resizable()
+                                                .renderingMode(.template)
+                                                .interpolation(.none)
+                                                .scaledToFit()
+                                                .frame(width: 40, height: 40)
+                                                .foregroundColor(.white)
+                                        } else {
+                                            Image(nsImage: img)
+                                                .resizable()
+                                                .interpolation(.none)
+                                                .scaledToFit()
+                                                .frame(width: 40, height: 40)
+                                        }
                                     }
                                     .frame(width: 50, height: 50)
                                     .background(

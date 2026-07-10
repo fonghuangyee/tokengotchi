@@ -4,6 +4,7 @@ import AppKit
 struct AIPromptGeneratorView: View {
     @ObservedObject var petState: PetState
     @ObservedObject var petManager: PetManager
+    var editPetName: String?
     @Environment(\.dismiss) var dismiss
 
     @State private var showCopied = false
@@ -37,10 +38,10 @@ struct AIPromptGeneratorView: View {
                 // Copy Prompt
                 Button {
                     var finalPrompt = loadPromptTemplate()
-                    if petManager.activePet.name != PetManager.defaultPet().name {
+                    if let editPetName = editPetName, let targetPet = petManager.availablePets.first(where: { $0.name == editPetName }) {
                         let encoder = JSONEncoder()
                         encoder.outputFormatting = [.prettyPrinted]
-                        if let data = try? encoder.encode(petManager.activePet),
+                        if let data = try? encoder.encode(targetPet),
                            let jsonStr = String(data: data, encoding: .utf8) {
                             finalPrompt += "\n\nUSE THIS EXISTING JSON AS A BASE AND MODIFY IT:\n```json\n\(jsonStr)\n```"
                         }
@@ -117,25 +118,27 @@ struct AIPromptGeneratorView: View {
     }
 
     private func loadPromptTemplate() -> String {
-        let templateName = "AI_PROMPT_TEMPLATE"
+        let isEditing = (editPetName != nil)
+        let templateName = isEditing ? "AI_EDIT_PET_PROMPT_TEMPLATE" : "AI_PROMPT_TEMPLATE"
+        
         // Try to load from bundle if bundled
         if let url = Bundle.main.url(forResource: templateName, withExtension: "md"),
            let text = try? String(contentsOf: url, encoding: .utf8) {
             return text
         }
         // Fallback for development if run from Xcode, try to load from project root
-        let rootPath = URL(fileURLWithPath: #file)
+        let rootPath = URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent() // Customisation
             .deletingLastPathComponent() // Tokengotchi
             .deletingLastPathComponent() // Sources
             .deletingLastPathComponent() // tokengotchi (root)
-            .appendingPathComponent("AI_PROMPT_TEMPLATE.md")
+            .appendingPathComponent("\(templateName).md")
         
         if let text = try? String(contentsOf: rootPath, encoding: .utf8) {
             return text
         }
         
-        return "Error: Could not load AI_PROMPT_TEMPLATE.md. Ensure it is included in the project bundle."
+        return "Error: Could not load \(templateName).md. Ensure it is included in the project bundle."
     }
 
     private func importFile() {

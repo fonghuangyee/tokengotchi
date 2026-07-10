@@ -60,6 +60,7 @@ final class PetState: ObservableObject {
         // Listen to active pet changes to update clip if needed
         PetManager.shared.$activePet
             .dropFirst()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self = self else { return }
                 // Re-trigger current mode so it picks a clip from the new pet
@@ -100,14 +101,22 @@ final class PetState: ObservableObject {
         animationTrigger = UUID()
         animationStartTime = Date().timeIntervalSince1970
 
+        var transientDurationInSeconds: TimeInterval? = nil
+        if newMode == .completed {
+            transientDurationInSeconds = max(first.duration, 3.0)
+        } else if newMode == .error {
+            transientDurationInSeconds = max(first.duration, 2.5)
+        }
+
         if newMode.isTransient {
-            scheduleTransientReturn(for: newMode)
+            scheduleTransientReturn(for: newMode, durationOverride: transientDurationInSeconds)
         }
 
         if newMode == .completed {
             showConfetti = true
+            let durationNanoseconds = UInt64((transientDurationInSeconds ?? 3.0) * 1_000_000_000)
             Task { [weak self] in
-                try? await Task.sleep(nanoseconds: 3_000_000_000)
+                try? await Task.sleep(nanoseconds: durationNanoseconds)
                 await MainActor.run { self?.showConfetti = false }
             }
         }
@@ -175,12 +184,16 @@ final class PetState: ObservableObject {
     }
 
     // MARK: - Transient Auto-Return
-    private func scheduleTransientReturn(for mode: PetMode) {
+    private func scheduleTransientReturn(for mode: PetMode, durationOverride: TimeInterval? = nil) {
         let duration: UInt64
-        switch mode {
-        case .completed: duration = 3_000_000_000
-        case .error:     duration = 2_500_000_000
-        default:         duration = 2_000_000_000
+        if let override = durationOverride {
+            duration = UInt64(override * 1_000_000_000)
+        } else {
+            switch mode {
+            case .completed: duration = 3_000_000_000
+            case .error:     duration = 2_500_000_000
+            default:         duration = 2_000_000_000
+            }
         }
         Task { [weak self] in
             try? await Task.sleep(nanoseconds: duration)

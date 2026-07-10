@@ -3,7 +3,7 @@ import SwiftUI
 // MARK: - Navigation Destinations
 enum PetDashboardDestination: Hashable {
     case preview(String) // pet name
-    case prompt
+    case prompt(String?)
     case jsonEditor
 }
 
@@ -47,8 +47,8 @@ struct PetDashboardView: View {
                 switch dest {
                 case .preview(let petName):
                     PetPreviewView(petState: petState, petManager: petManager, previewPetName: petName)
-                case .prompt:
-                    AIPromptGeneratorView(petState: petState, petManager: petManager)
+                case .prompt(let petName):
+                    AIPromptGeneratorView(petState: petState, petManager: petManager, editPetName: petName)
                 case .jsonEditor:
                     JSONEditorView(petManager: petManager)
                 }
@@ -160,7 +160,7 @@ struct HomeTab: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
                     // Create New Button
-                    NavigationLink(value: PetDashboardDestination.prompt) {
+                    NavigationLink(value: PetDashboardDestination.prompt(nil)) {
                         VStack {
                             ZStack {
                                 Circle()

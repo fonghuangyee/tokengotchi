@@ -28,7 +28,42 @@ struct OffscreenPetRenderer {
             let svgString: String
             let targetContext = contextName == "menuBar" ? pet.menuBar : pet.dock
 
-            if let animation = targetContext.findAnimation(id: clipID) {
+            var resolvedAnimation = targetContext.findAnimation(id: clipID)
+            
+            // If not found in target context, the clipID is likely from another context (e.g. dock).
+            // Find its corresponding state in dock, and pick the matching state in targetContext.
+            if resolvedAnimation == nil && contextName != "dock" {
+                var topLevelStateId: String?
+                var subStateId: String?
+                
+                for state in pet.dock.states {
+                    if state.animations.contains(where: { $0.id == clipID }) {
+                        topLevelStateId = state.id
+                        break
+                    }
+                    if let subs = state.subStates {
+                        if let sub = subs.first(where: { s in s.animations.contains(where: { $0.id == clipID }) }) {
+                            topLevelStateId = state.id
+                            subStateId = sub.id
+                            break
+                        }
+                    }
+                }
+                
+                if let topId = topLevelStateId {
+                    if let targetState = targetContext.states.first(where: { $0.id == topId }) {
+                        if let subId = subStateId,
+                           let targetSub = targetState.subStates?.first(where: { $0.id == subId }),
+                           let anim = targetSub.animations.first {
+                            resolvedAnimation = anim
+                        } else {
+                            resolvedAnimation = targetState.animations.first
+                        }
+                    }
+                }
+            }
+
+            if let animation = resolvedAnimation {
                 duration = animation.duration
                 if let frames = animation.frames, !frames.isEmpty {
                     let normalizedTime = time.truncatingRemainder(dividingBy: duration)

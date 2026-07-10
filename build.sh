@@ -22,6 +22,10 @@ echo "⚙️  Generating DefaultPetData.swift..."
 python3 build_icon.py Sources/Tokengotchi/Resources
 cp Sources/Tokengotchi/Resources/AppIcon.icns "$RESOURCES_DIR/"
 
+# Copy AI Prompt Templates to Resources
+cp AI_PROMPT_TEMPLATE.md "$RESOURCES_DIR/"
+cp AI_EDIT_PET_PROMPT_TEMPLATE.md "$RESOURCES_DIR/"
+
 # Generate Info.plist
 cat > "$APP_DIR/Contents/Info.plist" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>

@@ -2,7 +2,7 @@
 
 import Foundation
 
-let sourcePath = "Sample_Blobbit.json"
+let sourcePath = "pets/Kuramon.json"
 let destPath = "Sources/Tokengotchi/Pet/DefaultPetData.swift"
 
 guard let data = try? Data(contentsOf: URL(fileURLWithPath: sourcePath)),

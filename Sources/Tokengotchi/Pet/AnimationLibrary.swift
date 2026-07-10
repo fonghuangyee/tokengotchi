@@ -57,6 +57,7 @@ public struct AnimationClip: Identifiable, Hashable, Codable {
     public let id: String
     public let name: String
     public let description: String
+    public let duration: TimeInterval
     public let modes: [PetMode]
     public let busySubstate: BusySubstate?
 
@@ -64,11 +65,12 @@ public struct AnimationClip: Identifiable, Hashable, Codable {
     public var isGeneralBusy: Bool { modes.contains(.busy) && busySubstate == nil }
 
     public init(
-        id: String, name: String, description: String, modes: [PetMode], busySubstate: BusySubstate?
+        id: String, name: String, description: String, duration: TimeInterval, modes: [PetMode], busySubstate: BusySubstate?
     ) {
         self.id = id
         self.name = name
         self.description = description
+        self.duration = duration
         self.modes = modes
         self.busySubstate = busySubstate
     }
@@ -81,6 +83,7 @@ extension AnimationClip {
             id: "fallback",
             name: "Fallback",
             description: "Default fallback clip",
+            duration: 1.0,
             modes: [mode],
             busySubstate: nil
         )

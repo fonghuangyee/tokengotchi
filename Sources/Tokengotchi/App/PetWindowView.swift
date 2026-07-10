@@ -60,8 +60,8 @@ struct PetWindowView: View {
                 switch dest {
                 case .preview:
                     PetPreviewView(petState: petState, petManager: petManager)
-                case .prompt:
-                    AIPromptGeneratorView(petState: petState, petManager: petManager)
+                case .prompt(let petName):
+                    AIPromptGeneratorView(petState: petState, petManager: petManager, editPetName: petName)
                 case .jsonEditor:
                     JSONEditorView(petManager: petManager)
                 }

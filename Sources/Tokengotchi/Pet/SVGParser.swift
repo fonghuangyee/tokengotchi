@@ -100,10 +100,27 @@ enum SVGParser {
         var errorDescription: String? { message }
     }
 
+    // MARK: Cache
+    
+    private class CachedDocument {
+        let doc: SVGDocument
+        init(doc: SVGDocument) { self.doc = doc }
+    }
+    
+    private static let cache: NSCache<NSString, CachedDocument> = {
+        let cache = NSCache<NSString, CachedDocument>()
+        cache.countLimit = 100 // Prevent unbounded memory growth
+        return cache
+    }()
+
     // MARK: Public API
 
     /// Parse an SVG string into an `SVGDocument` (layer tree + definitions).
     static func parseSVG(_ svgString: String) throws -> SVGDocument {
+        if let cached = cache.object(forKey: svgString as NSString) {
+            return cached.doc
+        }
+
         var clean = svgString
         if !clean.contains("xmlns=") {
             clean = clean.replacingOccurrences(of: "<svg", with: "<svg xmlns=\"http://www.w3.org/2000/svg\"")
@@ -120,7 +137,9 @@ enum SVGParser {
         guard let root = delegate.rootLayer else {
             throw ParseError(message: "No root SVG element found.")
         }
-        return SVGDocument(root: root, defs: delegate.defs)
+        let document = SVGDocument(root: root, defs: delegate.defs)
+        cache.setObject(CachedDocument(doc: document), forKey: svgString as NSString)
+        return document
     }
 
     // MARK: Bounding Box

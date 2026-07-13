@@ -365,7 +365,7 @@ struct DefaultPetData {
       },
       {
         "id": "dock_pulse_beam_override",
-        "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><g id=\"kuramon_all\"><g id=\"tentacle_bl\"><path d=\"M 30 75 C 20 85 10 95 25 90 C 35 85 40 78 40 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"tentacle_br\"><path d=\"M 70 75 C 80 85 90 95 75 90 C 65 85 60 78 60 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"horn_tl\"><path d=\"M 35 25 C 25 15 15 5 20 20 C 25 35 30 35 30 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"horn_tr\"><path d=\"M 65 25 C 75 15 85 5 80 20 C 75 35 70 35 70 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"body_main\"><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"eye_group\"><path id=\"eye_black\" d=\"M 23 55 C 23 38 38 28 55 28 C 72 28 77 43 77 55 C 77 72 62 77 45 77 C 28 77 23 67 23 55 Z\" fill=\"var(--eyeliner)\"/><ellipse id=\"sclera\" cx=\"52\" cy=\"53\" rx=\"19\" ry=\"17\" fill=\"var(--eye-sclera)\"/><circle id=\"iris\" cx=\"52\" cy=\"53\" r=\"13\" fill=\"var(--eye-iris)\"/><circle id=\"pupil\" cx=\"52\" cy=\"53\" r=\"6\" fill=\"var(--eye-pupil)\"/><ellipse id=\"highlight\" cx=\"48\" cy=\"47\" rx=\"5\" ry=\"4\" fill=\"#FFFFFF\"/></g><g id=\"front_laser_fx\"><g id=\"front_core\"><circle cx=\"52\" cy=\"53\" r=\"8\" fill=\"#FFFFFF\" opacity=\"0.95\"/><circle cx=\"52\" cy=\"53\" r=\"13\" fill=\"var(--eye-iris)\" opacity=\"0.45\"/></g><g id=\"front_ring_outer\"><circle cx=\"52\" cy=\"53\" r=\"15\" fill=\"none\" stroke=\"var(--eye-iris)\" stroke-width=\"5\" opacity=\"0.9\"/></g><g id=\"front_ring_inner\"><circle cx=\"52\" cy=\"53\" r=\"8\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"3\" opacity=\"0.95\"/></g></g></g></svg>"
+        "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><g id=\"kuramon_all\"><g id=\"tentacle_bl\"><path d=\"M 30 75 C 20 85 10 95 25 90 C 35 85 40 78 40 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"tentacle_br\"><path d=\"M 70 75 C 80 85 90 95 75 90 C 65 85 60 78 60 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"horn_tl\"><path d=\"M 35 25 C 25 15 15 5 20 20 C 25 35 30 35 30 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"horn_tr\"><path d=\"M 65 25 C 75 15 85 5 80 20 C 75 35 70 35 70 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"body_main\"><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"eye_group\"><path id=\"eye_black\" d=\"M 23 55 C 23 38 38 28 55 28 C 72 28 77 43 77 55 C 77 72 62 77 45 77 C 28 77 23 67 23 55 Z\" fill=\"var(--eyeliner)\"/><ellipse id=\"sclera\" cx=\"52\" cy=\"53\" rx=\"19\" ry=\"17\" fill=\"var(--eye-sclera)\"/><circle id=\"iris\" cx=\"52\" cy=\"53\" r=\"13\" fill=\"var(--eye-iris)\"/><circle id=\"pupil\" cx=\"52\" cy=\"53\" r=\"6\" fill=\"var(--eye-pupil)\"/><ellipse id=\"highlight\" cx=\"48\" cy=\"47\" rx=\"5\" ry=\"4\" fill=\"#FFFFFF\"/></g><g id=\"front_laser_fx\"><g id=\"front_glow\"><circle cx=\"52\" cy=\"53\" r=\"28\" fill=\"var(--eye-iris)\" opacity=\"0.15\"/><circle cx=\"52\" cy=\"53\" r=\"20\" fill=\"var(--eye-iris)\" opacity=\"0.25\"/></g><g id=\"front_core\"><circle cx=\"52\" cy=\"53\" r=\"8\" fill=\"#FFFFFF\" opacity=\"0.95\"/><circle cx=\"52\" cy=\"53\" r=\"13\" fill=\"var(--eye-iris)\" opacity=\"0.45\"/></g><g id=\"front_ring_outer\"><circle cx=\"52\" cy=\"53\" r=\"15\" fill=\"none\" stroke=\"var(--eye-iris)\" stroke-width=\"5\" opacity=\"0.9\"/></g><g id=\"front_ring_inner\"><circle cx=\"52\" cy=\"53\" r=\"8\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"3\" opacity=\"0.95\"/></g></g></g></svg>"
       },
       {
         "id": "dock_cannon_flash_override",
@@ -374,6 +374,22 @@ struct DefaultPetData {
       {
         "id": "dock_spiral_blast_override",
         "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><g id=\"kuramon_all\"><g id=\"tentacle_bl\"><path d=\"M 30 75 C 20 85 10 95 25 90 C 35 85 40 78 40 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"tentacle_br\"><path d=\"M 70 75 C 80 85 90 95 75 90 C 65 85 60 78 60 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"horn_tl\"><path d=\"M 35 25 C 25 15 15 5 20 20 C 25 35 30 35 30 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"horn_tr\"><path d=\"M 65 25 C 75 15 85 5 80 20 C 75 35 70 35 70 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"body_main\"><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"eye_group\"><path id=\"eye_black\" d=\"M 23 55 C 23 38 38 28 55 28 C 72 28 77 43 77 55 C 77 72 62 77 45 77 C 28 77 23 67 23 55 Z\" fill=\"var(--eyeliner)\"/><ellipse id=\"sclera\" cx=\"52\" cy=\"53\" rx=\"19\" ry=\"17\" fill=\"var(--eye-sclera)\"/><circle id=\"iris\" cx=\"52\" cy=\"53\" r=\"13\" fill=\"var(--eye-iris)\"/><circle id=\"pupil\" cx=\"52\" cy=\"53\" r=\"6\" fill=\"var(--eye-pupil)\"/><ellipse id=\"highlight\" cx=\"48\" cy=\"47\" rx=\"5\" ry=\"4\" fill=\"#FFFFFF\"/></g><g id=\"front_laser_fx\"><g id=\"front_spiral\"><path d=\"M 52 53 C 60 47 68 55 61 63 C 50 75 31 58 42 42 C 57 22 86 45 72 68\" fill=\"none\" stroke=\"var(--eye-iris)\" stroke-width=\"5\" stroke-linecap=\"round\" opacity=\"0.85\"/><path d=\"M 52 53 C 47 58 39 53 43 46 C 50 35 67 45 60 59\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"3\" stroke-linecap=\"round\" opacity=\"0.95\"/></g><g id=\"front_target_ring\"><circle cx=\"52\" cy=\"53\" r=\"16\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" opacity=\"0.85\"/><circle cx=\"52\" cy=\"53\" r=\"24\" fill=\"none\" stroke=\"var(--eye-iris)\" stroke-width=\"4\" opacity=\"0.65\"/></g></g></g></svg>"
+      },
+      {
+        "id": "dock_thunder_pulse_cannon_override",
+        "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\">\n<g id=\"thunder_glow_backdrop\">\n<circle cx=\"50\" cy=\"50\" r=\"45\" fill=\"var(--eye-iris)\"/>\n<circle cx=\"50\" cy=\"50\" r=\"35\" fill=\"#80DFFF\"/>\n<circle cx=\"50\" cy=\"50\" r=\"25\" fill=\"#FFFFFF\"/>\n</g>\n<g id=\"kuramon_all\">\n<g id=\"tentacle_bl\"><path d=\"M 30 75 C 20 85 10 95 25 90 C 35 85 40 78 40 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g>\n<g id=\"tentacle_br\"><path d=\"M 70 75 C 80 85 90 95 75 90 C 65 85 60 78 60 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g>\n<g id=\"horn_tl\"><path d=\"M 35 25 C 25 15 15 5 20 20 C 25 35 30 35 30 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g>\n<g id=\"horn_tr\"><path d=\"M 65 25 C 75 15 85 5 80 20 C 75 35 70 35 70 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g>\n<g id=\"body_main\"><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g>\n<g id=\"eye_group\"><path id=\"eye_black\" d=\"M 23 55 C 23 38 38 28 55 28 C 72 28 77 43 77 55 C 77 72 62 77 45 77 C 28 77 23 67 23 55 Z\" fill=\"var(--eyeliner)\"/><ellipse id=\"sclera\" cx=\"52\" cy=\"53\" rx=\"19\" ry=\"17\" fill=\"var(--eye-sclera)\"/><circle id=\"iris\" cx=\"52\" cy=\"53\" r=\"13\" fill=\"var(--eye-iris)\"/><circle id=\"pupil\" cx=\"52\" cy=\"53\" r=\"6\" fill=\"var(--eye-pupil)\"/><ellipse id=\"highlight\" cx=\"48\" cy=\"47\" rx=\"5\" ry=\"4\" fill=\"#FFFFFF\"/></g>\n<g id=\"front_laser_fx\">\n<g id=\"front_glow\"><circle cx=\"52\" cy=\"53\" r=\"28\" fill=\"var(--eye-iris)\" opacity=\"0.15\"/><circle cx=\"52\" cy=\"53\" r=\"20\" fill=\"var(--eye-iris)\" opacity=\"0.25\"/></g>\n<g id=\"front_core\"><circle cx=\"52\" cy=\"53\" r=\"8\" fill=\"#FFFFFF\" opacity=\"0.95\"/><circle cx=\"52\" cy=\"53\" r=\"13\" fill=\"var(--eye-iris)\" opacity=\"0.45\"/></g>\n<g id=\"front_ring_outer\"><circle cx=\"52\" cy=\"53\" r=\"15\" fill=\"none\" stroke=\"var(--eye-iris)\" stroke-width=\"5\" opacity=\"0.9\"/></g>\n<g id=\"front_ring_inner\"><circle cx=\"52\" cy=\"53\" r=\"8\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"3\" opacity=\"0.95\"/></g>\n<g id=\"front_charge\"><circle cx=\"52\" cy=\"53\" r=\"7\" fill=\"#FFFFFF\" opacity=\"0.95\"/><circle cx=\"52\" cy=\"53\" r=\"12\" fill=\"var(--eye-iris)\" opacity=\"0.55\"/></g>\n<g id=\"front_blast_a\"><circle cx=\"52\" cy=\"53\" r=\"17\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"6\" opacity=\"0.9\"/></g>\n<g id=\"front_blast_b\"><circle cx=\"52\" cy=\"53\" r=\"22\" fill=\"none\" stroke=\"var(--eye-iris)\" stroke-width=\"5\" opacity=\"0.75\"/></g>\n</g>\n<g id=\"super_lightning_fx\">\n<path d=\"M 50 50 L 20 10 L 30 5 L 10 0\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"3\" stroke-linejoin=\"round\"/>\n<path d=\"M 50 50 L 80 15 L 75 5 L 90 0\" fill=\"none\" stroke=\"#80DFFF\" stroke-width=\"3\" stroke-linejoin=\"round\"/>\n<path d=\"M 50 50 L 15 70 L 25 80 L 5 95\" fill=\"none\" stroke=\"#80DFFF\" stroke-width=\"3\" stroke-linejoin=\"round\"/>\n<path d=\"M 50 50 L 85 80 L 70 85 L 95 100\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"3\" stroke-linejoin=\"round\"/>\n<path d=\"M 50 50 L 10 40 L 0 50\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"2\" stroke-linejoin=\"round\"/>\n<path d=\"M 50 50 L 90 60 L 100 50\" fill=\"none\" stroke=\"#80DFFF\" stroke-width=\"2\" stroke-linejoin=\"round\"/>\n</g>\n</g>\n</svg>"
+      },
+      {
+        "id": "dock_flag_override",
+        "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><g id=\"kuramon_all\"><g id=\"tentacle_bl\"><path d=\"M 30 75 C 20 85 10 95 25 90 C 35 85 40 78 40 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"tentacle_br\"><path d=\"M 70 75 C 80 85 90 95 75 90 C 65 85 60 78 60 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"horn_tl\"><path d=\"M 35 25 C 25 15 15 5 20 20 C 25 35 30 35 30 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"horn_tr\"><path d=\"M 65 25 C 75 15 85 5 80 20 C 75 35 70 35 70 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"body_main\"><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"eye_group\"><path id=\"eye_black\" d=\"M 23 55 C 23 38 38 28 55 28 C 72 28 77 43 77 55 C 77 72 62 77 45 77 C 28 77 23 67 23 55 Z\" fill=\"var(--eyeliner)\"/><ellipse id=\"sclera\" cx=\"52\" cy=\"53\" rx=\"19\" ry=\"17\" fill=\"var(--eye-sclera)\"/><circle id=\"iris\" cx=\"52\" cy=\"53\" r=\"13\" fill=\"var(--eye-iris)\"/><circle id=\"pupil\" cx=\"52\" cy=\"53\" r=\"6\" fill=\"var(--eye-pupil)\"/><ellipse id=\"highlight\" cx=\"48\" cy=\"47\" rx=\"5\" ry=\"4\" fill=\"#FFFFFF\"/></g><g id=\"flag_group\"><path d=\"M 40 40 L 40 10 L 15 25 Z\" fill=\"#FF5555\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 40 10 L 40 70\" stroke=\"var(--eyeliner)\" stroke-width=\"3\" stroke-linecap=\"round\"/></g></g></svg>"
+      },
+      {
+        "id": "dock_hat_override",
+        "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><g id=\"kuramon_all\"><g id=\"tentacle_bl\"><path d=\"M 30 75 C 20 85 10 95 25 90 C 35 85 40 78 40 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"tentacle_br\"><path d=\"M 70 75 C 80 85 90 95 75 90 C 65 85 60 78 60 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"horn_tl\"><path d=\"M 35 25 C 25 15 15 5 20 20 C 25 35 30 35 30 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"horn_tr\"><path d=\"M 65 25 C 75 15 85 5 80 20 C 75 35 70 35 70 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"body_main\"><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"eye_group\"><path id=\"eye_black\" d=\"M 23 55 C 23 38 38 28 55 28 C 72 28 77 43 77 55 C 77 72 62 77 45 77 C 28 77 23 67 23 55 Z\" fill=\"var(--eyeliner)\"/><ellipse id=\"sclera\" cx=\"52\" cy=\"53\" rx=\"19\" ry=\"17\" fill=\"var(--eye-sclera)\"/><circle id=\"iris\" cx=\"52\" cy=\"53\" r=\"13\" fill=\"var(--eye-iris)\"/><circle id=\"pupil\" cx=\"52\" cy=\"53\" r=\"6\" fill=\"var(--eye-pupil)\"/><ellipse id=\"highlight\" cx=\"48\" cy=\"47\" rx=\"5\" ry=\"4\" fill=\"#FFFFFF\"/></g><g id=\"party_hat\"><path d=\"M 50 5 L 35 30 L 65 30 Z\" fill=\"#55AAFF\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><circle cx=\"50\" cy=\"5\" r=\"5\" fill=\"#FFAA55\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/></g></g></svg>"
+      },
+      {
+        "id": "dock_medal_override",
+        "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><g id=\"kuramon_all\"><g id=\"tentacle_bl\"><path d=\"M 30 75 C 20 85 10 95 25 90 C 35 85 40 78 40 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"tentacle_br\"><path d=\"M 70 75 C 80 85 90 95 75 90 C 65 85 60 78 60 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"horn_tl\"><path d=\"M 35 25 C 25 15 15 5 20 20 C 25 35 30 35 30 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"horn_tr\"><path d=\"M 65 25 C 75 15 85 5 80 20 C 75 35 70 35 70 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"body_main\"><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"eye_group\"><path id=\"eye_black\" d=\"M 23 55 C 23 38 38 28 55 28 C 72 28 77 43 77 55 C 77 72 62 77 45 77 C 28 77 23 67 23 55 Z\" fill=\"var(--eyeliner)\"/><ellipse id=\"sclera\" cx=\"52\" cy=\"53\" rx=\"19\" ry=\"17\" fill=\"var(--eye-sclera)\"/><circle id=\"iris\" cx=\"52\" cy=\"53\" r=\"13\" fill=\"var(--eye-iris)\"/><circle id=\"pupil\" cx=\"52\" cy=\"53\" r=\"6\" fill=\"var(--eye-pupil)\"/><ellipse id=\"highlight\" cx=\"48\" cy=\"47\" rx=\"5\" ry=\"4\" fill=\"#FFFFFF\"/></g><g id=\"medal_group\"><path d=\"M 25 20 C 25 50 75 50 75 20\" fill=\"none\" stroke=\"#FF5555\" stroke-width=\"5\"/><circle cx=\"50\" cy=\"55\" r=\"15\" fill=\"#FFD700\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/><path d=\"M 47 50 L 50 48 L 50 60\" stroke=\"var(--eyeliner)\" stroke-width=\"2\" stroke-linecap=\"round\"/></g></g></svg>"
       }
     ],
     "states": [
@@ -584,12 +600,12 @@ struct DefaultPetData {
         "id": "busy",
         "animations": [
           {
-            "id": "busy_pulse_beam",
-            "name": "Pulse Beam",
-            "description": "Stays large and centered while the eye swells, then fires a purple front-facing pulse from the pupil as expanding rings flash over the eye and the horns and tentacles brace.",
-            "duration": 2.4,
+            "id": "busy_thunder_pulse_cannon",
+            "name": "Thunder Pulse Cannon",
+            "description": "Prepares a massive pulse beam while swelling, suddenly strikes with thunder, then blasts three intense cannon flashes with heavy recoil.",
+            "duration": 6.5,
             "svg": {
-              "id": "dock_pulse_beam_override"
+              "id": "dock_thunder_pulse_cannon_override"
             },
             "tracks": [
               {
@@ -604,7 +620,7 @@ struct DefaultPetData {
                     "sy": 1
                   },
                   {
-                    "time": 0.35,
+                    "time": 0.3,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 4,
@@ -612,7 +628,7 @@ struct DefaultPetData {
                     "sy": 0.93
                   },
                   {
-                    "time": 0.68,
+                    "time": 0.58,
                     "rotate": 0,
                     "tx": 0,
                     "ty": -3,
@@ -620,7 +636,7 @@ struct DefaultPetData {
                     "sy": 1.06
                   },
                   {
-                    "time": 0.95,
+                    "time": 0.81,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 2,
@@ -628,15 +644,23 @@ struct DefaultPetData {
                     "sy": 0.98
                   },
                   {
-                    "time": 1.35,
+                    "time": 1.28,
                     "rotate": 0,
                     "tx": 0,
-                    "ty": 1,
-                    "sx": 1.02,
-                    "sy": 0.99
+                    "ty": -1,
+                    "sx": 0.99,
+                    "sy": 1.02
                   },
                   {
                     "time": 1.8,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 2,
+                    "sx": 1.03,
+                    "sy": 0.98
+                  },
+                  {
+                    "time": 2.31,
                     "rotate": 0,
                     "tx": 0,
                     "ty": -2,
@@ -644,7 +668,111 @@ struct DefaultPetData {
                     "sy": 1.04
                   },
                   {
-                    "time": 2.4,
+                    "time": 3,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 3.2,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -6,
+                    "sx": 1.15,
+                    "sy": 0.85
+                  },
+                  {
+                    "time": 3.5,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1.05,
+                    "sy": 0.95
+                  },
+                  {
+                    "time": 4,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 3,
+                    "sx": 1.1,
+                    "sy": 0.9
+                  },
+                  {
+                    "time": 4.5,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 5,
+                    "sx": 1.1,
+                    "sy": 0.9
+                  },
+                  {
+                    "time": 4.6,
+                    "rotate": -4,
+                    "tx": -3,
+                    "ty": 0,
+                    "sx": 0.95,
+                    "sy": 1.08
+                  },
+                  {
+                    "time": 4.8,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 3,
+                    "sx": 1.05,
+                    "sy": 0.95
+                  },
+                  {
+                    "time": 5.1,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 3,
+                    "sx": 1.05,
+                    "sy": 0.95
+                  },
+                  {
+                    "time": 5.2,
+                    "rotate": 4,
+                    "tx": 3,
+                    "ty": 0,
+                    "sx": 0.95,
+                    "sy": 1.08
+                  },
+                  {
+                    "time": 5.4,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 3,
+                    "sx": 1.05,
+                    "sy": 0.95
+                  },
+                  {
+                    "time": 5.8,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 3,
+                    "sx": 1.05,
+                    "sy": 0.95
+                  },
+                  {
+                    "time": 5.9,
+                    "rotate": -5,
+                    "tx": -3,
+                    "ty": -2,
+                    "sx": 0.92,
+                    "sy": 1.1
+                  },
+                  {
+                    "time": 6.2,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -2,
+                    "sx": 0.98,
+                    "sy": 1.02
+                  },
+                  {
+                    "time": 6.5,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -665,7 +793,7 @@ struct DefaultPetData {
                     "sy": 1
                   },
                   {
-                    "time": 0.28,
+                    "time": 0.24,
                     "rotate": 0,
                     "tx": 0,
                     "ty": -1,
@@ -673,7 +801,7 @@ struct DefaultPetData {
                     "sy": 1.12
                   },
                   {
-                    "time": 0.58,
+                    "time": 0.49,
                     "rotate": 0,
                     "tx": 0,
                     "ty": -2,
@@ -681,7 +809,7 @@ struct DefaultPetData {
                     "sy": 1.35
                   },
                   {
-                    "time": 0.82,
+                    "time": 0.7,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 1,
@@ -693,11 +821,27 @@ struct DefaultPetData {
                     "rotate": 0,
                     "tx": 0,
                     "ty": -1,
-                    "sx": 1.18,
-                    "sy": 1.18
+                    "sx": 1.22,
+                    "sy": 1.22
                   },
                   {
-                    "time": 1.65,
+                    "time": 1.62,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 1,
+                    "sx": 0.95,
+                    "sy": 0.95
+                  },
+                  {
+                    "time": 2.05,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -1,
+                    "sx": 1.2,
+                    "sy": 1.2
+                  },
+                  {
+                    "time": 2.4,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 1,
@@ -705,12 +849,485 @@ struct DefaultPetData {
                     "sy": 0.96
                   },
                   {
-                    "time": 2.4,
+                    "time": 3,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
                     "sx": 1,
                     "sy": 1
+                  },
+                  {
+                    "time": 3.2,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -4,
+                    "sx": 1.4,
+                    "sy": 1.4
+                  },
+                  {
+                    "time": 4,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -2,
+                    "sx": 1.5,
+                    "sy": 1.35
+                  },
+                  {
+                    "time": 4.5,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -2,
+                    "sx": 1.5,
+                    "sy": 1.35
+                  },
+                  {
+                    "time": 4.6,
+                    "rotate": -5,
+                    "tx": -2,
+                    "ty": 0,
+                    "sx": 1.3,
+                    "sy": 1.5
+                  },
+                  {
+                    "time": 4.8,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -1,
+                    "sx": 1.45,
+                    "sy": 1.4
+                  },
+                  {
+                    "time": 5.1,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -1,
+                    "sx": 1.45,
+                    "sy": 1.4
+                  },
+                  {
+                    "time": 5.2,
+                    "rotate": 5,
+                    "tx": 2,
+                    "ty": 0,
+                    "sx": 1.3,
+                    "sy": 1.5
+                  },
+                  {
+                    "time": 5.4,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -1,
+                    "sx": 1.45,
+                    "sy": 1.4
+                  },
+                  {
+                    "time": 5.8,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -1,
+                    "sx": 1.45,
+                    "sy": 1.4
+                  },
+                  {
+                    "time": 5.9,
+                    "rotate": -6,
+                    "tx": -3,
+                    "ty": -2,
+                    "sx": 1.2,
+                    "sy": 1.6
+                  },
+                  {
+                    "time": 6.2,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": -2,
+                    "sx": 1.1,
+                    "sy": 1.1
+                  },
+                  {
+                    "time": 6.5,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "tentacle_bl",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.5,
+                    "rotate": 15,
+                    "tx": -5,
+                    "ty": 2,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 2.5,
+                    "rotate": 25,
+                    "tx": -10,
+                    "ty": 5,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 3,
+                    "rotate": -10,
+                    "tx": 5,
+                    "ty": -5,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 4,
+                    "rotate": 15,
+                    "tx": -3,
+                    "ty": 3,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 4.6,
+                    "rotate": 5,
+                    "tx": -1,
+                    "ty": 1,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 5.2,
+                    "rotate": 20,
+                    "tx": -5,
+                    "ty": 3,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 5.9,
+                    "rotate": -5,
+                    "tx": 2,
+                    "ty": -1,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 6.5,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "tentacle_br",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.5,
+                    "rotate": -15,
+                    "tx": 5,
+                    "ty": 2,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 2.5,
+                    "rotate": -25,
+                    "tx": 10,
+                    "ty": 5,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 3,
+                    "rotate": 10,
+                    "tx": -5,
+                    "ty": -5,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 4,
+                    "rotate": -15,
+                    "tx": 3,
+                    "ty": 3,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 4.6,
+                    "rotate": -20,
+                    "tx": 5,
+                    "ty": 3,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 5.2,
+                    "rotate": -5,
+                    "tx": 1,
+                    "ty": 1,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 5.9,
+                    "rotate": 5,
+                    "tx": -2,
+                    "ty": -1,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 6.5,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "horn_tl",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.5,
+                    "rotate": -10,
+                    "tx": 2,
+                    "ty": -2,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 2.5,
+                    "rotate": -20,
+                    "tx": 4,
+                    "ty": -4,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 3,
+                    "rotate": 25,
+                    "tx": -5,
+                    "ty": 5,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 4,
+                    "rotate": -15,
+                    "tx": 3,
+                    "ty": -3,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 4.6,
+                    "rotate": 5,
+                    "tx": -1,
+                    "ty": 1,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 5.2,
+                    "rotate": -20,
+                    "tx": 4,
+                    "ty": -4,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 5.9,
+                    "rotate": 10,
+                    "tx": -2,
+                    "ty": 2,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 6.5,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "horn_tr",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.5,
+                    "rotate": 10,
+                    "tx": -2,
+                    "ty": -2,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 2.5,
+                    "rotate": 20,
+                    "tx": -4,
+                    "ty": -4,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 3,
+                    "rotate": -25,
+                    "tx": 5,
+                    "ty": 5,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 4,
+                    "rotate": 15,
+                    "tx": -3,
+                    "ty": -3,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 4.6,
+                    "rotate": -5,
+                    "tx": 1,
+                    "ty": 1,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 5.2,
+                    "rotate": 20,
+                    "tx": -4,
+                    "ty": -4,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 5.9,
+                    "rotate": -10,
+                    "tx": 2,
+                    "ty": 2,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 6.5,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "front_glow",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 0.5,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0.5,
+                    "sy": 0.5
+                  },
+                  {
+                    "time": 1.5,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 2,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0.8,
+                    "sy": 0.8
+                  },
+                  {
+                    "time": 2.5,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 2.8,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 6.5,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
                   }
                 ]
               },
@@ -726,47 +1343,47 @@ struct DefaultPetData {
                     "sy": 0
                   },
                   {
-                    "time": 0.5,
+                    "time": 1,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
-                    "sx": 0.35,
-                    "sy": 0.35
+                    "sx": 1,
+                    "sy": 1
                   },
                   {
-                    "time": 0.72,
+                    "time": 1.5,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
-                    "sx": 1.4,
-                    "sy": 1.4
+                    "sx": 1,
+                    "sy": 1
                   },
                   {
-                    "time": 0.92,
+                    "time": 2,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
-                    "sx": 0.8,
-                    "sy": 0.8
+                    "sx": 1,
+                    "sy": 1
                   },
                   {
-                    "time": 1.2,
+                    "time": 2.5,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
-                    "sx": 1.15,
-                    "sy": 1.15
+                    "sx": 1,
+                    "sy": 1
                   },
                   {
-                    "time": 1.58,
+                    "time": 2.8,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
-                    "sx": 0.25,
-                    "sy": 0.25
+                    "sx": 0,
+                    "sy": 0
                   },
                   {
-                    "time": 2.4,
+                    "time": 6.5,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -787,39 +1404,7 @@ struct DefaultPetData {
                     "sy": 0
                   },
                   {
-                    "time": 0.62,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0.1,
-                    "sy": 0.1
-                  },
-                  {
-                    "time": 0.88,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.75,
-                    "sy": 1.75
-                  },
-                  {
-                    "time": 1.08,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0.2,
-                    "sy": 0.2
-                  },
-                  {
-                    "time": 1.32,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.55,
-                    "sy": 1.55
-                  },
-                  {
-                    "time": 1.62,
+                    "time": 0.8,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -827,7 +1412,47 @@ struct DefaultPetData {
                     "sy": 0
                   },
                   {
+                    "time": 1.2,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.3,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 1.8,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 2.3,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
                     "time": 2.4,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 6.5,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -848,39 +1473,31 @@ struct DefaultPetData {
                     "sy": 0
                   },
                   {
-                    "time": 0.58,
+                    "time": 0.9,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
-                    "sx": 0.1,
-                    "sy": 0.1
+                    "sx": 0,
+                    "sy": 0
                   },
                   {
-                    "time": 0.78,
+                    "time": 1.3,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
-                    "sx": 1.15,
-                    "sy": 1.15
+                    "sx": 1,
+                    "sy": 1
                   },
                   {
-                    "time": 1,
+                    "time": 1.4,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
-                    "sx": 0.25,
-                    "sy": 0.25
+                    "sx": 0,
+                    "sy": 0
                   },
                   {
-                    "time": 1.24,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.25,
-                    "sy": 1.25
-                  },
-                  {
-                    "time": 1.55,
+                    "time": 1.9,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -892,353 +1509,24 @@ struct DefaultPetData {
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 2.5,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
                     "sx": 0,
                     "sy": 0
-                  }
-                ]
-              },
-              {
-                "targetId": "horn_tl",
-                "keyframes": [
+                  },
                   {
-                    "time": 0,
+                    "time": 6.5,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.48,
-                    "rotate": -22,
-                    "tx": -3,
-                    "ty": 4,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.78,
-                    "rotate": 18,
-                    "tx": 3,
-                    "ty": -3,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 1.28,
-                    "rotate": -14,
-                    "tx": -2,
-                    "ty": 3,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 2.4,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  }
-                ]
-              },
-              {
-                "targetId": "horn_tr",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.48,
-                    "rotate": 22,
-                    "tx": 3,
-                    "ty": 4,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.78,
-                    "rotate": -18,
-                    "tx": -3,
-                    "ty": -3,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 1.28,
-                    "rotate": 14,
-                    "tx": 2,
-                    "ty": 3,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 2.4,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  }
-                ]
-              },
-              {
-                "targetId": "tentacle_bl",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.42,
-                    "rotate": -20,
-                    "tx": -4,
-                    "ty": 6,
-                    "sx": 1.1,
-                    "sy": 0.9
-                  },
-                  {
-                    "time": 0.82,
-                    "rotate": 16,
-                    "tx": 3,
-                    "ty": -3,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 1.4,
-                    "rotate": -12,
-                    "tx": -2,
-                    "ty": 4,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 2.4,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  }
-                ]
-              },
-              {
-                "targetId": "tentacle_br",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.42,
-                    "rotate": 20,
-                    "tx": 4,
-                    "ty": 6,
-                    "sx": 1.1,
-                    "sy": 0.9
-                  },
-                  {
-                    "time": 0.82,
-                    "rotate": -16,
-                    "tx": -3,
-                    "ty": -3,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 1.4,
-                    "rotate": 12,
-                    "tx": 2,
-                    "ty": 4,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 2.4,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "id": "busy_cannon_flash",
-            "name": "Cannon Flash",
-            "description": "Plants in place at full size, widens the eye into a cannon stare, then fires three short cyan front-facing flashes with tiny recoil twitches and a controlled settle.",
-            "duration": 2.8,
-            "svg": {
-              "id": "dock_cannon_flash_override"
-            },
-            "tracks": [
-              {
-                "targetId": "kuramon_all",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.35,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 5,
-                    "sx": 1.1,
-                    "sy": 0.9
-                  },
-                  {
-                    "time": 0.75,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 3,
-                    "sx": 1.04,
-                    "sy": 0.96
-                  },
-                  {
-                    "time": 0.95,
-                    "rotate": -3,
-                    "tx": -2,
-                    "ty": 0,
-                    "sx": 0.98,
-                    "sy": 1.04
-                  },
-                  {
-                    "time": 1.25,
-                    "rotate": 3,
-                    "tx": 2,
-                    "ty": 2,
-                    "sx": 1.04,
-                    "sy": 0.97
-                  },
-                  {
-                    "time": 1.58,
-                    "rotate": -3,
-                    "tx": -2,
-                    "ty": 0,
-                    "sx": 0.98,
-                    "sy": 1.04
-                  },
-                  {
-                    "time": 1.9,
-                    "rotate": 3,
-                    "tx": 2,
-                    "ty": 2,
-                    "sx": 1.04,
-                    "sy": 0.97
-                  },
-                  {
-                    "time": 2.25,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": -2,
-                    "sx": 0.98,
-                    "sy": 1.04
-                  },
-                  {
-                    "time": 2.8,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  }
-                ]
-              },
-              {
-                "targetId": "eye_group",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.3,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": -1,
-                    "sx": 1.18,
-                    "sy": 1.18
-                  },
-                  {
-                    "time": 0.7,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": -2,
-                    "sx": 1.5,
-                    "sy": 1.35
-                  },
-                  {
-                    "time": 0.95,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 1,
-                    "sx": 0.82,
-                    "sy": 0.82
-                  },
-                  {
-                    "time": 1.25,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": -1,
-                    "sx": 1.28,
-                    "sy": 1.2
-                  },
-                  {
-                    "time": 1.58,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 1,
-                    "sx": 0.82,
-                    "sy": 0.82
-                  },
-                  {
-                    "time": 1.9,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": -1,
-                    "sx": 1.28,
-                    "sy": 1.2
-                  },
-                  {
-                    "time": 2.25,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.06,
-                    "sy": 1.06
-                  },
-                  {
-                    "time": 2.8,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
+                    "sx": 0,
+                    "sy": 0
                   }
                 ]
               },
@@ -1254,55 +1542,23 @@ struct DefaultPetData {
                     "sy": 0
                   },
                   {
-                    "time": 0.25,
+                    "time": 4,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
-                    "sx": 0.35,
-                    "sy": 0.35
+                    "sx": 1,
+                    "sy": 1
                   },
                   {
-                    "time": 0.72,
+                    "time": 4.5,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
-                    "sx": 1.2,
-                    "sy": 1.2
+                    "sx": 1,
+                    "sy": 1
                   },
                   {
-                    "time": 0.9,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0.2,
-                    "sy": 0.2
-                  },
-                  {
-                    "time": 1.2,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.1,
-                    "sy": 1.1
-                  },
-                  {
-                    "time": 1.45,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0.2,
-                    "sy": 0.2
-                  },
-                  {
-                    "time": 1.82,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.15,
-                    "sy": 1.15
-                  },
-                  {
-                    "time": 2.08,
+                    "time": 4.6,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -1310,7 +1566,39 @@ struct DefaultPetData {
                     "sy": 0
                   },
                   {
-                    "time": 2.8,
+                    "time": 5.1,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 5.2,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 5.8,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 5.9,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 6.5,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -1331,23 +1619,7 @@ struct DefaultPetData {
                     "sy": 0
                   },
                   {
-                    "time": 0.86,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0.1,
-                    "sy": 0.1
-                  },
-                  {
-                    "time": 1,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.45,
-                    "sy": 1.45
-                  },
-                  {
-                    "time": 1.12,
+                    "time": 4.55,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -1355,23 +1627,15 @@ struct DefaultPetData {
                     "sy": 0
                   },
                   {
-                    "time": 1.48,
+                    "time": 4.6,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
-                    "sx": 0.1,
-                    "sy": 0.1
+                    "sx": 1,
+                    "sy": 1
                   },
                   {
-                    "time": 1.62,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.35,
-                    "sy": 1.35
-                  },
-                  {
-                    "time": 1.74,
+                    "time": 4.7,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -1379,23 +1643,7 @@ struct DefaultPetData {
                     "sy": 0
                   },
                   {
-                    "time": 1.84,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0.1,
-                    "sy": 0.1
-                  },
-                  {
-                    "time": 2,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.55,
-                    "sy": 1.55
-                  },
-                  {
-                    "time": 2.16,
+                    "time": 5.15,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -1403,7 +1651,47 @@ struct DefaultPetData {
                     "sy": 0
                   },
                   {
-                    "time": 2.8,
+                    "time": 5.2,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 5.3,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 5.85,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 5.9,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 6,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 6.5,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -1424,23 +1712,7 @@ struct DefaultPetData {
                     "sy": 0
                   },
                   {
-                    "time": 0.9,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0.1,
-                    "sy": 0.1
-                  },
-                  {
-                    "time": 1.08,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.75,
-                    "sy": 1.75
-                  },
-                  {
-                    "time": 1.18,
+                    "time": 4.6,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -1448,23 +1720,15 @@ struct DefaultPetData {
                     "sy": 0
                   },
                   {
-                    "time": 1.52,
+                    "time": 4.65,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
-                    "sx": 0.1,
-                    "sy": 0.1
+                    "sx": 1,
+                    "sy": 1
                   },
                   {
-                    "time": 1.7,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.65,
-                    "sy": 1.65
-                  },
-                  {
-                    "time": 1.8,
+                    "time": 4.75,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -1472,23 +1736,7 @@ struct DefaultPetData {
                     "sy": 0
                   },
                   {
-                    "time": 1.9,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0.1,
-                    "sy": 0.1
-                  },
-                  {
-                    "time": 2.1,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.85,
-                    "sy": 1.85
-                  },
-                  {
-                    "time": 2.22,
+                    "time": 5.2,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -1496,7 +1744,47 @@ struct DefaultPetData {
                     "sy": 0
                   },
                   {
-                    "time": 2.8,
+                    "time": 5.25,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 5.35,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 5.9,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 5.95,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 6.1,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 6.5,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -1506,371 +1794,167 @@ struct DefaultPetData {
                 ]
               },
               {
-                "targetId": "horn_tl",
+                "targetId": "thunder_glow_backdrop",
                 "keyframes": [
                   {
                     "time": 0,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
-                    "sx": 1,
-                    "sy": 1
+                    "sx": 0,
+                    "sy": 0
                   },
                   {
-                    "time": 0.52,
-                    "rotate": -28,
-                    "tx": -4,
-                    "ty": 5,
-                    "sx": 1,
-                    "sy": 1
+                    "time": 3,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
                   },
                   {
-                    "time": 1,
-                    "rotate": 18,
-                    "tx": 2,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 1.62,
-                    "rotate": 20,
-                    "tx": 3,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 2.08,
-                    "rotate": 14,
-                    "tx": 2,
-                    "ty": -1,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 2.8,
+                    "time": 3.2,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
                     "sx": 1,
                     "sy": 1
+                  },
+                  {
+                    "time": 3.4,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 4.5,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 4.6,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 4.7,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 5.1,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 5.2,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 5.3,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 5.8,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 5.9,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 6.1,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 6.5,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
                   }
                 ]
               },
               {
-                "targetId": "horn_tr",
+                "targetId": "super_lightning_fx",
                 "keyframes": [
                   {
                     "time": 0,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 3,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 3.1,
+                    "rotate": 15,
+                    "tx": 0,
+                    "ty": 0,
                     "sx": 1,
                     "sy": 1
                   },
                   {
-                    "time": 0.52,
-                    "rotate": 28,
-                    "tx": 4,
-                    "ty": 5,
-                    "sx": 1,
-                    "sy": 1
+                    "time": 3.2,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
                   },
                   {
-                    "time": 1,
-                    "rotate": -18,
-                    "tx": -2,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 1.62,
+                    "time": 3.3,
                     "rotate": -20,
-                    "tx": -3,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 2.08,
-                    "rotate": -14,
-                    "tx": -2,
-                    "ty": -1,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 2.8,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  }
-                ]
-              },
-              {
-                "targetId": "tentacle_bl",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "rotate": 0,
                     "tx": 0,
                     "ty": 0,
                     "sx": 1,
                     "sy": 1
                   },
                   {
-                    "time": 0.42,
-                    "rotate": -24,
-                    "tx": -5,
-                    "ty": 7,
-                    "sx": 1.14,
-                    "sy": 0.86
-                  },
-                  {
-                    "time": 1,
-                    "rotate": 16,
-                    "tx": 3,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 1.62,
-                    "rotate": 18,
-                    "tx": 3,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 2.08,
-                    "rotate": 10,
-                    "tx": 2,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 2.8,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  }
-                ]
-              },
-              {
-                "targetId": "tentacle_br",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.42,
-                    "rotate": 24,
-                    "tx": 5,
-                    "ty": 7,
-                    "sx": 1.14,
-                    "sy": 0.86
-                  },
-                  {
-                    "time": 1,
-                    "rotate": -16,
-                    "tx": -3,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 1.62,
-                    "rotate": -18,
-                    "tx": -3,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 2.08,
-                    "rotate": -10,
-                    "tx": -2,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 2.8,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "id": "busy_spiral_blast",
-            "name": "Spiral Blast",
-            "description": "Keeps the body centered while the eye winds up with a golden spiraling front-focus glyph, then releases an expanding target-ring blast straight out from the pupil.",
-            "duration": 3,
-            "svg": {
-              "id": "dock_spiral_blast_override"
-            },
-            "tracks": [
-              {
-                "targetId": "kuramon_all",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.45,
-                    "rotate": -4,
-                    "tx": 0,
-                    "ty": 3,
-                    "sx": 1.04,
-                    "sy": 0.96
-                  },
-                  {
-                    "time": 0.9,
-                    "rotate": 5,
-                    "tx": 0,
-                    "ty": 1,
-                    "sx": 0.98,
-                    "sy": 1.04
-                  },
-                  {
-                    "time": 1.25,
-                    "rotate": -5,
-                    "tx": 0,
-                    "ty": 4,
-                    "sx": 1.06,
-                    "sy": 0.95
-                  },
-                  {
-                    "time": 1.62,
-                    "rotate": 4,
-                    "tx": 0,
-                    "ty": -2,
-                    "sx": 0.98,
-                    "sy": 1.05
-                  },
-                  {
-                    "time": 2.1,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 1,
-                    "sx": 1.03,
-                    "sy": 0.98
-                  },
-                  {
-                    "time": 2.55,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": -1,
-                    "sx": 0.99,
-                    "sy": 1.02
-                  },
-                  {
-                    "time": 3,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  }
-                ]
-              },
-              {
-                "targetId": "eye_group",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.35,
-                    "rotate": -14,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.08,
-                    "sy": 1.08
-                  },
-                  {
-                    "time": 0.8,
-                    "rotate": 18,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.18,
-                    "sy": 1.12
-                  },
-                  {
-                    "time": 1.18,
-                    "rotate": -24,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.3,
-                    "sy": 1.22
-                  },
-                  {
-                    "time": 1.55,
-                    "rotate": 34,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.45,
-                    "sy": 1.32
-                  },
-                  {
-                    "time": 1.85,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0.86,
-                    "sy": 0.86
-                  },
-                  {
-                    "time": 2.25,
-                    "rotate": -8,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.06,
-                    "sy": 1.06
-                  },
-                  {
-                    "time": 3,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  }
-                ]
-              },
-              {
-                "targetId": "front_spiral",
-                "keyframes": [
-                  {
-                    "time": 0,
+                    "time": 3.4,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -1878,47 +1962,71 @@ struct DefaultPetData {
                     "sy": 0
                   },
                   {
-                    "time": 0.32,
-                    "rotate": -35,
+                    "time": 4.55,
+                    "rotate": 0,
                     "tx": 0,
                     "ty": 0,
-                    "sx": 0.35,
-                    "sy": 0.35
+                    "sx": 0,
+                    "sy": 0
                   },
                   {
-                    "time": 0.75,
+                    "time": 4.6,
+                    "rotate": 45,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 4.65,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 5.15,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 5.2,
+                    "rotate": -45,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 5.25,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 5.85,
+                    "rotate": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0,
+                    "sy": 0
+                  },
+                  {
+                    "time": 5.9,
                     "rotate": 90,
                     "tx": 0,
                     "ty": 0,
-                    "sx": 0.7,
-                    "sy": 0.7
+                    "sx": 1,
+                    "sy": 1
                   },
                   {
-                    "time": 1.16,
-                    "rotate": 210,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.05,
-                    "sy": 1.05
-                  },
-                  {
-                    "time": 1.52,
-                    "rotate": 360,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.28,
-                    "sy": 1.28
-                  },
-                  {
-                    "time": 1.82,
-                    "rotate": 420,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0.2,
-                    "sy": 0.2
-                  },
-                  {
-                    "time": 2.3,
+                    "time": 6,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
@@ -1926,317 +2034,12 @@ struct DefaultPetData {
                     "sy": 0
                   },
                   {
-                    "time": 3,
+                    "time": 6.5,
                     "rotate": 0,
                     "tx": 0,
                     "ty": 0,
                     "sx": 0,
                     "sy": 0
-                  }
-                ]
-              },
-              {
-                "targetId": "front_target_ring",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0,
-                    "sy": 0
-                  },
-                  {
-                    "time": 1.45,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0,
-                    "sy": 0
-                  },
-                  {
-                    "time": 1.72,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.65,
-                    "sy": 1.65
-                  },
-                  {
-                    "time": 1.98,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0.35,
-                    "sy": 0.35
-                  },
-                  {
-                    "time": 2.22,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1.45,
-                    "sy": 1.45
-                  },
-                  {
-                    "time": 2.5,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0,
-                    "sy": 0
-                  },
-                  {
-                    "time": 3,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 0,
-                    "sy": 0
-                  }
-                ]
-              },
-              {
-                "targetId": "horn_tl",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.5,
-                    "rotate": -18,
-                    "tx": -3,
-                    "ty": 2,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 1,
-                    "rotate": 22,
-                    "tx": 3,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 1.55,
-                    "rotate": -28,
-                    "tx": -4,
-                    "ty": 3,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 1.9,
-                    "rotate": 24,
-                    "tx": 4,
-                    "ty": -3,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 2.5,
-                    "rotate": -10,
-                    "tx": -2,
-                    "ty": 1,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 3,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  }
-                ]
-              },
-              {
-                "targetId": "horn_tr",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.5,
-                    "rotate": 18,
-                    "tx": 3,
-                    "ty": 2,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 1,
-                    "rotate": -22,
-                    "tx": -3,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 1.55,
-                    "rotate": 28,
-                    "tx": 4,
-                    "ty": 3,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 1.9,
-                    "rotate": -24,
-                    "tx": -4,
-                    "ty": -3,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 2.5,
-                    "rotate": 10,
-                    "tx": 2,
-                    "ty": 1,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 3,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  }
-                ]
-              },
-              {
-                "targetId": "tentacle_bl",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.45,
-                    "rotate": -18,
-                    "tx": -3,
-                    "ty": 4,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.95,
-                    "rotate": 20,
-                    "tx": 4,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 1.45,
-                    "rotate": -26,
-                    "tx": -5,
-                    "ty": 5,
-                    "sx": 1.12,
-                    "sy": 0.9
-                  },
-                  {
-                    "time": 1.9,
-                    "rotate": 18,
-                    "tx": 3,
-                    "ty": -3,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 2.5,
-                    "rotate": -8,
-                    "tx": -2,
-                    "ty": 1,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 3,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  }
-                ]
-              },
-              {
-                "targetId": "tentacle_br",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.45,
-                    "rotate": 18,
-                    "tx": 3,
-                    "ty": 4,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.95,
-                    "rotate": -20,
-                    "tx": -4,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 1.45,
-                    "rotate": 26,
-                    "tx": 5,
-                    "ty": 5,
-                    "sx": 1.12,
-                    "sy": 0.9
-                  },
-                  {
-                    "time": 1.9,
-                    "rotate": -18,
-                    "tx": -3,
-                    "ty": -3,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 2.5,
-                    "rotate": 8,
-                    "tx": 2,
-                    "ty": 1,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 3,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
                   }
                 ]
               }
@@ -3182,6 +2985,1432 @@ struct DefaultPetData {
             "name": "Sleepy Eye Wipe",
             "description": "Starts with the eye open, droops into a narrow sleepy close, wipes the tightly shut eye in two lazy arcs with the left tentacle, then eases open and settles with a soft body bounce.",
             "id": "completed_clean"
+          },
+          {
+            "id": "completed_flag_wave",
+            "name": "Triumphant Flag Wave",
+            "description": "Kuramon pops up, suddenly holding a victory flag, waving it vigorously back and forth while bouncing, ending with a celebratory spin before putting it away.",
+            "duration": 5.5,
+            "svg": {
+              "id": "dock_flag_override"
+            },
+            "tracks": [
+              {
+                "targetId": "kuramon_all",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.3,
+                    "tx": 0,
+                    "ty": 5,
+                    "sx": 1.1,
+                    "sy": 0.9,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.6,
+                    "tx": 0,
+                    "ty": -10,
+                    "sx": 0.9,
+                    "sy": 1.1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.9,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1.2,
+                    "tx": 0,
+                    "ty": -4,
+                    "sx": 0.95,
+                    "sy": 1.05,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1.5,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1.8,
+                    "tx": 0,
+                    "ty": -4,
+                    "sx": 0.95,
+                    "sy": 1.05,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 2.1,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 2.4,
+                    "tx": 0,
+                    "ty": -4,
+                    "sx": 0.95,
+                    "sy": 1.05,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 2.7,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 3.5,
+                    "tx": 0,
+                    "ty": -15,
+                    "sx": 0.8,
+                    "sy": 1.2,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 4,
+                    "tx": 0,
+                    "ty": -15,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 360
+                  },
+                  {
+                    "time": 4.5,
+                    "tx": 0,
+                    "ty": 5,
+                    "sx": 1.2,
+                    "sy": 0.8,
+                    "rotate": 360
+                  },
+                  {
+                    "time": 5,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 360
+                  },
+                  {
+                    "time": 5.5,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 360
+                  }
+                ]
+              },
+              {
+                "targetId": "flag_group",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 20,
+                    "sx": 0,
+                    "sy": 0,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.8,
+                    "tx": 0,
+                    "ty": 20,
+                    "sx": 0,
+                    "sy": 0,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1,
+                    "tx": -15,
+                    "ty": 10,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -20
+                  },
+                  {
+                    "time": 1.3,
+                    "tx": 15,
+                    "ty": 10,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 30
+                  },
+                  {
+                    "time": 1.6,
+                    "tx": -15,
+                    "ty": 10,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -30
+                  },
+                  {
+                    "time": 1.9,
+                    "tx": 15,
+                    "ty": 10,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 30
+                  },
+                  {
+                    "time": 2.2,
+                    "tx": -15,
+                    "ty": 10,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -30
+                  },
+                  {
+                    "time": 2.5,
+                    "tx": 15,
+                    "ty": 10,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 30
+                  },
+                  {
+                    "time": 2.8,
+                    "tx": 0,
+                    "ty": 10,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 4,
+                    "tx": 0,
+                    "ty": 10,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 4.7,
+                    "tx": 0,
+                    "ty": 10,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 5,
+                    "tx": 0,
+                    "ty": 20,
+                    "sx": 0,
+                    "sy": 0,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 5.5,
+                    "tx": 0,
+                    "ty": 20,
+                    "sx": 0,
+                    "sy": 0,
+                    "rotate": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "eye_group",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.9,
+                    "tx": 0,
+                    "ty": -2,
+                    "sx": 1.1,
+                    "sy": 1.1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 2.8,
+                    "tx": 0,
+                    "ty": -2,
+                    "sx": 1.1,
+                    "sy": 1.1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 3.5,
+                    "tx": 0,
+                    "ty": -4,
+                    "sx": 1.2,
+                    "sy": 1.2,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 4.5,
+                    "tx": 0,
+                    "ty": 2,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 5.5,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "horn_tl",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.6,
+                    "tx": -3,
+                    "ty": -3,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -20
+                  },
+                  {
+                    "time": 1.5,
+                    "tx": 2,
+                    "ty": 2,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 10
+                  },
+                  {
+                    "time": 2.1,
+                    "tx": -2,
+                    "ty": -2,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -15
+                  },
+                  {
+                    "time": 3.5,
+                    "tx": -5,
+                    "ty": -5,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -30
+                  },
+                  {
+                    "time": 4.5,
+                    "tx": 3,
+                    "ty": 3,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 20
+                  },
+                  {
+                    "time": 5.5,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "horn_tr",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.6,
+                    "tx": 3,
+                    "ty": -3,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 20
+                  },
+                  {
+                    "time": 1.5,
+                    "tx": -2,
+                    "ty": 2,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -10
+                  },
+                  {
+                    "time": 2.1,
+                    "tx": 2,
+                    "ty": -2,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 15
+                  },
+                  {
+                    "time": 3.5,
+                    "tx": 5,
+                    "ty": -5,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 30
+                  },
+                  {
+                    "time": 4.5,
+                    "tx": -3,
+                    "ty": 3,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -20
+                  },
+                  {
+                    "time": 5.5,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "tentacle_bl",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1,
+                    "tx": -5,
+                    "ty": -5,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 30
+                  },
+                  {
+                    "time": 3,
+                    "tx": -5,
+                    "ty": -5,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 30
+                  },
+                  {
+                    "time": 4,
+                    "tx": 0,
+                    "ty": 5,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -10
+                  },
+                  {
+                    "time": 5.5,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "tentacle_br",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.6,
+                    "tx": 5,
+                    "ty": -5,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -20
+                  },
+                  {
+                    "time": 3.5,
+                    "tx": 8,
+                    "ty": -8,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -30
+                  },
+                  {
+                    "time": 4.5,
+                    "tx": -2,
+                    "ty": 5,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 10
+                  },
+                  {
+                    "time": 5.5,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "completed_party_hat",
+            "name": "Party Hat Celebration",
+            "description": "A party hat drops on Kuramon's head. He performs a happy left-right dance tapping his tentacles, before removing the hat and settling.",
+            "duration": 6,
+            "svg": {
+              "id": "dock_hat_override"
+            },
+            "tracks": [
+              {
+                "targetId": "kuramon_all",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1,
+                    "tx": 0,
+                    "ty": 4,
+                    "sx": 1.1,
+                    "sy": 0.9,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1.5,
+                    "tx": 0,
+                    "ty": -2,
+                    "sx": 0.95,
+                    "sy": 1.05,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1.8,
+                    "tx": -10,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -10
+                  },
+                  {
+                    "time": 2.3,
+                    "tx": 10,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 10
+                  },
+                  {
+                    "time": 2.8,
+                    "tx": -10,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -10
+                  },
+                  {
+                    "time": 3.3,
+                    "tx": 10,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 10
+                  },
+                  {
+                    "time": 3.8,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 5,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 5.5,
+                    "tx": 0,
+                    "ty": 2,
+                    "sx": 1.05,
+                    "sy": 0.95,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 6,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "party_hat",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": -40,
+                    "sx": 0,
+                    "sy": 0,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.5,
+                    "tx": 0,
+                    "ty": -40,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1.2,
+                    "tx": 0,
+                    "ty": 3,
+                    "sx": 1.1,
+                    "sy": 0.9,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1.5,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 4.5,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 5,
+                    "tx": -20,
+                    "ty": 20,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -45
+                  },
+                  {
+                    "time": 5.2,
+                    "tx": -20,
+                    "ty": 20,
+                    "sx": 0,
+                    "sy": 0,
+                    "rotate": -45
+                  },
+                  {
+                    "time": 6,
+                    "tx": 0,
+                    "ty": -40,
+                    "sx": 0,
+                    "sy": 0,
+                    "rotate": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "eye_group",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1,
+                    "tx": 0,
+                    "ty": -3,
+                    "sx": 1.3,
+                    "sy": 1.3,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 4,
+                    "tx": 0,
+                    "ty": -3,
+                    "sx": 1.3,
+                    "sy": 1.3,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 4.5,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 6,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "tentacle_bl",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1.8,
+                    "tx": -5,
+                    "ty": -8,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 20
+                  },
+                  {
+                    "time": 2.3,
+                    "tx": 0,
+                    "ty": 5,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -10
+                  },
+                  {
+                    "time": 2.8,
+                    "tx": -5,
+                    "ty": -8,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 20
+                  },
+                  {
+                    "time": 3.3,
+                    "tx": 0,
+                    "ty": 5,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -10
+                  },
+                  {
+                    "time": 4.2,
+                    "tx": -5,
+                    "ty": -20,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 45
+                  },
+                  {
+                    "time": 5,
+                    "tx": -20,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -30
+                  },
+                  {
+                    "time": 6,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "tentacle_br",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1.8,
+                    "tx": 0,
+                    "ty": 5,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 10
+                  },
+                  {
+                    "time": 2.3,
+                    "tx": 5,
+                    "ty": -8,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -20
+                  },
+                  {
+                    "time": 2.8,
+                    "tx": 0,
+                    "ty": 5,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 10
+                  },
+                  {
+                    "time": 3.3,
+                    "tx": 5,
+                    "ty": -8,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -20
+                  },
+                  {
+                    "time": 3.8,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 6,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "horn_tl",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1,
+                    "tx": -3,
+                    "ty": -3,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -15
+                  },
+                  {
+                    "time": 1.8,
+                    "tx": -6,
+                    "ty": 2,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -25
+                  },
+                  {
+                    "time": 2.3,
+                    "tx": 4,
+                    "ty": -2,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 10
+                  },
+                  {
+                    "time": 2.8,
+                    "tx": -6,
+                    "ty": 2,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -25
+                  },
+                  {
+                    "time": 3.3,
+                    "tx": 4,
+                    "ty": -2,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 10
+                  },
+                  {
+                    "time": 4.5,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 6,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "horn_tr",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1,
+                    "tx": 3,
+                    "ty": -3,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 15
+                  },
+                  {
+                    "time": 1.8,
+                    "tx": -4,
+                    "ty": -2,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -10
+                  },
+                  {
+                    "time": 2.3,
+                    "tx": 6,
+                    "ty": 2,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 25
+                  },
+                  {
+                    "time": 2.8,
+                    "tx": -4,
+                    "ty": -2,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -10
+                  },
+                  {
+                    "time": 3.3,
+                    "tx": 6,
+                    "ty": 2,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 25
+                  },
+                  {
+                    "time": 4.5,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 6,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "completed_gold_medal",
+            "name": "Gold Medal Drop",
+            "description": "A large gold medal lands on Kuramon. The weight squashes him down, but he proudly puffs up, swaying left and right heroically, then tosses it aside.",
+            "duration": 5.2,
+            "svg": {
+              "id": "dock_medal_override"
+            },
+            "tracks": [
+              {
+                "targetId": "kuramon_all",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.6,
+                    "tx": 0,
+                    "ty": 12,
+                    "sx": 1.15,
+                    "sy": 0.85,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1.2,
+                    "tx": 0,
+                    "ty": -5,
+                    "sx": 0.9,
+                    "sy": 1.1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1.6,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 2.3,
+                    "tx": -5,
+                    "ty": -2,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -5
+                  },
+                  {
+                    "time": 3.5,
+                    "tx": 5,
+                    "ty": -2,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 5
+                  },
+                  {
+                    "time": 4.2,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 5.2,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "medal_group",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": -50,
+                    "sx": 0,
+                    "sy": 0,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.3,
+                    "tx": 0,
+                    "ty": -50,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.6,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.8,
+                    "tx": 0,
+                    "ty": 5,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1.2,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 2.4,
+                    "tx": 3,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 8
+                  },
+                  {
+                    "time": 3.6,
+                    "tx": -3,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -8
+                  },
+                  {
+                    "time": 4.2,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 4.6,
+                    "tx": 30,
+                    "ty": -10,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 45
+                  },
+                  {
+                    "time": 4.8,
+                    "tx": 30,
+                    "ty": -10,
+                    "sx": 0,
+                    "sy": 0,
+                    "rotate": 45
+                  },
+                  {
+                    "time": 5.2,
+                    "tx": 0,
+                    "ty": -50,
+                    "sx": 0,
+                    "sy": 0,
+                    "rotate": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "eye_group",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.6,
+                    "tx": 0,
+                    "ty": -2,
+                    "sx": 1.2,
+                    "sy": 1.2,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1.2,
+                    "tx": 0,
+                    "ty": -4,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 4.2,
+                    "tx": 0,
+                    "ty": -4,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 5.2,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "tentacle_bl",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.6,
+                    "tx": -10,
+                    "ty": 5,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -20
+                  },
+                  {
+                    "time": 1.2,
+                    "tx": 5,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 20
+                  },
+                  {
+                    "time": 4,
+                    "tx": 5,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 20
+                  },
+                  {
+                    "time": 4.4,
+                    "tx": 20,
+                    "ty": -15,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -40
+                  },
+                  {
+                    "time": 5.2,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "tentacle_br",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.6,
+                    "tx": 10,
+                    "ty": 5,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 20
+                  },
+                  {
+                    "time": 1.2,
+                    "tx": -5,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -20
+                  },
+                  {
+                    "time": 4.2,
+                    "tx": -5,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -20
+                  },
+                  {
+                    "time": 5.2,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "horn_tl",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.6,
+                    "tx": -3,
+                    "ty": -3,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -15
+                  },
+                  {
+                    "time": 1.2,
+                    "tx": 2,
+                    "ty": -2,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 20
+                  },
+                  {
+                    "time": 2.3,
+                    "tx": -4,
+                    "ty": 2,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -10
+                  },
+                  {
+                    "time": 3.5,
+                    "tx": 4,
+                    "ty": -2,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 10
+                  },
+                  {
+                    "time": 5.2,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "horn_tr",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.6,
+                    "tx": 3,
+                    "ty": -3,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 15
+                  },
+                  {
+                    "time": 1.2,
+                    "tx": -2,
+                    "ty": -2,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -20
+                  },
+                  {
+                    "time": 2.3,
+                    "tx": -4,
+                    "ty": -2,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -10
+                  },
+                  {
+                    "time": 3.5,
+                    "tx": 4,
+                    "ty": 2,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 10
+                  },
+                  {
+                    "time": 5.2,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0
+                  }
+                ]
+              }
+            ]
           }
         ],
         "id": "completed"
@@ -3191,23 +4420,23 @@ struct DefaultPetData {
         "animations": [
           {
             "frames": [
-              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/><circle cx=\"52\" cy=\"53\" r=\"20\" fill=\"var(--eye-iris)\" stroke=\"var(--eyeliner)\" stroke-width=\"4\"/><circle cx=\"52\" cy=\"53\" r=\"10\" fill=\"var(--eye-pupil)\"/></svg>",
-              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 50 15 C 70 15 75 35 75 55 C 75 75 60 85 50 85 C 40 85 25 75 25 55 C 25 35 30 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/><ellipse cx=\"60\" cy=\"53\" rx=\"12\" ry=\"20\" fill=\"var(--eye-iris)\" stroke=\"var(--eyeliner)\" stroke-width=\"4\"/><ellipse cx=\"60\" cy=\"53\" rx=\"5\" ry=\"10\" fill=\"var(--eye-pupil)\"/></svg>",
-              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 50 15 C 65 15 65 35 65 55 C 65 75 55 85 50 85 C 45 85 35 75 35 55 C 35 35 35 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/><ellipse cx=\"63\" cy=\"53\" rx=\"4\" ry=\"20\" fill=\"var(--eye-iris)\" stroke=\"var(--eyeliner)\" stroke-width=\"2\"/></svg>",
-              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 50 15 C 60 15 60 35 60 55 C 60 75 55 85 50 85 C 45 85 40 75 40 55 C 40 35 40 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/><path d=\"M 40 65 C 20 65 30 85 35 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2\"/></svg>",
-              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 50 15 C 70 15 75 35 75 55 C 75 75 60 85 50 85 C 40 85 25 75 25 55 C 25 35 30 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/><path d=\"M 40 65 C 10 65 20 90 35 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2\"/></svg>",
-              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/><path d=\"M 45 65 C 25 65 35 90 50 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2\"/></svg>",
-              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/><path d=\"M 55 65 C 75 65 65 90 50 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2\"/></svg>",
-              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/><path d=\"M 55 65 C 75 65 65 90 50 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2\"/></svg>",
-              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 50 15 C 70 15 75 35 75 55 C 75 75 60 85 50 85 C 40 85 25 75 25 55 C 25 35 30 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/><path d=\"M 60 65 C 90 65 80 90 65 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2\"/></svg>",
-              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 50 15 C 65 15 65 35 65 55 C 65 75 55 85 50 85 C 45 85 35 75 35 55 C 35 35 35 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/><ellipse cx=\"37\" cy=\"53\" rx=\"4\" ry=\"20\" fill=\"var(--eye-iris)\" stroke=\"var(--eyeliner)\" stroke-width=\"2\"/></svg>",
-              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 50 15 C 70 15 75 35 75 55 C 75 75 60 85 50 85 C 40 85 25 75 25 55 C 25 35 30 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/><ellipse cx=\"40\" cy=\"53\" rx=\"12\" ry=\"20\" fill=\"var(--eye-iris)\" stroke=\"var(--eyeliner)\" stroke-width=\"4\"/><ellipse cx=\"40\" cy=\"53\" rx=\"5\" ry=\"10\" fill=\"var(--eye-pupil)\"/></svg>",
-              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/><circle cx=\"52\" cy=\"53\" r=\"20\" fill=\"var(--eye-iris)\" stroke=\"var(--eyeliner)\" stroke-width=\"4\"/><circle cx=\"52\" cy=\"53\" r=\"10\" fill=\"var(--eye-pupil)\"/></svg>"
+              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 30 75 C 20 85 10 95 25 90 C 35 85 40 78 40 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 70 75 C 80 85 90 95 75 90 C 65 85 60 78 60 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 35 25 C 25 15 15 5 20 20 C 25 35 30 35 30 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 65 25 C 75 15 85 5 80 20 C 75 35 70 35 70 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/><path d=\"M 23 55 C 23 38 38 28 55 28 C 72 28 77 43 77 55 C 77 72 62 77 45 77 C 28 77 23 67 23 55 Z\" fill=\"var(--eyeliner)\"/><ellipse cx=\"52\" cy=\"53\" rx=\"19\" ry=\"17\" fill=\"var(--eye-sclera)\"/><ellipse cx=\"52\" cy=\"53\" rx=\"13\" ry=\"13\" fill=\"var(--eye-iris)\"/><ellipse cx=\"52\" cy=\"53\" rx=\"6\" ry=\"6\" fill=\"var(--eye-pupil)\"/><ellipse cx=\"48\" cy=\"47\" rx=\"5\" ry=\"4\" fill=\"#FFFFFF\"/></svg>",
+              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 35.8 75 C 28.7 85 21.6 95 32.25 90 C 39.35 85 42.9 78 42.9 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 64.2 75 C 71.3 85 78.4 95 67.75 90 C 60.65 85 57.1 78 57.1 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 39.35 25 C 32.25 15 25.15 5 28.7 20 C 32.25 35 35.8 35 35.8 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 60.65 25 C 67.75 15 74.85 5 71.3 20 C 67.75 35 64.2 35 64.2 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 50 15 C 70 15 75 35 75 55 C 75 75 60 85 50 85 C 40 85 25 75 25 55 C 25 35 30 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/><path d=\"M 42.6 55 C 42.6 38 51.6 28 61.8 28 C 72 28 75 43 75 55 C 75 72 66 77 55.8 77 C 45.6 77 42.6 67 42.6 55 Z\" fill=\"var(--eyeliner)\"/><ellipse cx=\"60\" cy=\"53\" rx=\"11.4\" ry=\"17\" fill=\"var(--eye-sclera)\"/><ellipse cx=\"60\" cy=\"53\" rx=\"7.8\" ry=\"13\" fill=\"var(--eye-iris)\"/><ellipse cx=\"60\" cy=\"53\" rx=\"3.6\" ry=\"6\" fill=\"var(--eye-pupil)\"/><ellipse cx=\"57.6\" cy=\"47\" rx=\"3\" ry=\"4\" fill=\"#FFFFFF\"/></svg>",
+              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 41.4 75 C 37.1 85 32.8 95 39.25 90 C 43.55 85 45.7 78 45.7 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 58.6 75 C 62.9 85 67.2 95 60.75 90 C 56.45 85 54.3 78 54.3 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 43.55 25 C 39.25 15 34.95 5 37.1 20 C 39.25 35 41.4 35 41.4 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 56.45 25 C 60.75 15 65.05 5 62.9 20 C 60.75 35 58.6 35 58.6 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 50 15 C 65 15 65 35 65 55 C 65 75 55 85 50 85 C 45 85 35 75 35 55 C 35 35 35 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/><path d=\"M 57.2 55 C 57.2 38 60.2 28 63.6 28 C 67 28 68 43 68 55 C 68 72 65 77 61.6 77 C 58.2 77 57.2 67 57.2 55 Z\" fill=\"var(--eyeliner)\"/><ellipse cx=\"63\" cy=\"53\" rx=\"3.8\" ry=\"17\" fill=\"var(--eye-sclera)\"/><ellipse cx=\"63\" cy=\"53\" rx=\"2.6\" ry=\"13\" fill=\"var(--eye-iris)\"/><ellipse cx=\"63\" cy=\"53\" rx=\"1.2\" ry=\"6\" fill=\"var(--eye-pupil)\"/><ellipse cx=\"62.2\" cy=\"47\" rx=\"1\" ry=\"4\" fill=\"#FFFFFF\"/></svg>",
+              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 44.4 75 C 41.6 85 38.8 95 43 90 C 45.8 85 47.2 78 47.2 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 55.6 75 C 58.4 85 61.2 95 57 90 C 54.2 85 52.8 78 52.8 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 45.8 25 C 43 15 40.2 5 41.6 20 C 43 35 44.4 35 44.4 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 54.2 25 C 57 15 59.8 5 58.4 20 C 57 35 55.6 35 55.6 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 50 15 C 60 15 60 35 60 55 C 60 75 55 85 50 85 C 45 85 40 75 40 55 C 40 35 40 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/></svg>",
+              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 35.8 75 C 28.7 85 21.6 95 32.25 90 C 39.35 85 42.9 78 42.9 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 64.2 75 C 71.3 85 78.4 95 67.75 90 C 60.65 85 57.1 78 57.1 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 39.35 25 C 32.25 15 25.15 5 28.7 20 C 32.25 35 35.8 35 35.8 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 60.65 25 C 67.75 15 74.85 5 71.3 20 C 67.75 35 64.2 35 64.2 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 50 15 C 70 15 75 35 75 55 C 75 75 60 85 50 85 C 40 85 25 75 25 55 C 25 35 30 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/></svg>",
+              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 30 75 C 20 85 10 95 25 90 C 35 85 40 78 40 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 70 75 C 80 85 90 95 75 90 C 65 85 60 78 60 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 35 25 C 25 15 15 5 20 20 C 25 35 30 35 30 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 65 25 C 75 15 85 5 80 20 C 75 35 70 35 70 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/></svg>",
+              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 30 75 C 20 85 10 95 25 90 C 35 85 40 78 40 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 70 75 C 80 85 90 95 75 90 C 65 85 60 78 60 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 35 25 C 25 15 15 5 20 20 C 25 35 30 35 30 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 65 25 C 75 15 85 5 80 20 C 75 35 70 35 70 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/></svg>",
+              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 30 75 C 20 85 10 95 25 90 C 35 85 40 78 40 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 70 75 C 80 85 90 95 75 90 C 65 85 60 78 60 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 35 25 C 25 15 15 5 20 20 C 25 35 30 35 30 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 65 25 C 75 15 85 5 80 20 C 75 35 70 35 70 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/></svg>",
+              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 35.8 75 C 28.7 85 21.6 95 32.25 90 C 39.35 85 42.9 78 42.9 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 64.2 75 C 71.3 85 78.4 95 67.75 90 C 60.65 85 57.1 78 57.1 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 39.35 25 C 32.25 15 25.15 5 28.7 20 C 32.25 35 35.8 35 35.8 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 60.65 25 C 67.75 15 74.85 5 71.3 20 C 67.75 35 64.2 35 64.2 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 50 15 C 70 15 75 35 75 55 C 75 75 60 85 50 85 C 40 85 25 75 25 55 C 25 35 30 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/></svg>",
+              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 41.4 75 C 37.1 85 32.8 95 39.25 90 C 43.55 85 45.7 78 45.7 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 58.6 75 C 62.9 85 67.2 95 60.75 90 C 56.45 85 54.3 78 54.3 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 43.55 25 C 39.25 15 34.95 5 37.1 20 C 39.25 35 41.4 35 41.4 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 56.45 25 C 60.75 15 65.05 5 62.9 20 C 60.75 35 58.6 35 58.6 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 50 15 C 65 15 65 35 65 55 C 65 75 55 85 50 85 C 45 85 35 75 35 55 C 35 35 35 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/><path d=\"M 31.2 55 C 31.2 38 34.2 28 37.6 28 C 41 28 42 43 42 55 C 42 72 39 77 35.6 77 C 32.2 77 31.2 67 31.2 55 Z\" fill=\"var(--eyeliner)\"/><ellipse cx=\"37\" cy=\"53\" rx=\"3.8\" ry=\"17\" fill=\"var(--eye-sclera)\"/><ellipse cx=\"37\" cy=\"53\" rx=\"2.6\" ry=\"13\" fill=\"var(--eye-iris)\"/><ellipse cx=\"37\" cy=\"53\" rx=\"1.2\" ry=\"6\" fill=\"var(--eye-pupil)\"/><ellipse cx=\"36.2\" cy=\"47\" rx=\"1\" ry=\"4\" fill=\"#FFFFFF\"/></svg>",
+              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 35.8 75 C 28.7 85 21.6 95 32.25 90 C 39.35 85 42.9 78 42.9 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 64.2 75 C 71.3 85 78.4 95 67.75 90 C 60.65 85 57.1 78 57.1 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 39.35 25 C 32.25 15 25.15 5 28.7 20 C 32.25 35 35.8 35 35.8 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 60.65 25 C 67.75 15 74.85 5 71.3 20 C 67.75 35 64.2 35 64.2 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 50 15 C 70 15 75 35 75 55 C 75 75 60 85 50 85 C 40 85 25 75 25 55 C 25 35 30 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/><path d=\"M 22.6 55 C 22.6 38 31.6 28 41.8 28 C 52 28 55 43 55 55 C 55 72 46 77 35.8 77 C 25.6 77 22.6 67 22.6 55 Z\" fill=\"var(--eyeliner)\"/><ellipse cx=\"40\" cy=\"53\" rx=\"11.4\" ry=\"17\" fill=\"var(--eye-sclera)\"/><ellipse cx=\"40\" cy=\"53\" rx=\"7.8\" ry=\"13\" fill=\"var(--eye-iris)\"/><ellipse cx=\"40\" cy=\"53\" rx=\"3.6\" ry=\"6\" fill=\"var(--eye-pupil)\"/><ellipse cx=\"37.6\" cy=\"47\" rx=\"3\" ry=\"4\" fill=\"#FFFFFF\"/></svg>",
+              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M 30 75 C 20 85 10 95 25 90 C 35 85 40 78 40 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 70 75 C 80 85 90 95 75 90 C 65 85 60 78 60 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 35 25 C 25 15 15 5 20 20 C 25 35 30 35 30 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 65 25 C 75 15 85 5 80 20 C 75 35 70 35 70 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/><path d=\"M 23 55 C 23 38 38 28 55 28 C 72 28 77 43 77 55 C 77 72 62 77 45 77 C 28 77 23 67 23 55 Z\" fill=\"var(--eyeliner)\"/><ellipse cx=\"52\" cy=\"53\" rx=\"19\" ry=\"17\" fill=\"var(--eye-sclera)\"/><ellipse cx=\"52\" cy=\"53\" rx=\"13\" ry=\"13\" fill=\"var(--eye-iris)\"/><ellipse cx=\"52\" cy=\"53\" rx=\"6\" ry=\"6\" fill=\"var(--eye-pupil)\"/><ellipse cx=\"48\" cy=\"47\" rx=\"5\" ry=\"4\" fill=\"#FFFFFF\"/></svg>"
             ],
             "duration": 1,
-            "description": "Spins completely around in a startled error reaction, momentarily hiding his giant eye to reveal a wiggly tail on his back, then snapping forward again.",
+            "description": "Spins completely around in a startled error reaction, preserving the 4 body spikes throughout the 360 rotation.",
             "id": "error_turn",
-            "name": "Error Turnaround Tail Reveal"
+            "name": "Error Turnaround"
           }
         ]
       }

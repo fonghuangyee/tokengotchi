@@ -43,6 +43,9 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject, @uncheck
         [(phase: TranscriptPhase, tool: String?, stepIndex: Int, stepType: String)] = []
     private var drainTimer: Timer?
 
+    // Fast-poll timer active only while waiting for user input
+    private var waitingPollTimer: Timer?
+
     // CSV status-duration logging
     private var currentStatusStartTime: Date = Date()
     private var currentStatusPhase: TranscriptPhase = .idle
@@ -97,6 +100,7 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject, @uncheck
         directoryPollingTimer = nil
         drainTimer?.invalidate()
         drainTimer = nil
+        cancelWaitingPollTimer()
         cancelFileWatcher()
         cancelIdleTimeout()
         isConnected = false
@@ -282,6 +286,7 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject, @uncheck
         lastSeenStepIndex = -1
         cancelFileWatcher()
         cancelIdleTimeout()
+        cancelWaitingPollTimer()
         lastKnownPhase = .idle
         lastParsedPhase = .idle
         pendingPhaseQueue.removeAll()
@@ -339,6 +344,13 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject, @uncheck
 
         let previousPhase = lastKnownPhase
         lastKnownPhase = phase
+
+        // Manage the fast-poll timer: only active while waiting for user
+        if phase == .waitingForUser {
+            startWaitingPollTimer()
+        } else {
+            cancelWaitingPollTimer()
+        }
 
         switch phase {
         case .reading:
@@ -402,6 +414,7 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject, @uncheck
         drainTimer = nil
 
         cancelIdleTimeout()
+        cancelWaitingPollTimer()
         lastKnownPhase = .idle
         currentTool = nil
         subject.send(.completed(taskId: UUID().uuidString, totalTokens: 0))
@@ -411,6 +424,31 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject, @uncheck
         Task { @MainActor in
             await fetchStamina()
         }
+    }
+
+    // MARK: - Waiting Poll Timer
+    /// Starts a 0.5-second repeating timer that re-reads the transcript while the
+    /// agent is blocked waiting for user input. This ensures the pet exits the
+    /// waiting state promptly (within ~0.5 s) after the user answers, rather than
+    /// relying solely on the OS file-write event from the DispatchSource watcher.
+    private func startWaitingPollTimer() {
+        cancelWaitingPollTimer()
+        waitingPollTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) {
+            [weak self] _ in
+            guard let self else { return }
+            Task { @MainActor in
+                guard self.lastKnownPhase == .waitingForUser else {
+                    self.cancelWaitingPollTimer()
+                    return
+                }
+                self.handleFileWrite(fromInitialAttach: false)
+            }
+        }
+    }
+
+    private func cancelWaitingPollTimer() {
+        waitingPollTimer?.invalidate()
+        waitingPollTimer = nil
     }
 
     // MARK: - Find Active Transcript

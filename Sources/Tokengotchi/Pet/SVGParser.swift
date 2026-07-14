@@ -113,6 +113,21 @@ enum SVGParser {
         return cache
     }()
 
+    private class CachedScaledLayer {
+        let layer: SVGLayer
+        let scale: CGFloat
+        init(layer: SVGLayer, scale: CGFloat) {
+            self.layer = layer
+            self.scale = scale
+        }
+    }
+    
+    private static let scaleCache: NSCache<NSString, CachedScaledLayer> = {
+        let cache = NSCache<NSString, CachedScaledLayer>()
+        cache.countLimit = 100
+        return cache
+    }()
+
     // MARK: Public API
 
     /// Parse an SVG string into an `SVGDocument` (layer tree + definitions).
@@ -156,7 +171,23 @@ enum SVGParser {
 
     static func scaleLayer(_ layer: SVGLayer,
                            toFit rect: CGRect,
-                           padding: CGFloat = 2) -> (layer: SVGLayer, scale: CGFloat) {
+                           padding: CGFloat = 2,
+                           cacheKey: String? = nil) -> (layer: SVGLayer, scale: CGFloat) {
+        if let cacheKey = cacheKey {
+            let fullKey = "\(cacheKey)_\(rect.width)_\(rect.height)_\(padding)" as NSString
+            if let cached = scaleCache.object(forKey: fullKey) {
+                return (cached.layer, cached.scale)
+            }
+            let result = scaleLayerWithoutCache(layer, toFit: rect, padding: padding)
+            scaleCache.setObject(CachedScaledLayer(layer: result.layer, scale: result.scale), forKey: fullKey)
+            return result
+        }
+        return scaleLayerWithoutCache(layer, toFit: rect, padding: padding)
+    }
+
+    private static func scaleLayerWithoutCache(_ layer: SVGLayer,
+                                               toFit rect: CGRect,
+                                               padding: CGFloat) -> (layer: SVGLayer, scale: CGFloat) {
         let bb = boundingBox(of: layer)
         guard bb.width > 0, bb.height > 0 else { return (layer, 1.0) }
         let tr = rect.insetBy(dx: padding, dy: padding)

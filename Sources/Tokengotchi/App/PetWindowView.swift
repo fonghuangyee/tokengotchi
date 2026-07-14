@@ -73,7 +73,7 @@ struct PetWindowView: View {
     var headerBar: some View {
         HStack(spacing: 14) {
             // Pet avatar preview (live animated)
-            TimelineView(.animation) { context in
+            TimelineView(.periodic(from: Date(timeIntervalSince1970: 0), by: 1.0 / 24.0)) { context in
                 Image(
                     nsImage: VectorPetRenderer.renderFrame(
                         clipID: petState.currentClipID,

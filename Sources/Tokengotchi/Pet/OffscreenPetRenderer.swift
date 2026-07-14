@@ -10,6 +10,81 @@ struct OffscreenPetRenderer {
         contextName: String = "menuBar",
         targetSize: NSSize = NSSize(width: 22, height: 22)
     ) -> NSImage {
+        // 1. Resolve animation to get duration
+        let duration: TimeInterval
+        let tracks: [KeyframeTrack]
+        let svgString: String
+        let targetContext = contextName == "menuBar" ? pet.menuBar : pet.dock
+
+        var resolvedAnimation = targetContext.findAnimation(id: clipID)
+        
+        // If not found in target context, the clipID is likely from another context (e.g. dock).
+        // Find its corresponding state in dock, and pick the matching state in targetContext.
+        if resolvedAnimation == nil && contextName != "dock" {
+            var topLevelStateId: String?
+            var subStateId: String?
+            
+            for state in pet.dock.states {
+                if state.animations.contains(where: { $0.id == clipID }) {
+                    topLevelStateId = state.id
+                    break
+                }
+                if let subs = state.subStates {
+                    if let sub = subs.first(where: { s in s.animations.contains(where: { $0.id == clipID }) }) {
+                        topLevelStateId = state.id
+                        subStateId = sub.id
+                        break
+                    }
+                }
+            }
+            
+            if let topId = topLevelStateId {
+                if let targetState = targetContext.states.first(where: { $0.id == topId }) {
+                    if let subId = subStateId,
+                       let targetSub = targetState.subStates?.first(where: { $0.id == subId }),
+                       let anim = targetSub.animations.first {
+                        resolvedAnimation = anim
+                    } else {
+                        resolvedAnimation = targetState.animations.first
+                    }
+                }
+            }
+        }
+
+        if let animation = resolvedAnimation {
+            duration = animation.duration
+            if let frames = animation.frames, !frames.isEmpty {
+                let normalizedTime = time.truncatingRemainder(dividingBy: duration)
+                let progress  = normalizedTime / duration
+                let index     = Int(progress * Double(frames.count))
+                let safeIndex = min(max(index, 0), frames.count - 1)
+                svgString = frames[safeIndex]
+                tracks    = []
+            } else {
+                svgString = targetContext.resolveSVG(animation.svg) ?? ""
+                tracks    = animation.tracks ?? []
+            }
+        } else {
+            duration  = 1.0
+            svgString = targetContext.resolveSVG(nil) ?? ""
+            tracks    = [KeyframeTrack(targetId: "body", keyframes: [
+                Keyframe(time: 0,   ty: 0, sx: 1,    sy: 1),
+                Keyframe(time: 0.5, ty: 3, sx: 1.05, sy: 0.95),
+                Keyframe(time: 1.0, ty: 0, sx: 1,    sy: 1)
+            ])]
+        }
+
+        // Calculate discrete frame index based on 24fps
+        let frameRate: Double = 24.0
+        let normalizedTime = time.truncatingRemainder(dividingBy: duration)
+        let frameIndex = Int(normalizedTime * frameRate)
+        
+        let cacheKey = "\(clipID)-\(contextName)-\(Int(targetSize.width))x\(Int(targetSize.height))-\(frameIndex)-\(isTemplate)"
+        
+        if let cachedImage = PetFrameCache.shared.getFrame(key: cacheKey) {
+            return cachedImage
+        }
+
         let size  = targetSize
         let image = NSImage(size: size, flipped: false) { rect in
             NSColor.clear.set()
@@ -22,78 +97,14 @@ struct OffscreenPetRenderer {
             flip.scaleX(by: 1, yBy: -1)
             flip.concat()
 
-            // 1. Resolve animation
-            let duration: TimeInterval
-            let tracks: [KeyframeTrack]
-            let svgString: String
-            let targetContext = contextName == "menuBar" ? pet.menuBar : pet.dock
-
-            var resolvedAnimation = targetContext.findAnimation(id: clipID)
-            
-            // If not found in target context, the clipID is likely from another context (e.g. dock).
-            // Find its corresponding state in dock, and pick the matching state in targetContext.
-            if resolvedAnimation == nil && contextName != "dock" {
-                var topLevelStateId: String?
-                var subStateId: String?
-                
-                for state in pet.dock.states {
-                    if state.animations.contains(where: { $0.id == clipID }) {
-                        topLevelStateId = state.id
-                        break
-                    }
-                    if let subs = state.subStates {
-                        if let sub = subs.first(where: { s in s.animations.contains(where: { $0.id == clipID }) }) {
-                            topLevelStateId = state.id
-                            subStateId = sub.id
-                            break
-                        }
-                    }
-                }
-                
-                if let topId = topLevelStateId {
-                    if let targetState = targetContext.states.first(where: { $0.id == topId }) {
-                        if let subId = subStateId,
-                           let targetSub = targetState.subStates?.first(where: { $0.id == subId }),
-                           let anim = targetSub.animations.first {
-                            resolvedAnimation = anim
-                        } else {
-                            resolvedAnimation = targetState.animations.first
-                        }
-                    }
-                }
-            }
-
-            if let animation = resolvedAnimation {
-                duration = animation.duration
-                if let frames = animation.frames, !frames.isEmpty {
-                    let normalizedTime = time.truncatingRemainder(dividingBy: duration)
-                    let progress  = normalizedTime / duration
-                    let index     = Int(progress * Double(frames.count))
-                    let safeIndex = min(max(index, 0), frames.count - 1)
-                    svgString = frames[safeIndex]
-                    tracks    = []
-                } else {
-                    svgString = targetContext.resolveSVG(animation.svg) ?? ""
-                    tracks    = animation.tracks ?? []
-                }
-            } else {
-                duration  = 1.0
-                svgString = targetContext.resolveSVG(nil) ?? ""
-                tracks    = [KeyframeTrack(targetId: "body", keyframes: [
-                    Keyframe(time: 0,   ty: 0, sx: 1,    sy: 1),
-                    Keyframe(time: 0.5, ty: 3, sx: 1.05, sy: 0.95),
-                    Keyframe(time: 1.0, ty: 0, sx: 1,    sy: 1)
-                ])]
-            }
-
             // 2. Parse SVG
             guard let doc = try? SVGParser.parseSVG(svgString) else { return true }
 
-            // 3. Evaluate keyframe transforms
+            // 3. Evaluate keyframe transforms using continuous time
             let transforms = AnimationEvaluator.evaluate(tracks: tracks, duration: duration, time: time)
 
-            // 4. Scale to 22×22
-            let scaleResult = SVGParser.scaleLayer(doc.root, toFit: rect, padding: 1)
+            // 4. Scale to target size
+            let scaleResult = SVGParser.scaleLayer(doc.root, toFit: rect, padding: 1, cacheKey: svgString)
 
             // 5. Draw
             NSGraphicsContext.current?.saveGraphicsState()
@@ -104,7 +115,13 @@ struct OffscreenPetRenderer {
 
             return true
         }
+
+        // Force rasterization so drawing handler isn't re-executed on every screen refresh
+        image.lockFocus()
+        image.unlockFocus()
         image.isTemplate = isTemplate
+
+        PetFrameCache.shared.setFrame(image, key: cacheKey)
         return image
     }
 

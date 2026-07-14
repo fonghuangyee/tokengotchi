@@ -160,17 +160,6 @@ final class MenuBarPetController: NSObject, NSMenuDelegate {
 
     private func handleSystemWake() {
         petState.setMode(.idle)
-        let previousClip = petState.currentClipID
-        petState.currentClipID = "idle_wave"
-        petState.animationTrigger = UUID()
-        Task { @MainActor [weak self] in
-            try? await Task.sleep(nanoseconds: 2_000_000_000)
-            guard let self = self else { return }
-            if self.petState.currentClipID == "idle_wave" && self.petState.mode == .idle {
-                self.petState.currentClipID = previousClip
-                self.petState.animationTrigger = UUID()
-            }
-        }
     }
 
     private func handleAgentEvent(_ event: AgentEvent) {

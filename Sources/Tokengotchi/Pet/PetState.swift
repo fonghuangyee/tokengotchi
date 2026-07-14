@@ -2,13 +2,11 @@ import Foundation
 import Combine
 import SwiftUI
 
-// MARK: - Display Mode
-enum PetDisplayMode: String, CaseIterable, Identifiable, Codable {
+// MARK: - Legacy Display Mode (kept for migration)
+enum PetDisplayMode: String, Codable {
     case both = "Both"
     case menuBar = "Menu Bar Only"
     case dock = "Dock Only"
-    
-    var id: String { rawValue }
 }
 
 // MARK: - Pet State (main observable)
@@ -31,7 +29,30 @@ final class PetState: ObservableObject {
     @Published var isSimulating: Bool = false
 
     // App Preferences
-    @Published var displayMode: PetDisplayMode = .both {
+    @Published var showMenuBarIcon: Bool = true {
+        didSet { save() }
+    }
+    @Published var showDockPet: Bool = true {
+        didSet { save() }
+    }
+    @Published var showWidgetPet: Bool = false {
+        didSet { save() }
+    }
+
+    // Widget frame geometry & screen persistence
+    @Published var widgetX: CGFloat = 400 {
+        didSet { save() }
+    }
+    @Published var widgetY: CGFloat = 400 {
+        didSet { save() }
+    }
+    @Published var widgetWidth: CGFloat = 150 {
+        didSet { save() }
+    }
+    @Published var widgetHeight: CGFloat = 150 {
+        didSet { save() }
+    }
+    @Published var widgetScreenID: String? = nil {
         didSet { save() }
     }
 
@@ -226,19 +247,75 @@ final class PetState: ObservableObject {
 // MARK: - Save State (Codable snapshot)
 private struct PetSaveState: Codable {
     var randomize: Bool
-    var displayMode: PetDisplayMode?
+    var displayMode: PetDisplayMode? // for migration
+    
+    var showMenuBarIcon: Bool?
+    var showDockPet: Bool?
+    var showWidgetPet: Bool?
+    var widgetX: CGFloat?
+    var widgetY: CGFloat?
+    var widgetWidth: CGFloat?
+    var widgetHeight: CGFloat?
+    var widgetScreenID: String?
 
     @MainActor
     init(from state: PetState) {
         randomize = state.randomize
-        displayMode = state.displayMode
+        showMenuBarIcon = state.showMenuBarIcon
+        showDockPet = state.showDockPet
+        showWidgetPet = state.showWidgetPet
+        widgetX = state.widgetX
+        widgetY = state.widgetY
+        widgetWidth = state.widgetWidth
+        widgetHeight = state.widgetHeight
+        widgetScreenID = state.widgetScreenID
     }
 
     @MainActor
     func apply(to state: PetState) {
         state.randomize = randomize
+        
+        // Migration from legacy displayMode
         if let mode = displayMode {
-            state.displayMode = mode
+            switch mode {
+            case .both:
+                state.showMenuBarIcon = true
+                state.showDockPet = true
+                state.showWidgetPet = false
+            case .menuBar:
+                state.showMenuBarIcon = true
+                state.showDockPet = false
+                state.showWidgetPet = false
+            case .dock:
+                state.showMenuBarIcon = false
+                state.showDockPet = true
+                state.showWidgetPet = false
+            }
+        }
+        
+        if let showMenuBarIcon = showMenuBarIcon {
+            state.showMenuBarIcon = showMenuBarIcon
+        }
+        if let showDockPet = showDockPet {
+            state.showDockPet = showDockPet
+        }
+        if let showWidgetPet = showWidgetPet {
+            state.showWidgetPet = showWidgetPet
+        }
+        if let widgetX = widgetX {
+            state.widgetX = widgetX
+        }
+        if let widgetY = widgetY {
+            state.widgetY = widgetY
+        }
+        if let widgetWidth = widgetWidth {
+            state.widgetWidth = widgetWidth
+        }
+        if let widgetHeight = widgetHeight {
+            state.widgetHeight = widgetHeight
+        }
+        if let widgetScreenID = widgetScreenID {
+            state.widgetScreenID = widgetScreenID
         }
     }
 }

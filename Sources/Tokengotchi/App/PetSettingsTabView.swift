@@ -1,4 +1,5 @@
 import SwiftUI
+import AppKit
 
 // MARK: - Settings Tab (cleaned up — no API key management)
 struct PetSettingsTabView: View {
@@ -16,15 +17,51 @@ struct PetSettingsTabView: View {
 
                 Divider().background(Color.white.opacity(0.06))
 
-                // Display Mode
-                secHead("Display Mode")
-                Picker("", selection: $petState.displayMode) {
-                    ForEach(PetDisplayMode.allCases) { mode in
-                        Text(mode.rawValue).tag(mode)
+                // Display Settings
+                secHead("Display Settings")
+                VStack(alignment: .leading, spacing: 10) {
+                    Toggle(isOn: $petState.showMenuBarIcon) {
+                        Text("Show Icon in Menu Bar")
+                            .font(.system(size: 12))
+                            .foregroundColor(.white)
+                    }
+                    .toggleStyle(SwitchToggleStyle(tint: .purple))
+                    
+                    Toggle(isOn: $petState.showDockPet) {
+                        Text("Show Pet in Dock")
+                            .font(.system(size: 12))
+                            .foregroundColor(.white)
+                    }
+                    .toggleStyle(SwitchToggleStyle(tint: .purple))
+                    
+                    Toggle(isOn: $petState.showWidgetPet) {
+                        Text("Show Pet as Desktop Widget")
+                            .font(.system(size: 12))
+                            .foregroundColor(.white)
+                    }
+                    .toggleStyle(SwitchToggleStyle(tint: .purple))
+                    
+                    if petState.showWidgetPet {
+                        HStack {
+                            Text("Screen:")
+                                .font(.system(size: 11))
+                                .foregroundColor(.white.opacity(0.5))
+                            
+                            let screenName: String = {
+                                if let id = petState.widgetScreenID,
+                                   let screen = NSScreen.screens.first(where: { ScreenManager.shared.screenID($0) == id }) {
+                                    return screen.localizedName
+                                }
+                                return NSScreen.main?.localizedName ?? "Main Screen"
+                            }()
+                            
+                            Text(screenName)
+                                .font(.system(size: 11, weight: .medium))
+                                .foregroundColor(.purple)
+                        }
+                        .padding(.leading, 24)
                     }
                 }
-                .pickerStyle(.segmented)
-                .labelsHidden()
 
                 Divider().background(Color.white.opacity(0.06))
 

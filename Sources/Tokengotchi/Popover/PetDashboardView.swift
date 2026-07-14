@@ -299,7 +299,7 @@ struct HomeTab: View {
                 }
                 
                 // Mini preview
-                TimelineView(.animation) { context in
+                TimelineView(.periodic(from: Date(timeIntervalSince1970: 0), by: 1.0 / 24.0)) { context in
                     Image(
                         nsImage: OffscreenPetRenderer.renderFrame(
                             clipID: pet.toAnimationClips(forContext: "dock").first?.id ?? "",

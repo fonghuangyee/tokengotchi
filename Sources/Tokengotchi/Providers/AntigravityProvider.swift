@@ -197,8 +197,21 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject, @uncheck
         }
 
         if !newSteps.isEmpty {
-            pendingPhaseQueue.append(contentsOf: newSteps)
-            ensureDrainTimerRunning()
+            if fromInitialAttach {
+                if let lastStep = newSteps.last {
+                    lastSeenStepIndex = lastStep.stepIndex
+                    applyPhase(
+                        phase: lastStep.phase,
+                        tool: lastStep.tool,
+                        stepIndex: lastStep.stepIndex,
+                        lastStepType: lastStep.stepType,
+                        reason: "initial_attach"
+                    )
+                }
+            } else {
+                pendingPhaseQueue.append(contentsOf: newSteps)
+                ensureDrainTimerRunning()
+            }
             scheduleIdleTimeout()
         }
     }

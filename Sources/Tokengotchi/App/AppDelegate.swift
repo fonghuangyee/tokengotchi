@@ -15,6 +15,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     // Dock controller — drives the big, smooth, full-color Dock tile pet.
     private var dockController: DockPetController?
 
+    // Widget controller — drives the borderless desktop floating pet window.
+    private var widgetController: WidgetPetController?
+
     // Pet window controller — replaces the old NSPopover with a proper window.
     private var petWindowController: PetWindowController?
     
@@ -35,17 +38,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             providerManager: providerManager
         )
 
-        // Observe display mode changes
-        petState.$displayMode
-            .removeDuplicates()
-            .sink { [weak self] mode in
-                self?.applyDisplayMode(mode)
+        // Observe display settings changes
+        petState.$showMenuBarIcon
+            .combineLatest(petState.$showDockPet, petState.$showWidgetPet)
+            .debounce(for: .milliseconds(250), scheduler: RunLoop.main)
+            .sink { [weak self] showIcon, showDock, showWidget in
+                self?.applyDisplaySettings(showIcon: showIcon, showDock: showDock, showWidget: showWidget)
             }
             .store(in: &cancellables)
 
         // Trigger wake animation (absorbed into idle as "Little Wave" clip)
         petState.setMode(.idle)
-        petState.currentClipID = "idle_wave"
         petState.animationTrigger = UUID()
 
         // Connect default provider
@@ -54,30 +57,40 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
-    // MARK: - Display Mode Handling
-    private func applyDisplayMode(_ mode: PetDisplayMode) {
+    // MARK: - Display Settings Handling
+    private func applyDisplaySettings(showIcon: Bool, showDock: Bool, showWidget: Bool) {
         let wasVisible = petWindowController?.isWindowVisible ?? false
 
-        switch mode {
-        case .both:
-            NSApp.setActivationPolicy(.regular)
+        // Determine activation policy: regular if Dock pet is enabled, otherwise accessory
+        let targetPolicy: NSApplication.ActivationPolicy = showDock ? .regular : .accessory
+        if NSApp.activationPolicy() != targetPolicy {
+            NSApp.setActivationPolicy(targetPolicy)
+        }
+
+        // Manage Menu Bar controller
+        if showIcon {
             setupMenuBarController()
-            setupDockController()
-        case .menuBar:
-            NSApp.setActivationPolicy(.accessory)
-            setupMenuBarController()
-            destroyDockController()
-        case .dock:
-            NSApp.setActivationPolicy(.regular)
-            setupDockController()
+        } else {
             destroyMenuBarController()
         }
 
+        // Manage Dock controller
+        if showDock {
+            setupDockController()
+        } else {
+            destroyDockController()
+        }
+
+        // Manage Widget controller
+        if showWidget {
+            setupWidgetController()
+        } else {
+            destroyWidgetController()
+        }
+
         if wasVisible {
-            DispatchQueue.main.async { [weak self] in
-                self?.petWindowController?.show()
-                NSApp.activate(ignoringOtherApps: true)
-            }
+            self.petWindowController?.show()
+            NSApp.activate(ignoringOtherApps: true)
         }
     }
     
@@ -109,6 +122,24 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         dockController = nil
         NSApp.dockTile.contentView = nil
         NSApp.dockTile.display()
+    }
+
+    private func setupWidgetController() {
+        if widgetController == nil {
+            widgetController = WidgetPetController(
+                petState: petState,
+                providerManager: providerManager
+            )
+        }
+    }
+
+    private func destroyWidgetController() {
+        widgetController?.cleanup()
+        widgetController = nil
+    }
+
+    func showMainWindow() {
+        petWindowController?.show()
     }
 
     // MARK: Dock Click

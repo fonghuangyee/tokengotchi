@@ -65,7 +65,7 @@ final class PetWindowController: NSObject, NSWindowDelegate {
         // Dismiss the popover first if it's open.
         popover?.close()
 
-        if let w = window, w.isVisible {
+        if let w = window {
             w.makeKeyAndOrderFront(nil)
             NSApp.activate(ignoringOtherApps: true)
             return

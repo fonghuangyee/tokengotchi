@@ -60,7 +60,7 @@ struct PetPreviewView: View {
                             .font(.headline)
                             .foregroundColor(.white)
                         
-                        TimelineView(.animation) { context in
+                        TimelineView(.periodic(from: Date(timeIntervalSince1970: 0), by: 1.0 / 24.0)) { context in
                             let time = context.date.timeIntervalSince1970 - petState.animationStartTime
                             Image(
                                 nsImage: VectorPetRenderer.renderFrame(
@@ -98,7 +98,7 @@ struct PetPreviewView: View {
                             .font(.headline)
                             .foregroundColor(.white)
                         
-                        TimelineView(.animation) { context in
+                        TimelineView(.periodic(from: Date(timeIntervalSince1970: 0), by: 1.0 / 24.0)) { context in
                             let time = context.date.timeIntervalSince1970 - petState.animationStartTime
                             let img = VectorPetRenderer.renderFrame(
                                 clipID: previewMenuClipID,
@@ -243,7 +243,7 @@ struct AnimationCarouselView: View {
                                 Button {
                                     selectedID = anim.id
                                 } label: {
-                                    TimelineView(.animation) { timelineContext in
+                                    TimelineView(.periodic(from: Date(timeIntervalSince1970: 0), by: 1.0 / 24.0)) { timelineContext in
                                         let time = timelineContext.date.timeIntervalSince1970 - petState.animationStartTime
                                         let img = VectorPetRenderer.renderFrame(
                                             clipID: anim.id,

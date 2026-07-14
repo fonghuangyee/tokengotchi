@@ -29,9 +29,48 @@ struct VectorPetRenderer {
     static func renderFrame(
         clipID: String, pet: TGPetFile, time: TimeInterval,
         stamina: Double? = nil, modelName: String? = nil,
-        context: RenderingContext = .main
+        context: RenderingContext = .main,
+        customSize: CGFloat = canvasSize
     ) -> NSImage {
-        let size  = NSSize(width: canvasSize, height: canvasSize)
+        let targetContext = context == .menuBar ? pet.menuBar : pet.dock
+
+        // 1. Find the animation entry to get duration
+        let duration: TimeInterval
+        let tracks: [KeyframeTrack]
+        let svgString: String
+
+        if let animation = targetContext.findAnimation(id: clipID) {
+            duration = animation.duration
+            if let frames = animation.frames, !frames.isEmpty {
+                let normalizedTime = time.truncatingRemainder(dividingBy: duration)
+                let progress  = normalizedTime / duration
+                let index     = Int(progress * Double(frames.count))
+                let safeIndex = min(max(index, 0), frames.count - 1)
+                svgString = frames[safeIndex]
+                tracks    = []
+            } else {
+                svgString = targetContext.resolveSVG(animation.svg) ?? ""
+                tracks    = animation.tracks ?? []
+            }
+        } else {
+            duration  = 1.0
+            svgString = targetContext.resolveSVG(nil) ?? ""
+            tracks    = []
+        }
+
+        // Calculate discrete frame index based on 24fps
+        let frameRate: Double = 24.0
+        let normalizedTime = time.truncatingRemainder(dividingBy: duration)
+        let frameIndex = Int(normalizedTime * frameRate)
+        
+        let contextKey = context == .menuBar ? "menuBar" : "main"
+        let cacheKey = "\(clipID)-\(contextKey)-\(Int(customSize))-\(frameIndex)"
+        
+        if let cachedImage = PetFrameCache.shared.getFrame(key: cacheKey) {
+            return cachedImage
+        }
+
+        let size  = NSSize(width: customSize, height: customSize)
         let image = NSImage(size: size, flipped: false) { rect in
             NSColor.clear.set()
             rect.fill()
@@ -43,41 +82,17 @@ struct VectorPetRenderer {
             flip.scaleX(by: 1, yBy: -1)
             flip.concat()
 
-            // 1. Find the animation entry
-            let duration: TimeInterval
-            let tracks: [KeyframeTrack]
-            let svgString: String
-
-            let targetContext = context == .menuBar ? pet.menuBar : pet.dock
-
-            if let animation = targetContext.findAnimation(id: clipID) {
-                duration = animation.duration
-                if let frames = animation.frames, !frames.isEmpty {
-                    let normalizedTime = time.truncatingRemainder(dividingBy: duration)
-                    let progress  = normalizedTime / duration
-                    let index     = Int(progress * Double(frames.count))
-                    let safeIndex = min(max(index, 0), frames.count - 1)
-                    svgString = frames[safeIndex]
-                    tracks    = []
-                } else {
-                    svgString = targetContext.resolveSVG(animation.svg) ?? ""
-                    tracks    = animation.tracks ?? []
-                }
-            } else {
-                duration  = 1.0
-                svgString = targetContext.resolveSVG(nil) ?? ""
-                tracks    = []
-            }
-
             // 2. Parse the SVG
             guard let doc = try? SVGParser.parseSVG(svgString) else { return true }
 
-            // 3. Evaluate keyframe transforms
+            // 3. Evaluate keyframe transforms using the continuous time for precise evaluation 
+            // (though for caching, the visual will map to the discrete frame)
             let transforms = AnimationEvaluator.evaluate(tracks: tracks, duration: duration, time: time)
 
             // 4. Scale to fit (with padding)
-            let innerRect   = rect.insetBy(dx: 12, dy: 12)
-            let scaleResult = SVGParser.scaleLayer(doc.root, toFit: innerRect, padding: 1)
+            let paddingRatio = customSize / canvasSize
+            let innerRect   = rect.insetBy(dx: 12 * paddingRatio, dy: 12 * paddingRatio)
+            let scaleResult = SVGParser.scaleLayer(doc.root, toFit: innerRect, padding: 1, cacheKey: svgString)
             let scaledLayer = scaleResult.layer
 
             // 5. Draw
@@ -97,7 +112,13 @@ struct VectorPetRenderer {
 
             return true
         }
+
+        // Force rasterization so drawing handler isn't re-executed on every screen refresh
+        image.lockFocus()
+        image.unlockFocus()
         image.isTemplate = false
+        
+        PetFrameCache.shared.setFrame(image, key: cacheKey)
         return image
     }
 

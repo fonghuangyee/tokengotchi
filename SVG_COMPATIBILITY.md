@@ -141,7 +141,7 @@ Animations use a **named-group keyframe** system:
 
 - Name your SVG groups with descriptive `id` attributes: `id="body"`, `id="left_eye"`, etc.
 - In the animation's `tracks` array, reference groups by `targetId`
-- Each keyframe specifies `time`, `tx`, `ty`, `rotate`, `sx`, `sy`
+- Each keyframe specifies `time`, `tx`, `ty`, `rotate`, `sx`, `sy`, `fill` (color), `stroke` (color), `opacity` (alpha)
 
 This architecture is intentionally AI-friendly — keyframe tracks can be generated reliably by language models.
 

@@ -68,7 +68,8 @@ struct AnimationEvaluator {
             sx: kf.sx, 
             sy: kf.sy,
             fill: kf.fill.map { .solid($0) },
-            stroke: kf.stroke.map { .solid($0) }
+            stroke: kf.stroke.map { .solid($0) },
+            opacity: kf.opacity
         )
     }
     
@@ -91,6 +92,13 @@ struct AnimationEvaluator {
             stroke = kf1.stroke.map { .solid($0) } ?? kf2.stroke.map { .solid($0) }
         }
         
+        let opacity: Double?
+        if let o1 = kf1.opacity, let o2 = kf2.opacity {
+            opacity = o1 + (o2 - o1) * easeP
+        } else {
+            opacity = kf1.opacity ?? kf2.opacity
+        }
+        
         return LayerTransform(
             rotate: kf1.rotate + (kf2.rotate - kf1.rotate) * easeP,
             tx: kf1.tx + (kf2.tx - kf1.tx) * easeP,
@@ -98,7 +106,8 @@ struct AnimationEvaluator {
             sx: kf1.sx + (kf2.sx - kf1.sx) * easeP,
             sy: kf1.sy + (kf2.sy - kf1.sy) * easeP,
             fill: fill,
-            stroke: stroke
+            stroke: stroke,
+            opacity: opacity
         )
     }
 }

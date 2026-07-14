@@ -25,9 +25,10 @@ struct Keyframe: Codable, Equatable {
     var sy: Double = 1
     var fill: String? = nil
     var stroke: String? = nil
+    var opacity: Double? = nil
     
     enum CodingKeys: String, CodingKey {
-        case time, rotate, tx, ty, sx, sy, fill, stroke
+        case time, rotate, tx, ty, sx, sy, fill, stroke, opacity
     }
 
     init(from decoder: Decoder) throws {
@@ -40,9 +41,10 @@ struct Keyframe: Codable, Equatable {
         sy = try container.decodeIfPresent(Double.self, forKey: .sy) ?? 1
         fill = try container.decodeIfPresent(String.self, forKey: .fill)
         stroke = try container.decodeIfPresent(String.self, forKey: .stroke)
+        opacity = try container.decodeIfPresent(Double.self, forKey: .opacity)
     }
 
-    init(time: TimeInterval, rotate: Double = 0, tx: Double = 0, ty: Double = 0, sx: Double = 1, sy: Double = 1, fill: String? = nil, stroke: String? = nil) {
+    init(time: TimeInterval, rotate: Double = 0, tx: Double = 0, ty: Double = 0, sx: Double = 1, sy: Double = 1, fill: String? = nil, stroke: String? = nil, opacity: Double? = nil) {
         self.time = time
         self.rotate = rotate
         self.tx = tx
@@ -51,6 +53,7 @@ struct Keyframe: Codable, Equatable {
         self.sy = sy
         self.fill = fill
         self.stroke = stroke
+        self.opacity = opacity
     }
 }
 
@@ -63,6 +66,7 @@ struct LayerTransform: Equatable {
     var sy: Double = 1
     var fill: LayerColor? = nil
     var stroke: LayerColor? = nil
+    var opacity: Double? = nil
     
     static let identity = LayerTransform()
 }

@@ -114,7 +114,8 @@ struct OffscreenPetRenderer {
                                   transforms: [String: LayerTransform],
                                   pet: TGPetFile,
                                   scale: CGFloat,
-                                  defs: SVGDefinitions) {
+                                  defs: SVGDefinitions,
+                                  parentOpacity: CGFloat = 1.0) {
         let t = transforms[layer.id] ?? .identity
 
         NSGraphicsContext.current?.saveGraphicsState()
@@ -128,15 +129,17 @@ struct OffscreenPetRenderer {
         xform.translateX(by: -cx, yBy: -cy)
         xform.concat()
 
-        if layer.opacity < 1.0, let ctx = NSGraphicsContext.current?.cgContext {
-            ctx.setAlpha(layer.opacity)
+        let localOpacity = t.opacity.map { CGFloat($0) } ?? layer.opacity
+        let finalOpacity = localOpacity * parentOpacity
+        if finalOpacity < 1.0, let ctx = NSGraphicsContext.current?.cgContext {
+            ctx.setAlpha(finalOpacity)
         }
 
         for element in layer.elements {
-            drawElement(element, pet: pet, defs: defs)
+            drawElement(element, pet: pet, defs: defs, parentOpacity: finalOpacity)
         }
         for child in layer.children {
-            drawLayer(child, transforms: transforms, pet: pet, scale: scale, defs: defs)
+            drawLayer(child, transforms: transforms, pet: pet, scale: scale, defs: defs, parentOpacity: finalOpacity)
         }
 
         NSGraphicsContext.current?.restoreGraphicsState()
@@ -144,12 +147,13 @@ struct OffscreenPetRenderer {
 
     // MARK: - Element Rendering
 
-    private static func drawElement(_ element: SVGElement, pet: TGPetFile, defs: SVGDefinitions) {
+    private static func drawElement(_ element: SVGElement, pet: TGPetFile, defs: SVGDefinitions, parentOpacity: CGFloat) {
         NSGraphicsContext.current?.saveGraphicsState()
         NSGraphicsContext.current?.compositingOperation = .sourceOver
 
-        if element.opacity < 1.0, let ctx = NSGraphicsContext.current?.cgContext {
-            ctx.setAlpha(element.opacity)
+        let targetOpacity = element.opacity * parentOpacity
+        if targetOpacity < 1.0, let ctx = NSGraphicsContext.current?.cgContext {
+            ctx.setAlpha(targetOpacity)
         }
 
         let bezier = NSBezierPath()

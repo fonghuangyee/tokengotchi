@@ -3,7 +3,7 @@
     "svgs": [
       {
         "id": "menu_base",
-        "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><g id=\"menu_kuramon\"><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z M 50 40 C 40 40 35 48 35 55 C 35 62 40 70 50 70 C 60 70 65 62 65 55 C 65 48 60 40 50 40 Z\" fill=\"#000000\" fill-rule=\"evenodd\"/><path d=\"M 20 20 C 25 35 30 35 30 35 C 30 35 25 15 35 25 C 25 15 15 5 20 20 Z M 80 20 C 85 5 75 15 65 25 C 75 15 70 35 70 35 C 70 35 75 35 80 20 Z M 25 90 C 35 85 40 78 40 75 C 40 75 25 80 30 75 C 20 85 10 95 25 90 Z M 75 90 C 90 95 80 85 70 75 C 75 80 60 75 60 75 C 60 78 65 85 75 90 Z\" fill=\"#000000\"/></g></svg>"
+        "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><g id=\"menu_kuramon\"><g id=\"menu_body\"><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z M 50 40 C 58.284271247 40 65 46.715728753 65 55 C 65 63.284271247 58.284271247 70 50 70 C 41.715728753 70 35 63.284271247 35 55 C 35 46.715728753 41.715728753 40 50 40 Z\" fill=\"#000000\" fill-rule=\"evenodd\"/></g><g id=\"menu_horn_l\"><path d=\"M 20 20 C 25 35 30 35 30 35 C 30 35 25 15 35 25 C 25 15 15 5 20 20 Z\" fill=\"#000000\"/></g><g id=\"menu_horn_r\"><path d=\"M 80 20 C 85 5 75 15 65 25 C 75 15 70 35 70 35 C 70 35 75 35 80 20 Z\" fill=\"#000000\"/></g><g id=\"menu_tentacle_l\"><path d=\"M 25 90 C 35 85 40 78 40 75 C 40 75 25 80 30 75 C 20 85 10 95 25 90 Z\" fill=\"#000000\"/></g><g id=\"menu_tentacle_r\"><path d=\"M 75 90 C 90 95 80 85 70 75 C 75 80 60 75 60 75 C 60 78 65 85 75 90 Z\" fill=\"#000000\"/></g></g></svg>"
       }
     ],
     "states": [
@@ -73,60 +73,189 @@
         "animations": [
           {
             "id": "menu_busy",
-            "name": "Quick Thinking Wobble",
-            "description": "Makes a quick centered thinking wobble with tiny left-right rotations, then settles back to neutral.",
-            "duration": 1.2,
+            "name": "Triple Lightning Strike",
+            "description": "Three massive lightning bolts strike Kuramon sequentially from the top-right, lower-right, and left. Each hit freezes his body in a wide electric squash before snapping back.",
+            "duration": 2.4,
+            "svg": {
+              "id": "menu_busy_override",
+              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><g id=\"menu_kuramon\"><g id=\"menu_body\"><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z M 50 40 C 58.284271247 40 65 46.715728753 65 55 C 65 63.284271247 58.284271247 70 50 70 C 41.715728753 70 35 63.284271247 35 55 C 35 46.715728753 41.715728753 40 50 40 Z\" fill=\"#000000\" fill-rule=\"evenodd\"/></g><g id=\"menu_horn_l\"><path d=\"M 20 20 C 25 35 30 35 30 35 C 30 35 25 15 35 25 C 25 15 15 5 20 20 Z\" fill=\"#000000\"/></g><g id=\"menu_horn_r\"><path d=\"M 80 20 C 85 5 75 15 65 25 C 75 15 70 35 70 35 C 70 35 75 35 80 20 Z\" fill=\"#000000\"/></g><g id=\"menu_tentacle_l\"><path d=\"M 25 90 C 35 85 40 78 40 75 C 40 75 25 80 30 75 C 20 85 10 95 25 90 Z\" fill=\"#000000\"/></g><g id=\"menu_tentacle_r\"><path d=\"M 75 90 C 90 95 80 85 70 75 C 75 80 60 75 60 75 C 60 78 65 85 75 90 Z\" fill=\"#000000\"/></g></g><g id=\"menu_bolt_tr\" opacity=\"0\"><path d=\"M 75 8 L 55 42 L 66 42 L 44 82 L 51 50 L 39 50 Z\" fill=\"#000000\" fill-opacity=\"0.4\"/><path d=\"M 75 8 L 55 42 L 66 42 L 44 82 L 51 50 L 39 50 Z\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"menu_bolt_l\" opacity=\"0\"><path d=\"M 73.9 92.7 L 54.4 58.3 L 48.9 67.9 L 25.3 28.8 L 49.5 50.9 L 55.5 40.5 Z\" fill=\"#000000\" fill-opacity=\"0.4\"/><path d=\"M 73.9 92.7 L 54.4 58.3 L 48.9 67.9 L 25.3 28.8 L 49.5 50.9 L 55.5 40.5 Z\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"menu_bolt_br\" opacity=\"0\"><path d=\"M 1.1 49.3 L 40.6 49.7 L 35.1 40.1 L 80.7 39.2 L 49.5 49.1 L 55.5 59.5 Z\" fill=\"#000000\" fill-opacity=\"0.4\"/><path d=\"M 1.1 49.3 L 40.6 49.7 L 35.1 40.1 L 80.7 39.2 L 49.5 49.1 L 55.5 59.5 Z\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g></svg>"
+            },
             "tracks": [
+              {
+                "targetId": "menu_bolt_tr",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "opacity": 0
+                  },
+                  {
+                    "time": 0.09,
+                    "opacity": 0
+                  },
+                  {
+                    "time": 0.1,
+                    "opacity": 0.95
+                  },
+                  {
+                    "time": 0.3,
+                    "opacity": 0
+                  },
+                  {
+                    "time": 2.4,
+                    "opacity": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "menu_bolt_l",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "opacity": 0
+                  },
+                  {
+                    "time": 0.89,
+                    "opacity": 0
+                  },
+                  {
+                    "time": 0.9,
+                    "opacity": 0.95
+                  },
+                  {
+                    "time": 1.1,
+                    "opacity": 0
+                  },
+                  {
+                    "time": 2.4,
+                    "opacity": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "menu_bolt_br",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "opacity": 0
+                  },
+                  {
+                    "time": 1.69,
+                    "opacity": 0
+                  },
+                  {
+                    "time": 1.7,
+                    "opacity": 0.95
+                  },
+                  {
+                    "time": 1.9,
+                    "opacity": 0
+                  },
+                  {
+                    "time": 2.4,
+                    "opacity": 0
+                  }
+                ]
+              },
               {
                 "targetId": "menu_kuramon",
                 "keyframes": [
                   {
                     "time": 0,
-                    "rotate": 0,
+                    "sx": 1.0,
+                    "sy": 1.0,
                     "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
+                    "ty": 0
+                  },
+                  {
+                    "time": 0.09,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "tx": 0,
+                    "ty": 0
+                  },
+                  {
+                    "time": 0.1,
+                    "sx": 1.2,
+                    "sy": 0.8,
+                    "tx": 0,
+                    "ty": 0
                   },
                   {
                     "time": 0.18,
-                    "rotate": -6,
-                    "tx": -1.2,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.36,
-                    "rotate": 6,
-                    "tx": 1.2,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.54,
-                    "rotate": -4,
-                    "tx": -0.8,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.72,
-                    "rotate": 4,
-                    "tx": 0.8,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 1.2,
-                    "rotate": 0,
+                    "sx": 1.2,
+                    "sy": 0.8,
                     "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
+                    "ty": 0
+                  },
+                  {
+                    "time": 0.3,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "tx": 0,
+                    "ty": 0
+                  },
+                  {
+                    "time": 0.89,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "tx": 0,
+                    "ty": 0
+                  },
+                  {
+                    "time": 0.9,
+                    "sx": 1.2,
+                    "sy": 0.8,
+                    "tx": 0,
+                    "ty": 0
+                  },
+                  {
+                    "time": 0.98,
+                    "sx": 1.2,
+                    "sy": 0.8,
+                    "tx": 0,
+                    "ty": 0
+                  },
+                  {
+                    "time": 1.1,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "tx": 0,
+                    "ty": 0
+                  },
+                  {
+                    "time": 1.69,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "tx": 0,
+                    "ty": 0
+                  },
+                  {
+                    "time": 1.7,
+                    "sx": 1.2,
+                    "sy": 0.8,
+                    "tx": 0,
+                    "ty": 0
+                  },
+                  {
+                    "time": 1.78,
+                    "sx": 1.2,
+                    "sy": 0.8,
+                    "tx": 0,
+                    "ty": 0
+                  },
+                  {
+                    "time": 1.9,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "tx": 0,
+                    "ty": 0
+                  },
+                  {
+                    "time": 2.4,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "tx": 0,
+                    "ty": 0
                   }
                 ]
               }
@@ -138,60 +267,64 @@
         "animations": [
           {
             "id": "menu_waiting",
-            "name": "Side Glance Nudge",
-            "description": "Nudges left, pauses, nudges right, and returns center like the tiny icon is checking whether progress has arrived.",
+            "name": "Sighing Slump",
+            "description": "Kuramon closing his eye in a flat slit as a sweat drop drifts down next to him.",
             "duration": 1.6,
+            "svg": {
+              "id": "menu_waiting_override",
+              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><g id=\"menu_kuramon\"><g id=\"menu_body\"><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z M 35 53 L 65 53 L 65 57 L 35 57 Z\" fill=\"#000000\" fill-rule=\"evenodd\"/></g><g id=\"menu_horn_l\"><path d=\"M 20 20 C 25 35 30 35 30 35 C 30 35 25 15 35 25 C 25 15 15 5 20 20 Z\" fill=\"#000000\"/></g><g id=\"menu_horn_r\"><path d=\"M 80 20 C 85 5 75 15 65 25 C 75 15 70 35 70 35 C 70 35 75 35 80 20 Z\" fill=\"#000000\"/></g><g id=\"menu_tentacle_l\"><path d=\"M 25 90 C 35 85 40 78 40 75 C 40 75 25 80 30 75 C 20 85 10 95 25 90 Z\" fill=\"#000000\"/></g><g id=\"menu_tentacle_r\"><path d=\"M 75 90 C 90 95 80 85 70 75 C 75 80 60 75 60 75 C 60 78 65 85 75 90 Z\" fill=\"#000000\"/></g></g><g id=\"menu_sweat_drop\" opacity=\"0.8\"><path d=\"M 82 45 C 82 45 87 52 87 55 C 87 58 84 60 82 60 C 80 60 77 58 77 55 C 77 52 82 45 82 45 Z\" fill=\"#000000\"/></g></svg>"
+            },
             "tracks": [
+              {
+                "targetId": "menu_sweat_drop",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "ty": 0,
+                    "opacity": 0.1
+                  },
+                  {
+                    "time": 0.4,
+                    "ty": 2,
+                    "opacity": 0.9
+                  },
+                  {
+                    "time": 0.8,
+                    "ty": 4,
+                    "opacity": 0.9
+                  },
+                  {
+                    "time": 1.2,
+                    "ty": 6,
+                    "opacity": 0.1
+                  },
+                  {
+                    "time": 1.6,
+                    "ty": 0,
+                    "opacity": 0.1
+                  }
+                ]
+              },
               {
                 "targetId": "menu_kuramon",
                 "keyframes": [
                   {
                     "time": 0,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
                     "sx": 1,
-                    "sy": 1
+                    "sy": 1,
+                    "ty": 0
                   },
                   {
-                    "time": 0.25,
-                    "rotate": -2,
-                    "tx": -2.2,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.55,
-                    "rotate": -2,
-                    "tx": -2.2,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 0.85,
-                    "rotate": 2,
-                    "tx": 2.2,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
-                  },
-                  {
-                    "time": 1.15,
-                    "rotate": 2,
-                    "tx": 2.2,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1
+                    "time": 0.8,
+                    "sx": 1.05,
+                    "sy": 0.95,
+                    "ty": 1
                   },
                   {
                     "time": 1.6,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
                     "sx": 1,
-                    "sy": 1
+                    "sy": 1,
+                    "ty": 0
                   }
                 ]
               }
@@ -205,9 +338,13 @@
         "animations": [
           {
             "id": "menu_completed",
-            "name": "Happy Pop",
-            "description": "Pops upward with a tiny squash-and-stretch beat, overshoots, and settles cleanly back to center.",
-            "duration": 1.1,
+            "name": "Celebrating Leap",
+            "description": "Pops upward in a full 360 spin with floating stars rotating in the opposite direction.",
+            "duration": 1.2,
+            "svg": {
+              "id": "menu_completed_override",
+              "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><g id=\"menu_kuramon\"><g id=\"menu_body\"><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z M 50 40 C 58.284271247 40 65 46.715728753 65 55 C 65 63.284271247 58.284271247 70 50 70 C 41.715728753 70 35 63.284271247 35 55 C 35 46.715728753 41.715728753 40 50 40 Z\" fill=\"#000000\" fill-rule=\"evenodd\"/></g><g id=\"menu_horn_l\"><path d=\"M 20 20 C 25 35 30 35 30 35 C 30 35 25 15 35 25 C 25 15 15 5 20 20 Z\" fill=\"#000000\"/></g><g id=\"menu_horn_r\"><path d=\"M 80 20 C 85 5 75 15 65 25 C 75 15 70 35 70 35 C 70 35 75 35 80 20 Z\" fill=\"#000000\"/></g><g id=\"menu_tentacle_l\"><path d=\"M 25 90 C 35 85 40 78 40 75 C 40 75 25 80 30 75 C 20 85 10 95 25 90 Z\" fill=\"#000000\"/></g><g id=\"menu_tentacle_r\"><path d=\"M 75 90 C 90 95 80 85 70 75 C 75 80 60 75 60 75 C 60 78 65 85 75 90 Z\" fill=\"#000000\"/></g></g><g id=\"menu_stars\" opacity=\"0.9\"><path d=\"M 15 25 L 17 28 L 20 28 L 18 30 L 19 33 L 15 31 L 11 33 L 12 30 L 10 28 L 13 28 Z\" fill=\"#000000\"/><path d=\"M 85 30 L 87 33 L 90 33 L 88 35 L 89 38 L 85 36 L 81 38 L 82 35 L 80 33 L 83 33 Z\" fill=\"#000000\"/></g></svg>"
+            },
             "tracks": [
               {
                 "targetId": "menu_kuramon",
@@ -215,48 +352,58 @@
                   {
                     "time": 0,
                     "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "ty": 0
+                  },
+                  {
+                    "time": 0.3,
+                    "rotate": 90,
+                    "sx": 0.9,
+                    "sy": 1.1,
+                    "ty": -3
+                  },
+                  {
+                    "time": 0.6,
+                    "rotate": 180,
+                    "sx": 1.1,
+                    "sy": 0.9,
+                    "ty": -1
+                  },
+                  {
+                    "time": 0.9,
+                    "rotate": 270,
+                    "sx": 0.9,
+                    "sy": 1.1,
+                    "ty": -3
+                  },
+                  {
+                    "time": 1.2,
+                    "rotate": 360,
+                    "sx": 1,
+                    "sy": 1,
+                    "ty": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "menu_stars",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "rotate": 0,
                     "sx": 1,
                     "sy": 1
                   },
                   {
-                    "time": 0.16,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 1.8,
-                    "sx": 1.08,
-                    "sy": 0.92
+                    "time": 0.6,
+                    "rotate": -180,
+                    "sx": 1.3,
+                    "sy": 1.3
                   },
                   {
-                    "time": 0.34,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": -3.2,
-                    "sx": 0.94,
-                    "sy": 1.08
-                  },
-                  {
-                    "time": 0.52,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0.8,
-                    "sx": 1.03,
-                    "sy": 0.97
-                  },
-                  {
-                    "time": 0.74,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": -0.6,
-                    "sx": 0.99,
-                    "sy": 1.02
-                  },
-                  {
-                    "time": 1.1,
-                    "rotate": 0,
-                    "tx": 0,
-                    "ty": 0,
+                    "time": 1.2,
+                    "rotate": -360,
                     "sx": 1,
                     "sy": 1
                   }
@@ -382,7 +529,7 @@
       },
       {
         "id": "dock_medal_override",
-        "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><g id=\"kuramon_all\"><g id=\"tentacle_bl\"><path d=\"M 30 75 C 20 85 10 95 25 90 C 35 85 40 78 40 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"tentacle_br\"><path d=\"M 70 75 C 80 85 90 95 75 90 C 65 85 60 78 60 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"horn_tl\"><path d=\"M 35 25 C 25 15 15 5 20 20 C 25 35 30 35 30 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"horn_tr\"><path d=\"M 65 25 C 75 15 85 5 80 20 C 75 35 70 35 70 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"body_main\"><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"eye_group\"><path id=\"eye_black\" d=\"M 23 55 C 23 38 38 28 55 28 C 72 28 77 43 77 55 C 77 72 62 77 45 77 C 28 77 23 67 23 55 Z\" fill=\"var(--eyeliner)\"/><ellipse id=\"sclera\" cx=\"52\" cy=\"53\" rx=\"19\" ry=\"17\" fill=\"var(--eye-sclera)\"/><circle id=\"iris\" cx=\"52\" cy=\"53\" r=\"13\" fill=\"var(--eye-iris)\"/><circle id=\"pupil\" cx=\"52\" cy=\"53\" r=\"6\" fill=\"var(--eye-pupil)\"/><ellipse id=\"highlight\" cx=\"48\" cy=\"47\" rx=\"5\" ry=\"4\" fill=\"#FFFFFF\"/></g><g id=\"medal_group\"><path d=\"M 25 20 C 25 50 75 50 75 20\" fill=\"none\" stroke=\"#FF5555\" stroke-width=\"5\"/><circle cx=\"50\" cy=\"55\" r=\"15\" fill=\"#FFD700\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/><path d=\"M 47 50 L 50 48 L 50 60\" stroke=\"var(--eyeliner)\" stroke-width=\"2\" stroke-linecap=\"round\"/></g></g></svg>"
+        "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><!-- Alternating Gold & Orange Shiny Sunburst --><g id=\"celebration_rays\" opacity=\"0\"><path d=\"M 50 50 L 40 -15 L 60 -15 Z\" fill=\"#FFD700\" opacity=\"0.35\"/><path d=\"M 50 50 L 95 10 L 115 30 Z\" fill=\"#FF8C00\" opacity=\"0.35\"/><path d=\"M 50 50 L 115 40 L 115 60 Z\" fill=\"#FFD700\" opacity=\"0.35\"/><path d=\"M 50 50 L 115 70 L 95 110 Z\" fill=\"#FF8C00\" opacity=\"0.35\"/><path d=\"M 50 50 L 60 115 L 40 115 Z\" fill=\"#FFD700\" opacity=\"0.35\"/><path d=\"M 50 50 L 5 95 L -15 75 Z\" fill=\"#FF8C00\" opacity=\"0.35\"/><path d=\"M 50 50 L -15 60 L -15 40 Z\" fill=\"#FFD700\" opacity=\"0.35\"/><path d=\"M 50 50 L -15 30 L 5 -10 Z\" fill=\"#FF8C00\" opacity=\"0.35\"/></g><g id=\"kuramon_all\"><g id=\"tentacle_bl\"><path d=\"M 30 75 C 20 85 10 95 25 90 C 35 85 40 78 40 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"tentacle_br\"><path d=\"M 70 75 C 80 85 90 95 75 90 C 65 85 60 78 60 75 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"horn_tl\"><path d=\"M 35 25 C 25 15 15 5 20 20 C 25 35 30 35 30 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"horn_tr\"><path d=\"M 65 25 C 75 15 85 5 80 20 C 75 35 70 35 70 35 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"body_main\"><path d=\"M 50 15 C 75 15 85 35 85 55 C 85 75 70 85 50 85 C 30 85 15 75 15 55 C 15 35 25 15 50 15 Z\" fill=\"var(--base)\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></g><g id=\"eye_group\"><path id=\"eye_black\" d=\"M 23 55 C 23 38 38 28 55 28 C 72 28 77 43 77 55 C 77 72 62 77 45 77 C 28 77 23 67 23 55 Z\" fill=\"var(--eyeliner)\"/><ellipse id=\"sclera\" cx=\"52\" cy=\"53\" rx=\"19\" ry=\"17\" fill=\"var(--eye-sclera)\"/><circle id=\"iris\" cx=\"52\" cy=\"53\" r=\"13\" fill=\"var(--eye-iris)\"/><circle id=\"pupil\" cx=\"52\" cy=\"53\" r=\"6\" fill=\"var(--eye-pupil)\"/><ellipse id=\"highlight\" cx=\"48\" cy=\"47\" rx=\"5\" ry=\"4\" fill=\"#FFFFFF\"/></g><!-- Shiny Gold Crown (accessory instead of laurel wreath) --><g id=\"gold_crown\" opacity=\"0\"><path d=\"M 35 25 C 35 25 50 28 65 25 L 68 12 L 59 18 L 50 7 L 41 18 L 32 12 Z\" fill=\"#FFD700\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><polygon points=\"50,15 52,18 50,21 48,18\" fill=\"#FF3B30\" stroke=\"var(--eyeliner)\" stroke-width=\"1\"/><circle cx=\"32\" cy=\"12\" r=\"2.5\" fill=\"#FFE066\" stroke=\"var(--eyeliner)\" stroke-width=\"1.5\"/><circle cx=\"50\" cy=\"7\" r=\"3\" fill=\"#FFE066\" stroke=\"var(--eyeliner)\" stroke-width=\"1.5\"/><circle cx=\"68\" cy=\"12\" r=\"2.5\" fill=\"#FFE066\" stroke=\"var(--eyeliner)\" stroke-width=\"1.5\"/></g><!-- Lowered Gold Medal (overlapping body edge for 3D depth) --><g id=\"medal_group\" opacity=\"0\"><path d=\"M 33 45 C 33 80 67 80 67 45\" fill=\"none\" stroke=\"#FF5555\" stroke-width=\"5\" stroke-linecap=\"round\"/><circle cx=\"50\" cy=\"80\" r=\"15\" fill=\"#FFD700\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\"/><path d=\"M 47 75 L 50 73 L 50 85\" fill=\"none\" stroke=\"var(--eyeliner)\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></g><!-- Floating Gold Stars & Sparkles --><g id=\"gold_stars\" opacity=\"0\"><path d=\"M 15 25 L 16.5 28.5 L 20 30 L 16.5 31.5 L 15 35 L 13.5 31.5 L 10 30 L 13.5 28.5 Z\" fill=\"#FFD700\" stroke=\"var(--eyeliner)\" stroke-width=\"1.5\" stroke-linejoin=\"round\"/><path d=\"M 85 30 L 86.5 33 L 90 34.5 L 86.5 36 L 85 39 L 83.5 36 L 80 34.5 L 83.5 33 Z\" fill=\"#FFAA00\" stroke=\"var(--eyeliner)\" stroke-width=\"1.5\" stroke-linejoin=\"round\"/><path d=\"M 20 60 L 21.2 62.5 L 24 63.7 L 21.2 64.9 L 20 67.4 L 18.8 64.9 L 16 63.7 L 18.8 62.5 Z\" fill=\"#FFD700\" stroke=\"var(--eyeliner)\" stroke-width=\"1.2\" stroke-linejoin=\"round\"/><path d=\"M 80 55 L 81.5 58 L 85 59.5 L 81.5 61 L 80 64 L 78.5 61 L 75 59.5 L 78.5 58 Z\" fill=\"#FFAA00\" stroke=\"var(--eyeliner)\" stroke-width=\"1.5\" stroke-linejoin=\"round\"/><path d=\"M 30 15 L 31 17.5 L 33.5 18.5 L 31 19.5 L 30 22 L 29 19.5 L 26.5 18.5 L 29 17.5 Z\" fill=\"#FFE680\" stroke=\"var(--eyeliner)\" stroke-width=\"1\" stroke-linejoin=\"round\"/><path d=\"M 70 12 L 71 14.5 L 73.5 15.5 L 71 16.5 L 70 19 L 69 16.5 L 66.5 15.5 L 69 14.5 Z\" fill=\"#FFE680\" stroke=\"var(--eyeliner)\" stroke-width=\"1\" stroke-linejoin=\"round\"/></g></g></svg>"
       }
     ],
     "states": [
@@ -2558,1013 +2705,9 @@
       {
         "animations": [
           {
-            "id": "completed_flag_wave",
-            "name": "Triumphant Flag Wave",
-            "description": "Kuramon pops up, suddenly holding a victory flag, waving it vigorously back and forth while bouncing, ending with a celebratory spin before putting it away.",
-            "duration": 5.5,
-            "svg": {
-              "id": "dock_flag_override"
-            },
-            "tracks": [
-              {
-                "targetId": "kuramon_all",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 0.3,
-                    "tx": 0,
-                    "ty": 5,
-                    "sx": 1.1,
-                    "sy": 0.9,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 0.6,
-                    "tx": 0,
-                    "ty": -10,
-                    "sx": 0.9,
-                    "sy": 1.1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 0.9,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 1.2,
-                    "tx": 0,
-                    "ty": -4,
-                    "sx": 0.95,
-                    "sy": 1.05,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 1.5,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 1.8,
-                    "tx": 0,
-                    "ty": -4,
-                    "sx": 0.95,
-                    "sy": 1.05,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 2.1,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 2.4,
-                    "tx": 0,
-                    "ty": -4,
-                    "sx": 0.95,
-                    "sy": 1.05,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 2.7,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 3.5,
-                    "tx": 0,
-                    "ty": -15,
-                    "sx": 0.8,
-                    "sy": 1.2,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 4,
-                    "tx": 0,
-                    "ty": -15,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 360
-                  },
-                  {
-                    "time": 4.5,
-                    "tx": 0,
-                    "ty": 5,
-                    "sx": 1.2,
-                    "sy": 0.8,
-                    "rotate": 360
-                  },
-                  {
-                    "time": 5,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 360
-                  },
-                  {
-                    "time": 5.5,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 360
-                  }
-                ]
-              },
-              {
-                "targetId": "flag_group",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "tx": 0,
-                    "ty": 20,
-                    "sx": 0,
-                    "sy": 0,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 0.8,
-                    "tx": 0,
-                    "ty": 20,
-                    "sx": 0,
-                    "sy": 0,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 1,
-                    "tx": -15,
-                    "ty": 10,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -20
-                  },
-                  {
-                    "time": 1.3,
-                    "tx": 15,
-                    "ty": 10,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 30
-                  },
-                  {
-                    "time": 1.6,
-                    "tx": -15,
-                    "ty": 10,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -30
-                  },
-                  {
-                    "time": 1.9,
-                    "tx": 15,
-                    "ty": 10,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 30
-                  },
-                  {
-                    "time": 2.2,
-                    "tx": -15,
-                    "ty": 10,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -30
-                  },
-                  {
-                    "time": 2.5,
-                    "tx": 15,
-                    "ty": 10,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 30
-                  },
-                  {
-                    "time": 2.8,
-                    "tx": 0,
-                    "ty": 10,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 4,
-                    "tx": 0,
-                    "ty": 10,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 4.7,
-                    "tx": 0,
-                    "ty": 10,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 5,
-                    "tx": 0,
-                    "ty": 20,
-                    "sx": 0,
-                    "sy": 0,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 5.5,
-                    "tx": 0,
-                    "ty": 20,
-                    "sx": 0,
-                    "sy": 0,
-                    "rotate": 0
-                  }
-                ]
-              },
-              {
-                "targetId": "eye_group",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 0.9,
-                    "tx": 0,
-                    "ty": -2,
-                    "sx": 1.1,
-                    "sy": 1.1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 2.8,
-                    "tx": 0,
-                    "ty": -2,
-                    "sx": 1.1,
-                    "sy": 1.1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 3.5,
-                    "tx": 0,
-                    "ty": -4,
-                    "sx": 1.2,
-                    "sy": 1.2,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 4.5,
-                    "tx": 0,
-                    "ty": 2,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 5.5,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  }
-                ]
-              },
-              {
-                "targetId": "horn_tl",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 0.6,
-                    "tx": -3,
-                    "ty": -3,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -20
-                  },
-                  {
-                    "time": 1.5,
-                    "tx": 2,
-                    "ty": 2,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 10
-                  },
-                  {
-                    "time": 2.1,
-                    "tx": -2,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -15
-                  },
-                  {
-                    "time": 3.5,
-                    "tx": -5,
-                    "ty": -5,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -30
-                  },
-                  {
-                    "time": 4.5,
-                    "tx": 3,
-                    "ty": 3,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 20
-                  },
-                  {
-                    "time": 5.5,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  }
-                ]
-              },
-              {
-                "targetId": "horn_tr",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 0.6,
-                    "tx": 3,
-                    "ty": -3,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 20
-                  },
-                  {
-                    "time": 1.5,
-                    "tx": -2,
-                    "ty": 2,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -10
-                  },
-                  {
-                    "time": 2.1,
-                    "tx": 2,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 15
-                  },
-                  {
-                    "time": 3.5,
-                    "tx": 5,
-                    "ty": -5,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 30
-                  },
-                  {
-                    "time": 4.5,
-                    "tx": -3,
-                    "ty": 3,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -20
-                  },
-                  {
-                    "time": 5.5,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  }
-                ]
-              },
-              {
-                "targetId": "tentacle_bl",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 1,
-                    "tx": -5,
-                    "ty": -5,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 30
-                  },
-                  {
-                    "time": 3,
-                    "tx": -5,
-                    "ty": -5,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 30
-                  },
-                  {
-                    "time": 4,
-                    "tx": 0,
-                    "ty": 5,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -10
-                  },
-                  {
-                    "time": 5.5,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  }
-                ]
-              },
-              {
-                "targetId": "tentacle_br",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 0.6,
-                    "tx": 5,
-                    "ty": -5,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -20
-                  },
-                  {
-                    "time": 3.5,
-                    "tx": 8,
-                    "ty": -8,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -30
-                  },
-                  {
-                    "time": 4.5,
-                    "tx": -2,
-                    "ty": 5,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 10
-                  },
-                  {
-                    "time": 5.5,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "id": "completed_party_hat",
-            "name": "Party Hat Celebration",
-            "description": "A party hat drops on Kuramon's head. He performs a happy left-right dance tapping his tentacles, before removing the hat and settling.",
-            "duration": 6,
-            "svg": {
-              "id": "dock_hat_override"
-            },
-            "tracks": [
-              {
-                "targetId": "kuramon_all",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 1,
-                    "tx": 0,
-                    "ty": 4,
-                    "sx": 1.1,
-                    "sy": 0.9,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 1.5,
-                    "tx": 0,
-                    "ty": -2,
-                    "sx": 0.95,
-                    "sy": 1.05,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 1.8,
-                    "tx": -10,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -10
-                  },
-                  {
-                    "time": 2.3,
-                    "tx": 10,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 10
-                  },
-                  {
-                    "time": 2.8,
-                    "tx": -10,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -10
-                  },
-                  {
-                    "time": 3.3,
-                    "tx": 10,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 10
-                  },
-                  {
-                    "time": 3.8,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 5,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 5.5,
-                    "tx": 0,
-                    "ty": 2,
-                    "sx": 1.05,
-                    "sy": 0.95,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 6,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  }
-                ]
-              },
-              {
-                "targetId": "party_hat",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "tx": 0,
-                    "ty": -40,
-                    "sx": 0,
-                    "sy": 0,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 0.5,
-                    "tx": 0,
-                    "ty": -40,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 1,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 1.2,
-                    "tx": 0,
-                    "ty": 3,
-                    "sx": 1.1,
-                    "sy": 0.9,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 1.5,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 4.5,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 5,
-                    "tx": -20,
-                    "ty": 20,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -45
-                  },
-                  {
-                    "time": 5.2,
-                    "tx": -20,
-                    "ty": 20,
-                    "sx": 0,
-                    "sy": 0,
-                    "rotate": -45
-                  },
-                  {
-                    "time": 6,
-                    "tx": 0,
-                    "ty": -40,
-                    "sx": 0,
-                    "sy": 0,
-                    "rotate": 0
-                  }
-                ]
-              },
-              {
-                "targetId": "eye_group",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 1,
-                    "tx": 0,
-                    "ty": -3,
-                    "sx": 1.3,
-                    "sy": 1.3,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 4,
-                    "tx": 0,
-                    "ty": -3,
-                    "sx": 1.3,
-                    "sy": 1.3,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 4.5,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 6,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  }
-                ]
-              },
-              {
-                "targetId": "tentacle_bl",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 1.8,
-                    "tx": -5,
-                    "ty": -8,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 20
-                  },
-                  {
-                    "time": 2.3,
-                    "tx": 0,
-                    "ty": 5,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -10
-                  },
-                  {
-                    "time": 2.8,
-                    "tx": -5,
-                    "ty": -8,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 20
-                  },
-                  {
-                    "time": 3.3,
-                    "tx": 0,
-                    "ty": 5,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -10
-                  },
-                  {
-                    "time": 4.2,
-                    "tx": -5,
-                    "ty": -20,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 45
-                  },
-                  {
-                    "time": 5,
-                    "tx": -20,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -30
-                  },
-                  {
-                    "time": 6,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  }
-                ]
-              },
-              {
-                "targetId": "tentacle_br",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 1.8,
-                    "tx": 0,
-                    "ty": 5,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 10
-                  },
-                  {
-                    "time": 2.3,
-                    "tx": 5,
-                    "ty": -8,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -20
-                  },
-                  {
-                    "time": 2.8,
-                    "tx": 0,
-                    "ty": 5,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 10
-                  },
-                  {
-                    "time": 3.3,
-                    "tx": 5,
-                    "ty": -8,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -20
-                  },
-                  {
-                    "time": 3.8,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 6,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  }
-                ]
-              },
-              {
-                "targetId": "horn_tl",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 1,
-                    "tx": -3,
-                    "ty": -3,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -15
-                  },
-                  {
-                    "time": 1.8,
-                    "tx": -6,
-                    "ty": 2,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -25
-                  },
-                  {
-                    "time": 2.3,
-                    "tx": 4,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 10
-                  },
-                  {
-                    "time": 2.8,
-                    "tx": -6,
-                    "ty": 2,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -25
-                  },
-                  {
-                    "time": 3.3,
-                    "tx": 4,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 10
-                  },
-                  {
-                    "time": 4.5,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 6,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  }
-                ]
-              },
-              {
-                "targetId": "horn_tr",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 1,
-                    "tx": 3,
-                    "ty": -3,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 15
-                  },
-                  {
-                    "time": 1.8,
-                    "tx": -4,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -10
-                  },
-                  {
-                    "time": 2.3,
-                    "tx": 6,
-                    "ty": 2,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 25
-                  },
-                  {
-                    "time": 2.8,
-                    "tx": -4,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -10
-                  },
-                  {
-                    "time": 3.3,
-                    "tx": 6,
-                    "ty": 2,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 25
-                  },
-                  {
-                    "time": 4.5,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 6,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  }
-                ]
-              }
-            ]
-          },
-          {
             "id": "completed_gold_medal",
             "name": "Gold Medal Drop",
-            "description": "A large gold medal lands on Kuramon. The weight squashes him down, but he proudly puffs up, swaying left and right heroically, then tosses it aside.",
+            "description": "A large gold medal lands on Kuramon's neck in 3D. A shiny golden crown drops onto his head. He squashes on landing, hops in excitement with shiny rotating background sunburst rays and rising gold stars floating upwards, ending with a celebratory spin to toss them aside.",
             "duration": 5.2,
             "svg": {
               "id": "dock_medal_override"
@@ -3584,57 +2727,129 @@
                   {
                     "time": 0.6,
                     "tx": 0,
-                    "ty": 12,
-                    "sx": 1.15,
-                    "sy": 0.85,
+                    "ty": 14,
+                    "sx": 1.25,
+                    "sy": 0.75,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.9,
+                    "tx": 0,
+                    "ty": -12,
+                    "sx": 0.85,
+                    "sy": 1.2,
                     "rotate": 0
                   },
                   {
                     "time": 1.2,
                     "tx": 0,
-                    "ty": -5,
-                    "sx": 0.9,
-                    "sy": 1.1,
+                    "ty": 4,
+                    "sx": 1.15,
+                    "sy": 0.85,
                     "rotate": 0
                   },
                   {
-                    "time": 1.6,
+                    "time": 1.5,
                     "tx": 0,
                     "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
+                    "sx": 1.0,
+                    "sy": 1.0,
                     "rotate": 0
                   },
                   {
-                    "time": 2.3,
-                    "tx": -5,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1,
+                    "time": 1.8,
+                    "tx": 0,
+                    "ty": 12,
+                    "sx": 1.2,
+                    "sy": 0.8,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 2.1,
+                    "tx": 0,
+                    "ty": -22,
+                    "sx": 0.8,
+                    "sy": 1.25,
                     "rotate": -5
                   },
                   {
-                    "time": 3.5,
-                    "tx": 5,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1,
+                    "time": 2.4,
+                    "tx": -10,
+                    "ty": -25,
+                    "sx": 0.95,
+                    "sy": 1.05,
+                    "rotate": -15
+                  },
+                  {
+                    "time": 2.7,
+                    "tx": -5,
+                    "ty": 12,
+                    "sx": 1.25,
+                    "sy": 0.75,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 3.0,
+                    "tx": 0,
+                    "ty": -6,
+                    "sx": 0.95,
+                    "sy": 1.05,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 3.3,
+                    "tx": 0,
+                    "ty": 12,
+                    "sx": 1.2,
+                    "sy": 0.8,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 3.6,
+                    "tx": 0,
+                    "ty": -22,
+                    "sx": 0.8,
+                    "sy": 1.25,
                     "rotate": 5
                   },
                   {
+                    "time": 3.9,
+                    "tx": 10,
+                    "ty": -25,
+                    "sx": 0.95,
+                    "sy": 1.05,
+                    "rotate": 15
+                  },
+                  {
                     "time": 4.2,
+                    "tx": 5,
+                    "ty": 12,
+                    "sx": 1.25,
+                    "sy": 0.75,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 4.6,
                     "tx": 0,
                     "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "rotate": 30
+                  },
+                  {
+                    "time": 4.9,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "rotate": -10
                   },
                   {
                     "time": 5.2,
                     "tx": 0,
                     "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
+                    "sx": 1.0,
+                    "sy": 1.0,
                     "rotate": 0
                   }
                 ]
@@ -3645,18 +2860,20 @@
                   {
                     "time": 0,
                     "tx": 0,
-                    "ty": -50,
-                    "sx": 0,
-                    "sy": 0,
-                    "rotate": 0
+                    "ty": -60,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0,
+                    "opacity": 0
                   },
                   {
                     "time": 0.3,
                     "tx": 0,
-                    "ty": -50,
+                    "ty": -35,
                     "sx": 1,
                     "sy": 1,
-                    "rotate": 0
+                    "rotate": 0,
+                    "opacity": 0.5
                   },
                   {
                     "time": 0.6,
@@ -3664,71 +2881,143 @@
                     "ty": 0,
                     "sx": 1,
                     "sy": 1,
-                    "rotate": 0
+                    "rotate": 0,
+                    "opacity": 1
                   },
                   {
-                    "time": 0.8,
+                    "time": 0.9,
                     "tx": 0,
-                    "ty": 5,
+                    "ty": -12,
                     "sx": 1,
                     "sy": 1,
-                    "rotate": 0
+                    "rotate": 0,
+                    "opacity": 1
                   },
                   {
                     "time": 1.2,
                     "tx": 0,
-                    "ty": 0,
+                    "ty": 4,
                     "sx": 1,
                     "sy": 1,
-                    "rotate": 0
+                    "rotate": 0,
+                    "opacity": 1
                   },
                   {
-                    "time": 2.4,
-                    "tx": 3,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 8
-                  },
-                  {
-                    "time": 3.6,
-                    "tx": -3,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -8
-                  },
-                  {
-                    "time": 4.2,
+                    "time": 1.5,
                     "tx": 0,
                     "ty": 0,
                     "sx": 1,
                     "sy": 1,
-                    "rotate": 0
+                    "rotate": 0,
+                    "opacity": 1
+                  },
+                  {
+                    "time": 1.8,
+                    "tx": 0,
+                    "ty": 12,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0,
+                    "opacity": 1
+                  },
+                  {
+                    "time": 2.1,
+                    "tx": 0,
+                    "ty": -22,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -5,
+                    "opacity": 1
+                  },
+                  {
+                    "time": 2.4,
+                    "tx": -10,
+                    "ty": -25,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -25,
+                    "opacity": 1
+                  },
+                  {
+                    "time": 2.7,
+                    "tx": -5,
+                    "ty": 12,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 5,
+                    "opacity": 1
+                  },
+                  {
+                    "time": 3.0,
+                    "tx": 0,
+                    "ty": -6,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0,
+                    "opacity": 1
+                  },
+                  {
+                    "time": 3.3,
+                    "tx": 0,
+                    "ty": 12,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0,
+                    "opacity": 1
+                  },
+                  {
+                    "time": 3.6,
+                    "tx": 0,
+                    "ty": -22,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 5,
+                    "opacity": 1
+                  },
+                  {
+                    "time": 3.9,
+                    "tx": 10,
+                    "ty": -25,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 25,
+                    "opacity": 1
+                  },
+                  {
+                    "time": 4.2,
+                    "tx": 5,
+                    "ty": 12,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -5,
+                    "opacity": 1
                   },
                   {
                     "time": 4.6,
-                    "tx": 30,
-                    "ty": -10,
+                    "tx": 60,
+                    "ty": -20,
                     "sx": 1,
                     "sy": 1,
-                    "rotate": 45
+                    "rotate": 90,
+                    "opacity": 0.5
                   },
                   {
-                    "time": 4.8,
-                    "tx": 30,
-                    "ty": -10,
-                    "sx": 0,
-                    "sy": 0,
-                    "rotate": 45
+                    "time": 4.9,
+                    "tx": 80,
+                    "ty": -20,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 180,
+                    "opacity": 0
                   },
                   {
                     "time": 5.2,
                     "tx": 0,
-                    "ty": -50,
-                    "sx": 0,
-                    "sy": 0,
-                    "rotate": 0
+                    "ty": -60,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0,
+                    "opacity": 0
                   }
                 ]
               },
@@ -3746,124 +3035,114 @@
                   {
                     "time": 0.6,
                     "tx": 0,
+                    "ty": 0,
+                    "sx": 1.4,
+                    "sy": 1.4,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 0.9,
+                    "tx": 0,
+                    "ty": -4,
+                    "sx": 0.9,
+                    "sy": 0.9,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1.2,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1.3,
+                    "sy": 1.3,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 1.5,
+                    "tx": 0,
                     "ty": -2,
-                    "sx": 1.2,
-                    "sy": 1.2,
+                    "sx": 1,
+                    "sy": 1,
                     "rotate": 0
                   },
                   {
-                    "time": 1.2,
+                    "time": 1.8,
+                    "tx": 0,
+                    "ty": 2,
+                    "sx": 1,
+                    "sy": 0.8,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 2.1,
                     "tx": 0,
                     "ty": -4,
+                    "sx": 1.3,
+                    "sy": 1.3,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 2.4,
+                    "tx": 0,
+                    "ty": -4,
+                    "sx": 1.3,
+                    "sy": 1.3,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 2.7,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1.4,
+                    "sy": 1.4,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 3.0,
+                    "tx": 0,
+                    "ty": -2,
                     "sx": 1,
                     "sy": 1,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 3.3,
+                    "tx": 0,
+                    "ty": 2,
+                    "sx": 1,
+                    "sy": 0.8,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 3.6,
+                    "tx": 0,
+                    "ty": -4,
+                    "sx": 1.3,
+                    "sy": 1.3,
+                    "rotate": 0
+                  },
+                  {
+                    "time": 3.9,
+                    "tx": 0,
+                    "ty": -4,
+                    "sx": 1.3,
+                    "sy": 1.3,
                     "rotate": 0
                   },
                   {
                     "time": 4.2,
                     "tx": 0,
-                    "ty": -4,
-                    "sx": 1,
-                    "sy": 1,
+                    "ty": 0,
+                    "sx": 1.4,
+                    "sy": 1.4,
                     "rotate": 0
                   },
                   {
-                    "time": 5.2,
+                    "time": 4.6,
                     "tx": 0,
                     "ty": 0,
                     "sx": 1,
                     "sy": 1,
                     "rotate": 0
-                  }
-                ]
-              },
-              {
-                "targetId": "tentacle_bl",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 0.6,
-                    "tx": -10,
-                    "ty": 5,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -20
-                  },
-                  {
-                    "time": 1.2,
-                    "tx": 5,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 20
-                  },
-                  {
-                    "time": 4,
-                    "tx": 5,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 20
-                  },
-                  {
-                    "time": 4.4,
-                    "tx": 20,
-                    "ty": -15,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -40
-                  },
-                  {
-                    "time": 5.2,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  }
-                ]
-              },
-              {
-                "targetId": "tentacle_br",
-                "keyframes": [
-                  {
-                    "time": 0,
-                    "tx": 0,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
-                  },
-                  {
-                    "time": 0.6,
-                    "tx": 10,
-                    "ty": 5,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 20
-                  },
-                  {
-                    "time": 1.2,
-                    "tx": -5,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -20
-                  },
-                  {
-                    "time": 4.2,
-                    "tx": -5,
-                    "ty": 0,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -20
                   },
                   {
                     "time": 5.2,
@@ -3882,49 +3161,113 @@
                     "time": 0,
                     "tx": 0,
                     "ty": 0,
+                    "rotate": 0,
                     "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
+                    "sy": 1
                   },
                   {
                     "time": 0.6,
-                    "tx": -3,
-                    "ty": -3,
+                    "tx": -5,
+                    "ty": 5,
+                    "rotate": -25,
                     "sx": 1,
-                    "sy": 1,
-                    "rotate": -15
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.9,
+                    "tx": 2,
+                    "ty": -3,
+                    "rotate": 20,
+                    "sx": 1,
+                    "sy": 1
                   },
                   {
                     "time": 1.2,
-                    "tx": 2,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": 20
-                  },
-                  {
-                    "time": 2.3,
                     "tx": -4,
-                    "ty": 2,
+                    "ty": 4,
+                    "rotate": -20,
                     "sx": 1,
-                    "sy": 1,
-                    "rotate": -10
+                    "sy": 1
                   },
                   {
-                    "time": 3.5,
-                    "tx": 4,
-                    "ty": -2,
+                    "time": 1.5,
+                    "tx": 0,
+                    "ty": 0,
+                    "rotate": 0,
                     "sx": 1,
-                    "sy": 1,
-                    "rotate": 10
+                    "sy": 1
+                  },
+                  {
+                    "time": 2.1,
+                    "tx": -3,
+                    "ty": -5,
+                    "rotate": -30,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 2.4,
+                    "tx": -6,
+                    "ty": -6,
+                    "rotate": -40,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 2.7,
+                    "tx": 3,
+                    "ty": 5,
+                    "rotate": 25,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 3.0,
+                    "tx": -1,
+                    "ty": -2,
+                    "rotate": -10,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 3.6,
+                    "tx": -3,
+                    "ty": -5,
+                    "rotate": -30,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 3.9,
+                    "tx": -6,
+                    "ty": -6,
+                    "rotate": -40,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 4.2,
+                    "tx": 3,
+                    "ty": 5,
+                    "rotate": 25,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 4.6,
+                    "tx": 5,
+                    "ty": -5,
+                    "rotate": 30,
+                    "sx": 1,
+                    "sy": 1
                   },
                   {
                     "time": 5.2,
                     "tx": 0,
                     "ty": 0,
+                    "rotate": 0,
                     "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
+                    "sy": 1
                   }
                 ]
               },
@@ -3935,49 +3278,643 @@
                     "time": 0,
                     "tx": 0,
                     "ty": 0,
+                    "rotate": 0,
                     "sx": 1,
-                    "sy": 1,
-                    "rotate": 0
+                    "sy": 1
                   },
                   {
                     "time": 0.6,
-                    "tx": 3,
-                    "ty": -3,
+                    "tx": 5,
+                    "ty": 5,
+                    "rotate": 25,
                     "sx": 1,
-                    "sy": 1,
-                    "rotate": 15
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.9,
+                    "tx": -2,
+                    "ty": -3,
+                    "rotate": -20,
+                    "sx": 1,
+                    "sy": 1
                   },
                   {
                     "time": 1.2,
-                    "tx": -2,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -20
-                  },
-                  {
-                    "time": 2.3,
-                    "tx": -4,
-                    "ty": -2,
-                    "sx": 1,
-                    "sy": 1,
-                    "rotate": -10
-                  },
-                  {
-                    "time": 3.5,
                     "tx": 4,
-                    "ty": 2,
+                    "ty": 4,
+                    "rotate": 20,
                     "sx": 1,
-                    "sy": 1,
-                    "rotate": 10
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.5,
+                    "tx": 0,
+                    "ty": 0,
+                    "rotate": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 2.1,
+                    "tx": 3,
+                    "ty": -5,
+                    "rotate": 30,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 2.4,
+                    "tx": 6,
+                    "ty": -6,
+                    "rotate": 40,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 2.7,
+                    "tx": -3,
+                    "ty": 5,
+                    "rotate": -25,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 3.0,
+                    "tx": 1,
+                    "ty": -2,
+                    "rotate": 10,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 3.6,
+                    "tx": 3,
+                    "ty": -5,
+                    "rotate": 30,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 3.9,
+                    "tx": 6,
+                    "ty": -6,
+                    "rotate": 40,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 4.2,
+                    "tx": -3,
+                    "ty": 5,
+                    "rotate": -25,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 4.6,
+                    "tx": -5,
+                    "ty": -5,
+                    "rotate": -30,
+                    "sx": 1,
+                    "sy": 1
                   },
                   {
                     "time": 5.2,
                     "tx": 0,
                     "ty": 0,
+                    "rotate": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "tentacle_bl",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "rotate": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.6,
+                    "tx": -15,
+                    "ty": 8,
+                    "rotate": -35,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.9,
+                    "tx": 5,
+                    "ty": -5,
+                    "rotate": 25,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.2,
+                    "tx": -10,
+                    "ty": 6,
+                    "rotate": -25,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.5,
+                    "tx": 0,
+                    "ty": 0,
+                    "rotate": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 2.1,
+                    "tx": 5,
+                    "ty": -10,
+                    "rotate": 30,
+                    "sx": 0.9,
+                    "sy": 0.9
+                  },
+                  {
+                    "time": 2.4,
+                    "tx": 8,
+                    "ty": -12,
+                    "rotate": 35,
+                    "sx": 0.9,
+                    "sy": 0.9
+                  },
+                  {
+                    "time": 2.7,
+                    "tx": -18,
+                    "ty": 10,
+                    "rotate": -45,
+                    "sx": 1.1,
+                    "sy": 1.1
+                  },
+                  {
+                    "time": 3.0,
+                    "tx": 2,
+                    "ty": -3,
+                    "rotate": 10,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 3.6,
+                    "tx": 5,
+                    "ty": -10,
+                    "rotate": 30,
+                    "sx": 0.9,
+                    "sy": 0.9
+                  },
+                  {
+                    "time": 3.9,
+                    "tx": 8,
+                    "ty": -12,
+                    "rotate": 35,
+                    "sx": 0.9,
+                    "sy": 0.9
+                  },
+                  {
+                    "time": 4.2,
+                    "tx": -18,
+                    "ty": 10,
+                    "rotate": -45,
+                    "sx": 1.1,
+                    "sy": 1.1
+                  },
+                  {
+                    "time": 4.6,
+                    "tx": 10,
+                    "ty": -5,
+                    "rotate": 20,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 5.2,
+                    "tx": 0,
+                    "ty": 0,
+                    "rotate": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "tentacle_br",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "rotate": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.6,
+                    "tx": 15,
+                    "ty": 8,
+                    "rotate": 35,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 0.9,
+                    "tx": -5,
+                    "ty": -5,
+                    "rotate": -25,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.2,
+                    "tx": 10,
+                    "ty": 6,
+                    "rotate": 25,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 1.5,
+                    "tx": 0,
+                    "ty": 0,
+                    "rotate": 0,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 2.1,
+                    "tx": -5,
+                    "ty": -10,
+                    "rotate": -30,
+                    "sx": 0.9,
+                    "sy": 0.9
+                  },
+                  {
+                    "time": 2.4,
+                    "tx": -8,
+                    "ty": -12,
+                    "rotate": -35,
+                    "sx": 0.9,
+                    "sy": 0.9
+                  },
+                  {
+                    "time": 2.7,
+                    "tx": 18,
+                    "ty": 10,
+                    "rotate": 45,
+                    "sx": 1.1,
+                    "sy": 1.1
+                  },
+                  {
+                    "time": 3.0,
+                    "tx": -2,
+                    "ty": -3,
+                    "rotate": -10,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 3.6,
+                    "tx": -5,
+                    "ty": -10,
+                    "rotate": -30,
+                    "sx": 0.9,
+                    "sy": 0.9
+                  },
+                  {
+                    "time": 3.9,
+                    "tx": -8,
+                    "ty": -12,
+                    "rotate": -35,
+                    "sx": 0.9,
+                    "sy": 0.9
+                  },
+                  {
+                    "time": 4.2,
+                    "tx": 18,
+                    "ty": 10,
+                    "rotate": 45,
+                    "sx": 1.1,
+                    "sy": 1.1
+                  },
+                  {
+                    "time": 4.6,
+                    "tx": -10,
+                    "ty": -5,
+                    "rotate": -20,
+                    "sx": 1,
+                    "sy": 1
+                  },
+                  {
+                    "time": 5.2,
+                    "tx": 0,
+                    "ty": 0,
+                    "rotate": 0,
+                    "sx": 1,
+                    "sy": 1
+                  }
+                ]
+              },
+              {
+                "targetId": "gold_crown",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": -65,
                     "sx": 1,
                     "sy": 1,
-                    "rotate": 0
+                    "rotate": 0,
+                    "opacity": 0
+                  },
+                  {
+                    "time": 0.6,
+                    "tx": 0,
+                    "ty": -65,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0,
+                    "opacity": 0
+                  },
+                  {
+                    "time": 0.8,
+                    "tx": 0,
+                    "ty": -40,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0,
+                    "opacity": 0.5
+                  },
+                  {
+                    "time": 1.2,
+                    "tx": 0,
+                    "ty": 4,
+                    "sx": 1.15,
+                    "sy": 0.85,
+                    "rotate": 0,
+                    "opacity": 1
+                  },
+                  {
+                    "time": 1.5,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0,
+                    "opacity": 1
+                  },
+                  {
+                    "time": 1.8,
+                    "tx": 0,
+                    "ty": 12,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0,
+                    "opacity": 1
+                  },
+                  {
+                    "time": 2.1,
+                    "tx": 0,
+                    "ty": -22,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -5,
+                    "opacity": 1
+                  },
+                  {
+                    "time": 2.4,
+                    "tx": -10,
+                    "ty": -25,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -15,
+                    "opacity": 1
+                  },
+                  {
+                    "time": 2.7,
+                    "tx": -5,
+                    "ty": 12,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0,
+                    "opacity": 1
+                  },
+                  {
+                    "time": 3.0,
+                    "tx": 0,
+                    "ty": -6,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0,
+                    "opacity": 1
+                  },
+                  {
+                    "time": 3.3,
+                    "tx": 0,
+                    "ty": 12,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0,
+                    "opacity": 1
+                  },
+                  {
+                    "time": 3.6,
+                    "tx": 0,
+                    "ty": -22,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 5,
+                    "opacity": 1
+                  },
+                  {
+                    "time": 3.9,
+                    "tx": 10,
+                    "ty": -25,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 15,
+                    "opacity": 1
+                  },
+                  {
+                    "time": 4.2,
+                    "tx": 5,
+                    "ty": 12,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0,
+                    "opacity": 1
+                  },
+                  {
+                    "time": 4.6,
+                    "tx": -60,
+                    "ty": -20,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -90,
+                    "opacity": 0.5
+                  },
+                  {
+                    "time": 4.9,
+                    "tx": -80,
+                    "ty": -20,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": -180,
+                    "opacity": 0
+                  },
+                  {
+                    "time": 5.2,
+                    "tx": 0,
+                    "ty": -65,
+                    "sx": 1,
+                    "sy": 1,
+                    "rotate": 0,
+                    "opacity": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "celebration_rays",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0.5,
+                    "sy": 0.5,
+                    "rotate": 0,
+                    "opacity": 0
+                  },
+                  {
+                    "time": 0.6,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "rotate": 45,
+                    "opacity": 0.5
+                  },
+                  {
+                    "time": 1.2,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "rotate": 90,
+                    "opacity": 0.8
+                  },
+                  {
+                    "time": 2.0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1.1,
+                    "sy": 1.1,
+                    "rotate": 150,
+                    "opacity": 1.0
+                  },
+                  {
+                    "time": 3.0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1.1,
+                    "sy": 1.1,
+                    "rotate": 225,
+                    "opacity": 1.0
+                  },
+                  {
+                    "time": 4.0,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1.1,
+                    "sy": 1.1,
+                    "rotate": 300,
+                    "opacity": 1.0
+                  },
+                  {
+                    "time": 4.6,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0.9,
+                    "sy": 0.9,
+                    "rotate": 330,
+                    "opacity": 0.5
+                  },
+                  {
+                    "time": 5.2,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 0.5,
+                    "sy": 0.5,
+                    "rotate": 360,
+                    "opacity": 0
+                  }
+                ]
+              },
+              {
+                "targetId": "gold_stars",
+                "keyframes": [
+                  {
+                    "time": 0,
+                    "tx": 0,
+                    "ty": 20,
+                    "sx": 0.5,
+                    "sy": 0.5,
+                    "opacity": 0
+                  },
+                  {
+                    "time": 1.2,
+                    "tx": 0,
+                    "ty": 0,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "opacity": 1.0
+                  },
+                  {
+                    "time": 2.1,
+                    "tx": -3,
+                    "ty": -15,
+                    "sx": 1.1,
+                    "sy": 1.1,
+                    "opacity": 1.0
+                  },
+                  {
+                    "time": 3.0,
+                    "tx": 3,
+                    "ty": -30,
+                    "sx": 1.0,
+                    "sy": 1.0,
+                    "opacity": 1.0
+                  },
+                  {
+                    "time": 4.0,
+                    "tx": -3,
+                    "ty": -45,
+                    "sx": 0.9,
+                    "sy": 0.9,
+                    "opacity": 0.7
+                  },
+                  {
+                    "time": 4.6,
+                    "tx": 0,
+                    "ty": -55,
+                    "sx": 0.7,
+                    "sy": 0.7,
+                    "opacity": 0.3
+                  },
+                  {
+                    "time": 5.2,
+                    "tx": 0,
+                    "ty": -65,
+                    "sx": 0.5,
+                    "sy": 0.5,
+                    "opacity": 0
                   }
                 ]
               }

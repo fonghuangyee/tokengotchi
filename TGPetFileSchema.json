@@ -181,6 +181,12 @@
         "stroke": {
           "type": "string",
           "description": "AI: Optional. Override the stroke color (hex or var(--key))."
+        },
+        "opacity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "AI: Optional. Override the opacity (0.0 to 1.0)."
         }
       },
       "additionalProperties": false

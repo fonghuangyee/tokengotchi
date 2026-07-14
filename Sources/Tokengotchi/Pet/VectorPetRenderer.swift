@@ -108,6 +108,7 @@ struct VectorPetRenderer {
                                   pet: TGPetFile,
                                   scale: CGFloat,
                                   defs: SVGDefinitions,
+                                  parentOpacity: CGFloat = 1.0,
                                   fillOverride: LayerColor? = nil,
                                   strokeOverride: LayerColor? = nil) {
         let t = transforms[layer.id] ?? .identity
@@ -125,9 +126,11 @@ struct VectorPetRenderer {
         animXform.translateX(by: -cx, yBy: -cy)
         animXform.concat()
 
-        // Apply group-level opacity
-        if layer.opacity < 1.0, let ctx = NSGraphicsContext.current?.cgContext {
-            ctx.setAlpha(layer.opacity)
+        // Apply group-level opacity (animation overrides SVG presentation attribute)
+        let localOpacity = t.opacity.map { CGFloat($0) } ?? layer.opacity
+        let finalOpacity = localOpacity * parentOpacity
+        if finalOpacity < 1.0, let ctx = NSGraphicsContext.current?.cgContext {
+            ctx.setAlpha(finalOpacity)
         }
 
         let currentFillOverride = t.fill ?? fillOverride
@@ -135,12 +138,12 @@ struct VectorPetRenderer {
 
         // Draw elements
         for element in layer.elements {
-            drawElement(element, pet: pet, defs: defs, fillOverride: currentFillOverride, strokeOverride: currentStrokeOverride)
+            drawElement(element, pet: pet, defs: defs, parentOpacity: finalOpacity, fillOverride: currentFillOverride, strokeOverride: currentStrokeOverride)
         }
 
         // Recurse into child layers
         for child in layer.children {
-            drawLayer(child, transforms: transforms, pet: pet, scale: scale, defs: defs, fillOverride: currentFillOverride, strokeOverride: currentStrokeOverride)
+            drawLayer(child, transforms: transforms, pet: pet, scale: scale, defs: defs, parentOpacity: finalOpacity, fillOverride: currentFillOverride, strokeOverride: currentStrokeOverride)
         }
 
         NSGraphicsContext.current?.restoreGraphicsState()
@@ -151,6 +154,7 @@ struct VectorPetRenderer {
     private static func drawElement(_ element: SVGElement,
                                     pet: TGPetFile,
                                     defs: SVGDefinitions,
+                                    parentOpacity: CGFloat,
                                     fillOverride: LayerColor? = nil,
                                     strokeOverride: LayerColor? = nil) {
         NSGraphicsContext.current?.saveGraphicsState()
@@ -166,8 +170,9 @@ struct VectorPetRenderer {
         }
 
         // Apply element-level opacity via context alpha
-        if element.opacity < 1.0, let ctx = NSGraphicsContext.current?.cgContext {
-            ctx.setAlpha(element.opacity)
+        let targetOpacity = element.opacity * parentOpacity
+        if targetOpacity < 1.0, let ctx = NSGraphicsContext.current?.cgContext {
+            ctx.setAlpha(targetOpacity)
         }
 
         // Build bezier path

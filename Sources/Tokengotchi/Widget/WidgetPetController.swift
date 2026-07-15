@@ -64,6 +64,7 @@ final class WidgetPetController: NSObject, NSWindowDelegate {
         panel.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
         panel.delegate = self
         panel.minSize = NSSize(width: 80, height: 80)
+        panel.contentAspectRatio = NSSize(width: 1, height: 1)
         panel.hidesOnDeactivate = false
 
         // Host the SwiftUI view
@@ -123,7 +124,9 @@ final class WidgetPetController: NSObject, NSWindowDelegate {
 
     func windowDidMove(_ notification: Notification) {
         guard let window = window else { return }
-        constrainWindowToScreen(window)
+        if !DragNSView.isCurrentlyDragging {
+            constrainWindowToScreen(window)
+        }
         let frame = window.frame
         petState.widgetX = frame.origin.x
         petState.widgetY = frame.origin.y
@@ -152,7 +155,9 @@ final class WidgetPetController: NSObject, NSWindowDelegate {
 
         // Clamp width/height to screen bounds
         let maxSide = min(screenFrame.width, screenFrame.height)
-        if frame.width > maxSide {
+        window.maxSize = NSSize(width: maxSide, height: maxSide)
+
+        if frame.width > maxSide || frame.height > maxSide {
             frame.size = NSSize(width: maxSide, height: maxSide)
         }
 
@@ -170,7 +175,7 @@ final class WidgetPetController: NSObject, NSWindowDelegate {
             newY = screenFrame.maxY - frame.height
         }
 
-        if newX != frame.origin.x || newY != frame.origin.y || frame.size.width != window.frame.width {
+        if newX != frame.origin.x || newY != frame.origin.y || frame.size.width != window.frame.width || frame.size.height != window.frame.height {
             frame.origin.x = newX
             frame.origin.y = newY
             window.setFrame(frame, display: true)

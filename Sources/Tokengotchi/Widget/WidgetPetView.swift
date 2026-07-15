@@ -64,6 +64,8 @@ struct DragWindowView: NSViewRepresentable {
 }
 
 class DragNSView: NSView {
+    static var isCurrentlyDragging = false
+
     private let petState: PetState
     private weak var hostWindow: NSWindow?
 
@@ -120,11 +122,14 @@ class DragNSView: NSView {
 
     private var initialMouseLocation: NSPoint?
     private var initialWindowOrigin: NSPoint?
+    private var initialScreen: NSScreen?
 
     override func mouseDown(with event: NSEvent) {
         guard let window = hostWindow else { return }
+        DragNSView.isCurrentlyDragging = true
         initialMouseLocation = NSEvent.mouseLocation
         initialWindowOrigin = window.frame.origin
+        initialScreen = window.screen ?? NSScreen.main
     }
 
     override func mouseDragged(with event: NSEvent) {
@@ -142,7 +147,9 @@ class DragNSView: NSView {
 
         // Clamp to screen bounds and detect boundary hits
         var hitWall = false
-        if let screen = window.screen ?? NSScreen.main {
+        // Determine the screen that contains the mouse pointer
+        let targetScreen = NSScreen.screens.first { $0.frame.contains(currentMouse) } ?? window.screen ?? NSScreen.main
+        if let screen = targetScreen {
             let sf = screen.visibleFrame
             let clampedX: CGFloat
             let clampedY: CGFloat
@@ -184,6 +191,49 @@ class DragNSView: NSView {
     override func mouseUp(with event: NSEvent) {
         initialMouseLocation = nil
         initialWindowOrigin = nil
+
+        if let window = hostWindow,
+           let initialScr = initialScreen,
+           let currentScr = window.screen,
+           initialScr != currentScr {
+            
+            let shorterSideA = min(initialScr.visibleFrame.width, initialScr.visibleFrame.height)
+            let shorterSideB = min(currentScr.visibleFrame.width, currentScr.visibleFrame.height)
+            let currentWidth = window.frame.width
+            // Scale proportionally, bounded between a minimum of 80 and the screen's shorter side
+            let newWidth = max(80, min(currentWidth * (shorterSideB / shorterSideA), shorterSideB))
+            
+            var newFrame = window.frame
+            let cx = newFrame.midX
+            let cy = newFrame.midY
+            newFrame.size = NSSize(width: newWidth, height: newWidth)
+            newFrame.origin.x = cx - newWidth / 2
+            newFrame.origin.y = cy - newWidth / 2
+            
+            let sf = currentScr.visibleFrame
+            newFrame.origin.x = max(sf.minX, min(newFrame.origin.x, sf.maxX - newWidth))
+            newFrame.origin.y = max(sf.minY, min(newFrame.origin.y, sf.maxY - newWidth))
+            
+            NSAnimationContext.runAnimationGroup { ctx in
+                ctx.duration = 0.25
+                ctx.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+                window.animator().setFrame(newFrame, display: true)
+            } completionHandler: { [weak self] in
+                Task { @MainActor [weak self] in
+                    guard let self = self else { return }
+                    self.petState.widgetWidth = newWidth
+                    self.petState.widgetHeight = newWidth
+                    self.petState.widgetX = newFrame.origin.x
+                    self.petState.widgetY = newFrame.origin.y
+                    self.petState.widgetScreenID = ScreenManager.shared.screenID(currentScr)
+                    DragNSView.isCurrentlyDragging = false
+                }
+            }
+        } else {
+            DragNSView.isCurrentlyDragging = false
+        }
+        
+        initialScreen = nil
     }
 
     // MARK: - Right-Click Context Menu (Size Presets)
@@ -220,7 +270,7 @@ class DragNSView: NSView {
 
     private func screenShortDimension() -> CGFloat {
         let screen = hostWindow?.screen ?? NSScreen.main ?? NSScreen.screens[0]
-        return min(screen.frame.width, screen.frame.height)
+        return min(screen.visibleFrame.width, screen.visibleFrame.height)
     }
 
     @objc private func openTokengotchi() {

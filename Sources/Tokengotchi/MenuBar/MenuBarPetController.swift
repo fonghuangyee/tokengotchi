@@ -110,7 +110,7 @@ final class MenuBarPetController: NSObject, NSMenuDelegate {
         switch petState.mode {
         case .idle: return "Idle"
         case .busy:
-            if let sub = petState.busySubstate {
+            if let sub = petState.busySubMode {
                 return "Working - \(sub.displayName)"
             }
             return "Working"
@@ -166,11 +166,11 @@ final class MenuBarPetController: NSObject, NSMenuDelegate {
         guard !petState.isSimulating else { return }
 
         switch event {
-        case .busy(let substate):
+        case .busy(let subMode):
             if petState.mode == .busy {
-                petState.setBusySubstate(substate)
+                petState.setBusySubMode(subMode)
             } else {
-                petState.setMode(.busy, substate: substate)
+                petState.setMode(.busy, subMode: subMode)
             }
         case .completed:
             petState.setMode(.completed)
@@ -179,7 +179,7 @@ final class MenuBarPetController: NSObject, NSMenuDelegate {
         case .contextWarning:
             break
         case .started:
-            if petState.mode != .busy { petState.setMode(.busy, substate: nil) }
+            if petState.mode != .busy { petState.setMode(.busy, subMode: nil) }
         case .disconnected:
             petState.setMode(.idle)
         case .idle:

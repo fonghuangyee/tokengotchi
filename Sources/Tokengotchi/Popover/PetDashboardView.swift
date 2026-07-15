@@ -227,7 +227,7 @@ struct HomeTab: View {
                             .font(.system(size: 18))
                     }
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(modeLabel(mode, substate: petState.busySubstate))
+                        Text(modeLabel(mode, subMode: petState.busySubMode))
                             .font(.system(size: 14, weight: .semibold, design: .rounded))
                             .foregroundColor(.white)
                         if let tool = tool {
@@ -338,10 +338,10 @@ struct HomeTab: View {
         Color(NSColor(hex: mode.accentColorHex) ?? .gray)
     }
 
-    func modeLabel(_ mode: PetMode, substate: BusySubstate?) -> String {
+    func modeLabel(_ mode: PetMode, subMode: BusySubMode?) -> String {
         switch mode {
         case .idle: return "Idle"
-        case .busy: return substate.map { $0.displayName + "…" } ?? "Working…"
+        case .busy: return subMode.map { $0.displayName + "…" } ?? "Working…"
         case .waiting: return "Waiting for you…"
         case .completed: return "Task complete! 🎉"
         case .error: return "Error!"

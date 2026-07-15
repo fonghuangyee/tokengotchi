@@ -18,7 +18,7 @@ final class PetState: ObservableObject {
 
     // Mode (current top-level state)
     @Published var mode: PetMode = .idle
-    @Published var busySubstate: BusySubstate? = nil
+    @Published var busySubMode: BusySubMode? = nil
 
     // Clip rotation (animation selection within a mode)
     @Published var currentClipID: String = ""
@@ -87,7 +87,7 @@ final class PetState: ObservableObject {
             .sink { [weak self] _ in
                 guard let self = self else { return }
                 // Re-trigger current mode so it picks a clip from the new pet
-                self.setMode(self.mode, substate: self.busySubstate)
+                self.setMode(self.mode, subMode: self.busySubMode)
             }
             .store(in: &cancellables)
             
@@ -98,12 +98,12 @@ final class PetState: ObservableObject {
     }
     
     // MARK: - Available Clips
-    private func availableClips(for targetMode: PetMode, substate: BusySubstate?) -> [AnimationClip] {
+    private func availableClips(for targetMode: PetMode, subMode: BusySubMode?) -> [AnimationClip] {
         let clips = PetManager.shared.activePet.toAnimationClips()
         let matching = clips.filter { clip in
             guard clip.modes.contains(targetMode) else { return false }
             if targetMode == .busy {
-                return clip.busySubstate == substate || clip.busySubstate == nil
+                return clip.busySubMode == subMode || clip.busySubMode == nil
             }
             return true
         }
@@ -111,14 +111,14 @@ final class PetState: ObservableObject {
     }
 
     // MARK: - Mode Transition
-    func setMode(_ newMode: PetMode, substate: BusySubstate? = nil) {
+    func setMode(_ newMode: PetMode, subMode: BusySubMode? = nil) {
         clipRotationTask?.cancel()
         clipRotationTask = nil
 
         mode = newMode
-        busySubstate = (newMode == .busy) ? substate : nil
+        busySubMode = (newMode == .busy) ? subMode : nil
 
-        let clips = availableClips(for: newMode, substate: busySubstate)
+        let clips = availableClips(for: newMode, subMode: busySubMode)
         let first = pickClip(from: clips)
         currentClipID = first.id
         animationTrigger = UUID()
@@ -140,24 +140,24 @@ final class PetState: ObservableObject {
         scheduleNextClipRotation()
     }
 
-    func setBusySubstate(_ substate: BusySubstate?) {
+    func setBusySubMode(_ subMode: BusySubMode?) {
         guard mode == .busy else {
-            setMode(.busy, substate: substate)
+            setMode(.busy, subMode: subMode)
             return
         }
-        if substate == busySubstate { return }
+        if subMode == busySubMode { return }
         
-        let oldSubstate = busySubstate
-        busySubstate = substate
+        let oldSubMode = busySubMode
+        busySubMode = subMode
         
         // 1. Gather all clips for the active pet
         let allClips = PetManager.shared.activePet.toAnimationClips()
         
-        // 2. Check if there are substate-specific clips for old and new substates
-        let hasNewSpecific = (substate != nil) && allClips.contains { $0.modes.contains(.busy) && $0.busySubstate == substate }
-        let hasOldSpecific = (oldSubstate != nil) && allClips.contains { $0.modes.contains(.busy) && $0.busySubstate == oldSubstate }
+        // 2. Check if there are submode-specific clips for old and new submodes
+        let hasNewSpecific = (subMode != nil) && allClips.contains { $0.modes.contains(.busy) && $0.busySubMode == subMode }
+        let hasOldSpecific = (oldSubMode != nil) && allClips.contains { $0.modes.contains(.busy) && $0.busySubMode == oldSubMode }
         
-        // 3. If neither substate has custom/specific clips, they both fallback to general busy.
+        // 3. If neither submode has custom/specific clips, they both fallback to general busy.
         // Keep playing the current clip if it is already general busy.
         if !hasNewSpecific && !hasOldSpecific {
             if currentClip.isGeneralBusy {
@@ -166,10 +166,10 @@ final class PetState: ObservableObject {
         }
         
         // 4. Transition to the next clip
-        let clips = availableClips(for: .busy, substate: busySubstate)
+        let clips = availableClips(for: .busy, subMode: busySubMode)
         
-        // Prioritize substate-specific clips if they exist
-        let specificClips = clips.filter { $0.busySubstate == substate }
+        // Prioritize submode-specific clips if they exist
+        let specificClips = clips.filter { $0.busySubMode == subMode }
         let targetClips = specificClips.isEmpty ? clips : specificClips
         
         let nextClip = pickClip(from: targetClips)
@@ -184,13 +184,13 @@ final class PetState: ObservableObject {
     // MARK: - Clip Rotation
     private func scheduleNextClipRotation() {
         clipRotationTask?.cancel()
-        let clips = availableClips(for: mode, substate: busySubstate)
+        let clips = availableClips(for: mode, subMode: busySubMode)
         guard clips.count > 1 else { return }
 
         let dwell = Double.random(in: 3.0...8.0)
         let clipsCapture = clips
         let modeCapture = mode
-        let substateCapture = busySubstate
+        let subModeCapture = busySubMode
         let isRandom = randomize
 
         clipRotationTask = Task { [weak self] in
@@ -198,7 +198,7 @@ final class PetState: ObservableObject {
             guard !Task.isCancelled else { return }
             await MainActor.run {
                 guard let self = self else { return }
-                guard self.mode == modeCapture, self.busySubstate == substateCapture else { return }
+                guard self.mode == modeCapture, self.busySubMode == subModeCapture else { return }
                 
                 let next: AnimationClip
                 if isRandom {

@@ -7,8 +7,10 @@ struct PetConfig: Codable, Equatable {
     
     // MARK: Default pet
     static var `default`: PetConfig {
-        guard let url = Bundle.main.url(forResource: "Kuramon", withExtension: "json"),
-              let data = try? Data(contentsOf: url),
+        let url = Bundle.main.url(forResource: "Kuramon", withExtension: "json", subdirectory: "pets")
+            ?? Bundle.main.url(forResource: "Kuramon", withExtension: "json")
+        guard let finalUrl = url,
+              let data = try? Data(contentsOf: finalUrl),
               let file = try? PetFile.parse(data) else {
             return PetConfig(name: "Fallback")
         }

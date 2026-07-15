@@ -1,10 +1,10 @@
 import Foundation
 
-// MARK: - Busy Substate
+// MARK: - Busy Submode
 // Antigravity's transcript reports fine-grained tool phases. We keep them as
-// optional substates under `.busy` so the renderer/UI can bias clip selection.
-// Other providers that can't report substates just emit `.busy` alone.
-public enum BusySubstate: String, CaseIterable, Codable, Hashable {
+// optional submodes under `.busy` so the renderer/UI can bias clip selection.
+// Other providers that can't report submodes just emit `.busy` alone.
+public enum BusySubMode: String, CaseIterable, Codable, Hashable {
     case reading, thinking, writing, searching, planning, building, running
 
     public var displayName: String { rawValue.capitalized }
@@ -51,28 +51,28 @@ public enum PetMode: String, CaseIterable, Codable, Hashable {
 // MARK: - Animation Clip
 // A single self-contained animation variant the renderer knows how to draw.
 // Clips are tagged with the modes they may be assigned to, and (optionally)
-// the busy substate they portray. A clip with `busySubstate == nil` that
-// includes `.busy` in `modes` is a "general busy" clip usable for any substate.
+// the busy submode they portray. A clip with `busySubMode == nil` that
+// includes `.busy` in `modes` is a "general busy" clip usable for any submode.
 public struct AnimationClip: Identifiable, Hashable, Codable {
     public let id: String
     public let name: String
     public let description: String
     public let duration: TimeInterval
     public let modes: [PetMode]
-    public let busySubstate: BusySubstate?
+    public let busySubMode: BusySubMode?
 
-    /// Usable for any `.busy` substate (not tied to a specific tool phase).
-    public var isGeneralBusy: Bool { modes.contains(.busy) && busySubstate == nil }
+    /// Usable for any `.busy` submode (not tied to a specific tool phase).
+    public var isGeneralBusy: Bool { modes.contains(.busy) && busySubMode == nil }
 
     public init(
-        id: String, name: String, description: String, duration: TimeInterval, modes: [PetMode], busySubstate: BusySubstate?
+        id: String, name: String, description: String, duration: TimeInterval, modes: [PetMode], busySubMode: BusySubMode?
     ) {
         self.id = id
         self.name = name
         self.description = description
         self.duration = duration
         self.modes = modes
-        self.busySubstate = busySubstate
+        self.busySubMode = busySubMode
     }
 }
 
@@ -85,7 +85,7 @@ extension AnimationClip {
             description: "Default fallback clip",
             duration: 1.0,
             modes: [mode],
-            busySubstate: nil
+            busySubMode: nil
         )
     }
 }

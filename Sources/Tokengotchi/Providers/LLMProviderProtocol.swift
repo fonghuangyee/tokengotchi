@@ -2,11 +2,11 @@ import Foundation
 import Combine
 
 // MARK: - Agent Events
-// Consolidated to 5 top-level modes. `.busy` carries an optional `BusySubstate`
+// Consolidated to 5 top-level modes. `.busy` carries an optional `BusySubMode`
 // for providers (currently Antigravity) that report fine-grained tool phases.
 public enum AgentEvent {
     case started(taskId: String)              // (kept for compatibility; providers may still emit)
-    case busy(substate: BusySubstate? = nil)  // agent is working
+    case busy(subMode: BusySubMode? = nil)  // agent is working
     case completed(taskId: String, totalTokens: Int)
     case failed(taskId: String, error: Error)
     case contextWarning(remainingTokens: Int) // informational only, no animation trigger

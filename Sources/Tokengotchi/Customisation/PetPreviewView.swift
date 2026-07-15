@@ -5,6 +5,7 @@ struct PetPreviewView: View {
     @ObservedObject var petState: PetState
     @ObservedObject var petManager: PetManager
     var previewPetName: String?
+    @Environment(\.dismiss) var dismiss
     
     enum EditSessionType: String, Codable {
         case localFile
@@ -131,11 +132,51 @@ struct PetPreviewView: View {
                             }
                         }
                     } else {
+                        // Reset or Delete button
+                        if petManager.isDefaultPet(targetPet.name) {
+                            if petManager.hasLocalOverride(targetPet.name) {
+                                Button(action: {
+                                    petManager.resetPet(targetPet)
+                                }) {
+                                    HStack {
+                                        Image(systemName: "arrow.counterclockwise")
+                                        Text("Reset to Default")
+                                    }
+                                    .font(.system(size: 11, weight: .medium))
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 6)
+                                    .background(Color.orange.opacity(0.8))
+                                    .cornerRadius(6)
+                                }
+                                .buttonStyle(.plain)
+                            }
+                        } else {
+                            Button(action: {
+                                petManager.deletePet(targetPet)
+                                dismiss()
+                            }) {
+                                HStack {
+                                    Image(systemName: "trash")
+                                    Text("Delete Pet")
+                                }
+                                .font(.system(size: 11, weight: .medium))
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 6)
+                                .background(Color.red.opacity(0.8))
+                                .cornerRadius(6)
+                            }
+                            .buttonStyle(.plain)
+                        }
+
                         Button(action: { showModeSelectionPopover = true }) {
                             HStack {
                                 Image(systemName: "wand.and.stars")
                                 Text("Edit with AI Agent")
                             }
+                            .font(.system(size: 11, weight: .medium))
+                            .foregroundColor(.white)
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
                             .background(Color.purple.opacity(0.8))

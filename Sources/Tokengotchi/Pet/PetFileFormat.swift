@@ -118,14 +118,14 @@ struct PetFile: Codable {
                     description: anim.description,
                     duration: anim.duration,
                     modes: [mode],
-                    busySubstate: nil
+                    busySubMode: nil
                 ))
             }
             
             // Submode animations
             if let subModes = modeConfig.subModes {
                 for sub in subModes {
-                    let substateEnum = BusySubstate(rawValue: sub.id)
+                    let subModeEnum = BusySubMode(rawValue: sub.id)
                     for anim in sub.animations {
                         clips.append(AnimationClip(
                             id: anim.id,
@@ -133,7 +133,7 @@ struct PetFile: Codable {
                             description: anim.description,
                             duration: anim.duration,
                             modes: [mode],
-                            busySubstate: substateEnum
+                            busySubMode: subModeEnum
                         ))
                     }
                 }

@@ -26,7 +26,7 @@ final class OpenAIProvider: LLMProviderProtocol {
     func sendMessage(_ message: String, model: String = "gpt-4o") {
         let taskId = UUID().uuidString
         subject.send(.started(taskId: taskId))
-        subject.send(.busy(substate: .thinking))
+        subject.send(.busy(subMode: .thinking))
         streamTask = Task {
             // TODO: Stream from https://api.openai.com/v1/chat/completions
             // Parse SSE chunks and emit .streaming(tokens:) per chunk

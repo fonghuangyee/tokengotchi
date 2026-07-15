@@ -14,15 +14,8 @@ mkdir -p "$RESOURCES_DIR"
 # 1. Copy AppIcon and Resources
 echo "🎨 Copying App Icon and Resources for Tokengotchi..."
 
-# Copy app icon
-cp Sources/Tokengotchi/Resources/AppIcon.icns "$RESOURCES_DIR/"
-
-# Copy Default Pet JSON
-cp Sources/Tokengotchi/Resources/Kuramon.json "$RESOURCES_DIR/"
-
-# Copy AI Prompt Templates to Resources
-cp AI_PROMPT_TEMPLATE.md "$RESOURCES_DIR/"
-cp AI_EDIT_PET_PROMPT_TEMPLATE.md "$RESOURCES_DIR/"
+# Copy all static resources recursively
+cp -R Resources/* "$RESOURCES_DIR/"
 
 # Generate Info.plist
 cat > "$APP_DIR/Contents/Info.plist" <<EOF

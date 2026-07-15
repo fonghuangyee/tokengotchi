@@ -179,7 +179,7 @@ struct PetWindowView: View {
     private var modeLabel: String {
         switch petState.mode {
         case .idle: return "Idle"
-        case .busy: return petState.busySubstate.map { $0.displayName + "…" } ?? "Working…"
+        case .busy: return petState.busySubMode.map { $0.displayName + "…" } ?? "Working…"
         case .waiting: return "Waiting for you…"
         case .completed: return "Task complete! 🎉"
         case .error: return "Error!"

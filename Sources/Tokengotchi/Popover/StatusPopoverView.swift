@@ -76,7 +76,7 @@ struct StatusPopoverView: View {
                 }
             }
 
-            if let sub = petState.busySubstate {
+            if let sub = petState.busySubMode {
                 Text(sub.displayName)
                     .font(.system(size: 11))
                     .foregroundColor(.secondary)

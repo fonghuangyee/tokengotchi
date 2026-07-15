@@ -370,27 +370,27 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject, @uncheck
             if previousPhase == .idle || previousPhase == .completed {
                 subject.send(.started(taskId: UUID().uuidString))
             }
-            subject.send(.busy(substate: .reading))
+            subject.send(.busy(subMode: .reading))
         case .thinking:
             if previousPhase == .idle || previousPhase == .completed {
                 subject.send(.started(taskId: UUID().uuidString))
             }
-            subject.send(.busy(substate: .thinking))
+            subject.send(.busy(subMode: .thinking))
         case .writing, .executing:
-            subject.send(.busy(substate: .writing))
+            subject.send(.busy(subMode: .writing))
         case .searching:
-            subject.send(.busy(substate: .searching))
+            subject.send(.busy(subMode: .searching))
         case .planning:
-            subject.send(.busy(substate: .planning))
+            subject.send(.busy(subMode: .planning))
         case .building:
-            subject.send(.busy(substate: .building))
+            subject.send(.busy(subMode: .building))
         case .running:
-            subject.send(.busy(substate: .running))
+            subject.send(.busy(subMode: .running))
         case .generic:
             if previousPhase == .idle || previousPhase == .completed {
                 subject.send(.started(taskId: UUID().uuidString))
             }
-            subject.send(.busy(substate: nil))
+            subject.send(.busy(subMode: nil))
         case .waitingForUser:
             subject.send(.waiting)
         case .completed:

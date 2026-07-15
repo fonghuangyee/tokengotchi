@@ -60,7 +60,6 @@ final class PetState: ObservableObject {
     @Published var petX: CGFloat = 200
     @Published var walkDirection: CGFloat = 1  // 1 = right, -1 = left
     @Published var isNearEdge: Bool = false
-    @Published var showConfetti: Bool = false
 
     // Backwards-compatible alias used by existing UI (read-only computed)
     var currentAnimation: PetMode { mode }
@@ -133,14 +132,7 @@ final class PetState: ObservableObject {
             scheduleTransientReturn(for: newMode, durationOverride: transientDurationInSeconds)
         }
 
-        if newMode == .completed {
-            showConfetti = true
-            let durationNanoseconds = UInt64((transientDurationInSeconds ?? 3.0) * 1_000_000_000)
-            Task { [weak self] in
-                try? await Task.sleep(nanoseconds: durationNanoseconds)
-                await MainActor.run { self?.showConfetti = false }
-            }
-        }
+
 
         scheduleNextClipRotation()
     }
@@ -151,12 +143,39 @@ final class PetState: ObservableObject {
             return
         }
         if substate == busySubstate { return }
+        
+        let oldSubstate = busySubstate
         busySubstate = substate
         
+        // 1. Gather all clips for the active pet
+        let allClips = PetManager.shared.activePet.toAnimationClips()
+        
+        // 2. Check if there are substate-specific clips for old and new substates
+        let hasNewSpecific = (substate != nil) && allClips.contains { $0.modes.contains(.busy) && $0.busySubstate == substate }
+        let hasOldSpecific = (oldSubstate != nil) && allClips.contains { $0.modes.contains(.busy) && $0.busySubstate == oldSubstate }
+        
+        // 3. If neither substate has custom/specific clips, they both fallback to general busy.
+        // Keep playing the current clip if it is already general busy.
+        if !hasNewSpecific && !hasOldSpecific {
+            if currentClip.isGeneralBusy {
+                return
+            }
+        }
+        
+        // 4. Transition to the next clip
         let clips = availableClips(for: .busy, substate: busySubstate)
-        currentClipID = pickClip(from: clips).id
-        animationTrigger = UUID()
-        animationStartTime = Date().timeIntervalSince1970
+        
+        // Prioritize substate-specific clips if they exist
+        let specificClips = clips.filter { $0.busySubstate == substate }
+        let targetClips = specificClips.isEmpty ? clips : specificClips
+        
+        let nextClip = pickClip(from: targetClips)
+        
+        if nextClip.id != currentClipID {
+            currentClipID = nextClip.id
+            animationTrigger = UUID()
+            animationStartTime = Date().timeIntervalSince1970
+        }
     }
 
     // MARK: - Clip Rotation

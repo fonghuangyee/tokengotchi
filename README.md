@@ -11,7 +11,7 @@ Your AI agent (Antigravity, OpenAI, Claude, Ollama) gets a **tiny pixel-art chib
 | Idle | Slow walk, yawns, sits down |
 | Thinking / typing | Paces, glows with an aura |
 | Long task (>10s) | Runs fast, sweat drops |
-| Task complete | Happy spin + confetti 🎉 |
+| Task complete | Happy spin 🎉 |
 | Error | Trips, shakes head 😱 |
 | Reaches screen edge | Grabs edge, scrambles back |
 | App wake | Stretches and waves |

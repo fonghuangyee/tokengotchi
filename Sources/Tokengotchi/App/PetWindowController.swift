@@ -77,8 +77,8 @@ final class PetWindowController: NSObject, NSWindowDelegate {
         )
 
         let hostingView = NSHostingView(rootView: contentView)
-        let width: CGFloat = 500
-        let height: CGFloat = 620
+        let width: CGFloat = 560
+        let height: CGFloat = 600
 
         let w = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: width, height: height),
@@ -87,10 +87,11 @@ final class PetWindowController: NSObject, NSWindowDelegate {
             defer: false
         )
         w.title = "Tokengotchi"
+        w.appearance = NSAppearance(named: .darkAqua)
         w.contentView = hostingView
         w.delegate = self
         w.center()
-        w.minSize = NSSize(width: 420, height: 500)
+        w.minSize = NSSize(width: 500, height: 500)
         w.isReleasedWhenClosed = false
         w.titlebarAppearsTransparent = true
         w.backgroundColor = NSColor(red: 0.07, green: 0.07, blue: 0.11, alpha: 1.0)

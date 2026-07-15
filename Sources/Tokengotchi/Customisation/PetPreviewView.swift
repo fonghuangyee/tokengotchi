@@ -95,18 +95,18 @@ struct PetPreviewView: View {
                                 }
                                 .buttonStyle(.plain)
                                 
-                                if sessionType == .embeddedJSON {
-                                    Button(action: pasteFromClipboard) {
-                                        Text("Paste JSON")
-                                            .font(.caption)
-                                            .foregroundColor(.white)
-                                            .padding(.horizontal, 8)
-                                            .padding(.vertical, 4)
-                                            .background(Color.purple.opacity(0.8))
-                                            .cornerRadius(4)
+                                    if sessionType == .embeddedJSON {
+                                        Button(action: pasteFromClipboard) {
+                                            Text("Paste JSON")
+                                                .font(.caption)
+                                                .foregroundColor(.white)
+                                                .padding(.horizontal, 8)
+                                                .padding(.vertical, 4)
+                                                .background(Color.accentColor.opacity(0.8))
+                                                .cornerRadius(4)
+                                        }
+                                        .buttonStyle(.plain)
                                     }
-                                    .buttonStyle(.plain)
-                                }
                                 
                                 Button(action: saveAndEndSession) {
                                     Text("Save & End")
@@ -179,7 +179,7 @@ struct PetPreviewView: View {
                             .foregroundColor(.white)
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
-                            .background(Color.purple.opacity(0.8))
+                            .background(Color.accentColor.opacity(0.8))
                             .cornerRadius(6)
                         }
                         .buttonStyle(.plain)
@@ -203,7 +203,7 @@ struct PetPreviewView: View {
                                     VStack(alignment: .leading, spacing: 4) {
                                         HStack {
                                             Image(systemName: "macbook.and.iphone")
-                                                .foregroundColor(.purple)
+                                                .foregroundColor(.accentColor)
                                             Text("Local Agent (Auto-Sync)")
                                                 .font(.system(size: 12, weight: .semibold))
                                                 .foregroundColor(.white)
@@ -229,7 +229,7 @@ struct PetPreviewView: View {
                                     VStack(alignment: .leading, spacing: 4) {
                                         HStack {
                                             Image(systemName: "doc.on.doc")
-                                                .foregroundColor(.purple)
+                                                .foregroundColor(.accentColor)
                                             Text("Remote Agent (Embed JSON)")
                                                 .font(.system(size: 12, weight: .semibold))
                                                 .foregroundColor(.white)

@@ -62,7 +62,7 @@ struct AIPromptGeneratorView: View {
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 12)
-                    .background(Color.purple.opacity(0.8))
+                    .background(Color.accentColor.opacity(0.8))
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
                 .buttonStyle(.plain)

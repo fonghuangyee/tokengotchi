@@ -160,9 +160,28 @@ struct AIPromptGeneratorView: View {
     }
 
     private func importClipboard() {
+        importClipboard(retryCount: 0)
+    }
+    
+    private func importClipboard(retryCount: Int) {
         guard let text = NSPasteboard.general.string(forType: .string) else {
             importError = "Clipboard is empty."
             return
+        }
+        
+        let isStalePrompt = text.contains("You are an expert Pet Designer") || text.contains("Before generating any code, you MUST interview the user")
+        
+        if isStalePrompt {
+            if retryCount < 5 {
+                // Clipboard hasn't synchronized yet, retry in 100ms
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.importClipboard(retryCount: retryCount + 1)
+                }
+                return
+            } else {
+                importError = "Clipboard still contains the copied prompt. Please copy the AI agent's response and try again."
+                return
+            }
         }
         
         let jsonStr = extractJSON(from: text)

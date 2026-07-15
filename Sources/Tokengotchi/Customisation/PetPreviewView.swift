@@ -368,9 +368,28 @@ struct PetPreviewView: View {
     }
     
     private func pasteFromClipboard() {
+        pasteFromClipboard(retryCount: 0)
+    }
+    
+    private func pasteFromClipboard(retryCount: Int) {
         guard let text = NSPasteboard.general.string(forType: .string) else {
             fileWatcher.error = NSError(domain: "Tokengotchi", code: 1, userInfo: [NSLocalizedDescriptionKey: "Clipboard is empty."])
             return
+        }
+        
+        let isStalePrompt = text.contains("You are an expert Pet Designer") || text.contains("USE THIS EXISTING JSON AS A BASE")
+        
+        if isStalePrompt {
+            if retryCount < 5 {
+                // Clipboard hasn't synchronized yet, retry in 100ms
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.pasteFromClipboard(retryCount: retryCount + 1)
+                }
+                return
+            } else {
+                fileWatcher.error = NSError(domain: "Tokengotchi", code: 2, userInfo: [NSLocalizedDescriptionKey: "Clipboard still contains the copied prompt. Please copy the AI agent's response and try again."])
+                return
+            }
         }
         
         let jsonStr = extractJSON(from: text)

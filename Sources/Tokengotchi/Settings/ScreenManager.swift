@@ -1,5 +1,6 @@
 import Foundation
 import AppKit
+import CoreGraphics
 
 // MARK: - Screen Manager
 // Resolves which NSScreen the pet overlay should appear on.
@@ -52,5 +53,14 @@ extension NSScreen {
     /// True if this screen currently shows the macOS menu bar.
     var hasMenuBar: Bool {
         return self == NSScreen.screens.first
+    }
+
+    /// True if this screen is the built-in display (e.g. MacBook screen).
+    var isBuiltIn: Bool {
+        guard let screenNumber = deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? NSNumber else {
+            return false
+        }
+        let displayID = CGDirectDisplayID(screenNumber.uint32Value)
+        return CGDisplayIsBuiltin(displayID) != 0
     }
 }

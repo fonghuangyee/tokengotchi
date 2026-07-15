@@ -29,8 +29,8 @@ struct PetPreviewView: View {
         let animations: [TGAnimationDef]
     }
     
-    var dockGroupedAnimations: [AnimationGroup] {
-        return targetPet.dock.states.map { state in
+    var petGroupedAnimations: [AnimationGroup] {
+        return targetPet.pet.states.map { state in
             var allAnims = state.animations
             if let subs = state.subStates {
                 allAnims.append(contentsOf: subs.flatMap { $0.animations })
@@ -39,8 +39,8 @@ struct PetPreviewView: View {
         }.filter { !$0.animations.isEmpty }
     }
     
-    var menuGroupedAnimations: [AnimationGroup] {
-        return targetPet.menuBar.states.map { state in
+    var iconGroupedAnimations: [AnimationGroup] {
+        return targetPet.icon.states.map { state in
             var allAnims = state.animations
             if let subs = state.subStates {
                 allAnims.append(contentsOf: subs.flatMap { $0.animations })
@@ -227,19 +227,19 @@ struct PetPreviewView: View {
             
             ScrollView(.vertical, showsIndicators: true) {
                 VStack(spacing: 30) {
-                    // --- Dock Icon Section ---
+                    // --- Pet Section ---
                     VStack(alignment: .leading, spacing: 16) {
-                        Text("Dock Animations")
+                        Text("Pet Animations")
                             .font(.headline)
                             .foregroundColor(.white)
                             .padding(.horizontal)
                         
                         LazyVGrid(columns: columns, spacing: 20) {
-                            ForEach(dockGroupedAnimations) { group in
+                            ForEach(petGroupedAnimations) { group in
                                 ForEach(group.animations, id: \.id) { anim in
                                     AnimationGridItem(
                                         anim: anim,
-                                        context: .main,
+                                        context: .pet,
                                         petState: petState,
                                         activePet: targetPet
                                     )
@@ -251,19 +251,19 @@ struct PetPreviewView: View {
                     
                     Divider().background(Color.white.opacity(0.2)).padding(.horizontal)
                     
-                    // --- Menu Bar Section ---
+                    // --- Icon Section ---
                     VStack(alignment: .leading, spacing: 16) {
-                        Text("Menu Bar Animations")
+                        Text("Icon Animations")
                             .font(.headline)
                             .foregroundColor(.white)
                             .padding(.horizontal)
                         
                         LazyVGrid(columns: columns, spacing: 20) {
-                            ForEach(menuGroupedAnimations) { group in
+                            ForEach(iconGroupedAnimations) { group in
                                 ForEach(group.animations, id: \.id) { anim in
                                     AnimationGridItem(
                                         anim: anim,
-                                        context: .menuBar,
+                                        context: .icon,
                                         petState: petState,
                                         activePet: targetPet
                                     )
@@ -458,7 +458,7 @@ struct AnimationGridItem: View {
                     context: context
                 )
                 
-                if context == .menuBar {
+                if context == .icon {
                     Image(nsImage: img)
                         .resizable()
                         .renderingMode(.template)

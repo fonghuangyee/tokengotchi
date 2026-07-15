@@ -62,13 +62,72 @@ The pet will now animate in real-time as your agent works!
 ```json
 {
   "name": "Nebula",
-  "base_color": "#8B5CF6",
-  "eye_color": "#F59E0B",
-  "personality": "mischievous",
-  "accessories": ["antenna", "glasses"],
-  "walk_speed": 1.8,
-  "aura_color": "#06B6D4",
-  "background_theme": "galaxy"
+  "palette": {
+    "base": "#8B5CF6",
+    "accent": "#F59E0B"
+  },
+  "icon": {
+    "svgs": [
+      {
+        "id": "nebula_icon_base",
+        "svg": "<svg viewBox='0 0 100 100'><g id='body'><circle cx='50' cy='50' r='40' fill='var(--base)'/></g></svg>"
+      }
+    ],
+    "states": [
+      {
+        "id": "idle",
+        "animations": [
+          {
+            "id": "nebula_icon_idle",
+            "name": "Icon Idle",
+            "description": "Subtle breathing",
+            "duration": 1.0,
+            "tracks": [
+              {
+                "targetId": "body",
+                "keyframes": [
+                  { "time": 0.0, "sy": 1.0 },
+                  { "time": 0.5, "sy": 1.05 },
+                  { "time": 1.0, "sy": 1.0 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "pet": {
+    "svgs": [
+      {
+        "id": "nebula_pet_base",
+        "svg": "<svg viewBox='0 0 100 100'><g id='body'><circle cx='50' cy='50' r='40' fill='var(--base)'/></g></svg>"
+      }
+    ],
+    "states": [
+      {
+        "id": "idle",
+        "animations": [
+          {
+            "id": "nebula_pet_idle",
+            "name": "Pet Idle",
+            "description": "Breathing with ear twitch",
+            "duration": 1.5,
+            "tracks": [
+              {
+                "targetId": "body",
+                "keyframes": [
+                  { "time": 0.0, "sy": 1.0 },
+                  { "time": 0.75, "sy": 1.1 },
+                  { "time": 1.5, "sy": 1.0 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }
 ```
 

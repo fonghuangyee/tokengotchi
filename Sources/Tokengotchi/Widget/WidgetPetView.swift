@@ -202,17 +202,15 @@ class DragNSView: NSView {
             let currentWidth = window.frame.width
             // Scale proportionally, bounded between a minimum of 80 and the screen's shorter side
             let newWidth = max(80, min(currentWidth * (shorterSideB / shorterSideA), shorterSideB))
-            
-            var newFrame = window.frame
-            let cx = newFrame.midX
-            let cy = newFrame.midY
-            newFrame.size = NSSize(width: newWidth, height: newWidth)
-            newFrame.origin.x = cx - newWidth / 2
-            newFrame.origin.y = cy - newWidth / 2
-            
+
+            // Snap to the center of the new screen when crossing screens
             let sf = currentScr.visibleFrame
-            newFrame.origin.x = max(sf.minX, min(newFrame.origin.x, sf.maxX - newWidth))
-            newFrame.origin.y = max(sf.minY, min(newFrame.origin.y, sf.maxY - newWidth))
+            let newFrame = NSRect(
+                x: sf.midX - newWidth / 2,
+                y: sf.midY - newWidth / 2,
+                width: newWidth,
+                height: newWidth
+            )
             
             NSAnimationContext.runAnimationGroup { ctx in
                 ctx.duration = 0.25
@@ -226,6 +224,7 @@ class DragNSView: NSView {
                     self.petState.widgetX = newFrame.origin.x
                     self.petState.widgetY = newFrame.origin.y
                     self.petState.widgetScreenID = ScreenManager.shared.screenID(currentScr)
+                    self.petState.widgetScreenIsBuiltIn = currentScr.isBuiltIn
                     DragNSView.isCurrentlyDragging = false
                 }
             }
@@ -307,8 +306,13 @@ class DragNSView: NSView {
             window.animator().setFrame(frame, display: true)
         } completionHandler: { [weak self] in
             Task { @MainActor [weak self] in
-                self?.petState.widgetX = frame.origin.x
-                self?.petState.widgetY = frame.origin.y
+                guard let self = self else { return }
+                self.petState.widgetX = frame.origin.x
+                self.petState.widgetY = frame.origin.y
+                if let screen = window.screen {
+                    self.petState.widgetScreenID = ScreenManager.shared.screenID(screen)
+                    self.petState.widgetScreenIsBuiltIn = screen.isBuiltIn
+                }
             }
         }
     }
@@ -352,10 +356,15 @@ class DragNSView: NSView {
             window.animator().setFrame(frame, display: true)
         } completionHandler: { [weak self] in
             Task { @MainActor [weak self] in
-                self?.petState.widgetWidth = side
-                self?.petState.widgetHeight = side
-                self?.petState.widgetX = frame.origin.x
-                self?.petState.widgetY = frame.origin.y
+                guard let self = self else { return }
+                self.petState.widgetWidth = side
+                self.petState.widgetHeight = side
+                self.petState.widgetX = frame.origin.x
+                self.petState.widgetY = frame.origin.y
+                if let screen = window.screen {
+                    self.petState.widgetScreenID = ScreenManager.shared.screenID(screen)
+                    self.petState.widgetScreenIsBuiltIn = screen.isBuiltIn
+                }
             }
         }
     }

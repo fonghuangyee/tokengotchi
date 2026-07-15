@@ -13,32 +13,44 @@ struct TGPetFile: Codable {
     /// Optional palette for colors (var(--key) in SVGs)
     let palette: [String: String]?
 
-    /// Menu Bar context definition (SVG definitions and animation states).
-    let menuBar: TGPetContext
+    /// Icon context definition (SVG definitions and animation states).
+    let icon: TGPetContext
     
-    /// Dock / Main App context definition.
-    let dock: TGPetContext
+    /// Pet / Main App context definition.
+    let pet: TGPetContext
 
     enum CodingKeys: String, CodingKey {
-        case name, palette, menuBar, dock
+        case name, palette, icon, pet, menuBar, dock
     }
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.name = try container.decode(String.self, forKey: .name)
         self.palette = try container.decodeIfPresent([String: String].self, forKey: .palette)
-        self.dock = try container.decode(TGPetContext.self, forKey: .dock)
         
-        // Fallback to dock if menuBar is missing
-        self.menuBar = try container.decodeIfPresent(TGPetContext.self, forKey: .menuBar) ?? self.dock
+        if let decodedPet = try container.decodeIfPresent(TGPetContext.self, forKey: .pet) {
+            self.pet = decodedPet
+        } else {
+            self.pet = try container.decode(TGPetContext.self, forKey: .dock)
+        }
+        
+        if let decodedIcon = try container.decodeIfPresent(TGPetContext.self, forKey: .icon) {
+            self.icon = decodedIcon
+        } else if let decodedMenuBar = try container.decodeIfPresent(TGPetContext.self, forKey: .menuBar) {
+            self.icon = decodedMenuBar
+        } else {
+            self.icon = self.pet
+        }
     }
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encodeIfPresent(palette, forKey: .palette)
-        try container.encode(menuBar, forKey: .menuBar)
-        try container.encode(dock, forKey: .dock)
+        try container.encode(icon, forKey: .icon)
+        try container.encode(pet, forKey: .pet)
+        try container.encode(icon, forKey: .menuBar)
+        try container.encode(pet, forKey: .dock)
     }
 
     // MARK: - Parsing
@@ -72,15 +84,15 @@ struct TGPetFile: Codable {
         // 3. The `svg` property is only allowed if `tracks` is used.
         // 4. Context states cannot be empty.
         
-        if dock.states.isEmpty {
-            throw ImportError.invalidFormat("Dock context must have at least one state.")
+        if pet.states.isEmpty {
+            throw ImportError.invalidFormat("Pet context must have at least one state.")
         }
-        if menuBar.states.isEmpty {
-            throw ImportError.invalidFormat("MenuBar context must have at least one state.")
+        if icon.states.isEmpty {
+            throw ImportError.invalidFormat("Icon context must have at least one state.")
         }
         
-        try menuBar.validate()
-        try dock.validate()
+        try icon.validate()
+        try pet.validate()
     }
 
     // MARK: - Conversion
@@ -90,9 +102,9 @@ struct TGPetFile: Codable {
         PetConfig(name: name)
     }
 
-    /// Convert the dock states to AnimationClip array for backwards compatibility with PetState.
-    func toAnimationClips(forContext contextName: String = "dock") -> [AnimationClip] {
-        let targetContext = (contextName == "menuBar") ? menuBar : dock
+    /// Convert the pet or icon states to AnimationClip array for backwards compatibility with PetState.
+    func toAnimationClips(forContext contextName: String = "pet") -> [AnimationClip] {
+        let targetContext = (contextName == "icon" || contextName == "menuBar") ? icon : pet
         var clips = [AnimationClip]()
         
         for state in targetContext.states {

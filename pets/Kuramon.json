@@ -1,5 +1,5 @@
 {
-  "menuBar": {
+  "icon": {
     "svgs": [
       {
         "id": "menu_base",
@@ -489,7 +489,7 @@
       }
     ]
   },
-  "dock": {
+  "pet": {
     "svgs": [
       {
         "id": "dock_base",

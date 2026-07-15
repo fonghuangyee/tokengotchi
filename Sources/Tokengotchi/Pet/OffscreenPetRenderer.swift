@@ -14,17 +14,17 @@ struct OffscreenPetRenderer {
         let duration: TimeInterval
         let tracks: [KeyframeTrack]
         let svgString: String
-        let targetContext = contextName == "menuBar" ? pet.menuBar : pet.dock
+        let targetContext = (contextName == "menuBar" || contextName == "icon") ? pet.icon : pet.pet
 
         var resolvedAnimation = targetContext.findAnimation(id: clipID)
         
-        // If not found in target context, the clipID is likely from another context (e.g. dock).
-        // Find its corresponding state in dock, and pick the matching state in targetContext.
-        if resolvedAnimation == nil && contextName != "dock" {
+        // If not found in target context, the clipID is likely from another context (e.g. pet/dock).
+        // Find its corresponding state in pet context, and pick the matching state in targetContext.
+        if resolvedAnimation == nil && contextName != "dock" && contextName != "pet" {
             var topLevelStateId: String?
             var subStateId: String?
             
-            for state in pet.dock.states {
+            for state in pet.pet.states {
                 if state.animations.contains(where: { $0.id == clipID }) {
                     topLevelStateId = state.id
                     break

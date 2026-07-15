@@ -6,7 +6,7 @@ import Foundation
 struct DefaultPetData {
     static let jsonString = #"""
 {
-  "menuBar": {
+  "icon": {
     "svgs": [
       {
         "id": "menu_base",
@@ -496,7 +496,7 @@ struct DefaultPetData {
       }
     ]
   },
-  "dock": {
+  "pet": {
     "svgs": [
       {
         "id": "dock_base",

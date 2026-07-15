@@ -3,7 +3,7 @@
   "title": "TGPetFile",
   "description": "AI Instruction: This schema defines the structure for a Tokengotchi Pet (.json). You must generate a strictly valid JSON file conforming to this structure.",
   "type": "object",
-  "required": ["name", "dock", "menuBar"],
+  "required": ["name", "pet", "icon"],
   "properties": {
     "name": {
       "type": "string",
@@ -18,17 +18,17 @@
         "description": "AI: Must be a valid hex color code (e.g. #FF0000)."
       }
     },
-    "menuBar": {
+    "icon": {
       "allOf": [
         { "$ref": "#/definitions/TGPetContext" }
       ],
-      "description": "AI: The context for the Mac menu bar. All SVGs should ideally use viewBox='0 0 100 100'. IMPORTANT: The menuBar is scaled down drastically to a 22x22 system icon. Keep all shapes and movements centered and animations extremely subtle so they remain legible at tiny sizes."
+      "description": "AI: The context for the Mac menu bar icon. All SVGs should ideally use viewBox='0 0 100 100'. IMPORTANT: The icon is scaled down drastically to a 22x22 system icon. Keep all shapes and movements centered and animations extremely subtle so they remain legible at tiny sizes."
     },
-    "dock": {
+    "pet": {
       "allOf": [
         { "$ref": "#/definitions/TGPetContext" }
       ],
-      "description": "AI: The context for the main desktop/dock renderer. All SVGs should ideally use viewBox='0 0 100 100'. This renders into a larger 128x128 canvas, meaning animations can be much more expressive and take up a larger area."
+      "description": "AI: The context for the main pet renderer (shown in both the macOS Dock and the desktop widget). All SVGs should ideally use viewBox='0 0 100 100'. This renders into a larger 128x128 canvas, meaning animations can be much more expressive and take up a larger area."
     }
   },
   "additionalProperties": false,

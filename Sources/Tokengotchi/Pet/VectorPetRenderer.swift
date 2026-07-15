@@ -5,14 +5,14 @@ struct VectorPetRenderer {
     static let canvasSize: CGFloat = 128
 
     enum RenderingContext {
-        case main
-        case menuBar
+        case pet
+        case icon
     }
 
     @MainActor
-    static func renderStaticIcon(size: CGFloat, context: RenderingContext = .main) -> NSImage {
+    static func renderStaticIcon(size: CGFloat, context: RenderingContext = .pet) -> NSImage {
         let pet = PetManager.defaultPet()
-        let targetContext = context == .menuBar ? pet.menuBar : pet.dock
+        let targetContext = context == .icon ? pet.icon : pet.pet
         let firstAnimationId = targetContext.states.first?.animations.first?.id ?? ""
 
         let sourceImage = renderFrame(
@@ -29,10 +29,10 @@ struct VectorPetRenderer {
     static func renderFrame(
         clipID: String, pet: TGPetFile, time: TimeInterval,
         stamina: Double? = nil, modelName: String? = nil,
-        context: RenderingContext = .main,
+        context: RenderingContext = .pet,
         customSize: CGFloat = canvasSize
     ) -> NSImage {
-        let targetContext = context == .menuBar ? pet.menuBar : pet.dock
+        let targetContext = context == .icon ? pet.icon : pet.pet
 
         // 1. Find the animation entry to get duration
         let duration: TimeInterval
@@ -63,7 +63,7 @@ struct VectorPetRenderer {
         let normalizedTime = time.truncatingRemainder(dividingBy: duration)
         let frameIndex = Int(normalizedTime * frameRate)
         
-        let contextKey = context == .menuBar ? "menuBar" : "main"
+        let contextKey = context == .icon ? "icon" : "pet"
         let cacheKey = "\(clipID)-\(contextKey)-\(Int(customSize))-\(frameIndex)"
         
         if let cachedImage = PetFrameCache.shared.getFrame(key: cacheKey) {

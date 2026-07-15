@@ -55,6 +55,9 @@ final class PetState: ObservableObject {
     @Published var widgetScreenID: String? = nil {
         didSet { save() }
     }
+    @Published var widgetScreenIsBuiltIn: Bool = true {
+        didSet { save() }
+    }
 
     // Position in menu bar overlay
     @Published var petX: CGFloat = 200
@@ -276,6 +279,7 @@ private struct PetSaveState: Codable {
     var widgetWidth: CGFloat?
     var widgetHeight: CGFloat?
     var widgetScreenID: String?
+    var widgetScreenIsBuiltIn: Bool?
 
     @MainActor
     init(from state: PetState) {
@@ -288,6 +292,7 @@ private struct PetSaveState: Codable {
         widgetWidth = state.widgetWidth
         widgetHeight = state.widgetHeight
         widgetScreenID = state.widgetScreenID
+        widgetScreenIsBuiltIn = state.widgetScreenIsBuiltIn
     }
 
     @MainActor
@@ -335,6 +340,9 @@ private struct PetSaveState: Codable {
         }
         if let widgetScreenID = widgetScreenID {
             state.widgetScreenID = widgetScreenID
+        }
+        if let widgetScreenIsBuiltIn = widgetScreenIsBuiltIn {
+            state.widgetScreenIsBuiltIn = widgetScreenIsBuiltIn
         }
     }
 }

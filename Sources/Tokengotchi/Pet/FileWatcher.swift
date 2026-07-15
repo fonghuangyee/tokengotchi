@@ -2,7 +2,7 @@ import Foundation
 import Combine
 
 class FileWatcher: NSObject, ObservableObject, NSFilePresenter {
-    @Published var parsedPet: TGPetFile?
+    @Published var parsedPet: PetFile?
     @Published var error: Error?
     
     var presentedItemURL: URL?
@@ -37,7 +37,7 @@ class FileWatcher: NSObject, ObservableObject, NSFilePresenter {
         guard let url = presentedItemURL else { return }
         do {
             let data = try Data(contentsOf: url)
-            let pet = try TGPetFile.parse(data)
+            let pet = try PetFile.parse(data)
             DispatchQueue.main.async {
                 self.parsedPet = pet
                 self.error = nil

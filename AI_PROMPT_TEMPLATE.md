@@ -7,10 +7,10 @@ Your reputation depends on the PET animations (used in both dock and desktop wid
 Before generating any code, you MUST interview the user to design the pet sequentially. Ask these questions ONE AT A TIME, waiting for the user's response before proceeding to the next step:
 
 1. **Initial Reference:** Ask the user to upload a pet image or describe the pet. Remind them that uploading a pet image usually creates a better result. **Use your `ask_question` tool to invite their input.**
-2. **Animation Design (Iterative):** For each state (`idle`, `busy`, `waiting`, `completed`, `error`), ask the user to describe the animation they want. **Use your `ask_question` tool to invite their input.**
+2. **Animation Design (Iterative):** For each mode (`idle`, `busy`, `waiting`, `completed`, `error`), ask the user to describe the animation they want. **Use your `ask_question` tool to invite their input.**
     - After the user describes the animation, suggest whether to use `track` (CSS transforms) or `frames` (frame-by-frame shape morphing) based on their description. Explain what tracks and frames are briefly, provide your recommended choice, and let the user decide. **Use your `ask_question` tool to provide clickable buttons for their decision. List the recommended option first and prefix it with "(Recommended)", for example: ["(Recommended) Use Tracks", "Use Frames"].**
-    - Once they decide, ask if they want to create another animation for this state or if you should proceed to the next state. **Use your `ask_question` tool to provide clickable buttons for this choice: ["Add another animation", "Move to next state"].**
-    - Repeat this process until all 5 states have been covered.
+    - Once they decide, ask if they want to create another animation for this mode or if you should proceed to the next mode. **Use your `ask_question` tool to provide clickable buttons for this choice: ["Add another animation", "Move to next mode"].**
+    - Repeat this process until all 5 modes have been covered.
 3. **Pet Name:** At the end, ask the user for the pet name. **Use your `ask_question` tool to collect the final pet name.**
 
 Do not proceed to Step 2 or generate JSON until the entire interview is complete.
@@ -25,7 +25,7 @@ If the user uploads an image, you MUST draw clean, separated SVG vector paths th
 
 Once you have the answers, before writing JSON, briefly plan in your own words (not shown to the schema, just your own reasoning):
 - What is this creature's silhouette and what 3-6 independently-movable parts does it have (e.g. body, head, left ear, right ear, left arm, right arm, tail, eyes)? Every part you name here should get its own `<g id="...">` and, in pet animations, its own keyframe track.
-- For each state (idle, busy, waiting, completed, error), what is the *one clear physical action* that reads instantly, even as a silent looping GIF? ("shivers with anticipation," "does a triumphant double-hop with arm pump," "deflates and slumps," "spins searching left-right like a meerkat") — not "moves slightly."
+- For each mode (idle, busy, waiting, completed, error), what is the *one clear physical action* that reads instantly, even as a silent looping GIF? ("shivers with anticipation," "does a triumphant double-hop with arm pump," "deflates and slumps," "spins searching left-right like a meerkat") — not "moves slightly."
 - Which moments deserve `frames` instead of `tracks`? Reserve `frames` for hero moments (completed celebration, error reaction, a surprising idle easter egg) where shape-morphing (squash/stretch, mouth/eye shape changes) matters more than simple transform animation.
 
 ## Step 3: Generate the JSON
@@ -36,8 +36,8 @@ Follow the JSON Schema below EXACTLY. It is provided at the end of this prompt �
 
 For every pet animation you write:
 - **Use at least 4 simultaneous keyframe tracks** (or an equivalent multi-part frame animation), each targeting a different named group (e.g. body, head, both ears/limbs independently, eyes). Two tracks moving in lockstep is not multi-part motion — different parts should move with different timing/offsets/magnitudes so it doesn't read as one rigid block.
-- **Rotation swings should be visually obvious**: aim for at least 8-15° of rotation on limbs/ears/tail for idle-level motion, and 20-40°+ for busy/completed/error states. A 2° wobble is invisible at 128px and is a failure.
-- **Translation should move parts a meaningful fraction of the canvas**: on a 0-100 viewBox, aim for translations of at least 3-8 units for idle "breathing" motion, and 10-20+ units for energetic states (hops, lunges, recoils). If every `tx`/`ty` value you write is under 3, go back and exaggerate.
+- **Rotation swings should be visually obvious**: aim for at least 8-15° of rotation on limbs/ears/tail for idle-level motion, and 20-40°+ for busy/completed/error modes. A 2° wobble is invisible at 128px and is a failure.
+- **Translation should move parts a meaningful fraction of the canvas**: on a 0-100 viewBox, aim for translations of at least 3-8 units for idle "breathing" motion, and 10-20+ units for energetic modes (hops, lunges, recoils). If every `tx`/`ty` value you write is under 3, go back and exaggerate.
 - **Use scale (`sx`/`sy`) for squash & stretch**, especially on the body: compress vertically (sy < 1, sx > 1) on impact/landing frames, stretch (sy > 1, sx < 1) on anticipation/launch frames. Static scale (always 1.0) across an entire "busy" or "completed" animation is a sign you under-designed it.
 - **Apply animation principles explicitly**:
   - *Anticipation*: a small counter-movement before the main action (crouch before a jump, lean back before a lunge forward).
@@ -45,7 +45,7 @@ For every pet animation you write:
   - *Secondary motion*: something not directly related to the primary action but reacting to it a beat later (ears flopping after the head stops, a tail still swishing after the body settles).
   - *Arcs*: limbs and heads should not move in perfectly straight lines; combine rotate + translate so the motion path curves.
 - **Respect the Visible Area**: By default, animations should stay within the viewBox bounds (e.g., `0 0 100 100`) so the pet doesn't get clipped. However, if an animation purposefully hides the pet (e.g., ducking out of frame) or specifically requires extending beyond the area for a dramatic action, going outside the bounds is completely fine.
-- **Seamless Looping**: Because animations can repeat if the pet's state doesn't change, the animation flow must be perfect. For tracks, the pose at the first keyframe (`time: 0`) must exactly match the pose at the last keyframe (`time: duration`). For frames, the first frame must connect smoothly to the last frame without a jarring jump.
+- **Seamless Looping**: Because animations can repeat if the pet's mode doesn't change, the animation flow must be perfect. For tracks, the pose at the first keyframe (`time: 0`) must exactly match the pose at the last keyframe (`time: duration`). For frames, the first frame must connect smoothly to the last frame without a jarring jump.
 - **Every animation's `description` field must describe a specific, obvious physical action.** If you can't describe it in a way that sounds fun or striking, redesign the animation before writing the tracks/frames. Banned description phrasing: "subtle movement," "gentle bob," "slight shift" (these are fine ONLY for the `icon` context, never for `pet`).
 
 ### icon context (menu bar) — separate rules
@@ -58,8 +58,8 @@ The icon is a macOS Template Image at 22x22 shown in the menu bar. Here the corr
 
 ### Other rules (unchanged from spec)
 
-1. At least 1 distinct animation variant for each state: `idle`, `busy`, `waiting`, `completed`, `error`.
-2. `subStates` are optional — use them for specific busy-phase animations (reading, thinking, writing, searching, planning, building, running) only if you want dedicated motion for those phases.
+1. At least 1 distinct animation variant for each mode: `idle`, `busy`, `waiting`, `completed`, `error`.
+2. `subModes` are optional — use them for specific busy-phase animations (reading, thinking, writing, searching, planning, building, running) only if you want dedicated motion for those phases.
 3. Use `frames` for complex shape-morphing animation, `tracks` for transform-based (rotate/translate/scale) and color (fill/stroke) animation. They are mutually exclusive per animation.
 4. If using `frames`, design them to play at **24 FPS** for high-quality, fluid motion. You must calculate the animation's `duration` based on this framerate (e.g., 24 frames = 1.0s, 48 frames = 2.0s). Do not skimp on frames; aim for smooth and expressive animations (e.g., 24-60 frames per animation cycle) to ensure premium quality.
 5. If using `tracks`, the last keyframe's `time` in every track MUST exactly equal the animation's `duration`, so loops are seamless.
@@ -87,7 +87,7 @@ Only output the final JSON once every box is checked. **CRITICAL:** The generate
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "TGPetFile",
+  "title": "PetFile",
   "description": "AI Instruction: This schema defines the structure for a Tokengotchi Pet (.json). You must generate a strictly valid JSON file conforming to this structure.",
   "type": "object",
   "required": ["name", "pet", "icon"],
@@ -107,39 +107,39 @@ Only output the final JSON once every box is checked. **CRITICAL:** The generate
     },
     "icon": {
       "allOf": [
-        { "$ref": "#/definitions/TGPetContext" }
+        { "$ref": "#/definitions/PetContext" }
       ],
       "description": "AI: The context for the Mac menu bar icon. All SVGs should ideally use viewBox='0 0 100 100'. IMPORTANT: This acts as a macOS 'Template Image'. Use strictly monochrome colors (black/white/transparency) so macOS can dynamically tint it based on light/dark mode. The icon is scaled down drastically to a 22x22 system icon. Keep all shapes and movements centered and animations extremely subtle so they remain legible at tiny sizes."
     },
     "pet": {
       "allOf": [
-        { "$ref": "#/definitions/TGPetContext" }
+        { "$ref": "#/definitions/PetContext" }
       ],
       "description": "AI: The context for the main pet renderer (shown in both the macOS Dock and the desktop widget). All SVGs should ideally use viewBox='0 0 100 100'. This renders into a larger 128x128 canvas, meaning animations can be much more expressive and take up a larger area."
     }
   },
   "additionalProperties": false,
   "definitions": {
-    "TGPetContext": {
+    "PetContext": {
       "type": "object",
-      "required": ["svgs", "states"],
+      "required": ["svgs", "modes"],
       "properties": {
         "svgs": {
           "type": "array",
           "description": "AI: Array of SVG objects used in this context. Usually contains a 'base_svg' with groups that are targeted by animations.",
-          "items": { "$ref": "#/definitions/TGSVGObject" },
+          "items": { "$ref": "#/definitions/SVGObject" },
           "minItems": 1
         },
-        "states": {
+        "modes": {
           "type": "array",
-          "description": "AI: Array of top-level states (PetMode). Must cover at least 'idle'. Valid IDs are: idle, busy, waiting, completed, error.",
-          "items": { "$ref": "#/definitions/TGState" },
+          "description": "AI: Array of top-level modes (PetMode). Must cover at least 'idle'. Valid IDs are: idle, busy, waiting, completed, error.",
+          "items": { "$ref": "#/definitions/Mode" },
           "minItems": 1
         }
       },
       "additionalProperties": false
     },
-    "TGSVGObject": {
+    "SVGObject": {
       "type": "object",
       "required": ["id"],
       "properties": {
@@ -154,30 +154,30 @@ Only output the final JSON once every box is checked. **CRITICAL:** The generate
       },
       "additionalProperties": false
     },
-    "TGState": {
+    "Mode": {
       "type": "object",
       "required": ["id", "animations"],
       "properties": {
         "id": {
           "type": "string",
-          "description": "AI: For top-level states, must be one of: idle, busy, waiting, completed, error. For substates under 'busy', must be one of: reading, thinking, writing, searching, planning, building, running.",
+          "description": "AI: For top-level modes, must be one of: idle, busy, waiting, completed, error. For submodes under 'busy', must be one of: reading, thinking, writing, searching, planning, building, running.",
           "enum": ["idle", "busy", "waiting", "completed", "error", "reading", "thinking", "writing", "searching", "planning", "building", "running"]
         },
         "animations": {
           "type": "array",
-          "description": "AI: List of animation variants for this state.",
-          "items": { "$ref": "#/definitions/TGAnimationDef" },
+          "description": "AI: List of animation variants for this mode.",
+          "items": { "$ref": "#/definitions/AnimationDef" },
           "minItems": 1
         },
-        "subStates": {
+        "subModes": {
           "type": "array",
-          "description": "AI: Optional substates. Usually used when the top-level state is 'busy' to define specific tool phase animations.",
-          "items": { "$ref": "#/definitions/TGState" }
+          "description": "AI: Optional submodes. Usually used when the top-level mode is 'busy' to define specific tool phase animations.",
+          "items": { "$ref": "#/definitions/Mode" }
         }
       },
       "additionalProperties": false
     },
-    "TGAnimationDef": {
+    "AnimationDef": {
       "type": "object",
       "required": ["id", "name", "description", "duration"],
       "properties": {
@@ -200,7 +200,7 @@ Only output the final JSON once every box is checked. **CRITICAL:** The generate
         },
         "svg": {
           "description": "AI: Optional override SVG object to use instead of the context's default. Can ONLY be used if 'tracks' are used, NOT with 'frames'.",
-          "$ref": "#/definitions/TGSVGObject"
+          "$ref": "#/definitions/SVGObject"
         },
         "tracks": {
           "type": "array",

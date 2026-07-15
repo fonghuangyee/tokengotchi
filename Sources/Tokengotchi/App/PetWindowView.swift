@@ -44,7 +44,7 @@ struct PetWindowView: View {
                 .background(Color.black.opacity(0.94))
 
                 // Bottom tab bar
-                tabBar
+                TabBar(selectedTab: $selectedTab)
             }
             .background(
                 LinearGradient(
@@ -153,37 +153,26 @@ struct PetWindowView: View {
     }
 
     // MARK: - Tab Bar
-    var tabBar: some View {
-        HStack(spacing: 0) {
-            ForEach(Tab.allCases, id: \.self) { tab in
-                Button {
-                    withAnimation(.spring(duration: 0.25)) { selectedTab = tab }
-                } label: {
-                    HStack(spacing: 6) {
-                        Image(systemName: tab.icon)
-                            .font(.system(size: 13, weight: .medium))
-                        Text(tab.rawValue)
-                            .font(.system(size: 12, weight: .medium))
+    private struct TabBar: View {
+        @Binding var selectedTab: PetWindowView.Tab
+
+        var body: some View {
+            HStack(spacing: 0) {
+                ForEach(PetWindowView.Tab.allCases, id: \.self) { tab in
+                    Button {
+                        withAnimation(.spring(duration: 0.25)) { selectedTab = tab }
+                    } label: {
+                        TabItem(tab: tab, isSelected: selectedTab == tab)
                     }
-                    .foregroundColor(
-                        selectedTab == tab
-                            ? Color.purple
-                            : .white.opacity(0.35)
-                    )
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 11)
-                    .background(
-                        selectedTab == tab ? Color.white.opacity(0.06) : Color.clear
-                    )
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
             }
+            .background(Color.white.opacity(0.02))
+            .overlay(
+                Rectangle().fill(Color.white.opacity(0.05)).frame(height: 1),
+                alignment: .top
+            )
         }
-        .background(Color.white.opacity(0.02))
-        .overlay(
-            Rectangle().fill(Color.white.opacity(0.05)).frame(height: 1),
-            alignment: .top
-        )
     }
 
     // MARK: - Helpers
@@ -202,4 +191,23 @@ struct PetWindowView: View {
     }
 }
 
+// MARK: - Tab Bar Item
+private struct TabItem: View {
+    let tab: PetWindowView.Tab
+    let isSelected: Bool
 
+    var body: some View {
+        let fg: Color = isSelected ? Color.purple : Color.white.opacity(0.35)
+        let bg: Color = isSelected ? Color.white.opacity(0.06) : Color.clear
+        HStack(spacing: 6) {
+            Image(systemName: tab.icon)
+                .font(.system(size: 13, weight: .medium))
+            Text(tab.rawValue)
+                .font(.system(size: 12, weight: .medium))
+        }
+        .foregroundColor(fg)
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 11)
+        .background(bg)
+    }
+}

@@ -286,7 +286,7 @@ struct HomeTab: View {
 
     // MARK: - Helpers
         @ViewBuilder
-    private func petCard(pet: TGPetFile, isActive: Bool) -> some View {
+    private func petCard(pet: PetFile, isActive: Bool) -> some View {
         VStack {
             ZStack {
                 Circle()

@@ -11,16 +11,14 @@ RESOURCES_DIR="$APP_DIR/Contents/Resources"
 mkdir -p "$MACOS_DIR"
 mkdir -p "$RESOURCES_DIR"
 
-# 1. Generate AppIcon using sips and iconutil
-echo "🎨 Generating App Icon for Tokengotchi..."
+# 1. Copy AppIcon and Resources
+echo "🎨 Copying App Icon and Resources for Tokengotchi..."
 
-# 1.5 Generate DefaultPetData.swift
-echo "⚙️  Generating DefaultPetData.swift..."
-./Scripts/generate_default_pet.swift
-
-# Generate app icon
-python3 build_icon.py Sources/Tokengotchi/Resources
+# Copy app icon
 cp Sources/Tokengotchi/Resources/AppIcon.icns "$RESOURCES_DIR/"
+
+# Copy Default Pet JSON
+cp Sources/Tokengotchi/Resources/Kuramon.json "$RESOURCES_DIR/"
 
 # Copy AI Prompt Templates to Resources
 cp AI_PROMPT_TEMPLATE.md "$RESOURCES_DIR/"

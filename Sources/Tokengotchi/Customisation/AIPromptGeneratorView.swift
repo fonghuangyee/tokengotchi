@@ -7,8 +7,8 @@ struct AIPromptGeneratorView: View {
     var editPetName: String?
     @Environment(\.dismiss) var dismiss
 
-    @State private var showCopied = false
-    @State private var importError: String? = nil
+    @State var showCopied = false
+    @State var importError: String? = nil
 
     var body: some View {
         ScrollView {
@@ -149,7 +149,7 @@ struct AIPromptGeneratorView: View {
             guard r == .OK, let url = panel.url else { return }
             do {
                 let data = try Data(contentsOf: url)
-                let pet = try TGPetFile.parse(data)
+                let pet = try PetFile.parse(data)
                 try petManager.savePet(pet)
                 petManager.setActivePet(pet)
                 dismiss()
@@ -186,7 +186,7 @@ struct AIPromptGeneratorView: View {
         
         let jsonStr = extractJSON(from: text)
         do {
-            let pet = try TGPetFile.parse(jsonStr)
+            let pet = try PetFile.parse(jsonStr)
             try petManager.savePet(pet)
             petManager.setActivePet(pet)
             dismiss()

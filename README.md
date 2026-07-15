@@ -73,7 +73,7 @@ The pet will now animate in real-time as your agent works!
         "svg": "<svg viewBox='0 0 100 100'><g id='body'><circle cx='50' cy='50' r='40' fill='var(--base)'/></g></svg>"
       }
     ],
-    "states": [
+    "modes": [
       {
         "id": "idle",
         "animations": [
@@ -104,7 +104,7 @@ The pet will now animate in real-time as your agent works!
         "svg": "<svg viewBox='0 0 100 100'><g id='body'><circle cx='50' cy='50' r='40' fill='var(--base)'/></g></svg>"
       }
     ],
-    "states": [
+    "modes": [
       {
         "id": "idle",
         "animations": [

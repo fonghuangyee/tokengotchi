@@ -1,15 +1,15 @@
 import Foundation
 import Combine
 
-/// Manages loading, saving, and deleting .tgpet files from disk.
+/// Manages loading, saving, and deleting .json files from disk.
 @MainActor
 final class PetManager: ObservableObject {
     static let shared = PetManager()
 
-    @Published var availablePets: [TGPetFile] = []
+    @Published var availablePets: [PetFile] = []
     
     // The currently active pet's JSON.
-    @Published var activePet: TGPetFile = PetManager.defaultPet()
+    @Published var activePet: PetFile = PetManager.defaultPet()
     
     private let petsDirectory: URL
     
@@ -23,33 +23,42 @@ final class PetManager: ObservableObject {
         loadActivePet()
     }
     
-    static func defaultPet() -> TGPetFile {
-        let data = DefaultPetData.jsonString.data(using: .utf8)!
-        return try! TGPetFile.parse(data)
+    static func defaultPet() -> PetFile {
+        guard let url = Bundle.main.url(forResource: "Kuramon", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let pet = try? PetFile.parse(data) else {
+            fatalError("Default pet Kuramon.json not found in bundle resources")
+        }
+        return pet
     }
     
     func loadAllPets() {
-        var loaded: [TGPetFile] = []
-        
-        // Always include the default pet
-        loaded.append(PetManager.defaultPet())
-        
-        guard let files = try? FileManager.default.contentsOfDirectory(at: petsDirectory, includingPropertiesForKeys: nil) else {
-            availablePets = loaded
-            return
+        var diskPets: [PetFile] = []
+        if let files = try? FileManager.default.contentsOfDirectory(at: petsDirectory, includingPropertiesForKeys: nil) {
+            for file in files where file.pathExtension == "json" {
+                guard let data = try? Data(contentsOf: file),
+                      let pet = try? PetFile.parse(data) else {
+                    continue
+                }
+                diskPets.append(pet)
+            }
         }
         
-        for file in files where file.pathExtension == "tgpet" {
-            guard let data = try? Data(contentsOf: file),
-                  let pet = try? TGPetFile.parse(data) else {
-                continue
-            }
+        let defaultPet = PetManager.defaultPet()
+        let overriddenDefault = diskPets.first(where: { $0.name == defaultPet.name })
+        
+        var loaded: [PetFile] = []
+        // Default pet (or its disk override) is always first
+        loaded.append(overriddenDefault ?? defaultPet)
+        
+        // Append all other custom pets
+        for pet in diskPets where pet.name != defaultPet.name {
             loaded.append(pet)
         }
         
-        // Deduplicate by name
+        // Deduplicate by name (in case of duplicate files on disk)
         var uniqueNames = Set<String>()
-        var deduplicated: [TGPetFile] = []
+        var deduplicated: [PetFile] = []
         for p in loaded {
             if !uniqueNames.contains(p.name) {
                 uniqueNames.insert(p.name)
@@ -69,16 +78,16 @@ final class PetManager: ObservableObject {
         activePet = found
     }
     
-    func setActivePet(_ pet: TGPetFile) {
+    func setActivePet(_ pet: PetFile) {
         activePet = pet
         UserDefaults.standard.set(pet.name, forKey: "tokengotchi.activePetName")
     }
     
-    func savePet(_ pet: TGPetFile) throws {
+    func savePet(_ pet: PetFile) throws {
         let data = try JSONEncoder().encode(pet)
         // Clean filename
         let safeName = pet.name.replacingOccurrences(of: "/", with: "-").replacingOccurrences(of: "\\", with: "-")
-        let fileURL = petsDirectory.appendingPathComponent("\(safeName).tgpet")
+        let fileURL = petsDirectory.appendingPathComponent("\(safeName).json")
         try data.write(to: fileURL)
         loadAllPets()
         
@@ -88,12 +97,9 @@ final class PetManager: ObservableObject {
         }
     }
     
-    func deletePet(_ pet: TGPetFile) {
-        if pet.name == PetManager.defaultPet().name {
-            return // Don't delete default
-        }
+    func deletePet(_ pet: PetFile) {
         let safeName = pet.name.replacingOccurrences(of: "/", with: "-").replacingOccurrences(of: "\\", with: "-")
-        let fileURL = petsDirectory.appendingPathComponent("\(safeName).tgpet")
+        let fileURL = petsDirectory.appendingPathComponent("\(safeName).json")
         try? FileManager.default.removeItem(at: fileURL)
         loadAllPets()
         

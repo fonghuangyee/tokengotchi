@@ -4,7 +4,7 @@ struct OffscreenPetRenderer {
 
     /// Render a single frame for the given clip ID (menu-bar size: 22×22).
     static func renderFrame(
-        clipID: String, pet: TGPetFile, time: TimeInterval,
+        clipID: String, pet: PetFile, time: TimeInterval,
         stamina: Double? = nil, modelName: String? = nil,
         isTemplate: Bool = false,
         contextName: String = "menuBar",
@@ -21,31 +21,31 @@ struct OffscreenPetRenderer {
         // If not found in target context, the clipID is likely from another context (e.g. pet/dock).
         // Find its corresponding state in pet context, and pick the matching state in targetContext.
         if resolvedAnimation == nil && contextName != "dock" && contextName != "pet" {
-            var topLevelStateId: String?
-            var subStateId: String?
+            var topLevelModeId: String?
+            var subModeId: String?
             
-            for state in pet.pet.states {
-                if state.animations.contains(where: { $0.id == clipID }) {
-                    topLevelStateId = state.id
+            for mode in pet.pet.modes {
+                if mode.animations.contains(where: { $0.id == clipID }) {
+                    topLevelModeId = mode.id
                     break
                 }
-                if let subs = state.subStates {
+                if let subs = mode.subModes {
                     if let sub = subs.first(where: { s in s.animations.contains(where: { $0.id == clipID }) }) {
-                        topLevelStateId = state.id
-                        subStateId = sub.id
+                        topLevelModeId = mode.id
+                        subModeId = sub.id
                         break
                     }
                 }
             }
             
-            if let topId = topLevelStateId {
-                if let targetState = targetContext.states.first(where: { $0.id == topId }) {
-                    if let subId = subStateId,
-                       let targetSub = targetState.subStates?.first(where: { $0.id == subId }),
+            if let topId = topLevelModeId {
+                if let targetMode = targetContext.modes.first(where: { $0.id == topId }) {
+                    if let subId = subModeId,
+                       let targetSub = targetMode.subModes?.first(where: { $0.id == subId }),
                        let anim = targetSub.animations.first {
                         resolvedAnimation = anim
                     } else {
-                        resolvedAnimation = targetState.animations.first
+                        resolvedAnimation = targetMode.animations.first
                     }
                 }
             }
@@ -129,7 +129,7 @@ struct OffscreenPetRenderer {
 
     private static func drawLayer(_ layer: SVGLayer,
                                   transforms: [String: LayerTransform],
-                                  pet: TGPetFile,
+                                  pet: PetFile,
                                   scale: CGFloat,
                                   defs: SVGDefinitions,
                                   parentOpacity: CGFloat = 1.0) {
@@ -164,7 +164,7 @@ struct OffscreenPetRenderer {
 
     // MARK: - Element Rendering
 
-    private static func drawElement(_ element: SVGElement, pet: TGPetFile, defs: SVGDefinitions, parentOpacity: CGFloat) {
+    private static func drawElement(_ element: SVGElement, pet: PetFile, defs: SVGDefinitions, parentOpacity: CGFloat) {
         NSGraphicsContext.current?.saveGraphicsState()
         NSGraphicsContext.current?.compositingOperation = .sourceOver
 

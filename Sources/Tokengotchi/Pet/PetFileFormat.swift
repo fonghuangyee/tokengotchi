@@ -5,7 +5,7 @@ import Foundation
 /// the agent generates this JSON, and the user imports it into Tokengotchi.
 ///
 /// File extension: `.json`
-struct TGPetFile: Codable {
+struct PetFile: Codable {
 
     /// Pet identity.
     let name: String
@@ -14,10 +14,10 @@ struct TGPetFile: Codable {
     let palette: [String: String]?
 
     /// Icon context definition (SVG definitions and animation states).
-    let icon: TGPetContext
+    let icon: PetContext
     
     /// Pet / Main App context definition.
-    let pet: TGPetContext
+    let pet: PetContext
 
     enum CodingKeys: String, CodingKey {
         case name, palette, icon, pet, menuBar, dock
@@ -28,15 +28,15 @@ struct TGPetFile: Codable {
         self.name = try container.decode(String.self, forKey: .name)
         self.palette = try container.decodeIfPresent([String: String].self, forKey: .palette)
         
-        if let decodedPet = try container.decodeIfPresent(TGPetContext.self, forKey: .pet) {
+        if let decodedPet = try container.decodeIfPresent(PetContext.self, forKey: .pet) {
             self.pet = decodedPet
         } else {
-            self.pet = try container.decode(TGPetContext.self, forKey: .dock)
+            self.pet = try container.decode(PetContext.self, forKey: .dock)
         }
         
-        if let decodedIcon = try container.decodeIfPresent(TGPetContext.self, forKey: .icon) {
+        if let decodedIcon = try container.decodeIfPresent(PetContext.self, forKey: .icon) {
             self.icon = decodedIcon
-        } else if let decodedMenuBar = try container.decodeIfPresent(TGPetContext.self, forKey: .menuBar) {
+        } else if let decodedMenuBar = try container.decodeIfPresent(PetContext.self, forKey: .menuBar) {
             self.icon = decodedMenuBar
         } else {
             self.icon = self.pet
@@ -56,10 +56,10 @@ struct TGPetFile: Codable {
     // MARK: - Parsing
 
     /// Parse a .json file from raw JSON data.
-    static func parse(_ jsonData: Data) throws -> TGPetFile {
+    static func parse(_ jsonData: Data) throws -> PetFile {
         let decoder = JSONDecoder()
         do {
-            let file = try decoder.decode(TGPetFile.self, from: jsonData)
+            let file = try decoder.decode(PetFile.self, from: jsonData)
             try file.validate()
             return file
         } catch {
@@ -68,7 +68,7 @@ struct TGPetFile: Codable {
     }
 
     /// Parse a .json file from a JSON string.
-    static func parse(_ jsonString: String) throws -> TGPetFile {
+    static func parse(_ jsonString: String) throws -> PetFile {
         guard let data = jsonString.data(using: .utf8) else {
             throw ImportError.invalidUTF8
         }
@@ -82,13 +82,13 @@ struct TGPetFile: Codable {
         // 1. Every SVG reference must exist in the context's svgs array.
         // 2. An animation cannot have both tracks and frames.
         // 3. The `svg` property is only allowed if `tracks` is used.
-        // 4. Context states cannot be empty.
+        // 4. Context modes cannot be empty.
         
-        if pet.states.isEmpty {
-            throw ImportError.invalidFormat("Pet context must have at least one state.")
+        if pet.modes.isEmpty {
+            throw ImportError.invalidFormat("Pet context must have at least one mode.")
         }
-        if icon.states.isEmpty {
-            throw ImportError.invalidFormat("Icon context must have at least one state.")
+        if icon.modes.isEmpty {
+            throw ImportError.invalidFormat("Icon context must have at least one mode.")
         }
         
         try icon.validate()
@@ -102,16 +102,16 @@ struct TGPetFile: Codable {
         PetConfig(name: name)
     }
 
-    /// Convert the pet or icon states to AnimationClip array for backwards compatibility with PetState.
+    /// Convert the pet or icon modes to AnimationClip array for backwards compatibility with PetState.
     func toAnimationClips(forContext contextName: String = "pet") -> [AnimationClip] {
         let targetContext = (contextName == "icon" || contextName == "menuBar") ? icon : pet
         var clips = [AnimationClip]()
         
-        for state in targetContext.states {
-            guard let mode = PetMode(rawValue: state.id) else { continue }
+        for modeConfig in targetContext.modes {
+            guard let mode = PetMode(rawValue: modeConfig.id) else { continue }
             
-            // Top-level state animations
-            for anim in state.animations {
+            // Top-level mode animations
+            for anim in modeConfig.animations {
                 clips.append(AnimationClip(
                     id: anim.id,
                     name: anim.name,
@@ -122,9 +122,9 @@ struct TGPetFile: Codable {
                 ))
             }
             
-            // Substate animations
-            if let subStates = state.subStates {
-                for sub in subStates {
+            // Submode animations
+            if let subModes = modeConfig.subModes {
+                for sub in subModes {
                     let substateEnum = BusySubstate(rawValue: sub.id)
                     for anim in sub.animations {
                         clips.append(AnimationClip(
@@ -160,9 +160,32 @@ struct TGPetFile: Codable {
 }
 
 // MARK: - Context Object
-struct TGPetContext: Codable {
-    let svgs: [TGSVGObject]
-    let states: [TGState]
+struct PetContext: Codable {
+    let svgs: [SVGObject]
+    let modes: [Mode]
+    
+    enum CodingKeys: String, CodingKey {
+        case svgs
+        case modes
+        case states // legacy
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.svgs = try container.decode([SVGObject].self, forKey: .svgs)
+        if let modes = try container.decodeIfPresent([Mode].self, forKey: .modes) {
+            self.modes = modes
+        } else {
+            self.modes = try container.decode([Mode].self, forKey: .states)
+        }
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(svgs, forKey: .svgs)
+        try container.encode(modes, forKey: .modes)
+        try container.encode(modes, forKey: .states) // write legacy for compatibility
+    }
     
     func validate() throws {
         let definedSvgIds = Set(svgs.compactMap { $0.svg != nil ? $0.id : nil })
@@ -170,17 +193,17 @@ struct TGPetContext: Codable {
         // Ensure all reference svgs in the svgs array itself resolve
         for svgObj in svgs {
             if svgObj.svg == nil && !definedSvgIds.contains(svgObj.id) {
-                throw TGPetFile.ImportError.invalidFormat("Missing SVG definition for id '\(svgObj.id)'")
+                throw PetFile.ImportError.invalidFormat("Missing SVG definition for id '\(svgObj.id)'")
             }
         }
         
-        // Validate states
-        for state in states {
-            try state.validate(definedSvgIds: definedSvgIds)
+        // Validate modes
+        for mode in modes {
+            try mode.validate(definedSvgIds: definedSvgIds)
         }
     }
     
-    func resolveSVG(_ svgObj: TGSVGObject? = nil) -> String? {
+    func resolveSVG(_ svgObj: SVGObject? = nil) -> String? {
         guard let obj = svgObj else {
             // Return first fully defined SVG as default base
             return svgs.first(where: { $0.svg != nil })?.svg ?? svgs.first?.svg
@@ -189,10 +212,10 @@ struct TGPetContext: Codable {
         return svgs.first(where: { $0.id == obj.id && $0.svg != nil })?.svg
     }
     
-    func findAnimation(id: String) -> TGAnimationDef? {
-        for state in states {
-            if let a = state.animations.first(where: { $0.id == id }) { return a }
-            if let subs = state.subStates {
+    func findAnimation(id: String) -> AnimationDef? {
+        for mode in modes {
+            if let a = mode.animations.first(where: { $0.id == id }) { return a }
+            if let subs = mode.subModes {
                 for s in subs {
                     if let a = s.animations.first(where: { $0.id == id }) { return a }
                 }
@@ -203,22 +226,50 @@ struct TGPetContext: Codable {
 }
 
 // MARK: - SVG Object
-struct TGSVGObject: Codable {
+struct SVGObject: Codable {
     let id: String
     let svg: String? // If nil, this is just a reference by id
 }
 
-// MARK: - State Object
-struct TGState: Codable {
+// MARK: - Mode Object
+struct Mode: Codable {
     let id: String
-    let animations: [TGAnimationDef]
-    let subStates: [TGState]?
+    let animations: [AnimationDef]
+    let subModes: [Mode]?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case animations
+        case subModes
+        case subStates // legacy
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(String.self, forKey: .id)
+        self.animations = try container.decode([AnimationDef].self, forKey: .animations)
+        if let subModes = try container.decodeIfPresent([Mode].self, forKey: .subModes) {
+            self.subModes = subModes
+        } else if let subStates = try container.decodeIfPresent([Mode].self, forKey: .subStates) {
+            self.subModes = subStates
+        } else {
+            self.subModes = nil
+        }
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(animations, forKey: .animations)
+        try container.encodeIfPresent(subModes, forKey: .subModes)
+        try container.encodeIfPresent(subModes, forKey: .subStates) // legacy
+    }
     
     func validate(definedSvgIds: Set<String>) throws {
         for anim in animations {
             try anim.validate(definedSvgIds: definedSvgIds)
         }
-        if let sub = subStates {
+        if let sub = subModes {
             for s in sub {
                 try s.validate(definedSvgIds: definedSvgIds)
             }
@@ -227,25 +278,25 @@ struct TGState: Codable {
 }
 
 // MARK: - Animation Definition
-struct TGAnimationDef: Codable {
+struct AnimationDef: Codable {
     let id: String
     let name: String
     let description: String
     let duration: TimeInterval
-    let svg: TGSVGObject? // Optional override SVG, only if tracks is used
+    let svg: SVGObject? // Optional override SVG, only if tracks is used
     let tracks: [KeyframeTrack]?
     let frames: [String]?
     
     func validate(definedSvgIds: Set<String>) throws {
         if tracks != nil && frames != nil {
-            throw TGPetFile.ImportError.invalidFormat("Animation '\(id)' cannot have both 'tracks' and 'frames'.")
+            throw PetFile.ImportError.invalidFormat("Animation '\(id)' cannot have both 'tracks' and 'frames'.")
         }
         if frames != nil && svg != nil {
-            throw TGPetFile.ImportError.invalidFormat("Animation '\(id)' cannot have 'svg' (override) when using 'frames'.")
+            throw PetFile.ImportError.invalidFormat("Animation '\(id)' cannot have 'svg' (override) when using 'frames'.")
         }
         if let overrideSvg = svg, overrideSvg.svg == nil {
             if !definedSvgIds.contains(overrideSvg.id) {
-                throw TGPetFile.ImportError.invalidFormat("Animation '\(id)' references unknown SVG id '\(overrideSvg.id)'.")
+                throw PetFile.ImportError.invalidFormat("Animation '\(id)' references unknown SVG id '\(overrideSvg.id)'.")
             }
         }
     }

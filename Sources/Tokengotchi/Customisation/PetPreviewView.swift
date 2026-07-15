@@ -11,10 +11,10 @@ struct PetPreviewView: View {
         case embeddedJSON
     }
     @StateObject private var fileWatcher = FileWatcher()
-    @State private var activeSessionType: EditSessionType? = nil
-    @State private var showModeSelectionPopover = false
+    @State var activeSessionType: EditSessionType? = nil
+    @State var showModeSelectionPopover = false
     
-    var targetPet: TGPetFile {
+    var targetPet: PetFile {
         if let watchedPet = fileWatcher.parsedPet {
             return watchedPet
         }
@@ -26,26 +26,26 @@ struct PetPreviewView: View {
     
     struct AnimationGroup: Identifiable {
         let id: String
-        let animations: [TGAnimationDef]
+        let animations: [AnimationDef]
     }
     
     var petGroupedAnimations: [AnimationGroup] {
-        return targetPet.pet.states.map { state in
-            var allAnims = state.animations
-            if let subs = state.subStates {
+        return targetPet.pet.modes.map { mode in
+            var allAnims = mode.animations
+            if let subs = mode.subModes {
                 allAnims.append(contentsOf: subs.flatMap { $0.animations })
             }
-            return AnimationGroup(id: state.id, animations: allAnims)
+            return AnimationGroup(id: mode.id, animations: allAnims)
         }.filter { !$0.animations.isEmpty }
     }
     
     var iconGroupedAnimations: [AnimationGroup] {
-        return targetPet.icon.states.map { state in
-            var allAnims = state.animations
-            if let subs = state.subStates {
+        return targetPet.icon.modes.map { mode in
+            var allAnims = mode.animations
+            if let subs = mode.subModes {
                 allAnims.append(contentsOf: subs.flatMap { $0.animations })
             }
-            return AnimationGroup(id: state.id, animations: allAnims)
+            return AnimationGroup(id: mode.id, animations: allAnims)
         }.filter { !$0.animations.isEmpty }
     }
     
@@ -394,7 +394,7 @@ struct PetPreviewView: View {
         
         let jsonStr = extractJSON(from: text)
         do {
-            let pet = try TGPetFile.parse(jsonStr)
+            let pet = try PetFile.parse(jsonStr)
             fileWatcher.parsedPet = pet
             fileWatcher.error = nil
         } catch {
@@ -442,10 +442,10 @@ struct PetPreviewView: View {
 }
 
 struct AnimationGridItem: View {
-    let anim: TGAnimationDef
+    let anim: AnimationDef
     let context: VectorPetRenderer.RenderingContext
     @ObservedObject var petState: PetState
-    let activePet: TGPetFile
+    let activePet: PetFile
     
     var body: some View {
         VStack(spacing: 8) {

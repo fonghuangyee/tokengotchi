@@ -1,14 +1,15 @@
 import Foundation
 
 // MARK: - Pet Config
-// Simplified to just the identity properties from the .tgpet file
+// Simplified to just the identity properties from the .json file
 struct PetConfig: Codable, Equatable {
     var name: String
     
     // MARK: Default pet
     static var `default`: PetConfig {
-        guard let data = DefaultPetData.jsonString.data(using: .utf8),
-              let file = try? JSONDecoder().decode(TGPetFile.self, from: data) else {
+        guard let url = Bundle.main.url(forResource: "Kuramon", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let file = try? PetFile.parse(data) else {
             return PetConfig(name: "Fallback")
         }
         return file.toPetConfig()

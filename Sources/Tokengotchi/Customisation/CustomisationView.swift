@@ -7,7 +7,7 @@ struct SettingsTab: View {
     @ObservedObject var screenManager: ScreenManager = ScreenManager.shared
     @ObservedObject var petState: PetState
 
-    @State private var editingKey: String = ""
+    @State var editingKey: String = ""
 
     var body: some View {
         ScrollView {

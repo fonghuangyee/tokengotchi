@@ -13,7 +13,7 @@ struct VectorPetRenderer {
     static func renderStaticIcon(size: CGFloat, context: RenderingContext = .pet) -> NSImage {
         let pet = PetManager.defaultPet()
         let targetContext = context == .icon ? pet.icon : pet.pet
-        let firstAnimationId = targetContext.states.first?.animations.first?.id ?? ""
+        let firstAnimationId = targetContext.modes.first?.animations.first?.id ?? ""
 
         let sourceImage = renderFrame(
             clipID: firstAnimationId, pet: pet, time: 0, context: context)
@@ -27,7 +27,7 @@ struct VectorPetRenderer {
     }
 
     static func renderFrame(
-        clipID: String, pet: TGPetFile, time: TimeInterval,
+        clipID: String, pet: PetFile, time: TimeInterval,
         stamina: Double? = nil, modelName: String? = nil,
         context: RenderingContext = .pet,
         customSize: CGFloat = canvasSize
@@ -126,7 +126,7 @@ struct VectorPetRenderer {
 
     private static func drawLayer(_ layer: SVGLayer,
                                   transforms: [String: LayerTransform],
-                                  pet: TGPetFile,
+                                  pet: PetFile,
                                   scale: CGFloat,
                                   defs: SVGDefinitions,
                                   parentOpacity: CGFloat = 1.0,
@@ -173,7 +173,7 @@ struct VectorPetRenderer {
     // MARK: - Element Rendering
 
     private static func drawElement(_ element: SVGElement,
-                                    pet: TGPetFile,
+                                    pet: PetFile,
                                     defs: SVGDefinitions,
                                     parentOpacity: CGFloat,
                                     fillOverride: LayerColor? = nil,

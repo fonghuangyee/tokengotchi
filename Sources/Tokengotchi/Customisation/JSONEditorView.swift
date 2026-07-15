@@ -5,8 +5,8 @@ struct JSONEditorView: View {
     @ObservedObject var petManager: PetManager
     @Environment(\.dismiss) var dismiss
 
-    @State private var jsonText: String = ""
-    @State private var saveError: String? = nil
+    @State var jsonText: String = ""
+    @State var saveError: String? = nil
 
     var body: some View {
         VStack(spacing: 0) {
@@ -83,7 +83,7 @@ struct JSONEditorView: View {
 
     private func saveJSON() {
         do {
-            let pet = try TGPetFile.parse(jsonText)
+            let pet = try PetFile.parse(jsonText)
             try petManager.savePet(pet)
             petManager.setActivePet(pet)
             dismiss()

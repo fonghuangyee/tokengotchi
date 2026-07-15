@@ -11,7 +11,7 @@
         "svg": "<svg viewBox='0 0 100 100'><g id='mb_kuku'><path id='mb_body' d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill-rule='evenodd' fill='#000'/><circle id='mb_pupil' cx='47' cy='48' r='8' fill='#000'/></g></svg>"
       }
     ],
-    "states": [
+    "modes": [
       {
         "id": "idle",
         "animations": [
@@ -303,7 +303,7 @@
         "svg": "<svg viewBox='0 0 100 100'><g id='kuku'><path d='M 50 15 Q 40 20 25 5 Q 30 25 10 45 Q 20 60 15 85 Q 35 75 50 75 Q 65 75 85 85 Q 80 60 90 45 Q 70 25 75 5 Q 60 20 50 15 Z' fill='var(--base)' stroke='#111' stroke-width='2'/><path d='M 20 50 Q 25 20 55 30 Q 75 35 70 55 Q 65 70 45 65 Q 20 65 20 50 Z' fill='#111'/><path d='M 25 50 Q 30 25 53 34 Q 70 38 65 54 Q 61 66 45 61 Q 25 61 25 50 Z' fill='var(--accent)'/><circle cx='47' cy='48' r='8' fill='#111'/><circle cx='42' cy='43' r='4' fill='#FFF'/></g></svg>"
       }
     ],
-    "states": [
+    "modes": [
       {
         "id": "idle",
         "animations": [

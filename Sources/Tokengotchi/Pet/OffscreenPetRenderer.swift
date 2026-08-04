@@ -85,44 +85,54 @@ struct OffscreenPetRenderer {
             return cachedImage
         }
 
-        let size  = targetSize
-        let image = NSImage(size: size, flipped: false) { rect in
-            NSColor.clear.set()
-            rect.fill()
+        let bakedImage: NSImage = autoreleasepool {
+            let size = targetSize
 
-            // Flip: SVG (Y-down) → AppKit (Y-up)
-            NSGraphicsContext.current?.saveGraphicsState()
-            let flip = NSAffineTransform()
-            flip.translateX(by: 0, yBy: size.height)
-            flip.scaleX(by: 1, yBy: -1)
-            flip.concat()
+            // Phase 1: draw into a handler-backed image (closure is local to this pool)
+            let handlerImage = NSImage(size: size, flipped: false) { rect in
+                NSColor.clear.set()
+                rect.fill()
 
-            // 2. Parse SVG
-            guard let doc = try? SVGParser.parseSVG(svgString) else { return true }
+                // Flip: SVG (Y-down) → AppKit (Y-up)
+                NSGraphicsContext.current?.saveGraphicsState()
+                let flip = NSAffineTransform()
+                flip.translateX(by: 0, yBy: size.height)
+                flip.scaleX(by: 1, yBy: -1)
+                flip.concat()
 
-            // 3. Evaluate keyframe transforms using continuous time
-            let transforms = AnimationEvaluator.evaluate(tracks: tracks, duration: duration, time: time)
+                // 2. Parse SVG
+                guard let doc = try? SVGParser.parseSVG(svgString) else {
+                    NSGraphicsContext.current?.restoreGraphicsState() // restore flip even on failure
+                    return true
+                }
 
-            // 4. Scale to target size
-            let scaleResult = SVGParser.scaleLayer(doc.root, toFit: rect, padding: 1, cacheKey: svgString)
+                // 3. Evaluate keyframe transforms using continuous time
+                let transforms = AnimationEvaluator.evaluate(tracks: tracks, duration: duration, time: time)
 
-            // 5. Draw
-            NSGraphicsContext.current?.saveGraphicsState()
-            drawLayer(scaleResult.layer, transforms: transforms, pet: pet,
-                      scale: scaleResult.scale, defs: doc.defs)
-            NSGraphicsContext.current?.restoreGraphicsState()
-            NSGraphicsContext.current?.restoreGraphicsState()
+                // 4. Scale to target size
+                let scaleResult = SVGParser.scaleLayer(doc.root, toFit: rect, padding: 1, cacheKey: svgString)
 
-            return true
+                // 5. Draw
+                NSGraphicsContext.current?.saveGraphicsState()
+                drawLayer(scaleResult.layer, transforms: transforms, pet: pet,
+                          scale: scaleResult.scale, defs: doc.defs)
+                NSGraphicsContext.current?.restoreGraphicsState()
+                NSGraphicsContext.current?.restoreGraphicsState()
+
+                return true
+            }
+
+            // Phase 2: bake handler-backed image into a plain NSImage so the closure can be freed
+            let baked = NSImage(size: size)
+            baked.lockFocus()
+            handlerImage.draw(in: NSRect(origin: .zero, size: size))
+            baked.unlockFocus()
+            baked.isTemplate = isTemplate
+            return baked
         }
 
-        // Force rasterization so drawing handler isn't re-executed on every screen refresh
-        image.lockFocus()
-        image.unlockFocus()
-        image.isTemplate = isTemplate
-
-        PetFrameCache.shared.setFrame(image, key: cacheKey)
-        return image
+        PetFrameCache.shared.setFrame(bakedImage, key: cacheKey)
+        return bakedImage
     }
 
     // MARK: - Layer Rendering

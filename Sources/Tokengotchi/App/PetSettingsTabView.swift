@@ -9,10 +9,22 @@ struct PetSettingsTabView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 14) {
-                // LLM Provider Selection
+                // LLM Provider — auto-detected, zero-config (no selection, no API key)
                 secHead("LLM Provider")
-                ForEach(providerManager.available, id: \.id) { provider in
-                    providerRow(provider)
+                let installed = providerManager.available.filter { $0.isInstalledLocally }
+                if installed.isEmpty {
+                    Text("No supported agent CLI detected.\nInstall Claude Code or Antigravity to begin.")
+                        .font(.system(size: 11))
+                        .foregroundColor(.white.opacity(0.4))
+                        .padding(.vertical, 4)
+                } else {
+                    ForEach(installed, id: \.id) { provider in
+                        providerRow(provider)
+                    }
+                    Text("Auto-detected. The pet follows whichever agent is working.")
+                        .font(.system(size: 10))
+                        .foregroundColor(.white.opacity(0.3))
+                        .padding(.top, 2)
                 }
 
                 Divider().background(Color.white.opacity(0.06))
@@ -109,42 +121,34 @@ struct PetSettingsTabView: View {
     }
 
     private func providerRow(_ provider: any LLMProviderProtocol) -> some View {
-        Button {
-            providerManager.activeProviderId = provider.id
-        } label: {
-            HStack(spacing: 10) {
-                Circle()
-                    .fill(provider.isConnected ? Color.green : Color.gray.opacity(0.35))
-                    .frame(width: 8, height: 8)
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(provider.name)
-                        .font(.system(size: 12, weight: .medium)).foregroundColor(.white)
-                    Text(provider.isConnected ? "Connected" : "Disconnected")
-                        .font(.system(size: 9))
-                        .foregroundColor(
-                            provider.isConnected ? .green.opacity(0.65) : .white.opacity(0.3))
-                }
-                Spacer()
-                if providerManager.activeProviderId == provider.id {
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(.purple).font(.system(size: 13))
-                }
+        let isActive = providerManager.activeProviderId == provider.id
+        return HStack(spacing: 10) {
+            Circle()
+                .fill(provider.isConnected ? Color.green : Color.gray.opacity(0.35))
+                .frame(width: 8, height: 8)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(provider.name)
+                    .font(.system(size: 12, weight: .medium)).foregroundColor(.white)
+                Text(provider.isConnected ? "Monitoring" : "Detected")
+                    .font(.system(size: 9))
+                    .foregroundColor(
+                        provider.isConnected ? .green.opacity(0.65) : .white.opacity(0.3))
             }
-            .padding(12)
-            .background(
-                RoundedRectangle(cornerRadius: 9)
-                    .fill(
-                        providerManager.activeProviderId == provider.id
-                            ? Color.purple.opacity(0.12) : Color.white.opacity(0.04))
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 9)
-                    .stroke(
-                        providerManager.activeProviderId == provider.id
-                            ? Color.purple.opacity(0.3) : Color.clear, lineWidth: 1)
-            )
+            Spacer()
+            if isActive {
+                Image(systemName: "pawprint.fill")
+                    .foregroundColor(.purple).font(.system(size: 12))
+            }
         }
-        .buttonStyle(.plain)
+        .padding(12)
+        .background(
+            RoundedRectangle(cornerRadius: 9)
+                .fill(isActive ? Color.purple.opacity(0.12) : Color.white.opacity(0.04))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 9)
+                .stroke(isActive ? Color.purple.opacity(0.3) : Color.clear, lineWidth: 1)
+        )
     }
 
     private func secHead(_ t: String) -> some View {

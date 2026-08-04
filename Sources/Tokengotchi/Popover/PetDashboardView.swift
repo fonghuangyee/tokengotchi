@@ -375,9 +375,10 @@ struct ThinkingDots: View {
                         value: phase)
             }
         }
-        .onAppear {
-            withAnimation { phase = 0 }
-            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
+        .task {
+            phase = 0
+            while !Task.isCancelled {
+                try? await Task.sleep(nanoseconds: 500_000_000)
                 phase = (phase + 1) % 3
             }
         }

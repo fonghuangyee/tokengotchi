@@ -94,6 +94,7 @@ final class WidgetPetController: NSObject, NSWindowDelegate {
     }
 
     func cleanup() {
+        PetFrameCache.shared.clear()
         cancellables.removeAll()
         let observerPointer = Unmanaged.passUnretained(hideProxy).toOpaque()
         CGDisplayRemoveReconfigurationCallback(displayReconfigurationCallback, observerPointer)

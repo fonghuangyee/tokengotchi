@@ -46,6 +46,11 @@ final class DockPetController {
         bindEvents()
     }
 
+    deinit {
+        animationTimer?.invalidate()
+        animationTimer = nil
+    }
+
     // MARK: Dock Tile
     private func setupDockTile() {
         let tile = NSApp.dockTile

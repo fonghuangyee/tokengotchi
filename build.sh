@@ -66,7 +66,8 @@ swiftc -o "$MACOS_DIR/$APP_NAME" \
     -framework SwiftUI \
     -framework AppKit \
     -framework SpriteKit \
-    -framework Combine
+    -framework Combine \
+    -framework IOKit
 
 echo "✅ Build complete → $APP_DIR"
 echo "🛑 Closing existing instance..."

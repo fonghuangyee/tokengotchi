@@ -5,19 +5,30 @@ import AppKit
 struct SettingsTab: View {
     @ObservedObject var providerManager: ProviderManager
     @ObservedObject var screenManager: ScreenManager = ScreenManager.shared
+    @ObservedObject var sleepManager: SleepManager = SleepManager.shared
     @ObservedObject var petState: PetState
-
-    @State var editingKey: String = ""
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
 
-                // --- LLM Provider ---
+                // --- LLM Provider (auto-detected, zero-config) ---
                 sectionHeader("LLM Provider")
 
-                ForEach(providerManager.available, id: \.id) { provider in
-                    providerRow(provider)
+                let installed = providerManager.available.filter { $0.isInstalledLocally }
+                if installed.isEmpty {
+                    Text("No supported agent CLI detected.\nInstall Claude Code or Antigravity to begin.")
+                        .font(.system(size: 11))
+                        .foregroundColor(.white.opacity(0.4))
+                        .padding(.vertical, 4)
+                } else {
+                    ForEach(installed, id: \.id) { provider in
+                        providerRow(provider)
+                    }
+                    Text("Auto-detected · no API key required · the pet follows the active agent")
+                        .font(.system(size: 10))
+                        .foregroundColor(.white.opacity(0.3))
+                        .padding(.top, 2)
                 }
 
                 Divider().background(Color.white.opacity(0.1))
@@ -70,39 +81,20 @@ struct SettingsTab: View {
 
                 Divider().background(Color.white.opacity(0.1))
 
-                // --- API Key ---
-                sectionHeader("API Key")
-
-                if let provider = providerManager.available.first(where: {
-                    $0.id == providerManager.activeProviderId
-                }) {
-                    if provider.id != "antigravity" && provider.id != "ollama" {
-                        SecureField("API Key for \(provider.name)", text: $editingKey)
-                            .textFieldStyle(.plain)
-                            .font(.system(size: 12, design: .monospaced))
+                // --- System ---
+                sectionHeader("System")
+                VStack(alignment: .leading, spacing: 4) {
+                    Toggle(isOn: $sleepManager.preventSleep) {
+                        Text("Prevent Mac from Sleeping")
+                            .font(.system(size: 12))
                             .foregroundColor(.white)
-                            .padding(10)
-                            .background(Color.white.opacity(0.07))
-                            .clipShape(RoundedRectangle(cornerRadius: 8))
-
-                        Button("Save Key") {
-                            var cfg = providerManager.configs[provider.id] ?? ProviderConfig()
-                            cfg.apiKey = editingKey
-                            providerManager.configs[provider.id] = cfg
-                            providerManager.switchProvider(to: provider.id)
-                        }
-                        .buttonStyle(.plain)
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundColor(.purple)
-                    } else {
-                        Text(
-                            provider.id == "antigravity"
-                                ? "Bridge auto-connects to localhost:7432"
-                                : "Connects to Ollama at localhost:11434"
-                        )
-                        .font(.system(size: 11))
-                        .foregroundColor(.white.opacity(0.4))
                     }
+                    .toggleStyle(SwitchToggleStyle(tint: .purple))
+
+                    Text("Keeps the display awake while your agent is working.")
+                        .font(.system(size: 10))
+                        .foregroundColor(.white.opacity(0.35))
+                        .padding(.leading, 2)
                 }
 
                 Divider().background(Color.white.opacity(0.1))
@@ -144,36 +136,27 @@ struct SettingsTab: View {
 
     // MARK: - Row Helpers
     func providerRow(_ provider: any LLMProviderProtocol) -> some View {
-        Button {
-            providerManager.activeProviderId = provider.id
-        } label: {
-            HStack(spacing: 10) {
-                Circle()
-                    .fill(provider.isConnected ? Color.green : Color.gray.opacity(0.4))
-                    .frame(width: 8, height: 8)
-                Text(provider.name)
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(.white)
-                Spacer()
-                if providerManager.activeProviderId == provider.id {
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(.purple)
-                        .font(.system(size: 14))
-                }
+        let isActive = providerManager.activeProviderId == provider.id
+        return HStack(spacing: 10) {
+            Circle()
+                .fill(provider.isConnected ? Color.green : Color.gray.opacity(0.4))
+                .frame(width: 8, height: 8)
+            Text(provider.name)
+                .font(.system(size: 12, weight: .medium))
+                .foregroundColor(.white)
+            Spacer()
+            if isActive {
+                Image(systemName: "pawprint.fill")
+                    .foregroundColor(.purple)
+                    .font(.system(size: 13))
             }
-            .padding(12)
-            .background(
-                providerManager.activeProviderId == provider.id
-                    ? Color.purple.opacity(0.15) : Color.white.opacity(0.05)
-            )
-            .clipShape(RoundedRectangle(cornerRadius: 10))
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(
-                        providerManager.activeProviderId == provider.id
-                            ? Color.purple.opacity(0.4) : Color.clear, lineWidth: 1))
         }
-        .buttonStyle(.plain)
+        .padding(12)
+        .background(isActive ? Color.purple.opacity(0.15) : Color.white.opacity(0.05))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(isActive ? Color.purple.opacity(0.4) : Color.clear, lineWidth: 1))
     }
 
     func sectionHeader(_ title: String) -> some View {

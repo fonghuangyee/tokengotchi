@@ -12,12 +12,25 @@ struct WidgetPetView: View {
 
     private static let startDate = Date()
 
+    /// Quantized size steps to avoid generating unique cache entries on every
+    /// pixel change during window resize.
+    private static func quantizedSize(_ raw: CGFloat) -> CGFloat {
+        switch raw {
+        case ..<100: return 80
+        case ..<200: return 150
+        case ..<400: return 300
+        case ..<800: return 600
+        default: return 1024
+        }
+    }
+
     var body: some View {
         TimelineView(.periodic(from: Self.startDate, by: 1.0 / 24.0)) { context in
             let elapsed = context.date.timeIntervalSince1970 - petState.animationStartTime
             
             let stamina: Double? = antigravity?.currentStamina
             let modelName: String? = antigravity?.activeModelName
+            let size = Self.quantizedSize(window.frame.width)
 
             let image = VectorPetRenderer.renderFrame(
                 clipID: petState.currentClipID,
@@ -25,7 +38,7 @@ struct WidgetPetView: View {
                 time: elapsed,
                 stamina: stamina,
                 modelName: modelName,
-                customSize: window.frame.width
+                customSize: size
             )
 
             ZStack {

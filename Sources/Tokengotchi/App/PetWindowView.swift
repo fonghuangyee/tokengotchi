@@ -6,11 +6,12 @@ struct PetWindowView: View {
     @ObservedObject var petState: PetState
     @ObservedObject var providerManager: ProviderManager
     @StateObject private var petManager = PetManager.shared
+    @StateObject private var sleepManager = SleepManager.shared
 
     @State private var isLLMExpanded = false
     @State private var isDisplayExpanded = false
+    @State private var isSystemExpanded = true
     @State private var isAboutExpanded = false
-    @State private var editingKey: String = ""
 
     private var antigravity: AntigravityProvider? {
         providerManager.available.first(where: { $0.id == "antigravity" }) as? AntigravityProvider
@@ -305,43 +306,20 @@ struct PetWindowView: View {
             // LLM Provider Group
             DisclosureGroup(isExpanded: $isLLMExpanded) {
                 VStack(alignment: .leading, spacing: 10) {
-                    ForEach(providerManager.available, id: \.id) { provider in
-                        providerRow(provider)
-                    }
-                    
-                    if let provider = providerManager.available.first(where: { $0.id == providerManager.activeProviderId }) {
-                        if provider.id != "antigravity" && provider.id != "ollama" {
-                            VStack(alignment: .leading, spacing: 6) {
-                                SecureField("API Key for \(provider.name)", text: $editingKey)
-                                    .textFieldStyle(.plain)
-                                    .font(.system(size: 11, design: .monospaced))
-                                    .foregroundColor(.white)
-                                    .padding(8)
-                                    .background(Color.white.opacity(0.06))
-                                    .clipShape(RoundedRectangle(cornerRadius: 6))
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 6)
-                                            .stroke(Color.white.opacity(0.1), lineWidth: 1)
-                                    )
-                                
-                                Button("Save Key") {
-                                    var cfg = providerManager.configs[provider.id] ?? ProviderConfig()
-                                    cfg.apiKey = editingKey
-                                    providerManager.configs[provider.id] = cfg
-                                    providerManager.switchProvider(to: provider.id)
-                                }
-                                .buttonStyle(.bordered)
-                                .controlSize(.small)
-                            }
-                            .padding(.top, 4)
-                        } else {
-                            Text(provider.id == "antigravity"
-                                 ? "Bridge auto-connects to localhost:7432"
-                                 : "Connects to Ollama at localhost:11434")
-                                .font(.system(size: 11))
-                                .foregroundColor(.white.opacity(0.4))
-                                .padding(.vertical, 4)
+                    let installed = providerManager.available.filter { $0.isInstalledLocally }
+                    if installed.isEmpty {
+                        Text("No supported agent CLI detected.\nInstall Claude Code or Antigravity.")
+                            .font(.system(size: 11))
+                            .foregroundColor(.white.opacity(0.4))
+                            .padding(.vertical, 4)
+                    } else {
+                        ForEach(installed, id: \.id) { provider in
+                            providerRow(provider)
                         }
+                        Text("Auto-detected · no API key · follows the active agent")
+                            .font(.system(size: 10))
+                            .foregroundColor(.white.opacity(0.3))
+                            .padding(.top, 2)
                     }
                 }
                 .padding(.top, 8)
@@ -415,6 +393,34 @@ struct PetWindowView: View {
             }
             .disclosureGroupStyle(CustomDisclosureGroupStyle())
             
+            // System Group
+            DisclosureGroup(isExpanded: $isSystemExpanded) {
+                VStack(alignment: .leading, spacing: 6) {
+                    Toggle(isOn: $sleepManager.preventSleep) {
+                        Text("Prevent Mac from Sleeping")
+                            .font(.system(size: 12))
+                            .foregroundColor(.white.opacity(0.85))
+                    }
+                    .toggleStyle(SwitchToggleStyle(tint: .accentColor))
+                    
+                    Text("Keeps the display awake while your agent is working.")
+                        .font(.system(size: 10))
+                        .foregroundColor(.white.opacity(0.4))
+                        .padding(.leading, 2)
+                }
+                .padding(.top, 8)
+                .padding(.leading, 4)
+            } label: {
+                HStack(spacing: 8) {
+                    Image(systemName: "moon.zzz")
+                        .font(.system(size: 12))
+                        .foregroundColor(.accentColor)
+                    Text("System")
+                        .font(.system(size: 12, weight: .bold))
+                }
+            }
+            .disclosureGroupStyle(CustomDisclosureGroupStyle())
+            
             // About Group
             DisclosureGroup(isExpanded: $isAboutExpanded) {
                 VStack(alignment: .leading, spacing: 6) {
@@ -482,60 +488,42 @@ struct PetWindowView: View {
             }
             .buttonStyle(.plain)
         }
-        .onAppear {
-            initializeEditingKey()
-        }
-        .onChange(of: providerManager.activeProviderId) {
-            initializeEditingKey()
-        }
     }
 
     private func providerRow(_ provider: any LLMProviderProtocol) -> some View {
-        Button {
-            providerManager.activeProviderId = provider.id
-        } label: {
-            HStack(spacing: 8) {
-                Circle()
-                    .fill(provider.isConnected ? Color.green : Color.gray.opacity(0.4))
-                    .frame(width: 7, height: 7)
-                
-                VStack(alignment: .leading, spacing: 1) {
-                    Text(provider.name)
-                        .font(.system(size: 11, weight: .medium))
-                        .foregroundColor(.white)
-                    Text(provider.isConnected ? "Connected" : "Disconnected")
-                        .font(.system(size: 9))
-                        .foregroundColor(provider.isConnected ? .green.opacity(0.7) : .white.opacity(0.35))
-                }
-                
-                Spacer()
-                
-                if providerManager.activeProviderId == provider.id {
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(.accentColor)
-                        .font(.system(size: 12))
-                }
+        let isActive = providerManager.activeProviderId == provider.id
+        return HStack(spacing: 8) {
+            Circle()
+                .fill(provider.isConnected ? Color.green : Color.gray.opacity(0.4))
+                .frame(width: 7, height: 7)
+            
+            VStack(alignment: .leading, spacing: 1) {
+                Text(provider.name)
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundColor(.white)
+                Text(provider.isConnected ? "Monitoring" : "Detected")
+                    .font(.system(size: 9))
+                    .foregroundColor(provider.isConnected ? .green.opacity(0.7) : .white.opacity(0.35))
             }
-            .padding(.horizontal, 10)
-            .padding(.vertical, 8)
-            .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(providerManager.activeProviderId == provider.id
-                          ? Color.accentColor.opacity(0.12) : Color.white.opacity(0.03))
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(providerManager.activeProviderId == provider.id
-                            ? Color.accentColor.opacity(0.3) : Color.clear, lineWidth: 1)
-            )
+            
+            Spacer()
+            
+            if isActive {
+                Image(systemName: "pawprint.fill")
+                    .foregroundColor(.accentColor)
+                    .font(.system(size: 11))
+            }
         }
-        .buttonStyle(.plain)
-    }
-
-    private func initializeEditingKey() {
-        if let provider = providerManager.available.first(where: { $0.id == providerManager.activeProviderId }) {
-            editingKey = providerManager.configs[provider.id]?.apiKey ?? ""
-        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 8)
+        .background(
+            RoundedRectangle(cornerRadius: 8)
+                .fill(isActive ? Color.accentColor.opacity(0.12) : Color.white.opacity(0.03))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(isActive ? Color.accentColor.opacity(0.3) : Color.clear, lineWidth: 1)
+        )
     }
 
     // MARK: - Helpers
@@ -675,9 +663,10 @@ struct LocalThinkingDots: View {
                         value: phase)
             }
         }
-        .onAppear {
-            withAnimation { phase = 0 }
-            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
+        .task {
+            phase = 0
+            while !Task.isCancelled {
+                try? await Task.sleep(nanoseconds: 500_000_000)
                 phase = (phase + 1) % 3
             }
         }

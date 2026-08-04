@@ -129,6 +129,7 @@ final class PetManager: ObservableObject {
     
     func setActivePet(_ pet: PetFile) {
         activePet = pet
+        PetFrameCache.shared.clear()
         UserDefaults.standard.set(pet.name, forKey: "tokengotchi.activePetName")
     }
     

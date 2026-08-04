@@ -35,8 +35,16 @@ public protocol LLMProviderProtocol: AnyObject {
     var id: String { get }
     var name: String { get }
     var isConnected: Bool { get }
+    /// True when the provider's CLI / data directory is present on this machine,
+    /// enabling zero-config auto-detection.
+    var isInstalledLocally: Bool { get }
     var eventPublisher: AnyPublisher<AgentEvent, Never> { get }
 
     func connect(config: ProviderConfig) async throws
     func disconnect()
+}
+
+// Default: providers that don't self-report installation are not auto-detected.
+public extension LLMProviderProtocol {
+    var isInstalledLocally: Bool { false }
 }

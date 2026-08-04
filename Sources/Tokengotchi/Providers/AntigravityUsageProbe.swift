@@ -15,6 +15,14 @@ class AntigravityUsageProbe {
     static let shared = AntigravityUsageProbe()
     private let timeout: TimeInterval = 8.0
 
+    /// Shared session for all probe requests — avoids creating a new URLSession
+    /// (and its connection pool / delegate queue) on every fetch.
+    private static let sharedSession: URLSession = {
+        let config = URLSessionConfiguration.ephemeral
+        config.timeoutIntervalForRequest = 8.0
+        return URLSession(configuration: config, delegate: InsecureDelegate(), delegateQueue: nil)
+    }()
+
     func probe(workspaceId: String? = nil) async throws -> UsageSnapshot {
         // 1. Detect process
         let pgrepResult = try runCommand("/usr/bin/pgrep", args: ["-lf", "language_server"])
@@ -104,17 +112,6 @@ class AntigravityUsageProbe {
         return UsageSnapshot(quotas: quotas, activeModelName: finalModelName)
     }
 
-    private class InsecureDelegate: NSObject, URLSessionDelegate {
-        func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-            if let trust = challenge.protectionSpace.serverTrust {
-                let credential = URLCredential(trust: trust)
-                completionHandler(.useCredential, credential)
-            } else {
-                completionHandler(.performDefaultHandling, nil)
-            }
-        }
-    }
-
     private func makeRequest(scheme: String, port: Int, path: String, csrfToken: String) async throws -> Data {
         let urlStr = "\(scheme)://127.0.0.1:\(port)\(path)"
         guard let url = URL(string: urlStr) else { throw URLError(.badURL) }
@@ -136,9 +133,7 @@ class AntigravityUsageProbe {
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
         
-        // We use a custom URLSession to bypass SSL cert errors on localhost
-        let session = URLSession(configuration: .ephemeral, delegate: InsecureDelegate(), delegateQueue: nil)
-        let (data, response) = try await session.data(for: request)
+        let (data, response) = try await Self.sharedSession.data(for: request)
         
         guard let httpRes = response as? HTTPURLResponse, httpRes.statusCode == 200 else {
             throw URLError(.badServerResponse)
@@ -152,10 +147,12 @@ class AntigravityUsageProbe {
         process.executableURL = URL(fileURLWithPath: executable)
         process.arguments = args
         process.standardOutput = pipe
+        process.standardError = FileHandle.nullDevice
         try process.run()
         process.waitUntilExit()
         
         let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        pipe.fileHandleForReading.closeFile()
         return String(data: data, encoding: .utf8) ?? ""
     }
     

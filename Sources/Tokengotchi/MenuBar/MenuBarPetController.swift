@@ -11,6 +11,7 @@ final class MenuBarPetController: NSObject, NSMenuDelegate {
     private let petState: PetState
     private let providerManager: ProviderManager
     private let screenManager = ScreenManager.shared
+    private let sleepManager = SleepManager.shared
 
     // Menu bar icon
     private var statusItem: NSStatusItem!
@@ -24,6 +25,8 @@ final class MenuBarPetController: NSObject, NSMenuDelegate {
 
     private var cancellables = Set<AnyCancellable>()
 
+    private var cachedMenuInfoView: NSHostingView<MenuInfoView>?
+
     init(
         petState: PetState,
         providerManager: ProviderManager,
@@ -36,6 +39,11 @@ final class MenuBarPetController: NSObject, NSMenuDelegate {
         setupStatusItem()
         bindEvents()
         bindSystemEvents()
+    }
+
+    deinit {
+        animationTimer?.invalidate()
+        animationTimer = nil
     }
 
     // MARK: Status Item
@@ -88,15 +96,32 @@ final class MenuBarPetController: NSObject, NSMenuDelegate {
             menu.addItem(NSMenuItem.separator())
             
             let modeLabel = self.getModeLabel()
-            let infoView = NSHostingView(rootView: MenuInfoView(
-                modeLabel: modeLabel,
-                providerName: self.providerManager.activeProviderName
-            ))
-            infoView.frame = NSRect(x: 0, y: 0, width: 220, height: 44)
+            let providerName = self.providerManager.activeProviderName
             
-            let infoItem = NSMenuItem()
-            infoItem.view = infoView
-            menu.addItem(infoItem)
+            if let cached = self.cachedMenuInfoView {
+                cached.rootView = MenuInfoView(modeLabel: modeLabel, providerName: providerName)
+                let infoItem = NSMenuItem()
+                infoItem.view = cached
+                menu.addItem(infoItem)
+            } else {
+                let infoView = NSHostingView(rootView: MenuInfoView(
+                    modeLabel: modeLabel,
+                    providerName: providerName
+                ))
+                infoView.frame = NSRect(x: 0, y: 0, width: 220, height: 44)
+                self.cachedMenuInfoView = infoView
+                
+                let infoItem = NSMenuItem()
+                infoItem.view = infoView
+                menu.addItem(infoItem)
+            }
+            
+            menu.addItem(NSMenuItem.separator())
+            
+            let sleepItem = NSMenuItem(title: "Prevent Sleep", action: #selector(self.togglePreventSleep), keyEquivalent: "")
+            sleepItem.target = self
+            sleepItem.state = self.sleepManager.preventSleep ? .on : .off
+            menu.addItem(sleepItem)
             
             menu.addItem(NSMenuItem.separator())
             
@@ -122,6 +147,10 @@ final class MenuBarPetController: NSObject, NSMenuDelegate {
 
     @objc private func openApp() {
         windowController.show()
+    }
+
+    @objc private func togglePreventSleep() {
+        sleepManager.preventSleep.toggle()
     }
 
     @objc private func quitApp() {

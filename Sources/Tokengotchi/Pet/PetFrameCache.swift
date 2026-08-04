@@ -9,9 +9,8 @@ final class PetFrameCache {
     private let cache = NSCache<NSString, NSImage>()
 
     init() {
-        // A generous limit to hold several animations in memory.
-        // Rasterized 128x128 or 256x256 NSImages are relatively small.
-        cache.countLimit = 1000
+        cache.countLimit = 300
+        cache.totalCostLimit = 100_000_000 // ~100MB
     }
 
     /// Retrieve a cached frame.
@@ -21,7 +20,11 @@ final class PetFrameCache {
 
     /// Store a newly rasterized frame.
     func setFrame(_ image: NSImage, key: String) {
-        cache.setObject(image, forKey: key as NSString)
+        let w = Int(image.size.width)
+        let h = Int(image.size.height)
+        let scale = Int(NSScreen.main?.backingScaleFactor ?? 2)
+        let cost = w * h * 4 * scale * scale
+        cache.setObject(image, forKey: key as NSString, cost: cost)
     }
 
     /// Clear the cache (e.g. on memory warning or pet switch).

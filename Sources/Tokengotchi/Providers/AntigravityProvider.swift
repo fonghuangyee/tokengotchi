@@ -780,23 +780,29 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject, @uncheck
     }
 
     private func extractWorkspacePath(from transcriptPath: String) -> String? {
-        guard let data = try? String(contentsOfFile: transcriptPath, encoding: .utf8) else {
-            return nil
-        }
+        guard let handle = try? FileHandle(forReadingFrom: URL(fileURLWithPath: transcriptPath)) else { return nil }
+        defer { try? handle.close() }
+        
+        let fileSize = (try? handle.seekToEnd()) ?? 0
+        let readOffset = fileSize > 65536 ? fileSize - 65536 : 0
+        try? handle.seek(toOffset: readOffset)
+        
+        guard let data = try? handle.readToEnd(),
+              let text = String(data: data, encoding: .utf8) else { return nil }
 
         let regex = try? NSRegularExpression(pattern: "\"Cwd\"\\s*:\\s*\"(?:\\\\\")?(/[^\\\\\"]+)")
-        let range = NSRange(data.startIndex..<data.endIndex, in: data)
-        if let match = regex?.firstMatch(in: data, options: [], range: range) {
-            if let r = Range(match.range(at: 1), in: data) {
-                return String(data[r])
+        let range = NSRange(text.startIndex..<text.endIndex, in: text)
+        if let match = regex?.firstMatch(in: text, options: [], range: range) {
+            if let r = Range(match.range(at: 1), in: text) {
+                return String(text[r])
             }
         }
 
         let regex2 = try? NSRegularExpression(
             pattern: "\"SearchPath\"\\s*:\\s*\"(?:\\\\\")?(/[^\\\\\"]+)")
-        if let match2 = regex2?.firstMatch(in: data, options: [], range: range) {
-            if let r = Range(match2.range(at: 1), in: data) {
-                return String(data[r])
+        if let match2 = regex2?.firstMatch(in: text, options: [], range: range) {
+            if let r = Range(match2.range(at: 1), in: text) {
+                return String(text[r])
             }
         }
 
@@ -804,9 +810,15 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject, @uncheck
     }
 
     private func extractActiveModelName(from transcriptPath: String) -> String? {
-        guard let data = try? String(contentsOfFile: transcriptPath, encoding: .utf8) else {
-            return nil
-        }
+        guard let handle = try? FileHandle(forReadingFrom: URL(fileURLWithPath: transcriptPath)) else { return nil }
+        defer { try? handle.close() }
+        
+        let fileSize = (try? handle.seekToEnd()) ?? 0
+        let readOffset = fileSize > 65536 ? fileSize - 65536 : 0
+        try? handle.seek(toOffset: readOffset)
+        
+        guard let data = try? handle.readToEnd(),
+              let text = String(data: data, encoding: .utf8) else { return nil }
 
         // Parse JSON strings: the regex can safely use .dotMatchesLineSeparators on the unescaped content
         let regex = try? NSRegularExpression(
@@ -815,7 +827,7 @@ final class AntigravityProvider: LLMProviderProtocol, ObservableObject, @uncheck
             options: [.dotMatchesLineSeparators])
 
         var lastModel: String? = nil
-        let lines = data.split(whereSeparator: \.isNewline)
+        let lines = text.split(whereSeparator: \.isNewline)
         for line in lines {
             guard let jsonData = String(line).data(using: .utf8),
                 let json = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any],

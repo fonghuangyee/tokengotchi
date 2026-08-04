@@ -28,4 +28,5 @@ targets:
       base:
         PRODUCT_NAME: Tokengotchi
         WRAPPER_EXTENSION: app
-    dependencies: []
+    dependencies:
+      - framework: IOKit

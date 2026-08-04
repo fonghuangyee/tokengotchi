@@ -70,56 +70,72 @@ struct VectorPetRenderer {
             return cachedImage
         }
 
-        let size  = NSSize(width: customSize, height: customSize)
-        let image = NSImage(size: size, flipped: false) { rect in
-            NSColor.clear.set()
-            rect.fill()
+        // Render into a bitmap-backed image inside an autoreleasepool so all
+        // temporary AppKit/CoreGraphics objects (XMLParser, NSAffineTransform,
+        // CGPath, etc.) are freed immediately after the frame is drawn.
+        // We deliberately do NOT cache the drawing-handler image itself — doing
+        // so would keep the closure (and all captured SVG data) alive for the
+        // entire cache lifetime. Instead we bake it into a plain NSImage via
+        // lockFocus so the closure can be released right away.
+        let bakedImage: NSImage = autoreleasepool {
+            let size = NSSize(width: customSize, height: customSize)
 
-            // Flip context: SVG (Y-down) → AppKit (Y-up)
-            NSGraphicsContext.current?.saveGraphicsState()
-            let flip = NSAffineTransform()
-            flip.translateX(by: 0, yBy: size.height)
-            flip.scaleX(by: 1, yBy: -1)
-            flip.concat()
+            // Phase 1: draw into a handler-backed image (closure is local to this pool)
+            let handlerImage = NSImage(size: size, flipped: false) { rect in
+                NSColor.clear.set()
+                rect.fill()
 
-            // 2. Parse the SVG
-            guard let doc = try? SVGParser.parseSVG(svgString) else { return true }
+                // Flip context: SVG (Y-down) → AppKit (Y-up)
+                NSGraphicsContext.current?.saveGraphicsState()
+                let flip = NSAffineTransform()
+                flip.translateX(by: 0, yBy: size.height)
+                flip.scaleX(by: 1, yBy: -1)
+                flip.concat()
 
-            // 3. Evaluate keyframe transforms using the continuous time for precise evaluation 
-            // (though for caching, the visual will map to the discrete frame)
-            let transforms = AnimationEvaluator.evaluate(tracks: tracks, duration: duration, time: time)
+                // Parse the SVG — result is pooled by XMLParser
+                guard let doc = try? SVGParser.parseSVG(svgString) else {
+                    NSGraphicsContext.current?.restoreGraphicsState() // restore flip even on failure
+                    return true
+                }
 
-            // 4. Scale to fit (with padding)
-            let paddingRatio = customSize / canvasSize
-            let innerRect   = rect.insetBy(dx: 12 * paddingRatio, dy: 12 * paddingRatio)
-            let scaleResult = SVGParser.scaleLayer(doc.root, toFit: innerRect, padding: 1, cacheKey: svgString)
-            let scaledLayer = scaleResult.layer
+                // Evaluate keyframe transforms
+                let transforms = AnimationEvaluator.evaluate(tracks: tracks, duration: duration, time: time)
 
-            // 5. Draw
-            NSGraphicsContext.current?.saveGraphicsState()
-            if let ctx = NSGraphicsContext.current?.cgContext {
-                ctx.setShadow(
-                    offset: CGSize(width: 0, height: -3),
-                    blur:   6,
-                    color:  NSColor.black.withAlphaComponent(0.25).cgColor)
+                // Scale to fit (with padding)
+                let paddingRatio = customSize / canvasSize
+                let innerRect   = rect.insetBy(dx: 12 * paddingRatio, dy: 12 * paddingRatio)
+                let scaleResult = SVGParser.scaleLayer(doc.root, toFit: innerRect, padding: 1, cacheKey: svgString)
+
+                // Draw with drop-shadow
+                NSGraphicsContext.current?.saveGraphicsState()
+                if let ctx = NSGraphicsContext.current?.cgContext {
+                    ctx.setShadow(
+                        offset: CGSize(width: 0, height: -3),
+                        blur:   6,
+                        color:  NSColor.black.withAlphaComponent(0.25).cgColor)
+                }
+
+                drawLayer(scaleResult.layer, transforms: transforms, pet: pet,
+                          scale: scaleResult.scale, defs: doc.defs)
+
+                NSGraphicsContext.current?.restoreGraphicsState() // restore shadow
+                NSGraphicsContext.current?.restoreGraphicsState() // restore flip
+
+                return true
             }
 
-            drawLayer(scaledLayer, transforms: transforms, pet: pet,
-                      scale: scaleResult.scale, defs: doc.defs)
-
-            NSGraphicsContext.current?.restoreGraphicsState() // restore shadow
-            NSGraphicsContext.current?.restoreGraphicsState() // restore flip
-
-            return true
+            // Phase 2: bake handler-backed image into a plain NSImage so the
+            // closure (which captures `pet`, `svgString`, etc.) can be freed.
+            let baked = NSImage(size: size)
+            baked.lockFocus()
+            handlerImage.draw(in: NSRect(origin: .zero, size: size))
+            baked.unlockFocus()
+            baked.isTemplate = false
+            return baked
         }
 
-        // Force rasterization so drawing handler isn't re-executed on every screen refresh
-        image.lockFocus()
-        image.unlockFocus()
-        image.isTemplate = false
-        
-        PetFrameCache.shared.setFrame(image, key: cacheKey)
-        return image
+        PetFrameCache.shared.setFrame(bakedImage, key: cacheKey)
+        return bakedImage
     }
 
     // MARK: - Layer Rendering

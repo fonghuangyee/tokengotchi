@@ -17,6 +17,7 @@ final class ProviderManager: ObservableObject {
     let available: [any LLMProviderProtocol] = [
         AntigravityProvider(),
         ClaudeProvider(),
+        ZedProvider(),
         OpenAIProvider(),
         AnthropicProvider(),
         OllamaProvider()

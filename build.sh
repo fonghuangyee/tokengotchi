@@ -55,14 +55,29 @@ EOF
 # Find all Swift source files
 SWIFT_FILES=$(find Sources -name "*.swift")
 
+# C sources: the vendored zstd decoder + the Swift bridging shim
+C_FILES=$(find Sources -name "*.c")
+
 if [ -z "$SWIFT_FILES" ]; then
     echo "❌ No Swift files found in Sources directory."
     exit 1
 fi
 
+# The bridging header exposes the zstd shim's C ABI to Swift. zstd is compiled
+# in portable mode (no runtime x86 BMI2 dispatch / no asm) so the binary runs
+# on both Apple Silicon and Intel Macs.
+ZSTD_DEFINES="-Xcc -DDYNAMIC_BMI2=0 -Xcc -DZSTD_DISABLE_ASM -Xcc -DZSTD_LEGACY_SUPPORT=0 -Xcc -DZSTD_MULTITHREAD=0"
+
 echo "🔨 Compiling $APP_NAME..."
 swiftc -o "$MACOS_DIR/$APP_NAME" \
     $SWIFT_FILES \
+    $C_FILES \
+    -import-objc-header Sources/Tokengotchi/Providers/ZstdShim.h \
+    -I Sources/Tokengotchi/Providers \
+    -I Sources/Tokengotchi/Providers/zstd \
+    -I Sources/Tokengotchi/Providers/zstd/common \
+    -I Sources/Tokengotchi/Providers/zstd/decompress \
+    $ZSTD_DEFINES \
     -framework SwiftUI \
     -framework AppKit \
     -framework SpriteKit \
